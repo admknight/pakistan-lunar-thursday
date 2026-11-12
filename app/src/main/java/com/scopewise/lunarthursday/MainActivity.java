@@ -329,7 +329,7 @@ public final class MainActivity extends LocalizedActivity {
         tile.setGravity(Gravity.CENTER);
         tile.setPadding(dp(4), dp(8), dp(4), dp(8));
         tile.setBackground(round(surface, 16));
-        TextView value = text("0", 24, true, onPrimaryContainer);
+        TextView value = text("0", 24, true, onSurface); // Readable against Material surface tile
         value.setGravity(Gravity.CENTER);
         tile.addView(value);
         TextView title = text(unit, 12, false, secondary);
