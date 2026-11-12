@@ -1,7 +1,7 @@
 name: Apply verified v1.4.0 UI and signing update (one time)
 on:
   push:
-    paths: ['.bootstrap/v14-source.tar.gz']
+    paths: ['.github/workflows/apply-v1-4-update.yml']
   workflow_dispatch:
 
 permissions:
@@ -26,6 +26,8 @@ jobs:
             echo 'Archive contains unsafe paths'; exit 1
           fi
           tar -xzf .bootstrap/v14-source.tar.gz
+          # GitHub Actions job token lacks workflows permission; publish this file separately.
+          rm -f .github/workflows/publish-stable.yml
           rm -rf .bootstrap
           rm -f .github/workflows/apply-v1-4-update.yml
           git config user.name 'github-actions[bot]'
