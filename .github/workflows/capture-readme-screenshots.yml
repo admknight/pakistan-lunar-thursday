@@ -77,7 +77,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for png in home-en calendar-en updates-en about-en settings-en settings-alarm-en alarm-sounds-en weather-settings-en home-ur; do
+          for png in home-en calendar-en updates-en about-en settings-en settings-alarm-en alarm-sounds-en hijri-location-en weather-settings-en home-ur; do
             test -s "docs/screenshots/$png.png"
           done
           git config user.name 'github-actions[bot]'

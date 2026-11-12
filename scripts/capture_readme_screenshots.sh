@@ -135,9 +135,14 @@ sleep 2
 # The second Settings view shows the weather/location controls without opting in.
 adb shell input swipe 550 1800 550 750 650
 sleep 2
+capture hijri-location-en 'Hijri date and Maghrib'
+# The separate Maghrib city card pushes weather settings farther down.
+adb shell input swipe 550 1890 550 830 650
+sleep 2
 capture weather-settings-en 'Sky and local weather'
-# Return to Settings top, select Urdu through app's own Settings dialog.
-adb shell input swipe 550 500 550 1970 500
+# Return to Settings top for the language control.
+adb shell input swipe 550 440 550 2040 570
+adb shell input swipe 550 440 550 2040 570
 sleep 2
 tap_ui 'App language'
 tap_ui 'اردو'
