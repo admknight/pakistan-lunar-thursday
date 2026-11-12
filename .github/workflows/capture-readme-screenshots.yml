@@ -1,0 +1,93 @@
+name: Capture real Android app screenshots for README
+
+on:
+  push:
+    paths:
+      - '.github/workflows/capture-readme-screenshots.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    name: Capture installed v1.7.0 on Android 15 emulator
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    timeout-minutes: 40
+    steps:
+      - name: Check out public source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Unpack and verify screenshot automation source
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f .screenshot-src/capture_readme_screenshots.sh.gz ]; then
+            echo '154a86e6c97d33ca1e8d671a4a4a318b187a96cf6e163ce1fad19975ef7310f8  .screenshot-src/capture_readme_screenshots.sh.gz' | sha256sum --check
+            mkdir -p scripts
+            gzip -dc .screenshot-src/capture_readme_screenshots.sh.gz > scripts/capture_readme_screenshots.sh
+            chmod 755 scripts/capture_readme_screenshots.sh
+            rm -rf .screenshot-src
+          fi
+          bash -n scripts/capture_readme_screenshots.sh
+
+      - name: Download actual permanently signed v1.7.0 APK
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p release-apk
+          gh release download v1.7.0 --repo "$GITHUB_REPOSITORY" --pattern 'HilalThursday-v1.7.0.apk*' --dir release-apk
+          (cd release-apk && sha256sum --check HilalThursday-v1.7.0.apk.sha256)
+          echo '08402b3256500c087958f16b62e1da68243e5f7c27b71514fc3f96d92941e295  release-apk/HilalThursday-v1.7.0.apk' | sha256sum --check
+
+      - name: Enable hardware acceleration (KVM)
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Run signed app and capture screenshots from real Android UI
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          target: google_apis
+          arch: x86_64
+          profile: pixel_5
+          cores: 2
+          ram-size: 4096M
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -camera-front none -no-snapshot
+          disable-animations: true
+          script: bash scripts/capture_readme_screenshots.sh
+
+      - name: Upload raw emulator screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: real-hilal-thursday-v1.7-emulator-screenshots
+          path: docs/screenshots/*.png
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish screenshot images and reproducible script
+        shell: bash
+        run: |
+          set -euo pipefail
+          for png in home-en calendar-en updates-en about-en settings-en weather-settings-en home-ur; do
+            test -s "docs/screenshots/$png.png"
+          done
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add scripts/capture_readme_screenshots.sh docs/screenshots/ .screenshot-src/ || true
+          git add -A
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo 'Screenshots are unchanged.'
+          else
+            git commit -m 'Capture real signed v1.7.0 Android emulator screenshots [skip ci]'
+            git push origin HEAD:main
+          fi
