@@ -31,6 +31,7 @@ import java.util.Locale;
 /** User preferences, permission guidance, and the release update manager. No date editing. */
 public final class SettingsActivity extends LocalizedActivity {
     private static final int NOTIFICATION_REQUEST = 85;
+    private static final int WEATHER_LOCATION_REQUEST = 86;
     private SharedPreferences p;
     private int primary;
     private int onPrimary;
@@ -54,6 +55,7 @@ public final class SettingsActivity extends LocalizedActivity {
     @Override protected void onResume() {
         super.onResume();
         if (p != null) render();
+        AppUpdateInstaller.resumeIfPermitted(this);
     }
 
     private void render() {
@@ -118,12 +120,46 @@ public final class SettingsActivity extends LocalizedActivity {
         if (!ReminderScheduler.exactAlarmsAllowed(this)) add(permissions, button("Allow exact alarms", false, this::askExactAlarms), 10);
         add(body, card(permissions), 16);
 
+        LinearLayout scenes = panel();
+        add(scenes, text("🌤 Sky and local weather", 19, true, onSurface), 0);
+        add(scenes, text("The moon and mosque respond to your device time even without location access.",
+                13, false, onSurfaceVariant), 8);
+        toggle(scenes, "Weather-based sky effects", "Optional: ask for approximate location only while you use the app. Weather data by Open-Meteo (CC BY 4.0).",
+                WeatherManager.enabled(this), enabled -> {
+                    if (!enabled) { WeatherManager.disable(this); render(); return; }
+                    if (WeatherManager.permissionGranted(this)) {
+                        p.edit().putBoolean(WeatherManager.ENABLED, true).apply();
+                        WeatherManager.refresh(this, true, this::render);
+                        render();
+                    } else {
+                        requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, WEATHER_LOCATION_REQUEST);
+                    }
+                });
+        if (WeatherManager.enabled(this)) {
+            WeatherManager.Scene scene = WeatherManager.current(this);
+            add(scenes, text(scene == null ? "Weather not available yet. A time-aware scene is still displayed."
+                    : scene.description(this), 13, false, onSurfaceVariant), 7);
+            add(scenes, slimAction("↻", "Refresh weather now", () -> {
+                WeatherManager.refresh(this, true, this::render);
+            }), 8);
+        }
+        add(scenes, text("Approximate coordinates are rounded before weather requests and never saved. Disabling this setting clears cached conditions. No background-location permission is requested.",
+                12, false, onSurfaceVariant), 8);
+        add(body, card(scenes), 16);
+
         LinearLayout updates = panel();
         add(updates, text("App updates", 19, true, onSurface), 0);
         add(updates, text(UiText.tr(this, "Installed version: ") + UpdateManager.installed(this), 14, false, onSurfaceVariant), 10);
         toggle(updates, "Check automatically", "Checks GitHub when you open the app, normally at most twice per day.",
-                p.getBoolean(UpdateManager.AUTO_CHECK, true), value ->
-                        p.edit().putBoolean(UpdateManager.AUTO_CHECK, value).apply());
+                p.getBoolean(UpdateManager.AUTO_CHECK, true), value -> {
+                    p.edit().putBoolean(UpdateManager.AUTO_CHECK, value).apply();
+                    UpdateCheckScheduler.ensure(this);
+                });
+        toggle(updates, "Background update notifications", "Android checks GitHub roughly daily, even when this app is closed; you decide when to download and install.",
+                p.getBoolean(UpdateManager.BACKGROUND_CHECK, true), value -> {
+                    p.edit().putBoolean(UpdateManager.BACKGROUND_CHECK, value).apply();
+                    UpdateCheckScheduler.ensure(this);
+                });
         if (UpdateManager.isReleaseBuild(this)) {
             add(updates, text("Stable release signing active. Incompatible debug-signed previews are excluded from update checks.",
                     12, false, onSurfaceVariant), 10);
@@ -147,14 +183,14 @@ public final class SettingsActivity extends LocalizedActivity {
         } else {
             add(updates, text(UiText.tr(this, "Update available: ") + VersionPolicy.display(available.tag)
                             + (available.preview ? UiText.tr(this, " (preview)") : ""), 16, true, primary), 12);
-            add(updates, button("Download update on GitHub", true, () -> open(available.url)), 8);
+            add(updates, slimAction("⬇", "Download and install update", () -> AppUpdateInstaller.prompt(this, available)), 8);
         }
         add(updates, slimAction("↻", UpdateManager.isChecking() ? "Checking GitHub..." : "Check for updates now", () -> {
             if (UpdateManager.isChecking()) { toast("Update check already running"); return; }
             UpdateManager.check(this, true, (ok, message) -> { toast(message); render(); });
             toast("Checking GitHub releases");
         }), 12);
-        add(updates, text("Android always asks before installing APK updates. Moving from older debug-signed preview builds to a signed release requires uninstalling the preview first; future releases with the same signing key can update in place.",
+        add(updates, text("Verified APKs download inside the app. Android confirms installation and may first require permission to install from this app. Permanent signing allows later stable releases to update in place.",
                 12, false, onSurfaceVariant), 12);
         add(body, card(updates), 16);
     }
@@ -225,6 +261,16 @@ public final class SettingsActivity extends LocalizedActivity {
     @Override public void onRequestPermissionsResult(int code, String[] permissions, int[] grants) {
         super.onRequestPermissionsResult(code, permissions, grants);
         if (code == NOTIFICATION_REQUEST) render();
+        if (code == WEATHER_LOCATION_REQUEST) {
+            if (WeatherManager.permissionGranted(this)) {
+                p.edit().putBoolean(WeatherManager.ENABLED, true).apply();
+                WeatherManager.refresh(this, true, this::render);
+            } else {
+                WeatherManager.disable(this);
+                toast("Approximate location denied; time-aware sky remains available");
+            }
+            render();
+        }
     }
 
     private void askExactAlarms() {

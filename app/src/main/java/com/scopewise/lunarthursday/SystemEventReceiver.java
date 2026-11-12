@@ -18,6 +18,7 @@ public final class SystemEventReceiver extends BroadcastReceiver {
             ReminderScheduler.sync(context);
             SnoozeReceiver.rearm(context);
             DateSyncScheduler.ensure(context);
+            UpdateCheckScheduler.ensure(context);
         }
     }
 }

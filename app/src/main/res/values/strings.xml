@@ -230,4 +230,47 @@
     <string name="tr_abb2896dc" formatted="false">"MIT License"</string>
     <string name="tr_e135e38ac" formatted="false">"Read the project license"</string>
     <string name="tr_68a5ff1d6" formatted="false">"✨ Made with care under the same moon."</string>
+    <string name="tr17_2961a9a599" formatted="false">"🌤 Sky and local weather"</string>
+    <string name="tr17_c2d5693fc0" formatted="false">"The moon and mosque respond to your device time even without location access."</string>
+    <string name="tr17_4118f05e26" formatted="false">"Weather-based sky effects"</string>
+    <string name="tr17_a3cf787004" formatted="false">"Optional: ask for approximate location only while you use the app. Weather data by Open-Meteo (CC BY 4.0)."</string>
+    <string name="tr17_d64589d0a3" formatted="false">"Weather not available yet. A time-aware scene is still displayed."</string>
+    <string name="tr17_da9a0efccf" formatted="false">"Refresh weather now"</string>
+    <string name="tr17_3aef63aaaf" formatted="false">"Approximate coordinates are rounded before weather requests and never saved. Disabling this setting clears cached conditions. No background-location permission is requested."</string>
+    <string name="tr17_a65f32e69d" formatted="false">"Weather unavailable · time-aware sky shown"</string>
+    <string name="tr17_d976168caa" formatted="false">"Allow approximate location in Settings"</string>
+    <string name="tr17_719ea396ad" formatted="false">"Clear"</string>
+    <string name="tr17_44961bce9c" formatted="false">"Cloudy"</string>
+    <string name="tr17_88957d8137" formatted="false">"Foggy"</string>
+    <string name="tr17_cb2afce13b" formatted="false">"Rainy"</string>
+    <string name="tr17_9889a6718c" formatted="false">"Snowy"</string>
+    <string name="tr17_320002f337" formatted="false">"Thunderstorm"</string>
+    <string name="tr17_63f21863d0" formatted="false">"Background update notifications"</string>
+    <string name="tr17_2cc18c2fb0" formatted="false">"Android checks GitHub roughly daily, even when this app is closed; you decide when to download and install."</string>
+    <string name="tr17_6cf8845e00" formatted="false">"Download and install update"</string>
+    <string name="tr17_3e0bf8d605" formatted="false">"Update Hilal Thursday"</string>
+    <string name="tr17_e457149073" formatted="false">"Not now"</string>
+    <string name="tr17_7db0bddc82" formatted="false">"Download &amp; install"</string>
+    <string name="tr17_439f5b6308" formatted="false">"Installing update"</string>
+    <string name="tr17_359f771d8f" formatted="false">"Downloading securely…"</string>
+    <string name="tr17_0a82591963" formatted="false">"Downloading APK…"</string>
+    <string name="tr17_77dfd2135f" formatted="false">"Cancel"</string>
+    <string name="tr17_dd26aca1cd" formatted="false">"Android installation permission"</string>
+    <string name="tr17_610e342dea" formatted="false">"Open Android settings"</string>
+    <string name="tr17_56e2f5d363" formatted="false">"Later"</string>
+    <string name="tr17_f8b8cfcfff" formatted="false">"Approximate location denied; time-aware sky remains available"</string>
+    <string name="tr17_1e434c4650" formatted="false">"Hilal Thursday update available"</string>
+    <string name="tr17_d15c2b37c7" formatted="false">"No browser is needed."</string>
+    <string name="tr17_3b425ad7cf" formatted="false">"Weather: Open-Meteo"</string>
+    <string name="tr17_74c7f34de9" formatted="false">"Newer signed update"</string>
+    <string name="tr17_6f266286a2" formatted="false">"Optional weather location · no ads or accounts"</string>
+    <string name="tr17_717c781cff" formatted="false">"Weather visuals and in-app updates"</string>
+    <string name="tr17_3e3ca4d087" formatted="false">"No account, ads, or analytics. Location is requested only when you enable weather visuals, and only while the app is in use. Approximate coordinates are rounded, sent to Open-Meteo, and never stored. The Hijri-date feed and GitHub release checks also contact external services. Each provider can see the connecting IP address."</string>
+    <string name="tr17_3f090a48a3" formatted="false">"Hilal Thursday v1.7 adds optional location-based weather scenery, a time-aware moon-and-mosque illustration, background update alerts and secure APK downloads inside the app. Android always confirms installation. Weather data: Open-Meteo (CC BY 4.0)."</string>
+    <string name="tr17_912d5a7d18" formatted="false">"Download version "</string>
+    <string name="tr17_72c55f8abb" formatted="false">" securely inside this app? The APK is checked against its SHA-256 digest and the installed signing certificate before Android confirms installation."</string>
+    <string name="tr17_a5e7a0d079" formatted="false">"Allow Hilal Thursday to install app updates in Android settings. Return to this app to continue. No web browser is needed."</string>
+    <string name="tr17_6f2bb9125b" formatted="false">"Previously downloaded APK is no longer compatible"</string>
+    <string name="tr17_adff75831c" formatted="false">"Verified APKs download inside the app. Android confirms installation and may first require permission to install from this app. Permanent signing allows later stable releases to update in place."</string>
+    <string name="tr17_4236381988" formatted="false">" is ready. Tap to download inside this app."</string>
 </resources>

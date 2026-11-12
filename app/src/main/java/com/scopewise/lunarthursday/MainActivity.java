@@ -64,9 +64,11 @@ public final class MainActivity extends LocalizedActivity {
             preferences.edit().putBoolean(ReminderStore.ENABLED, true).apply();
         }
         if (state != null) activeTab = state.getInt("dashboard_tab", TAB_HOME);
+        else activeTab = getIntent().getIntExtra("open_tab", TAB_HOME);
         ReminderNotifications.ensureChannel(this);
         ReminderScheduler.sync(this);
         DateSyncScheduler.ensure(this);
+        UpdateCheckScheduler.ensure(this);
         if (Build.VERSION.SDK_INT >= 33) requestNotificationPermission();
         render();
     }
@@ -81,7 +83,12 @@ public final class MainActivity extends LocalizedActivity {
         if (preferences == null) return;
         ReminderScheduler.sync(this);
         DateSyncScheduler.ensure(this);
+        UpdateCheckScheduler.ensure(this);
         render();
+        AppUpdateInstaller.resumeIfPermitted(this);
+        WeatherManager.refresh(this, false, () -> {
+            if (!isFinishing() && !isDestroyed()) render();
+        });
         UpdateManager.check(this, false, (ok, message) -> {
             if (!isFinishing() && !isDestroyed()) render();
         });
@@ -249,7 +256,9 @@ public final class MainActivity extends LocalizedActivity {
             MaterialCardView card = card(primaryContainer, 27);
             LinearLayout hero = column();
             card.addView(hero);
-            hero.addView(new MoonSkyView(this), new LinearLayout.LayoutParams(-1, dp(151)));
+            MoonSkyView sky = new MoonSkyView(this);
+            sky.setWeather(WeatherManager.current(this));
+            hero.addView(sky, new LinearLayout.LayoutParams(-1, dp(151)));
             LinearLayout details = column();
             details.setPadding(dp(17), dp(12), dp(17), dp(19));
             add(details, text("NEXT REMINDER", 12, true, onPrimaryContainer), 0);
@@ -263,6 +272,14 @@ public final class MainActivity extends LocalizedActivity {
             minutesValue = addCounter(countdown, "Minutes");
             add(details, countdown, 15);
             add(details, text(sourceLabel(next.basis), 12, false, onPrimaryContainer), 12);
+            WeatherManager.Scene live = WeatherManager.current(this);
+            if (live != null) {
+                add(details, text("🌤 " + live.description(this) + "  ·  Weather: Open-Meteo", 12, false, onPrimaryContainer), 7);
+            } else if (WeatherManager.enabled(this)) {
+                add(details, text("🌤 " + (WeatherManager.permissionGranted(this)
+                     ? "Weather unavailable · time-aware sky shown" : "Allow approximate location in Settings"),
+                     12, false, onPrimaryContainer), 7);
+            }
             add(details, text("Tap for the month-start date and source", 11, false, onPrimaryContainer), 6);
             hero.addView(details);
             card.setOnClickListener(v -> showMonthDetails(next));
@@ -374,7 +391,7 @@ public final class MainActivity extends LocalizedActivity {
         UpdateManager.Result result = UpdateManager.available(this);
         if (result == null) add(releaseCard, text("No newer release detected", 13, false, secondary), 9);
         else add(releaseCard, compactSurfaceRow("✨", "Update available",
-                VersionPolicy.display(result.tag), () -> open(result.url)), 9);
+                VersionPolicy.display(result.tag), () -> AppUpdateInstaller.prompt(this, result)), 9);
         add(releaseCard, actionRow(R.drawable.ic_ui_refresh, "Check for updates now", this::checkUpdates), 12);
         add(body, card(releaseCard, surfaceVariant, 23), 18);
 

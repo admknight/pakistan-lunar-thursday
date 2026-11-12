@@ -100,14 +100,14 @@ public final class AboutActivity extends LocalizedActivity {
 
         LinearLayout list = column();
         list.setPadding(dp(13), dp(6), dp(13), dp(6));
-        list.addView(linkRow("🔒", "Privacy", "No account, ads or location tracking",
-                () -> showInfo("Privacy", "No account, ads, location request, or app analytics. The phone checks a public Hijri-date feed and GitHub's Releases API; those services can see the connecting IP address.")));
+        list.addView(linkRow("🔒", "Privacy", "Optional weather location · no ads or accounts",
+                () -> showInfo("Privacy", "No account, ads, or analytics. Location is requested only when you enable weather visuals, and only while the app is in use. Approximate coordinates are rounded, sent to Open-Meteo, and never stored. The Hijri-date feed and GitHub release checks also contact external services. Each provider can see the connecting IP address.")));
         divider(list);
         list.addView(linkRow("📅", "Calendar sources & accuracy", "How Islamic month dates are determined",
                 () -> showInfo("Calendar sources & accuracy", "Official Pakistani moon sighting is determined by the Central Ruet-e-Hilal Committee. The app uses third-party reported dates when available and PMD forecasts or calculated estimates otherwise. It does not claim a government-approved date feed.")));
         divider(list);
-        list.addView(linkRow("✨", "What's new", "View the latest public release notes",
-                () -> open(PROJECT + "/releases")));
+        list.addView(linkRow("✨", "What's new", "Weather visuals and in-app updates",
+                () -> showInfo("What's new", "Hilal Thursday v1.7 adds optional location-based weather scenery, a time-aware moon-and-mosque illustration, background update alerts and secure APK downloads inside the app. Android always confirms installation. Weather data: Open-Meteo (CC BY 4.0).")));
         divider(list);
         list.addView(linkRow("⌘", "Open source & feedback", "Code, issues and contributions",
                 () -> open(PROJECT)));

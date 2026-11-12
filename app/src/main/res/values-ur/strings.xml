@@ -230,4 +230,47 @@
     <string name="tr_abb2896dc" formatted="false">"ایم آئی ٹی لائسنس"</string>
     <string name="tr_e135e38ac" formatted="false">"پروجیکٹ کا لائسنس پڑھیں"</string>
     <string name="tr_68a5ff1d6" formatted="false">"✨ ایک ہی چاند تلے محبت سے تیار کردہ۔"</string>
+    <string name="tr17_2961a9a599" formatted="false">"🌤 آسمان اور مقامی موسم"</string>
+    <string name="tr17_c2d5693fc0" formatted="false">"چاند اور مسجد کا منظر آپ کے فون کے وقت کے مطابق بدلتا ہے، مقام کی اجازت کے بغیر بھی۔"</string>
+    <string name="tr17_4118f05e26" formatted="false">"موسم کے مطابق آسمانی مناظر"</string>
+    <string name="tr17_a3cf787004" formatted="false">"اختیاری: ایپ کے استعمال کے دوران صرف اندازاً مقام کی اجازت مانگی جاتی ہے۔ موسم کا ڈیٹا: Open-Meteo (CC BY 4.0)۔"</string>
+    <string name="tr17_d64589d0a3" formatted="false">"موسم کا ڈیٹا ابھی دستیاب نہیں۔ وقت کے مطابق منظر پھر بھی دکھایا جائے گا۔"</string>
+    <string name="tr17_da9a0efccf" formatted="false">"موسم ابھی تازہ کریں"</string>
+    <string name="tr17_3aef63aaaf" formatted="false">"موسم کی درخواست سے پہلے اندازاً مقام کو گول کیا جاتا ہے اور محفوظ نہیں کیا جاتا۔ یہ اختیار بند کرنے سے پرانا موسمی ڈیٹا صاف ہو جاتا ہے۔ پس منظر میں مقام کی اجازت نہیں مانگی جاتی۔"</string>
+    <string name="tr17_a65f32e69d" formatted="false">"موسم دستیاب نہیں · وقت کے مطابق منظر دکھایا گیا ہے"</string>
+    <string name="tr17_d976168caa" formatted="false">"سیٹنگز میں اندازاً مقام کی اجازت دیں"</string>
+    <string name="tr17_719ea396ad" formatted="false">"صاف موسم"</string>
+    <string name="tr17_44961bce9c" formatted="false">"بادل"</string>
+    <string name="tr17_88957d8137" formatted="false">"دھند"</string>
+    <string name="tr17_cb2afce13b" formatted="false">"بارش"</string>
+    <string name="tr17_9889a6718c" formatted="false">"برف باری"</string>
+    <string name="tr17_320002f337" formatted="false">"گرج چمک"</string>
+    <string name="tr17_63f21863d0" formatted="false">"پس منظر میں اپ ڈیٹ کی اطلاعات"</string>
+    <string name="tr17_2cc18c2fb0" formatted="false">"Android تقریباً روزانہ GitHub پر چیک کرتا ہے، ایپ بند ہونے پر بھی۔ ڈاؤن لوڈ اور انسٹال آپ کی مرضی سے ہوگا۔"</string>
+    <string name="tr17_6cf8845e00" formatted="false">"اپ ڈیٹ ڈاؤن لوڈ اور انسٹال کریں"</string>
+    <string name="tr17_3e0bf8d605" formatted="false">"ہلال جمعرات اپ ڈیٹ کریں"</string>
+    <string name="tr17_e457149073" formatted="false">"ابھی نہیں"</string>
+    <string name="tr17_7db0bddc82" formatted="false">"ڈاؤن لوڈ اور انسٹال کریں"</string>
+    <string name="tr17_439f5b6308" formatted="false">"اپ ڈیٹ انسٹال ہو رہی ہے"</string>
+    <string name="tr17_359f771d8f" formatted="false">"محفوظ طریقے سے ڈاؤن لوڈ ہو رہا ہے…"</string>
+    <string name="tr17_0a82591963" formatted="false">"APK ڈاؤن لوڈ ہو رہی ہے…"</string>
+    <string name="tr17_77dfd2135f" formatted="false">"منسوخ کریں"</string>
+    <string name="tr17_dd26aca1cd" formatted="false">"Android کی انسٹالیشن اجازت"</string>
+    <string name="tr17_610e342dea" formatted="false">"Android سیٹنگز کھولیں"</string>
+    <string name="tr17_56e2f5d363" formatted="false">"بعد میں"</string>
+    <string name="tr17_f8b8cfcfff" formatted="false">"اندازاً مقام کی اجازت نہیں ملی؛ وقت کے مطابق منظر پھر بھی دستیاب ہے"</string>
+    <string name="tr17_1e434c4650" formatted="false">"ہلال جمعرات کی نئی اپ ڈیٹ دستیاب ہے"</string>
+    <string name="tr17_d15c2b37c7" formatted="false">"براؤزر کی ضرورت نہیں۔"</string>
+    <string name="tr17_3b425ad7cf" formatted="false">"موسم: Open-Meteo"</string>
+    <string name="tr17_74c7f34de9" formatted="false">"نئی دستخط شدہ اپ ڈیٹ"</string>
+    <string name="tr17_6f266286a2" formatted="false">"اختیاری موسم کا مقام · نہ اشتہارات، نہ اکاؤنٹ"</string>
+    <string name="tr17_717c781cff" formatted="false">"موسمی منظر اور ایپ کے اندر اپ ڈیٹس"</string>
+    <string name="tr17_3e3ca4d087" formatted="false">"نہ اکاؤنٹ درکار ہے، نہ اشتہارات یا تجزیاتی ٹریکنگ۔ مقام کی اجازت صرف موسمی مناظر فعال کرنے پر، ایپ کے استعمال کے دوران مانگی جاتی ہے۔ اندازاً مقام کو گول کر کے Open-Meteo کو بھیجا جاتا ہے، محفوظ نہیں کیا جاتا۔ ہجری تاریخ کا ذریعہ اور GitHub اپ ڈیٹ چیک بیرونی خدمات ہیں؛ وہ آپ کا انٹرنیٹ پتہ دیکھ سکتی ہیں۔"</string>
+    <string name="tr17_3f090a48a3" formatted="false">"ہلال جمعرات 1.7 میں اختیاری مقامی موسم کے مناظر، وقت کے مطابق چاند اور مسجد کی تصویر، پس منظر میں اپ ڈیٹ کی اطلاع اور ایپ کے اندر محفوظ APK ڈاؤن لوڈ شامل ہیں۔ انسٹالیشن کی تصدیق Android کرتا ہے۔ موسم: Open-Meteo (CC BY 4.0)۔"</string>
+    <string name="tr17_912d5a7d18" formatted="false">"ورژن "</string>
+    <string name="tr17_72c55f8abb" formatted="false">" کو ایپ میں محفوظ طریقے سے ڈاؤن لوڈ کریں؟ Android کی تصدیق سے پہلے SHA-256 اور موجودہ دستخطی سرٹیفکیٹ چیک کیا جائے گا۔"</string>
+    <string name="tr17_a5e7a0d079" formatted="false">"Android سیٹنگز میں ہلال جمعرات کو ایپ اپ ڈیٹس انسٹال کرنے کی اجازت دیں۔ پھر اسی ایپ میں واپس آئیں۔ ویب براؤزر کی ضرورت نہیں۔"</string>
+    <string name="tr17_6f2bb9125b" formatted="false">"پہلے ڈاؤن لوڈ شدہ APK اب مطابقت نہیں رکھتی"</string>
+    <string name="tr17_adff75831c" formatted="false">"تصدیق شدہ APK ایپ کے اندر ڈاؤن لوڈ ہوتی ہے۔ Android انسٹالیشن کی تصدیق کرتا ہے اور اس ایپ سے انسٹال کرنے کی اجازت مانگ سکتا ہے۔ مستقل دستخط کے ساتھ آئندہ مستحکم ریلیز اسی ایپ پر اپ ڈیٹ ہو سکتی ہیں۔"</string>
+    <string name="tr17_4236381988" formatted="false">" تیار ہے۔ ایپ میں ڈاؤن لوڈ کے لیے ٹیپ کریں۔"</string>
 </resources>

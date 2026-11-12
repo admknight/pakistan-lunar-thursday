@@ -28,6 +28,9 @@ final class UpdateManager {
     private static final String LATEST_URL = "updates_latest_download_url";
     private static final String LATEST_PAGE = "updates_latest_release_page";
     private static final String LATEST_PREVIEW = "updates_latest_is_preview";
+    private static final String LATEST_DIGEST = "updates_latest_digest";
+    static final String BACKGROUND_CHECK = "updates_background_check";
+    private static final String LAST_NOTIFIED = "updates_last_notified_version";
     private static final String FEED = "https://api.github.com/repos/admknight/pakistan-lunar-thursday/releases?per_page=20";
     private static final String RELEASE_PREFIX = "https://github.com/admknight/pakistan-lunar-thursday/releases/";
     private static final String DOWNLOAD_PREFIX = RELEASE_PREFIX + "download/";
@@ -47,11 +50,10 @@ final class UpdateManager {
         final String url;
         final String page;
         final boolean preview;
-        Result(String tag, String url, String page, boolean preview) {
-            this.tag = tag;
-            this.url = url;
-            this.page = page;
-            this.preview = preview;
+        final String digest;
+        Result(String tag, String url, String page, boolean preview, String digest) {
+            this.tag = tag; this.url = url; this.page = page;
+            this.preview = preview; this.digest = digest;
         }
     }
 
@@ -74,11 +76,13 @@ final class UpdateManager {
         String url = p.getString(LATEST_URL, "");
         String page = p.getString(LATEST_PAGE, "");
         boolean preview = p.getBoolean(LATEST_PREVIEW, true);
+        String digest = p.getString(LATEST_DIGEST, "");
         if (preview && (isReleaseBuild(context)
                 || !p.getBoolean(INCLUDE_PREVIEWS, true))) return null;
         if (VersionPolicy.compare(tag, installed(context)) <= 0) return null;
         if (!safeUrl(url, DOWNLOAD_PREFIX, ".apk") || !safeUrl(page, RELEASE_PREFIX, "")) return null;
-        return new Result(tag, url, page, preview);
+        if (!digest.matches("[a-f0-9]{64}")) return null;
+        return new Result(tag, url, page, preview, digest);
     }
 
     static long lastChecked(Context context) {
@@ -109,11 +113,12 @@ final class UpdateManager {
                         && p.getBoolean(INCLUDE_PREVIEWS, true), installed(app));
                 SharedPreferences.Editor e = ReminderStore.prefs(app).edit();
                 if (best == null) {
-                    e.remove(LATEST_TAG).remove(LATEST_URL).remove(LATEST_PAGE).remove(LATEST_PREVIEW);
+                    e.remove(LATEST_TAG).remove(LATEST_URL).remove(LATEST_PAGE).remove(LATEST_PREVIEW).remove(LATEST_DIGEST);
                     status = "No newer compatible release found";
                 } else {
                     e.putString(LATEST_TAG, best.tag).putString(LATEST_URL, best.url)
-                            .putString(LATEST_PAGE, best.page).putBoolean(LATEST_PREVIEW, best.preview);
+                            .putString(LATEST_PAGE, best.page).putBoolean(LATEST_PREVIEW, best.preview)
+                            .putString(LATEST_DIGEST, best.digest);
                     status = "New version available: " + VersionPolicy.display(best.tag);
                 }
                 e.putLong(LAST_SUCCESS, System.currentTimeMillis()).apply();
@@ -130,6 +135,42 @@ final class UpdateManager {
                         ? UiText.tr(activity, "New version available: ") + VersionPolicy.display(finalStatus.substring("New version available: ".length()))
                         : UiText.tr(activity, finalStatus));
             });
+        });
+    }
+
+    /** Periodic read-only GitHub check; never downloads or installs APKs unattended. */
+    static void checkInBackground(Context context, Runnable finished) {
+        Context app = context.getApplicationContext();
+        SharedPreferences p = ReminderStore.prefs(app);
+        if (!p.getBoolean(AUTO_CHECK, true) || !p.getBoolean(BACKGROUND_CHECK, true)) {
+            if (finished != null) finished.run();
+            return;
+        }
+        if (!BUSY.compareAndSet(false, true)) {
+            if (finished != null) finished.run();
+            return;
+        }
+        IO.execute(() -> {
+            try {
+                Result best = fetchLatest(false, installed(app));
+                SharedPreferences.Editor e = p.edit();
+                if (best == null) {
+                    e.remove(LATEST_TAG).remove(LATEST_URL).remove(LATEST_PAGE)
+                     .remove(LATEST_PREVIEW).remove(LATEST_DIGEST);
+                } else {
+                    e.putString(LATEST_TAG, best.tag).putString(LATEST_URL, best.url)
+                     .putString(LATEST_PAGE, best.page).putBoolean(LATEST_PREVIEW, best.preview)
+                     .putString(LATEST_DIGEST, best.digest);
+                }
+                e.putLong(LAST_SUCCESS, System.currentTimeMillis()).apply();
+                if (best != null && !best.preview
+                        && !best.tag.equals(p.getString(LAST_NOTIFIED, ""))) {
+                    if (UpdateCheckJob.notifyUpdate(app, best.tag)) {
+                        p.edit().putString(LAST_NOTIFIED, best.tag).apply();
+                    }
+                }
+            } catch (Exception ignored) { /* Periodic job will retry later. */ }
+            finally { BUSY.set(false); if (finished != null) MAIN.post(finished); }
         });
     }
 
@@ -168,17 +209,21 @@ final class UpdateManager {
                 JSONArray assets = entry.optJSONArray("assets");
                 if (assets == null) continue;
                 String apk = "";
+                String digest = "";
                 for (int j = 0; j < assets.length(); j++) {
                     JSONObject asset = assets.optJSONObject(j);
                     if (asset == null || !asset.optString("name", "").endsWith(".apk")) continue;
                     String candidate = asset.optString("browser_download_url", "");
                     if (!safeUrl(candidate, DOWNLOAD_PREFIX, ".apk")) continue;
+                    String publishedDigest = asset.optString("digest", "");
+                    if (!publishedDigest.matches("sha256:[a-fA-F0-9]{64}")) continue;
+                    digest = publishedDigest.substring(7).toLowerCase(java.util.Locale.ROOT);
                     apk = candidate;
                     break;
                 }
                 if (apk.isEmpty()) continue;
                 if (best == null || VersionPolicy.compare(tag, best.tag) > 0) {
-                    best = new Result(tag, apk, page, preview);
+                    best = new Result(tag, apk, page, preview, digest);
                 }
             }
             return best;
