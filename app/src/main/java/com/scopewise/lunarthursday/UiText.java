@@ -285,6 +285,13 @@ final class UiText {
         return String.format(AppLanguage.locale(context), tr(context, template), values);
     }
 
+    /** Always marks the displayed day as provisional, even for third-party reports. */
+    static String expectedHijriDate(Context context, LunarEngine.Month month, LocalDate civilDate) {
+        String day = String.format(AppLanguage.locale(context), "%d", month.hijriDay(civilDate));
+        return AppLanguage.wrap(context).getString(
+                R.string.expected_hijri_date, day, month(context, month));
+    }
+
     static String date(Context context, LocalDate value, boolean longFormat) {
         String format = longFormat ? "EEEE, d MMMM yyyy" : "d MMM yyyy";
         return DateTimeFormatter.ofPattern(format, AppLanguage.locale(context)).format(value);

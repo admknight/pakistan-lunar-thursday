@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -42,6 +43,16 @@ public final class LunarEngine {
         public String key() { return hijriYear + "-" + hijriMonth; }
         public String label() { return monthName(hijriMonth) + " " + hijriYear + " AH"; }
         public LocalDate thursday() { return firstThursday(start); }
+
+        /** Expected Hijri day on a Pakistan civil date, relative to this month start. */
+        public int hijriDay(LocalDate civilDate) {
+            long day = ChronoUnit.DAYS.between(start, civilDate) + 1L;
+            if (day < 1 || day > 30) {
+                throw new IllegalArgumentException("Civil date outside expected Hijri month");
+            }
+            return (int) day;
+        }
+
         public Instant remindAt() {
             return ZonedDateTime.of(thursday(), REMINDER_TIME, PAKISTAN).toInstant();
         }
@@ -112,6 +123,40 @@ public final class LunarEngine {
         if (confirmed != null) return new Month(year, month, confirmed, Basis.LIVE_REPORTED_CONFIRMED);
         if (pmd != null) return new Month(year, month, pmd, Basis.PMD_FORECAST);
         return new Month(year, month, estimatedFirstDay(year, month), Basis.CALCULATED_ESTIMATE);
+    }
+
+    /** A provisional Hijri civil date sourced from the same month-start data as reminders. */
+    public static final class HijriDate {
+        public final Month month;
+        public final int day;
+
+        private HijriDate(Month month, int day) {
+            this.month = month;
+            this.day = day;
+        }
+    }
+
+    /**
+     * Find the Hijri date expected on a Pakistan civil day. Use the most recent
+     * source-selected month start within 30 days, never a second conversion API.
+     * Return null if no defensible start exists; do not display day 31+.
+     */
+    public static HijriDate expectedOnDate(LocalDate civilDate,
+                                           Map<String, LocalDate> confirmedStarts) {
+        if (civilDate == null) throw new IllegalArgumentException("Civil date is required");
+        int approximateYear = civilDate.getYear() - 579;
+        Month best = null;
+        for (int year = Math.max(1, approximateYear - 5); year <= approximateYear + 7; year++) {
+            for (int m = 1; m <= 12; m++) {
+                Month candidate = month(year, m, confirmedStarts);
+                long elapsed = ChronoUnit.DAYS.between(candidate.start, civilDate);
+                if (elapsed >= 0 && elapsed < 30
+                        && (best == null || candidate.start.isAfter(best.start))) {
+                    best = candidate;
+                }
+            }
+        }
+        return best == null ? null : new HijriDate(best, best.hijriDay(civilDate));
     }
 
     /** Upcoming one-time reminder occurrences, sorted by Pakistan local date. */

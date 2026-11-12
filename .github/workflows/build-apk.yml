@@ -129,7 +129,7 @@ jobs:
           fi
           cat > "$RUNNER_TEMP/release-notes.md" <<'NOTES'
           ## Pakistan Lunar Thursday — Android preview
-          This debug-signed APK reminds you at **11:00 AM Pakistan time** on the first Thursday on or after the start of each Islamic month. Date checks are automatic, with no manual correction required. Version 1.8.1 corrects countdown-number contrast on light tiles and retains three user-supplied, originally composed Gemini musical alarm cues (Hilal Noor, Sukoon and Hilal Nida), offline previews, persistence of the selected tone, and Android's system alarm-tone picker. It preserves weather scenery, in-app updates and the eleven AM PKT reminder.
+          This debug-signed APK reminds you at **11:00 AM Pakistan time** on the first Thursday on or after the start of each Islamic month. Date checks are automatic, with no manual correction required. Version 1.9.0 adds the expected Hijri day alongside Gregorian dates on the home dashboard and upcoming-month calendar, with English/Urdu labels and Pakistan moon-sighting caveats. It retains three user-supplied, originally composed Gemini musical alarm cues (Hilal Noor, Sukoon and Hilal Nida), offline previews, persistence of the selected tone, and Android's system alarm-tone picker. It preserves weather scenery, in-app updates and the eleven AM PKT reminder.
 
           **Install:** Download the APK asset below, allow installation from your browser/file manager, open the app, and grant notification and (when available) exact-alarm permissions. Android 8.0 or newer is required.
 

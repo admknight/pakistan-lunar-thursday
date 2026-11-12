@@ -248,8 +248,15 @@ public final class MainActivity extends LocalizedActivity {
         List<LunarEngine.Month> upcoming = months(6);
         TextView welcome = text("Your next lunar Thursday, at a glance", 25, true, onSurface);
         add(body, welcome, 0);
+        LocalDate today = LocalDate.now(LunarEngine.PAKISTAN);
         add(body, text(UiText.tr(this, "Today in Pakistan: ")
-                + UiText.date(this, LocalDate.now(LunarEngine.PAKISTAN), true), 13, false, secondary), 6);
+                + UiText.date(this, today, true), 13, false, secondary), 6);
+        LunarEngine.HijriDate expectedToday = LunarEngine.expectedOnDate(
+                today, ReminderStore.confirmedStarts(this));
+        if (expectedToday != null) {
+            add(body, text(UiText.expectedHijriDate(this, expectedToday.month, today),
+                    12, false, secondary), 3);
+        }
 
         if (!upcoming.isEmpty()) {
             LunarEngine.Month next = upcoming.get(0);
@@ -264,6 +271,8 @@ public final class MainActivity extends LocalizedActivity {
             add(details, text("NEXT REMINDER", 12, true, onPrimaryContainer), 0);
             add(details, text(UiText.month(this, next), 22, true, onPrimaryContainer), 6);
             add(details, text(UiText.date(this, next.thursday(), true), 16, true, onPrimaryContainer), 7);
+            add(details, text(UiText.expectedHijriDate(this, next, next.thursday()),
+                    14, true, onPrimaryContainer), 4);
             add(details, text("11:00 AM  ·  Pakistan Standard Time", 13, false, onPrimaryContainer), 3);
             LinearLayout countdown = row();
             countdown.setGravity(Gravity.CENTER);
@@ -373,11 +382,15 @@ public final class MainActivity extends LocalizedActivity {
         details.setPadding(dp(11), 0, 0, 0);
         details.addView(text(UiText.month(this, item), 15, true, onSurface));
         details.addView(text(UiText.date(this, item.thursday(), false), 13, false, secondary));
+        details.addView(text(UiText.expectedHijriDate(this, item, item.thursday()),
+                12, true, onSurface));
         details.addView(text(sourceLabel(item.basis), 11, false, secondary));
         row.addView(details, new LinearLayout.LayoutParams(0, -2, 1));
         row.addView(text(chevron(), 27, false, secondary));
         row.setOnClickListener(v -> showMonthDetails(item));
-        row.setContentDescription(UiText.month(this, item) + ", " + UiText.date(this, item.thursday(), true));
+        row.setContentDescription(UiText.month(this, item) + ", "
+                + UiText.date(this, item.thursday(), true) + ", "
+                + UiText.expectedHijriDate(this, item, item.thursday()));
         return row;
     }
 
@@ -458,7 +471,9 @@ public final class MainActivity extends LocalizedActivity {
     private void showMonthDetails(LunarEngine.Month item) {
         String message = UiText.tr(this, "Month: ") + UiText.month(this, item)
                 + "\n" + UiText.tr(this, "First civil day (Pakistan): ") + UiText.date(this, item.start, true)
-                + "\n" + UiText.tr(this, "First Thursday: ") + UiText.date(this, item.thursday(), true)
+                + "\n" + UiText.expectedHijriDate(this, item, item.start)
+                + "\n\n" + UiText.tr(this, "First Thursday: ") + UiText.date(this, item.thursday(), true)
+                + "\n" + UiText.expectedHijriDate(this, item, item.thursday())
                 + "\n" + UiText.tr(this, "Reminder: 11:00 AM PKT")
                 + "\n\n" + UiText.tr(this, "Source: ") + LunarEngine.basisDescription(item.basis)
                 + "\n\n" + UiText.tr(this, "Forecasts and third-party reports may differ from the official Ruet-e-Hilal decision.");
