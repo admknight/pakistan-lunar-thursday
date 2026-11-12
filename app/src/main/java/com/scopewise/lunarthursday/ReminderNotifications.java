@@ -42,6 +42,12 @@ final class ReminderNotifications {
                 label + " - 11:00 AM Pakistan time. " + note);
     }
 
+    static void missed(Context context, String monthLabel, String basis) {
+        send(context, MONTHLY_ID, "Lunar Thursday alarm was missed",
+                (monthLabel == null ? "Lunar Thursday" : monthLabel)
+                        + ": the ringing alarm stopped after two minutes. Open the app to review your reminder.");
+    }
+
     static void test(Context context) {
         send(context, TEST_ID, "Lunar Thursday test notification",
                 "Notifications are enabled. Monthly reminders target 11:00 AM PKT.");

@@ -23,10 +23,14 @@ public final class ReminderReceiver extends BroadcastReceiver {
         String monthKey = intent.getStringExtra(ReminderScheduler.EXTRA_MONTH_KEY);
         if (monthKey == null) return;
         if (!monthKey.equals(p.getString(ReminderStore.LAST_SENT_KEY, ""))) {
-            ReminderNotifications.show(context,
-                    intent.getStringExtra(ReminderScheduler.EXTRA_MONTH),
-                    intent.getStringExtra(ReminderScheduler.EXTRA_BASIS));
-            p.edit().putString(ReminderStore.LAST_SENT_KEY, monthKey).apply();
+            String label = intent.getStringExtra(ReminderScheduler.EXTRA_MONTH);
+            String basis = intent.getStringExtra(ReminderScheduler.EXTRA_BASIS);
+            if (!p.getBoolean(ReminderStore.ALARM_MODE, false)
+                    || !AlarmRingingService.start(context, label, monthKey, basis, false)) {
+                ReminderNotifications.show(context, label, basis);
+            }
+            // Durable at-most-once monthly dispatch; snoozing uses a distinct guarded timer.
+            p.edit().putString(ReminderStore.LAST_SENT_KEY, monthKey).commit();
         }
         ReminderScheduler.sync(context);
     }

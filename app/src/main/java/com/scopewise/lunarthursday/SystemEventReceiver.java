@@ -16,6 +16,7 @@ public final class SystemEventReceiver extends BroadcastReceiver {
                 || Intent.ACTION_TIMEZONE_CHANGED.equals(action)
                 || AlarmManager.ACTION_SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED.equals(action)) {
             ReminderScheduler.sync(context);
+            SnoozeReceiver.rearm(context);
             DateSyncScheduler.ensure(context);
         }
     }

@@ -10,6 +10,13 @@ import java.util.Map;
 /** Only automatic feed observations are stored. No user date editing. */
 final class ReminderStore {
     static final String ENABLED = "enabled";
+    static final String ALARM_MODE = "ringing_alarm_mode";
+    static final String ALARM_SOUND = "ringing_alarm_sound";
+    static final String ALARM_VIBRATE = "ringing_alarm_vibration";
+    static final String SNOOZE_TRIGGER = "snooze_trigger";
+    static final String SNOOZE_KEY = "snooze_month_key";
+    static final String SNOOZE_LABEL = "snooze_month_label";
+    static final String SNOOZE_BASIS = "snooze_source_basis";
     static final String NEXT_TRIGGER = "next_trigger_millis";
     static final String LAST_SENT_KEY = "last_sent_month";
     static final String CONFIRMED_PREFIX = "live_confirmed_first_day_";
