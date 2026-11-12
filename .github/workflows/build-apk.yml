@@ -48,6 +48,7 @@ jobs:
             app/src/main/java/com/scopewise/lunarthursday/SunsetMath.java \
             app/src/main/java/com/scopewise/lunarthursday/ReminderTimePolicy.java \
             app/src/main/java/com/scopewise/lunarthursday/MonthEndChecks.java \
+            app/src/main/java/com/scopewise/lunarthursday/SentReminderPolicy.java \
             test/java/com/scopewise/lunarthursday/EngineTest.java \
             test/java/com/scopewise/lunarthursday/FeedDatePolicyTest.java \
             test/java/com/scopewise/lunarthursday/VersionPolicyTest.java \
@@ -55,6 +56,7 @@ jobs:
             test/java/com/scopewise/lunarthursday/AlarmTonePolicyTest.java \
             test/java/com/scopewise/lunarthursday/SunsetMathTest.java \
             test/java/com/scopewise/lunarthursday/ReminderTimePolicyTest.java \
+            test/java/com/scopewise/lunarthursday/SentReminderPolicyTest.java \
             test/java/com/scopewise/lunarthursday/MonthEndChecksTest.java
           java -cp build/portable-tests com.scopewise.lunarthursday.EngineTest
           java -cp build/portable-tests com.scopewise.lunarthursday.FeedDatePolicyTest
@@ -64,6 +66,7 @@ jobs:
           java -cp build/portable-tests com.scopewise.lunarthursday.SunsetMathTest
           java -cp build/portable-tests com.scopewise.lunarthursday.ReminderTimePolicyTest
           java -cp build/portable-tests com.scopewise.lunarthursday.MonthEndChecksTest
+          java -cp build/portable-tests com.scopewise.lunarthursday.SentReminderPolicyTest
 
       - name: Verify the three reviewed Gemini music excerpts
         shell: bash
