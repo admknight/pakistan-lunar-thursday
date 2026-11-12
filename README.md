@@ -4,6 +4,27 @@
 
 ![Build Android APK](https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/build-apk.yml/badge.svg)
 
+## Real app screenshots (Android emulator)
+
+These are **unedited screenshots of the actual permanently signed v1.7.0 APK**, installed and opened on a **Pixel 5 Android 15 emulator (API 35)**. They were captured from the running app with Android Debug Bridge (`adb screencap`), not generated from the promotional artwork. Calendar dates, countdown values, device time, and any reported data reflect the emulator session; third-party forecast dates are **not** official moon-sighting confirmations. Location-based weather is **off** in these default screenshots.
+
+| Home — English | Home — اردو | Upcoming lunar months |
+|:---:|:---:|:---:|
+| <img src="docs/screenshots/home-en.png" width="245" alt="Real Hilal Thursday English dashboard screenshot on Android 15, with crescent-and-mosque illustration, next lunar reminder and countdown"> | <img src="docs/screenshots/home-ur.png" width="245" alt="Real right-to-left Urdu dashboard screenshot of Hilal Thursday on Android 15"> | <img src="docs/screenshots/calendar-en.png" width="245" alt="Real upcoming Islamic months calendar screen with forecast labels"> |
+
+| Updates and date checks | About and developer | Settings and alarms |
+|:---:|:---:|:---:|
+| <img src="docs/screenshots/updates-en.png" width="245" alt="Real app releases and automatic Pakistan Hijri date-check status screen"> | <img src="docs/screenshots/about-en.png" width="245" alt="Real About and Developer page including maintainer, privacy, data accuracy and license links"> | <img src="docs/screenshots/settings-en.png" width="245" alt="Real Android settings page showing language, alarm controls and Android permission status"> |
+
+<details>
+<summary>Weather and location preferences — actual settings screenshot</summary>
+
+<img src="docs/screenshots/weather-settings-en.png" width="265" alt="Real settings screen with optional weather-based sky effects switch, location privacy explanation and update preferences">
+
+</details>
+
+The **screenshots are reference captures, not staged feature claims**. They show the app as it actually rendered on the emulator, including any visible Android permission state. For repeatable capture steps, see [the screenshot automation script](scripts/capture_readme_screenshots.sh) and [its successful GitHub Actions run](https://github.com/admknight/pakistan-lunar-thursday/actions/runs/43287438102). Visual appearance can vary with device, font size, Android version and Material You palette.
+
 ## Download / install
 
 Open **[Releases](https://github.com/admknight/pakistan-lunar-thursday/releases)** to download publicly available APKs. Preview releases contain `app-debug.apk` (temporary debug signing). The [permanent signing setup](docs/SIGNING.md) is operational (first stable release: v1.4.0). The [Publish permanently signed APK workflow](https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/publish-stable.yml) publishes a **normal GitHub Release** with `HilalThursday-vX.Y.Z.apk` and its SHA-256 checksum. For diagnostics, [Actions → Build Android APK](https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/build-apk.yml) retains temporary artifacts.
