@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   capture:
-    name: Capture installed v1.9.0 on Android 15 emulator
+    name: Capture installed v1.9.1 on Android 15 emulator
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -35,16 +35,16 @@ jobs:
           fi
           bash -n scripts/capture_readme_screenshots.sh
 
-      - name: Download actual permanently signed v1.9.0 APK
+      - name: Download actual permanently signed v1.9.1 APK
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           mkdir -p release-apk
-          gh release download v1.9.0 --repo "$GITHUB_REPOSITORY" --pattern 'HilalThursday-v1.9.0.apk*' --dir release-apk
-          (cd release-apk && sha256sum --check HilalThursday-v1.9.0.apk.sha256)
-          echo 'ebec77b353a0390d1b60727b9debbb5ef0ff26c6620ed0a6fbb5cb85d11739eb  release-apk/HilalThursday-v1.9.0.apk' | sha256sum --check
+          gh release download v1.9.1 --repo "$GITHUB_REPOSITORY" --pattern 'HilalThursday-v1.9.1.apk*' --dir release-apk
+          (cd release-apk && sha256sum --check HilalThursday-v1.9.1.apk.sha256)
+          echo 'a65fc711146cd1650751cb1f9287bfa354d3a4f090f4ac2e96dc8fcf5a0703cd  release-apk/HilalThursday-v1.9.1.apk' | sha256sum --check
 
       - name: Enable hardware acceleration (KVM)
         run: |
@@ -68,7 +68,7 @@ jobs:
       - name: Upload raw emulator screenshots
         uses: actions/upload-artifact@v4
         with:
-          name: real-hilal-thursday-v1.9.0-emulator-screenshots
+          name: real-hilal-thursday-v1.9.1-emulator-screenshots
           path: docs/screenshots/*.png
           if-no-files-found: error
           retention-days: 30
@@ -87,7 +87,7 @@ jobs:
           if git diff --cached --quiet; then
             echo 'Screenshots are unchanged.'
           else
-            git commit -m 'Capture real signed v1.9.0 Android emulator screenshots [skip ci]'
+            git commit -m 'Capture real signed v1.9.1 Android emulator screenshots [skip ci]'
             # The daily download counter may advance main during emulator capture.
             # Merge non-overlapping updates rather than reject a verified capture.
             for attempt in 1 2 3; do

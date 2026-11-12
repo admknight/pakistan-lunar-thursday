@@ -4,7 +4,7 @@ set -euo pipefail
 # Real Android emulator captures of the installed, signed GitHub release APK.
 # No mocked app screens, synthetic dates, or Photoshop composites.
 PACKAGE=com.scopewise.lunarthursday
-APK_PATH="${APK_PATH:-release-apk/HilalThursday-v1.9.0.apk}"
+APK_PATH="${APK_PATH:-release-apk/HilalThursday-v1.9.1.apk}"
 OUTPUT=docs/screenshots
 mkdir -p "$OUTPUT"
 
@@ -109,6 +109,7 @@ PY
 }
 
 capture home-en 'Your next lunar Thursday'
+assert_ui 'Hijri Date:'
 assert_ui 'Expected Hijri'
 tap_ui Calendar
 capture calendar-en 'Upcoming lunar months'
@@ -122,6 +123,7 @@ sleep 2
 tap_ui 'More options'
 tap_ui Settings
 capture settings-en 'How reminders reach you'
+assert_ui 'Reminder time'
 # Enable audible ringing only in this disposable emulator, to expose the real sound selector.
 tap_ui 'Ring audible alarm'
 capture settings-alarm-en 'Alarm sound'
@@ -154,6 +156,7 @@ if not any(any('\u0600'<=ch<='\u06ff' for ch in t) for t in texts):
 print('Urdu UI confirmed on live emulator')
 PY
 capture home-ur 'ہلال'
+assert_ui 'ہجری تاریخ:'
 assert_ui 'متوقع ہجری تاریخ'
 
 echo "[capture] All screenshots are live emulator captures from signed APK."
