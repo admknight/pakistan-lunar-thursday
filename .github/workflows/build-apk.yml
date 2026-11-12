@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write  # First-run bootstrap; reduced after sources are published.
+  contents: read
 
 jobs:
   build:
@@ -16,21 +16,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
         with:
-          persist-credentials: true
-
-      - name: Publish initial source bundle (one-time)
-        shell: bash
-        run: |
-          if [ -f .bootstrap/source.tar.gz ]; then
-            echo "Expanding original project source..."
-            tar -xzf .bootstrap/source.tar.gz
-            rm -rf .bootstrap
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add -A
-            git commit -m "Publish Lunar Thursday Android application source"
-            git push origin HEAD:main
-          fi
+          persist-credentials: false
 
       - name: Set up Java
         uses: actions/setup-java@v4
@@ -42,7 +28,7 @@ jobs:
         uses: android-actions/setup-android@v4
 
       - name: Install SDK platform
-        run: sdkmanager --install "platforms;android-37" "build-tools;36.0.0"
+        run: sdkmanager --install "platforms;android-36" "build-tools;36.0.0"
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4

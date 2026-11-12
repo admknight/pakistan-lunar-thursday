@@ -33,14 +33,14 @@ A third-party data feed at `https://islamicdatetoday.pk/data/today.json` is used
 - **Gradle:** 9.6.0
 - **Material Components for Android:** 1.14.0 (Material 3)
 - **Java:** 17
-- **compileSdk:** 37; **targetSdk:** 35; **minSdk:** 26
+- **compileSdk:** 36; **targetSdk:** 35; **minSdk:** 26
 - **Application ID:** `com.scopewise.lunarthursday`
 
 The GitHub workflow installs the matching Android SDK platform/build tools, runs 140 pure-Java scheduling/feed-policy assertions, builds the APK and attaches its SHA-256 hash. It is set to run on pushes to `main`, pull requests and manual dispatch. This project deliberately uses the stable Java Material Components SDK rather than introducing Kotlin/Compose into an already tested Java-only notification engine.
 
 ## Local build
 
-Open the repository in recent Android Studio with JDK 17, or use Gradle 9.6.0 with Android SDK platform 37:
+Open the repository in recent Android Studio with JDK 17, or use Gradle 9.6.0 with Android SDK platform 36:
 
 ```bash
 gradle --no-daemon :app:assembleDebug
