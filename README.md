@@ -6,7 +6,7 @@ A small, **fully automatic, best-effort** Android reminder for the **first Thurs
 
 ## Download / install
 
-Open **[Actions → Build Android APK](https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/build-apk.yml)**, choose a successful run, and download the `LunarThursday-debug-apk` artifact. Extract `app-debug.apk` and install it on Android 8.0 or later.
+Open **[Releases](https://github.com/admknight/pakistan-lunar-thursday/releases)** and select the latest **Preview** release. Under **Assets**, download `app-debug.apk` directly and install it on Android 8.0 or later. You can also download `app-debug.apk.sha256` to verify its checksum. For build-by-build debugging, [Actions → Build Android APK](https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/build-apk.yml) retains the temporary `LunarThursday-debug-apk` artifact.
 
 The GitHub Actions build produces a **debug-signed test APK**. Each cloud runner may use a different debug signing key. Therefore, installing a newer build can require uninstalling the old one first. Do not treat this as a stable release-signing solution. Android 13+ requires the one-time **Notifications** permission; Android 12+ may also require **Alarms & reminders** permission for closer-to-exact delivery. No monthly date entry is necessary.
 
@@ -36,7 +36,7 @@ A third-party data feed at `https://islamicdatetoday.pk/data/today.json` is used
 - **compileSdk:** 36; **targetSdk:** 35; **minSdk:** 26
 - **Application ID:** `com.scopewise.lunarthursday`
 
-The GitHub workflow installs the matching Android SDK platform/build tools, runs 140 pure-Java scheduling/feed-policy assertions, builds the APK and attaches its SHA-256 hash. It is set to run on pushes to `main`, pull requests and manual dispatch. This project deliberately uses the stable Java Material Components SDK rather than introducing Kotlin/Compose into an already tested Java-only notification engine.
+The GitHub workflow installs the matching Android SDK platform/build tools, runs 140 pure-Java scheduling/feed-policy assertions, builds the APK and attaches its SHA-256 hash. It runs on pushes to `main`, pull requests and manual dispatch. Successful pushes to `main` also publish a **versioned GitHub pre-release** if that version has not already been published. Increment `versionName` when publishing a new preview; rebuilding the same version does not silently replace public assets. This project deliberately uses the stable Java Material Components SDK rather than introducing Kotlin/Compose into an already tested Java-only notification engine.
 
 ## Local build
 

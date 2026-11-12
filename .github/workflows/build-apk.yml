@@ -64,3 +64,66 @@ jobs:
             app/build/outputs/apk/debug/app-debug.apk.sha256
           retention-days: 30
           if-no-files-found: error
+
+  publish-preview-release:
+    name: Publish installable preview on GitHub Releases
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out versioned source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Download APK from successful build
+        uses: actions/download-artifact@v4
+        with:
+          name: LunarThursday-debug-apk
+          path: release
+
+      - name: Verify APK and determine version
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd release
+          sha256sum --check app-debug.apk.sha256
+          test -s app-debug.apk
+          cd ..
+          VERSION="$(sed -n "s/^[[:space:]]*versionName[[:space:]]*'\([^']*\)'.*$/\1/p" app/build.gradle | head -n 1)"
+          test -n "$VERSION" || { echo "Cannot determine versionName"; exit 1; }
+          echo "tag=v$VERSION-preview" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Publish GitHub pre-release (version once only)
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.version.outputs.tag }}
+          APP_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          set -euo pipefail
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            echo "Release $TAG already exists; leaving published assets unchanged."
+            exit 0
+          fi
+          cat > "$RUNNER_TEMP/release-notes.md" <<'NOTES'
+          ## Pakistan Lunar Thursday — Android preview
+          This debug-signed APK reminds you at **11:00 AM Pakistan time** on the first Thursday on or after the start of each Islamic month. Date checks are automatic, with no manual correction required.
+
+          **Install:** Download the APK asset below, allow installation from your browser/file manager, open the app, and grant notification and (when available) exact-alarm permissions. Android 8.0 or newer is required.
+
+          **Preview limitations:** The APK is debug-signed with a per-run key, so updating it with another preview build may require uninstalling the previous build. The current date feed is third-party and is not guaranteed to match all official Ruet-e-Hilal announcements. Android background limits can delay checks or notifications; real-device timing is not yet validated. This is **not** a production-signed or Play Store release.
+
+          Verify the APK against the accompanying .sha256 file before sharing, if possible.
+          NOTES
+          gh release create "$TAG" \
+            release/app-debug.apk \
+            release/app-debug.apk.sha256 \
+            --target "$GITHUB_SHA" \
+            --title "Lunar Thursday v$APP_VERSION (Preview, debug-signed)" \
+            --prerelease \
+            --notes-file "$RUNNER_TEMP/release-notes.md"
