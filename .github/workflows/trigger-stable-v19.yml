@@ -1,0 +1,42 @@
+name: Trigger Hilal Thursday v1.9 signed release (one time)
+on:
+  push:
+    paths: ['.github/workflows/trigger-stable-v19.yml']
+permissions:
+  contents: write
+  actions: write
+jobs:
+  dispatch:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Verify preview and remove one-time launcher
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view v1.9.0 > /dev/null 2>&1; then
+            echo 'Stable v1.9.0 already exists; no replacement is permitted'
+            exit 0
+          fi
+          gh release view v1.9.0-preview > /dev/null
+          rm -f .github/workflows/trigger-stable-v19.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Remove one-time v1.9 signed-release launcher [skip ci]'
+          for attempt in 1 2 3; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then break; fi
+            if [ "$attempt" -eq 3 ]; then exit 1; fi
+            sleep 2
+          done
+      - name: Dispatch certificate-verified permanent signing workflow
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run publish-stable.yml --ref main
