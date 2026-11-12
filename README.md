@@ -1,35 +1,56 @@
-# Hilal Thursday — ہلال جمعرات
+<div align="center">
 
-**Hilal Thursday**, formerly *Lunar Thursday*, is an open-source, bilingual English/Urdu Android reminder for the **first Thursday on or after the first civil day of every new Islamic month in Pakistan**, at **11:00 AM Pakistan Standard Time (Asia/Karachi)**.
+<img src="docs/branding/icon.svg" width="108" height="108" alt="Hilal Thursday official crescent-and-calendar app icon">
 
-![Build Android APK](https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/build-apk.yml/badge.svg)
+<h1>Hilal Thursday · ہلال جمعرات</h1>
 
-## Real app screenshots (Android emulator)
+<p><strong>Pakistan's lunar-month Thursday reminder, made simple.</strong><br>
+A bilingual, open-source Android app that reminds you at <strong>11:00 AM Pakistan time</strong> on the first Thursday of each Islamic month.</p>
 
-These are **unedited screenshots of the actual permanently signed v1.7.0 APK**, installed and opened on a **Pixel 5 Android 15 emulator (API 35)**. They were captured from the running app with Android Debug Bridge (`adb screencap`), not generated from the promotional artwork. Calendar dates, countdown values, device time, and any reported data reflect the emulator session; third-party forecast dates are **not** official moon-sighting confirmations. Location-based weather is **off** in these default screenshots.
+<p>
+  <a href="https://github.com/admknight/pakistan-lunar-thursday/releases/latest"><img alt="Latest permanently signed release" src="https://img.shields.io/github/v/release/admknight/pakistan-lunar-thursday?label=stable%20release&amp;color=168568"></a>
+  <a href="https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/build-apk.yml"><img alt="Android build status" src="https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/build-apk.yml/badge.svg"></a>
+  <a href="https://github.com/admknight/pakistan-lunar-thursday/releases"><img alt="Cumulative GitHub APK downloads across all stable and preview versions" src="docs/stats/apk-downloads.svg"></a>
+</p>
 
-| Home — English | Home — اردو | Upcoming lunar months |
+<p><a href="https://github.com/admknight/pakistan-lunar-thursday/releases/latest"><strong>⬇️ Get the latest signed APK</strong></a> &nbsp;·&nbsp; <a href="#real-app-screenshots"><strong>📱 Real screenshots</strong></a> &nbsp;·&nbsp; <a href="#signature-alarm-sounds"><strong>🎶 Alarm sounds</strong></a> &nbsp;·&nbsp; <a href="#important-accuracy-limitations"><strong>📅 Accuracy &amp; sources</strong></a></p>
+
+<sub>Android 8.0+ · English / اردو · No accounts or ads · Originally published as Lunar Thursday</sub>
+
+</div>
+
+> **Date accuracy:** Gregorian reminder dates are shown alongside **expected Hijri dates** derived from Pakistan-specific month-start information. Dates may be forecasts or third-party reports, not official Ruet-e-Hilal confirmation. The Hijri label uses a Pakistan civil-day basis, not a precise sunset rollover.
+
+## Real app screenshots
+
+These are **genuine, unedited screenshots** of the permanently signed **v1.8.1** APK on a **Pixel 5 / Android 15 emulator (API 35)**, captured with Android Debug Bridge. They are **not promotional mockups**. The v1.9.0 release adds expected Hijri day labels; its refreshed screenshots are being captured. Weather/location remains off in the example screens.
+
+| Dashboard · English | Dashboard · اردو | Upcoming Islamic months |
 |:---:|:---:|:---:|
-| <img src="docs/screenshots/home-en.png" width="245" alt="Real Hilal Thursday English dashboard screenshot on Android 15, with crescent-and-mosque illustration, next lunar reminder and countdown"> | <img src="docs/screenshots/home-ur.png" width="245" alt="Real right-to-left Urdu dashboard screenshot of Hilal Thursday on Android 15"> | <img src="docs/screenshots/calendar-en.png" width="245" alt="Real upcoming Islamic months calendar screen with forecast labels"> |
+| <img src="docs/screenshots/home-en.png" width="245" alt="Real Hilal Thursday English home dashboard with a moon and mosque illustration, next reminder date, and countdown"> | <img src="docs/screenshots/home-ur.png" width="245" alt="Real Hilal Thursday Urdu RTL dashboard"> | <img src="docs/screenshots/calendar-en.png" width="245" alt="Real upcoming Hijri-month calendar with source-quality labels"> |
 
-| Updates and date checks | About and developer | Settings and alarms |
+| Signature alarm sound picker | Ringing alarm settings | Weather and location |
 |:---:|:---:|:---:|
-| <img src="docs/screenshots/updates-en.png" width="245" alt="Real app releases and automatic Pakistan Hijri date-check status screen"> | <img src="docs/screenshots/about-en.png" width="245" alt="Real About and Developer page including maintainer, privacy, data accuracy and license links"> | <img src="docs/screenshots/settings-en.png" width="245" alt="Real Android settings page showing language, alarm controls and Android permission status"> |
+| <img src="docs/screenshots/alarm-sounds-en.png" width="245" alt="Actual selection screen for Hilal Noor, Sukoon, Hilal Nida and Android phone alarm sounds"> | <img src="docs/screenshots/settings-alarm-en.png" width="245" alt="Actual settings with ringing alarm enabled and the selectable signature alarm sound"> | <img src="docs/screenshots/weather-settings-en.png" width="245" alt="Actual optional local-weather effects and location settings"> |
 
 <details>
-<summary>Weather and location preferences — actual settings screenshot</summary>
+<summary>More screenshots — updates, About and general Settings</summary>
 
-<img src="docs/screenshots/weather-settings-en.png" width="265" alt="Real settings screen with optional weather-based sky effects switch, location privacy explanation and update preferences">
+| Updates and date checks | About &amp; Developer | General settings |
+|:---:|:---:|:---:|
+| <img src="docs/screenshots/updates-en.png" width="245" alt="Real updates page, including release and calendar-source check status"> | <img src="docs/screenshots/about-en.png" width="245" alt="Real About page with developer, privacy and source links"> | <img src="docs/screenshots/settings-en.png" width="245" alt="Real settings screen with language, alarm, and permission controls"> |
 
 </details>
 
-The **screenshots are reference captures, not staged feature claims**. They show the app as it actually rendered on the emulator, including any visible Android permission state. For repeatable capture steps, see [the screenshot automation script](scripts/capture_readme_screenshots.sh) and [its successful GitHub Actions run](https://github.com/admknight/pakistan-lunar-thursday/actions/runs/43287438102). Visual appearance can vary with device, font size, Android version and Material You palette.
+The captures show the app's real Android UI, including its emulator permission state and the selected date source; dates are illustrative, **not official moon-sighting announcements**. UI colors, fonts and positioning can vary by device. See [the reproducible capture script](scripts/capture_readme_screenshots.sh) and [verified v1.8.1 emulator capture run](https://github.com/admknight/pakistan-lunar-thursday/actions/runs/43304367533).
 
 ## Download / install
 
-Open **[Releases](https://github.com/admknight/pakistan-lunar-thursday/releases)** to download publicly available APKs. Preview releases contain `app-debug.apk` (temporary debug signing). The [permanent signing setup](docs/SIGNING.md) is operational (first stable release: v1.4.0). The [Publish permanently signed APK workflow](https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/publish-stable.yml) publishes a **normal GitHub Release** with `HilalThursday-vX.Y.Z.apk` and its SHA-256 checksum. For diagnostics, [Actions → Build Android APK](https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/build-apk.yml) retains temporary artifacts.
+**Recommended:** Get the [latest permanently signed Android APK](https://github.com/admknight/pakistan-lunar-thursday/releases/latest) from the normal GitHub release, then approve the installation in Android. This stable build uses the same long-lived certificate for in-place upgrades and includes a matching SHA-256 checksum. Android 8.0 or later is required.
 
-The GitHub Actions build produces a **debug-signed test APK**, not a production-signed stable APK. Each cloud runner may use a different debug signing key. Therefore, installing a newer build can require uninstalling the old one first. Do not treat this as a stable release-signing solution. Android 13+ requires the one-time **Notifications** permission; Android 12+ may also require **Alarms & reminders** permission for closer-to-exact delivery. No monthly date entry is necessary.
+Once installed, the **in-app updater** can check GitHub Releases, download newer compatible APKs directly inside the app, verify their package, digest and signing certificate, and hand them to Android's installer for approval. It never silently installs updates.
+
+**Debug-signed previews are separate test builds.** They are publicly downloadable but may have changing signing keys. Moving from a debug preview to the stable signing identity requires uninstalling the preview (which can erase local settings). Android 13+ may ask for notification permission, and Android 12+ may require alarm scheduling permission for more exact reminders. No monthly date entry is required.
 
 ## Features
 
@@ -41,7 +62,7 @@ The GitHub Actions build produces a **debug-signed test APK**, not a production-
 - Material 3 interface, light/dark theme, **Material You dynamic wallpaper color** on Android 12+.
 - **English / اردو bilingual interface**, with a Settings language selector (device language / English / Urdu), Urdu calendar month labels, translated reminder text, and right-to-left layout. Android 13+ users can also change the app language in system settings.
 - **Rebranded Hilal Thursday icon:** teal-and-gold crescent with a highlighted calendar day; adaptive icon for shaped launchers plus monochrome themed-icon variant on supported Android devices.
-- **Optional ringing alarm** in Settings: repeats the system alarm sound/vibration for up to two minutes; **Dismiss** and **Snooze 10 minutes** controls; a missed-alert notification remains after timeout. The original notification-only mode stays the default.
+- **Optional ringing alarm** in Settings: choose from three original 23-second signature music cues (**Hilal Noor, Sukoon, Hilal Nida**) or an existing Android phone alarm sound. Includes preview/selection, optional vibration, **Dismiss**, **Snooze 10 minutes**, and a two-minute ringing limit. Notification-only mode remains available.
 - **Settings page** with alarm preferences, exact-alarm/full-screen permission guidance, and automatic updates that require no manual lunar-date adjustments.
 - **In-app update manager:** Checks the project's GitHub Releases API when the app opens, with optional daily background update notifications. Download progress and SHA-256 digest, Android package-ID, version, and signing-certificate verification all occur inside Hilal Thursday; **no browser or GitHub page is opened to update**. Android still controls and confirms APK installation, and may first request approval to install from this app. Installation is never silent. Stable builds exclude incompatible debug-signed previews.
 - **Interactive home dashboard** with live countdown in Pakistan time, tap-to-explore upcoming month cards, a reminder status / alert-mode overview, and one-tap date refresh requests (queued through Android JobScheduler).
@@ -49,7 +70,13 @@ The GitHub Actions build produces a **debug-signed test APK**, not a production-
 - Next reminder, upcoming months, source quality, last successful feed check, and a test-notification button.
 - **No accounts, no ads, no tracking, and no manually entered lunar dates.** Optional location permission is used **only after the user enables weather visuals**; the app never requests background or precise location.
 
-## Signature alarm sounds (v1.8.0)
+## Gregorian and expected Hijri dates
+
+The Home and Calendar screens display the **Gregorian reminder date plus its expected Hijri day, month and year**. For example, the PMD forecast of Rajab 1448 starting on **11 December 2026** gives the first Thursday as **17 December 2026 · expected 7 Rajab 1448 AH**. The current-day label also shows an estimated Hijri civil date when a defensible month start is available.
+
+The date comes from the **same month-start observation/forecast/estimate used by the reminder engine**, so a newer provider-reported first day automatically changes the predicted Hijri day. A Hijri day in this interface is aligned with the **Pakistan civil date** (not automatically adjusted at sunset); it is not an official moon-sighting statement. The app labels source quality separately.
+
+## Signature alarm sounds
 
 Hilal Thursday includes three **music-derived, 23-second custom alarm cues** made from recordings supplied by the maintainer: **🌙 Hilal Noor** (the default), **✨ Sukoon**, and **🕌 Hilal Nida**. These are converted excerpts of the Gemini-generated musical recordings the maintainer reviewed; **they are not the rejected synthetic notification tones**.
 
@@ -65,18 +92,18 @@ The **update manager** checks the public GitHub Releases API when the app opens,
 
 ### Preview builds versus permanently signed public releases
 
-The automatic CI workflow generates a **debug signing key per runner/build**, so its builds are correctly tagged **preview**. **GitHub pre-releases are still public** and provide direct APK downloads. A long-lived release key and a separate certificate-verified release workflow have now been prepared. The maintainer must add two encrypted GitHub Actions secrets once before that workflow can publish a normally labeled public release. See [Private signing setup](docs/SIGNING.md); **the private signing material is never part of this public repository**. First-time migration from any debug-signed APK to the permanently signed APK requires uninstalling the debug APK. After that, updates using the same signer and a higher version code can install in place. App signing is not a substitute for actual device testing. The stable build excludes incompatible debug-signed preview updates.
+CI preview builds are **debug signed** and available publicly for testing. The separate, certificate-verified release workflow has been operational since **v1.4.0** and publishes signed public releases with a consistent key. The secret signing material is not committed to GitHub; see [signing documentation](docs/SIGNING.md). A preview cannot be installed as an in-place update over a stable build with a different certificate, and migrating from preview to stable generally requires uninstalling the preview. Signed builds exclude incompatible debug previews from update recommendations. APK signing does not prove real-device reminder timing.
 
 
-## Dashboard and navigation (v1.6.0)
+## Dashboard and navigation
 
 The main screen now has a compact app header with a three-dot **More options** menu, a decorative crescent-and-mosque night-sky card, three live countdown tiles (days/hours/minutes), a small reminder-status row and the next upcoming months. A bottom navigation bar switches between **Home**, **Calendar** (upcoming Hijri months), **Updates** (release/date checks), and **About**. The design is built with native Android views and Material 3 dynamic colors; the previous promotional concept was not a screenshot and is not claimed to be reproduced pixel-for-pixel.
 
 The **About / Developer** screen uses concise icon-and-text rows for privacy, calendar accuracy, recent releases, project feedback and the MIT license rather than full-width GitHub buttons. Three optional hidden interactions remain: tap the home logo/title seven times, long-press the About icon, and tap the About version area five times. None of the easter eggs changes alarms, dates, or update settings.
 
-Android accessibility labels, English/Urdu string resources, and right-to-left layout behavior are retained. The reminders still fire at **11:00 AM Pakistan time**; month start accuracy remains subject to the independent data-source limitations below. The graphical layout has not yet been visually exercised on a physical Android device.
+Android accessibility labels, English/Urdu string resources, and right-to-left layout behavior are retained. The reminders still fire at **11:00 AM Pakistan time**; month-start accuracy remains subject to the independent data-source limitations below. The UI has been captured on an Android emulator; real-device alarm behavior remains unverified.
 
-## Living sky and optional local weather (v1.7.0)
+## Living sky and optional local weather
 
 The home illustration reacts to the device's current time of day (morning, daylight, sunset, night), **even offline and without location access**. In **Settings → Sky and local weather**, opt in to weather effects. Android will ask for **approximate location** while the app is in use. Hilal Thursday retrieves a one-time coarse location, rounds it to two decimal places, and retrieves current temperature, WMO weather code, and daylight status from Open-Meteo. Clouds, rain, fog, snow, and storms change only the decorative scene; **weather data is not a hazard alert or official lunar-sighting source**. No continuous GPS polling or background location access is used. Cached conditions expire after three hours, and weather refreshes are throttled to about 45 minutes. When permission, location, connectivity, or weather data is unavailable, the app falls back to the time-of-day sky.
 
@@ -123,12 +150,18 @@ javac -d build/portable-tests \
   app/src/main/java/com/scopewise/lunarthursday/LunarEngine.java \
   app/src/main/java/com/scopewise/lunarthursday/FeedDatePolicy.java \
   app/src/main/java/com/scopewise/lunarthursday/VersionPolicy.java \
+  app/src/main/java/com/scopewise/lunarthursday/WeatherCode.java \
+  app/src/main/java/com/scopewise/lunarthursday/AlarmTonePolicy.java \
   test/java/com/scopewise/lunarthursday/EngineTest.java \
   test/java/com/scopewise/lunarthursday/FeedDatePolicyTest.java \
-  test/java/com/scopewise/lunarthursday/VersionPolicyTest.java
+  test/java/com/scopewise/lunarthursday/VersionPolicyTest.java \
+  test/java/com/scopewise/lunarthursday/WeatherCodeTest.java \
+  test/java/com/scopewise/lunarthursday/AlarmTonePolicyTest.java
 java -cp build/portable-tests com.scopewise.lunarthursday.EngineTest
 java -cp build/portable-tests com.scopewise.lunarthursday.FeedDatePolicyTest
 java -cp build/portable-tests com.scopewise.lunarthursday.VersionPolicyTest
+java -cp build/portable-tests com.scopewise.lunarthursday.WeatherCodeTest
+java -cp build/portable-tests com.scopewise.lunarthursday.AlarmTonePolicyTest
 ```
 
 ## Privacy
@@ -147,6 +180,6 @@ The app contacts the independent Hijri-date feed and GitHub's public Releases AP
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+The application source code is MIT-licensed; see [LICENSE](LICENSE). The externally generated musical recordings have separate [provenance and reuse notes](docs/AUDIO.md) and are **not assumed to be covered by MIT**.
 
 **Build evidence:** Pure-Java tests and static XML checks can be run without Android SDK. Successful GitHub CI builds establish APK compilation, not real-device notification timing or official announcement accuracy.
