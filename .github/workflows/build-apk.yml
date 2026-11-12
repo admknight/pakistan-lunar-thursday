@@ -1,0 +1,80 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write  # First-run bootstrap; reduced after sources are published.
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Publish initial source bundle (one-time)
+        shell: bash
+        run: |
+          if [ -f .bootstrap/source.tar.gz ]; then
+            echo "Expanding original project source..."
+            tar -xzf .bootstrap/source.tar.gz
+            rm -rf .bootstrap
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "Publish Lunar Thursday Android application source"
+            git push origin HEAD:main
+          fi
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v4
+
+      - name: Install SDK platform
+        run: sdkmanager --install "platforms;android-37" "build-tools;36.0.0"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.6.0'
+
+      - name: Verify Java scheduling engine and feed validation
+        shell: bash
+        run: |
+          mkdir -p build/portable-tests
+          javac -d build/portable-tests \
+            app/src/main/java/com/scopewise/lunarthursday/LunarEngine.java \
+            app/src/main/java/com/scopewise/lunarthursday/FeedDatePolicy.java \
+            test/java/com/scopewise/lunarthursday/EngineTest.java \
+            test/java/com/scopewise/lunarthursday/FeedDatePolicyTest.java
+          java -cp build/portable-tests com.scopewise.lunarthursday.EngineTest
+          java -cp build/portable-tests com.scopewise.lunarthursday.FeedDatePolicyTest
+
+      - name: Build debug APK
+        run: gradle --no-daemon :app:assembleDebug
+
+      - name: Record APK SHA-256
+        run: |
+          cd app/build/outputs/apk/debug
+          sha256sum app-debug.apk > app-debug.apk.sha256
+
+      - name: Publish installable APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LunarThursday-debug-apk
+          path: |
+            app/build/outputs/apk/debug/app-debug.apk
+            app/build/outputs/apk/debug/app-debug.apk.sha256
+          retention-days: 30
+          if-no-files-found: error
