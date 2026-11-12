@@ -1,0 +1,44 @@
+name: Apply Hilal Thursday v1.7 weather and updater source (one time)
+on:
+  push:
+    paths: ['.bootstrap/v17-source.tar.xz']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  apply:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Verify and apply reviewed Android source
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '61730954fb9e0a56a83d4a3910451fb7e842e93de377896c9b2ca8afdac57be3  .bootstrap/v17-source.tar.xz' | sha256sum --check
+          test "$(tar -tJf .bootstrap/v17-source.tar.xz | wc -l)" -eq 18
+          if tar -tJf .bootstrap/v17-source.tar.xz | grep -Eq '(^/|(^|/)\.\.(/|$)|(^|/)\.github/|\.p12$|\.jks$)'; then
+            echo 'Unsafe source archive path'; exit 1
+          fi
+          if tar -tJf .bootstrap/v17-source.tar.xz | grep -Ev '^(app/(src/main/|build.gradle$)|test/java/com/scopewise/lunarthursday/WeatherCodeTest.java$)'; then
+            echo 'Unexpected source path'; exit 1
+          fi
+          tar -xJf .bootstrap/v17-source.tar.xz --no-same-owner
+          rm -rf .bootstrap
+          rm -f .github/workflows/apply-v1-7-update.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --check
+          git commit -m 'Implement opt-in local-weather sky and secure in-app updates v1.7.0'
+          git push origin HEAD:main
+      - name: Trigger compiled APK build
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run build-apk.yml --ref main
