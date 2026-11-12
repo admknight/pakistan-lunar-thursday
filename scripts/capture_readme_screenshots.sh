@@ -4,7 +4,7 @@ set -euo pipefail
 # Real Android emulator captures of the installed, signed GitHub release APK.
 # No mocked app screens, synthetic dates, or Photoshop composites.
 PACKAGE=com.scopewise.lunarthursday
-APK_PATH="${APK_PATH:-release-apk/HilalThursday-v1.7.0.apk}"
+APK_PATH="${APK_PATH:-release-apk/HilalThursday-v1.8.0.apk}"
 OUTPUT=docs/screenshots
 mkdir -p "$OUTPUT"
 
@@ -108,6 +108,14 @@ sleep 2
 tap_ui 'More options'
 tap_ui Settings
 capture settings-en 'How reminders reach you'
+# Enable audible ringing only in this disposable emulator, to expose the real sound selector.
+tap_ui 'Ring audible alarm'
+capture settings-alarm-en 'Alarm sound'
+tap_ui 'Alarm sound · Hilal Noor'
+capture alarm-sounds-en 'Hilal signature sounds'
+assert_ui 'Choose from phone'
+adb shell input keyevent 4
+sleep 2
 # The second Settings view shows the weather/location controls without opting in.
 adb shell input swipe 550 1800 550 750 650
 sleep 2

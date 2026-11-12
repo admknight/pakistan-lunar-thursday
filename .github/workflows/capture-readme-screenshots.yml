@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   capture:
-    name: Capture installed v1.7.0 on Android 15 emulator
+    name: Capture installed v1.8.0 on Android 15 emulator
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -35,16 +35,16 @@ jobs:
           fi
           bash -n scripts/capture_readme_screenshots.sh
 
-      - name: Download actual permanently signed v1.7.0 APK
+      - name: Download actual permanently signed v1.8.0 APK
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           mkdir -p release-apk
-          gh release download v1.7.0 --repo "$GITHUB_REPOSITORY" --pattern 'HilalThursday-v1.7.0.apk*' --dir release-apk
-          (cd release-apk && sha256sum --check HilalThursday-v1.7.0.apk.sha256)
-          echo '08402b3256500c087958f16b62e1da68243e5f7c27b71514fc3f96d92941e295  release-apk/HilalThursday-v1.7.0.apk' | sha256sum --check
+          gh release download v1.8.0 --repo "$GITHUB_REPOSITORY" --pattern 'HilalThursday-v1.8.0.apk*' --dir release-apk
+          (cd release-apk && sha256sum --check HilalThursday-v1.8.0.apk.sha256)
+          echo 'f87b963774542f65aa1383269c617300d4a64c77d02ab6265709d03df5c5cda0  release-apk/HilalThursday-v1.8.0.apk' | sha256sum --check
 
       - name: Enable hardware acceleration (KVM)
         run: |
@@ -68,7 +68,7 @@ jobs:
       - name: Upload raw emulator screenshots
         uses: actions/upload-artifact@v4
         with:
-          name: real-hilal-thursday-v1.7-emulator-screenshots
+          name: real-hilal-thursday-v1.8-emulator-screenshots
           path: docs/screenshots/*.png
           if-no-files-found: error
           retention-days: 30
@@ -77,17 +77,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for png in home-en calendar-en updates-en about-en settings-en weather-settings-en home-ur; do
+          for png in home-en calendar-en updates-en about-en settings-en settings-alarm-en alarm-sounds-en weather-settings-en home-ur; do
             test -s "docs/screenshots/$png.png"
           done
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add scripts/capture_readme_screenshots.sh docs/screenshots/ .screenshot-src/ || true
-          git add -A
+          git add docs/screenshots/*.png
           git diff --cached --check
           if git diff --cached --quiet; then
             echo 'Screenshots are unchanged.'
           else
-            git commit -m 'Capture real signed v1.7.0 Android emulator screenshots [skip ci]'
+            git commit -m 'Capture real signed v1.8.0 Android emulator screenshots [skip ci]'
             git push origin HEAD:main
           fi

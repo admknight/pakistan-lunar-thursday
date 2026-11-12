@@ -1,0 +1,69 @@
+name: Refresh cumulative APK download counter
+
+on:
+  schedule:
+    - cron: '27 3 * * *'
+  workflow_dispatch:
+  release:
+    types: [published, edited, deleted]
+  push:
+    paths: ['.github/workflows/apk-download-counter.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hilal-apk-download-counter
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+
+      - name: Validate APK-only cumulative counting
+        run: python3 scripts/update_apk_downloads.py --self-test
+
+      - name: Fetch all published release pages and update verified count
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/update_apk_downloads.py
+
+      - name: Validate generated artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, pathlib, xml.etree.ElementTree as ET
+          x=json.loads(pathlib.Path('docs/stats/apk-downloads.json').read_text())
+          assert x['apk_downloads']==x['stable_downloads']+x['preview_downloads']
+          assert x['counted_apk_assets']>=0
+          ET.parse('docs/stats/apk-downloads.svg')
+          print('Stats JSON and SVG valid; cumulative total', x['apk_downloads'])
+          PY
+
+      - name: Publish only when download counts change
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add docs/stats/apk-downloads.json docs/stats/apk-downloads.svg
+          if git diff --cached --quiet; then
+            echo 'No change to recorded download counts'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Refresh cumulative APK download counter [skip ci]'
+          for attempt in 1 2 3; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep 3
+          done
+          echo 'Failed to publish refreshed download stats' >&2
+          exit 1
