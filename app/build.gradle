@@ -2,6 +2,11 @@ plugins {
     id 'com.android.application'
 }
 
+// Release signing is configured only when the CI job supplies the two secure secrets.
+// No keystore, password or private key is stored in source control.
+def releaseStore = System.getenv('ANDROID_RELEASE_STORE_FILE')
+def releasePassword = System.getenv('ANDROID_RELEASE_STORE_PASSWORD')
+
 android {
     namespace 'com.scopewise.lunarthursday'
     compileSdk 36
@@ -10,8 +15,25 @@ android {
         applicationId 'com.scopewise.lunarthursday'
         minSdk 26
         targetSdk 35
-        versionCode 4
-        versionName '1.3.0'
+        versionCode 5
+        versionName '1.4.0'
+    }
+
+    if (releaseStore && releasePassword) {
+        signingConfigs {
+            release {
+                storeFile file(releaseStore)
+                storePassword releasePassword
+                keyAlias 'lunarthursday'
+                keyPassword releasePassword
+                storeType 'pkcs12'
+            }
+        }
+        buildTypes {
+            release {
+                signingConfig signingConfigs.release
+            }
+        }
     }
 
     compileOptions {

@@ -14,6 +14,21 @@ final class DateSyncScheduler {
 
     private DateSyncScheduler() { }
 
+    /** User-requested refresh queues a one-off job; Android decides when it executes. */
+    static boolean requestNow(Context context) {
+        if (!ReminderStore.prefs(context).getBoolean(ReminderStore.ENABLED, false)) return false;
+        JobScheduler jobs = context.getSystemService(JobScheduler.class);
+        if (jobs == null) return false;
+        jobs.cancel(ONCE_ID);
+        JobInfo refresh = new JobInfo.Builder(ONCE_ID,
+                new ComponentName(context, DateSyncJob.class))
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                .setBackoffCriteria(30L * 60L * 1000L,
+                        JobInfo.BACKOFF_POLICY_EXPONENTIAL)
+                .build();
+        return jobs.schedule(refresh) == JobScheduler.RESULT_SUCCESS;
+    }
+
     static void ensure(Context context) {
         JobScheduler jobs = context.getSystemService(JobScheduler.class);
         if (jobs == null) return;

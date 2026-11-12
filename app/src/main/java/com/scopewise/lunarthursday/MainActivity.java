@@ -2,6 +2,7 @@ package com.scopewise.lunarthursday;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,8 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +29,8 @@ import com.google.android.material.color.MaterialColors;
 import com.google.android.material.materialswitch.MaterialSwitch;
 
 import java.time.Instant;
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
@@ -44,6 +49,17 @@ public final class MainActivity extends Activity {
     private int onSurfaceVariant;
     private int primaryContainer;
     private int onPrimaryContainer;
+    private final Handler ticker = new Handler(Looper.getMainLooper());
+    private TextView countdownView;
+    private Instant countdownTarget;
+    private int moonTaps;
+    private final Runnable tickerTask = new Runnable() {
+        @Override public void run() {
+            if (countdownView == null || countdownTarget == null || isFinishing()) return;
+            countdownView.setText(countdownText(countdownTarget));
+            ticker.postDelayed(this, 60_000L);
+        }
+    };
 
     @Override protected void onCreate(Bundle state) {
         super.onCreate(state);
@@ -66,6 +82,11 @@ public final class MainActivity extends Activity {
         DateSyncScheduler.ensure(this);
         showScreen();
         UpdateManager.check(this, false, (success, message) -> showScreen());
+    }
+
+    @Override protected void onPause() {
+        ticker.removeCallbacks(tickerTask);
+        super.onPause();
     }
 
     private void applyPalette() {
@@ -102,21 +123,41 @@ public final class MainActivity extends Activity {
         }
         setContentView(scroll);
 
-        add(body, label("☾  LUNAR THURSDAY", 14, true, primary), 0);
-        add(body, label("A little reminder, every lunar month", 26, true, onSurface), 8);
-        add(body, label("Pakistan • First Thursday • 11:00 AM PKT", 14, false, onSurfaceVariant), 8);
-        add(body, button("Settings · alarms & updates", false,
+        TextView moonHeader = label("☾  LUNAR THURSDAY", 14, true, primary);
+        add(body, moonHeader, 0);
+        moonHeader.setOnClickListener(v -> {
+            if (++moonTaps >= 7) {
+                moonTaps = 0;
+                new AlertDialog.Builder(this).setTitle("🌙 Moonlight unlocked")
+                        .setMessage("Seven taps, seven skies. Your next Thursday is written in the stars — but the date still comes from the calendar, not the stars.")
+                        .setPositiveButton("Lovely", null).show();
+            }
+        });
+        add(body, label("Your next lunar Thursday, at a glance", 26, true, onSurface), 8);
+        add(body, label("Today in Pakistan: " + LocalDate.now(LunarEngine.PAKISTAN)
+                .format(DATE_LONG), 13, false, onSurfaceVariant), 8);
+        add(body, label("Monthly reminder • 11:00 AM PKT", 14, false, onSurfaceVariant), 8);
+        add(body, button("Settings  ·  alarm & updates", false,
                 () -> startActivity(new Intent(this, SettingsActivity.class))), 12);
+        add(body, button("About  ·  developer & surprises", false,
+                () -> startActivity(new Intent(this, AboutActivity.class))), 8);
 
         if (!upcoming.isEmpty()) {
             LunarEngine.Month next = upcoming.get(0);
             LinearLayout hero = panel();
             add(hero, label("NEXT REMINDER", 12, true, onPrimaryContainer), 0);
-            add(hero, label(next.thursday().format(DATE_LONG), 24, true, onPrimaryContainer), 12);
-            add(hero, label("11:00 AM  ·  Asia/Karachi", 16, true, onPrimaryContainer), 8);
-            add(hero, label(next.label(), 16, false, onPrimaryContainer), 12);
-            add(hero, label(LunarEngine.basisDescription(next.basis), 12, false, onPrimaryContainer), 8);
-            add(body, card(hero, primaryContainer), 20);
+            countdownTarget = next.remindAt();
+            countdownView = label(countdownText(countdownTarget), 19, true, onPrimaryContainer);
+            add(hero, countdownView, 10);
+            ticker.removeCallbacks(tickerTask);
+            ticker.postDelayed(tickerTask, 60_000L);
+            add(hero, label(next.thursday().format(DATE_LONG), 24, true, onPrimaryContainer), 10);
+            add(hero, label("11:00 AM  ·  Pakistan Standard Time", 16, true, onPrimaryContainer), 8);
+            add(hero, label(next.label() + "  ·  " + sourceLabel(next.basis), 14, false, onPrimaryContainer), 12);
+            add(hero, label("Tap for the month-start date and source", 12, false, onPrimaryContainer), 8);
+            MaterialCardView heroCard = card(hero, primaryContainer);
+            heroCard.setOnClickListener(v -> showMonthDetails(next));
+            add(body, heroCard, 20);
         }
 
         UpdateManager.Result release = UpdateManager.available(this);
@@ -138,6 +179,8 @@ public final class MainActivity extends Activity {
         toggle.setChecked(enabled);
         add(state, toggle, 0);
         add(state, label(statusMessage(enabled), 13, false, onSurfaceVariant), 8);
+        add(state, label("Alert mode: " + (preferences.getBoolean(ReminderStore.ALARM_MODE, false)
+                ? "Ringing alarm" : "Standard notification"), 13, true, onSurface), 8);
         if (enabled && !ReminderNotifications.permitted(this)) {
             add(state, button("Allow notifications", true, this::requestNotificationPermission), 10);
         }
@@ -157,10 +200,15 @@ public final class MainActivity extends Activity {
         add(body, label("Upcoming lunar months", 19, true, onSurface), 24);
         LinearLayout list = panel();
         for (int i = 0; i < Math.min(5, upcoming.size()); i++) {
-            LunarEngine.Month next = upcoming.get(i);
-            add(list, label(next.thursday().format(DATE_SHORT) + "  ·  " + next.label(),
-                    15, true, onSurface), i == 0 ? 0 : 14);
-            add(list, label(sourceLabel(next.basis), 12, false, onSurfaceVariant), 5);
+            LunarEngine.Month item = upcoming.get(i);
+            LinearLayout itemView = panel();
+            itemView.setPadding(dp(2), dp(7), dp(2), dp(7));
+            add(itemView, label(item.thursday().format(DATE_SHORT) + "  ·  " + item.label(),
+                    15, true, onSurface), 0);
+            add(itemView, label(sourceLabel(item.basis) + "  •  Tap for details",
+                    12, false, onSurfaceVariant), 5);
+            itemView.setOnClickListener(v -> showMonthDetails(item));
+            add(list, itemView, i == 0 ? 0 : 6);
         }
         add(body, card(list, surfaceVariant), 10);
 
@@ -175,6 +223,16 @@ public final class MainActivity extends Activity {
                 : Instant.ofEpochMilli(checked).atZone(LunarEngine.PAKISTAN)
                         .format(DateTimeFormatter.ofPattern("d MMM yyyy, h:mm a", Locale.ENGLISH)) + " PKT";
         add(info, label("Last successful feed check: " + when, 12, true, onSurfaceVariant), 12);
+        long age = checked > 0 && System.currentTimeMillis() >= checked
+                ? System.currentTimeMillis() - checked : 0L;
+        if (checked == 0 || age > 36L * 60 * 60 * 1000) {
+            add(info, label("Online date data may be stale. Forecasts are shown until a new check succeeds.",
+                    12, true, onSurfaceVariant), 9);
+        }
+        add(info, button("Request a date refresh", false, () -> {
+            if (DateSyncScheduler.requestNow(this)) toast("Refresh requested; Android will run it when network is available");
+            else toast("Enable reminders to allow date checks");
+        }), 12);
         add(body, card(info, surfaceVariant), 10);
 
         add(body, label("Notifications and updates", 19, true, onSurface), 24);
@@ -188,6 +246,30 @@ public final class MainActivity extends Activity {
                 () -> open("https://weather.gov.pk/cdpc/lunar-calendar")), 8);
         add(body, label("Automatic scheduling and date checks require no login or monthly adjustments.",
                 12, false, onSurfaceVariant), 20);
+    }
+
+    private String countdownText(Instant target) {
+        long millis = Math.max(0L, Duration.between(Instant.now(), target).toMillis());
+        long minutes = (millis + 59_999L) / 60_000L;
+        long days = minutes / (24L * 60L);
+        long hours = (minutes % (24L * 60L)) / 60L;
+        if (minutes == 0L) return "Scheduled time has arrived";
+        if (days > 0) return "In " + days + (days == 1 ? " day" : " days")
+                + ", " + hours + (hours == 1 ? " hour" : " hours");
+        if (hours > 0) return "In " + hours + (hours == 1 ? " hour" : " hours")
+                + ", " + (minutes % 60L) + " minutes";
+        return "In " + minutes + (minutes == 1 ? " minute" : " minutes");
+    }
+
+    private void showMonthDetails(LunarEngine.Month item) {
+        String description = "Month: " + item.label()
+                + "\nFirst civil day (Pakistan): " + item.start.format(DATE_LONG)
+                + "\nFirst Thursday: " + item.thursday().format(DATE_LONG)
+                + "\nReminder: 11:00 AM PKT"
+                + "\n\nSource: " + LunarEngine.basisDescription(item.basis)
+                + "\n\nForecasts and third-party reports may differ from the official Ruet-e-Hilal decision.";
+        new AlertDialog.Builder(this).setTitle("Lunar month details")
+                .setMessage(description).setPositiveButton("Close", null).show();
     }
 
     private String sourceLabel(LunarEngine.Basis b) {

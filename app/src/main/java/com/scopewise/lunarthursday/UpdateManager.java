@@ -62,13 +62,20 @@ final class UpdateManager {
         } catch (Exception ignored) { return "0.0.0"; }
     }
 
+    /** Release builds must not offer debug-signed preview APKs as in-place updates. */
+    static boolean isReleaseBuild(Context context) {
+        return (context.getApplicationInfo().flags
+                & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) == 0;
+    }
+
     static Result available(Context context) {
         SharedPreferences p = ReminderStore.prefs(context);
         String tag = p.getString(LATEST_TAG, "");
         String url = p.getString(LATEST_URL, "");
         String page = p.getString(LATEST_PAGE, "");
         boolean preview = p.getBoolean(LATEST_PREVIEW, true);
-        if (preview && !p.getBoolean(INCLUDE_PREVIEWS, true)) return null;
+        if (preview && (isReleaseBuild(context)
+                || !p.getBoolean(INCLUDE_PREVIEWS, true))) return null;
         if (VersionPolicy.compare(tag, installed(context)) <= 0) return null;
         if (!safeUrl(url, DOWNLOAD_PREFIX, ".apk") || !safeUrl(page, RELEASE_PREFIX, "")) return null;
         return new Result(tag, url, page, preview);
@@ -98,7 +105,8 @@ final class UpdateManager {
             boolean success = false;
             String status;
             try {
-                Result best = fetchLatest(p.getBoolean(INCLUDE_PREVIEWS, true), installed(app));
+                Result best = fetchLatest(!isReleaseBuild(app)
+                        && p.getBoolean(INCLUDE_PREVIEWS, true), installed(app));
                 SharedPreferences.Editor e = ReminderStore.prefs(app).edit();
                 if (best == null) {
                     e.remove(LATEST_TAG).remove(LATEST_URL).remove(LATEST_PAGE).remove(LATEST_PREVIEW);

@@ -118,12 +118,17 @@ public final class SettingsActivity extends Activity {
         toggle(updates, "Check automatically", "Checks GitHub when you open the app, normally at most twice per day.",
                 p.getBoolean(UpdateManager.AUTO_CHECK, true), value ->
                         p.edit().putBoolean(UpdateManager.AUTO_CHECK, value).apply());
-        toggle(updates, "Include preview versions", "Preview APKs may use different debug signing keys; an update may require reinstalling.",
-                p.getBoolean(UpdateManager.INCLUDE_PREVIEWS, true), value -> {
-                    p.edit().putBoolean(UpdateManager.INCLUDE_PREVIEWS, value).apply();
-                    UpdateManager.check(this, true, (ok, message) -> { toast(message); render(); });
-                    render();
-                });
+        if (UpdateManager.isReleaseBuild(this)) {
+            add(updates, text("Stable release signing active. Incompatible debug-signed previews are excluded from update checks.",
+                    12, false, onSurfaceVariant), 10);
+        } else {
+            toggle(updates, "Include preview versions", "Preview APKs use debug signing and may require reinstalling.",
+                    p.getBoolean(UpdateManager.INCLUDE_PREVIEWS, true), value -> {
+                        p.edit().putBoolean(UpdateManager.INCLUDE_PREVIEWS, value).apply();
+                        UpdateManager.check(this, true, (ok, message) -> { toast(message); render(); });
+                        render();
+                    });
+        }
         long last = UpdateManager.lastChecked(this);
         String label = last <= 0 ? "Never checked"
                 : Instant.ofEpochMilli(last).atZone(LunarEngine.PAKISTAN)
@@ -143,7 +148,7 @@ public final class SettingsActivity extends Activity {
             UpdateManager.check(this, true, (ok, message) -> { toast(message); render(); });
             toast("Checking GitHub releases");
         }), 12);
-        add(updates, text("Android requires your confirmation to install APK updates. Preview builds are debug-signed and may not install over previous builds.",
+        add(updates, text("Android always asks before installing APK updates. Moving from older debug-signed preview builds to a signed release requires uninstalling the preview first; future releases with the same signing key can update in place.",
                 12, false, onSurfaceVariant), 12);
         add(body, card(updates), 16);
     }
