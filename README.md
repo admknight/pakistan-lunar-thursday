@@ -1,12 +1,12 @@
-# Lunar Thursday — Pakistan
+# Hilal Thursday — ہلال جمعرات
 
-A small, **fully automatic, best-effort** Android reminder for the **first Thursday on or after the first civil day of every new Islamic month in Pakistan**, at **11:00 AM Pakistan Standard Time (Asia/Karachi)**.
+**Hilal Thursday**, formerly *Lunar Thursday*, is an open-source, bilingual English/Urdu Android reminder for the **first Thursday on or after the first civil day of every new Islamic month in Pakistan**, at **11:00 AM Pakistan Standard Time (Asia/Karachi)**.
 
 ![Build Android APK](https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/build-apk.yml/badge.svg)
 
 ## Download / install
 
-Open **[Releases](https://github.com/admknight/pakistan-lunar-thursday/releases)** to download publicly available APKs. Preview releases contain `app-debug.apk` (temporary debug signing). Once the maintainer completes the [permanent signing setup](docs/SIGNING.md), the separate [Publish permanently signed APK workflow](https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/publish-stable.yml) publishes a **normal GitHub Release** with `LunarThursday-vX.Y.Z.apk` and its SHA-256 checksum. For diagnostics, [Actions → Build Android APK](https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/build-apk.yml) retains temporary artifacts.
+Open **[Releases](https://github.com/admknight/pakistan-lunar-thursday/releases)** to download publicly available APKs. Preview releases contain `app-debug.apk` (temporary debug signing). The [permanent signing setup](docs/SIGNING.md) is operational (first stable release: v1.4.0). The [Publish permanently signed APK workflow](https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/publish-stable.yml) publishes a **normal GitHub Release** with `HilalThursday-vX.Y.Z.apk` and its SHA-256 checksum. For diagnostics, [Actions → Build Android APK](https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/build-apk.yml) retains temporary artifacts.
 
 The GitHub Actions build produces a **debug-signed test APK**, not a production-signed stable APK. Each cloud runner may use a different debug signing key. Therefore, installing a newer build can require uninstalling the old one first. Do not treat this as a stable release-signing solution. Android 13+ requires the one-time **Notifications** permission; Android 12+ may also require **Alarms & reminders** permission for closer-to-exact delivery. No monthly date entry is necessary.
 
@@ -18,6 +18,8 @@ The GitHub Actions build produces a **debug-signed test APK**, not a production-
 - PMD published **2026–2027 forecast dates** used as fallback, then a clearly labeled *calculated approximation* for other years.
 - Rescheduling on device reboot, clock or timezone changes, app update, and exact-alarm permission changes.
 - Material 3 interface, light/dark theme, **Material You dynamic wallpaper color** on Android 12+.
+- **English / اردو bilingual interface**, with a Settings language selector (device language / English / Urdu), Urdu calendar month labels, translated reminder text, and right-to-left layout. Android 13+ users can also change the app language in system settings.
+- **Rebranded Hilal Thursday icon:** teal-and-gold crescent with a highlighted calendar day; adaptive icon for shaped launchers plus monochrome themed-icon variant on supported Android devices.
 - **Optional ringing alarm** in Settings: repeats the system alarm sound/vibration for up to two minutes; **Dismiss** and **Snooze 10 minutes** controls; a missed-alert notification remains after timeout. The original notification-only mode stays the default.
 - **Settings page** with alarm preferences, exact-alarm/full-screen permission guidance, and automatic updates that require no manual lunar-date adjustments.
 - **In-app update indicator** on the home screen, with a GitHub release checker on app open (about twice daily) and a manual **Check now** option. Debug builds can opt into preview update checks; permanently signed release builds exclude incompatible debug-signed preview APKs. APK installation always requires user approval.
@@ -35,6 +37,13 @@ The **update manager** checks the public GitHub Releases API automatically when 
 ### Preview builds versus permanently signed public releases
 
 The automatic CI workflow generates a **debug signing key per runner/build**, so its builds are correctly tagged **preview**. **GitHub pre-releases are still public** and provide direct APK downloads. A long-lived release key and a separate certificate-verified release workflow have now been prepared. The maintainer must add two encrypted GitHub Actions secrets once before that workflow can publish a normally labeled public release. See [Private signing setup](docs/SIGNING.md); **the private signing material is never part of this public repository**. First-time migration from any debug-signed APK to the permanently signed APK requires uninstalling the debug APK. After that, updates using the same signer and a higher version code can install in place. App signing is not a substitute for actual device testing. The stable build excludes incompatible debug-signed preview updates.
+
+
+## Bilingual app language and icon
+
+Go to **Settings → App language** to choose **Follow device language**, **English**, or **اردو**. The language selection is retained locally on Android 8–12; on Android 13+ it uses Android's native per-app language system. Islamic month labels and on-screen dates follow the selected interface language. The app's reminder timing stays fixed at **11:00 AM Pakistan Standard Time**, regardless of the phone's locale or time zone.
+
+The updated app icon uses native Android vector foreground/background layers and a separate monochrome layer for Material You themed icons. The published package name `com.scopewise.lunarthursday` and GitHub repository URL are intentionally unchanged to preserve upgrade compatibility, app data, and existing links. Branding is not a claim of government association or official sighting confirmation.
 
 ## Important accuracy limitations
 
