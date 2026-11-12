@@ -35,38 +35,8 @@ jobs:
         with:
           gradle-version: '9.6.0'
 
-      - name: Verify Java scheduling engine and feed validation
-        shell: bash
-        run: |
-          mkdir -p build/portable-tests
-          javac -d build/portable-tests \
-            app/src/main/java/com/scopewise/lunarthursday/LunarEngine.java \
-            app/src/main/java/com/scopewise/lunarthursday/FeedDatePolicy.java \
-            app/src/main/java/com/scopewise/lunarthursday/VersionPolicy.java \
-            app/src/main/java/com/scopewise/lunarthursday/WeatherCode.java \
-            app/src/main/java/com/scopewise/lunarthursday/AlarmTonePolicy.java \
-            app/src/main/java/com/scopewise/lunarthursday/SunsetMath.java \
-            app/src/main/java/com/scopewise/lunarthursday/ReminderTimePolicy.java \
-            app/src/main/java/com/scopewise/lunarthursday/MonthEndChecks.java \
-            app/src/main/java/com/scopewise/lunarthursday/SentReminderPolicy.java \
-            test/java/com/scopewise/lunarthursday/EngineTest.java \
-            test/java/com/scopewise/lunarthursday/FeedDatePolicyTest.java \
-            test/java/com/scopewise/lunarthursday/VersionPolicyTest.java \
-            test/java/com/scopewise/lunarthursday/WeatherCodeTest.java \
-            test/java/com/scopewise/lunarthursday/AlarmTonePolicyTest.java \
-            test/java/com/scopewise/lunarthursday/SunsetMathTest.java \
-            test/java/com/scopewise/lunarthursday/ReminderTimePolicyTest.java \
-            test/java/com/scopewise/lunarthursday/SentReminderPolicyTest.java \
-            test/java/com/scopewise/lunarthursday/MonthEndChecksTest.java
-          java -cp build/portable-tests com.scopewise.lunarthursday.EngineTest
-          java -cp build/portable-tests com.scopewise.lunarthursday.FeedDatePolicyTest
-          java -cp build/portable-tests com.scopewise.lunarthursday.VersionPolicyTest
-          java -cp build/portable-tests com.scopewise.lunarthursday.WeatherCodeTest
-          java -cp build/portable-tests com.scopewise.lunarthursday.AlarmTonePolicyTest
-          java -cp build/portable-tests com.scopewise.lunarthursday.SunsetMathTest
-          java -cp build/portable-tests com.scopewise.lunarthursday.ReminderTimePolicyTest
-          java -cp build/portable-tests com.scopewise.lunarthursday.MonthEndChecksTest
-          java -cp build/portable-tests com.scopewise.lunarthursday.SentReminderPolicyTest
+      - name: Run unit tests (date engine, feed, version and reminder rules)
+        run: gradle --no-daemon :app:testDebugUnitTest
 
       - name: Verify the three reviewed Gemini music excerpts
         shell: bash
