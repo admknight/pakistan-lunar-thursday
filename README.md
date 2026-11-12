@@ -22,17 +22,17 @@ The GitHub Actions build produces a **debug-signed test APK**, not a production-
 - **Rebranded Hilal Thursday icon:** teal-and-gold crescent with a highlighted calendar day; adaptive icon for shaped launchers plus monochrome themed-icon variant on supported Android devices.
 - **Optional ringing alarm** in Settings: repeats the system alarm sound/vibration for up to two minutes; **Dismiss** and **Snooze 10 minutes** controls; a missed-alert notification remains after timeout. The original notification-only mode stays the default.
 - **Settings page** with alarm preferences, exact-alarm/full-screen permission guidance, and automatic updates that require no manual lunar-date adjustments.
-- **In-app update indicator** on the home screen, with a GitHub release checker on app open (about twice daily) and a manual **Check now** option. Debug builds can opt into preview update checks; permanently signed release builds exclude incompatible debug-signed preview APKs. APK installation always requires user approval.
+- **In-app update manager:** Checks the project's GitHub Releases API when the app opens, with optional daily background update notifications. Download progress and SHA-256 digest, Android package-ID, version, and signing-certificate verification all occur inside Hilal Thursday; **no browser or GitHub page is opened to update**. Android still controls and confirms APK installation, and may first request approval to install from this app. Installation is never silent. Stable builds exclude incompatible debug-signed previews.
 - **Interactive home dashboard** with live countdown in Pakistan time, tap-to-explore upcoming month cards, a reminder status / alert-mode overview, and one-tap date refresh requests (queued through Android JobScheduler).
 - **About / Developer page** for `admknight`, open-source attribution, privacy, calendar-source transparency, and small hidden easter eggs.
 - Next reminder, upcoming months, source quality, last successful feed check, and a test-notification button.
-- **No accounts, no ads, no location permission, no tracking and no manually entered dates.**
+- **No accounts, no ads, no tracking, and no manually entered lunar dates.** Optional location permission is used **only after the user enables weather visuals**; the app never requests background or precise location.
 
 ## Ringing alarm and updates
 
 Open **Settings** to enable **Ring audible alarm** if a normal notification is easy to miss. You can toggle sound and vibration independently and test the alarm from Settings. Alarm sound/vibration stop automatically after two minutes even if you don't dismiss; Snooze schedules another attempt ten minutes later. Android notification, exact-alarm, foreground service, and (on some devices) full-screen intent permissions affect availability and timing. Do Not Disturb, battery restrictions, device power-off, and OEM behavior can suppress or delay ringing. This path has been built in CI, **not tested on a physical phone**.
 
-The **update manager** checks the public GitHub Releases API automatically when the app is opened, at most every twelve hours after a successful check. It reports a newer matching release and opens its APK download URL in your browser. It cannot silently install updates. With **Include preview versions** disabled, it will hide preview releases. It requests no new accounts, location, or tracking permissions.
+The **update manager** checks the public GitHub Releases API when the app opens, at most every twelve hours after a successful check. An optional daily Android JobScheduler task can notify you about newer signed stable releases while the app is closed; Android may defer the check for battery/network reasons. A selected update is downloaded **inside the app**, with progress, maximum-size checks, GitHub release-asset SHA-256 digest verification, package identity, version upgrade, and matching installed APK signer verification. It then invokes Android's built-in installer to obtain explicit user approval. Android 8+ may require a one-time **Allow from this source** system permission. No GitHub browser or web page is involved in updating; no APK is silently installed. Debug preview builds cannot replace a permanently signed stable APK.
 
 ### Preview builds versus permanently signed public releases
 
@@ -46,6 +46,12 @@ The main screen now has a compact app header with a three-dot **More options** m
 The **About / Developer** screen uses concise icon-and-text rows for privacy, calendar accuracy, recent releases, project feedback and the MIT license rather than full-width GitHub buttons. Three optional hidden interactions remain: tap the home logo/title seven times, long-press the About icon, and tap the About version area five times. None of the easter eggs changes alarms, dates, or update settings.
 
 Android accessibility labels, English/Urdu string resources, and right-to-left layout behavior are retained. The reminders still fire at **11:00 AM Pakistan time**; month start accuracy remains subject to the independent data-source limitations below. The graphical layout has not yet been visually exercised on a physical Android device.
+
+## Living sky and optional local weather (v1.7.0)
+
+The home illustration reacts to the device's current time of day (morning, daylight, sunset, night), **even offline and without location access**. In **Settings → Sky and local weather**, opt in to weather effects. Android will ask for **approximate location** while the app is in use. Hilal Thursday retrieves a one-time coarse location, rounds it to two decimal places, and retrieves current temperature, WMO weather code, and daylight status from Open-Meteo. Clouds, rain, fog, snow, and storms change only the decorative scene; **weather data is not a hazard alert or official lunar-sighting source**. No continuous GPS polling or background location access is used. Cached conditions expire after three hours, and weather refreshes are throttled to about 45 minutes. When permission, location, connectivity, or weather data is unavailable, the app falls back to the time-of-day sky.
+
+Weather data attribution: [Open-Meteo](https://open-meteo.com/) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Open-Meteo's free hosted endpoint is for non-commercial use; maintainers must review licensing before any commercialization.
 
 ## Bilingual app language and icon
 
@@ -68,7 +74,7 @@ A third-party data feed at `https://islamicdatetoday.pk/data/today.json` is used
 - **compileSdk:** 36; **targetSdk:** 35; **minSdk:** 26
 - **Application ID:** `com.scopewise.lunarthursday`
 
-The GitHub workflow installs the matching Android SDK platform/build tools, runs 160 pure-Java scheduling/feed-policy/version assertions, builds the APK and attaches its SHA-256 hash. It runs on pushes to `main`, pull requests and manual dispatch. Successful pushes to `main` also publish a **versioned GitHub pre-release** if that version has not already been published. Increment `versionName` when publishing a new preview; rebuilding the same version does not silently replace public assets. This project deliberately uses the stable Java Material Components SDK rather than introducing Kotlin/Compose into an already tested Java-only notification engine.
+The GitHub workflow installs the matching Android SDK platform/build tools, runs 180 pure-Java scheduling/feed-policy/version/weather-code assertions, builds the APK and attaches its SHA-256 hash. It runs on pushes to `main`, pull requests and manual dispatch. Successful pushes to `main` also publish a **versioned GitHub pre-release** if that version has not already been published. Increment `versionName` when publishing a new preview; rebuilding the same version does not silently replace public assets. This project deliberately uses the stable Java Material Components SDK rather than introducing Kotlin/Compose into an already tested Java-only notification engine.
 
 ## Local build
 
@@ -98,7 +104,7 @@ java -cp build/portable-tests com.scopewise.lunarthursday.VersionPolicyTest
 
 ## Privacy
 
-The app sends HTTPS requests to the external third-party date feed and to GitHub's public Releases API; those providers may observe the connecting IP address. The app itself sends no user profile, account credentials, location, or device identifiers. Data such as enabled state, last date check, and month-start observations is stored locally on the phone.
+The app contacts the independent Hijri-date feed and GitHub's public Releases API, whose providers may observe the connecting IP address. **Weather visuals are strictly opt-in:** after enabling them, Android requests only approximate foreground location; coordinates are rounded to two decimal places (approximately 1 km) and sent by HTTPS to [Open-Meteo](https://open-meteo.com/). Raw location coordinates are not saved, and turning the feature off clears cached weather. No background or precise location permission is requested. Weather conditions are cached locally for up to three hours. Open-Meteo forecast data is supplied under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) and its free-hosted API is intended for non-commercial use. The app sends no account credentials or tracking identifiers. Existing reminder settings and month-start observations remain local.
 
 ## Attribution / references
 
