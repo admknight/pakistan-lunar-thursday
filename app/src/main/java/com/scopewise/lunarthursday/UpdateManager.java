@@ -126,7 +126,9 @@ final class UpdateManager {
             final boolean finalSuccess = success;
             final String finalStatus = status;
             if (callback != null) MAIN.post(() -> {
-                if (!activity.isFinishing() && !activity.isDestroyed()) callback.finished(finalSuccess, finalStatus);
+                if (!activity.isFinishing() && !activity.isDestroyed()) callback.finished(finalSuccess, finalStatus.startsWith("New version available: ")
+                        ? UiText.tr(activity, "New version available: ") + VersionPolicy.display(finalStatus.substring("New version available: ".length()))
+                        : UiText.tr(activity, finalStatus));
             });
         });
     }

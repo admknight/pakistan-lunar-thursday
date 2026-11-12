@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ہلال جمعرات</string>
+    <string name="tr_0005bdb96" formatted="false">"گٹ ہب ریلیز کی جانچ جاری ہے"</string>
+    <string name="tr_0047ae94e" formatted="false">"پاکستان کے قمری مہینوں کی خوبصورت ترتیب یاد رکھنے کا پرسکون طریقہ۔"</string>
+    <string name="tr_004a77be9" formatted="false">"یاددہانی اور بجنے والے الارم کے لیے اطلاعات کی اجازت دیں۔"</string>
+    <string name="tr_00a83a63b" formatted="false">"اگلی قمری جمعرات، ایک نظر میں"</string>
+    <string name="tr_00fedff2f" formatted="false">"اطلاعات: اجازت درکار ہے"</string>
+    <string name="tr_01e1787a9" formatted="false">"ایپ کی زبان"</string>
+    <string name="tr_01f44bc97" formatted="false">"آج پاکستان میں: "</string>
+    <string name="tr_03283ea97" formatted="false">"ورژن "</string>
+    <string name="tr_03366c77b" formatted="false">"سورس کوڈ اور مسائل"</string>
+    <string name="tr_062079591" formatted="false">"کیلنڈر کا اندازہ · غیر مصدقہ"</string>
+    <string name="tr_06352ba4d" formatted="false">"تعارف · ڈویلپر اور دلچسپ چیزیں"</string>
+    <string name="tr_09e0cb995" formatted="false">"مہینہ: "</string>
+    <string name="tr_0b6504c95" formatted="false">"آزمائشی ورژن بھی شامل کریں"</string>
+    <string name="tr_0bb2128a2" formatted="false">"کیلنڈر کا اندازہ ہے؛ سرکاری رؤیت مختلف ہو سکتی ہے۔"</string>
+    <string name="tr_10eae0ce7" formatted="false">"اینڈرائیڈ کی ترتیبات میں الارم اور یاددہانی کی اجازت دیں"</string>
+    <string name="tr_12b461e73" formatted="false">"وائبریشن فون کی ترتیبات کے مطابق ہو گی۔"</string>
+    <string name="tr_133278b92" formatted="false">"کوئی نیا موافق ورژن نہیں ملا"</string>
+    <string name="tr_14d624084" formatted="false">" صبح 11:00 بجے پاکستان وقت۔ "</string>
+    <string name="tr_16213f85d" formatted="false">"ایپ اپ ڈیٹس"</string>
+    <string name="tr_164ab02db" formatted="false">"اطلاع کی قسم: "</string>
+    <string name="tr_17fd4b2db" formatted="false">"باقی: %1$d منٹ"</string>
+    <string name="tr_18e0e1489" formatted="false">"ہر قمری مہینے کی پہلی جمعرات کو پاکستانی وقت کے مطابق ایک یاددہانی"</string>
+    <string name="tr_196d2da5d" formatted="false">"پیش گوئیاں اور غیر سرکاری رپورٹس سرکاری رؤیتِ ہلال کے فیصلے سے مختلف ہو سکتی ہیں۔"</string>
+    <string name="tr_1aaa27f9a" formatted="false">"ریلیز ڈاؤن لوڈ کریں"</string>
+    <string name="tr_1b36cb9e2" formatted="false">"آخری کامیاب آن لائن جانچ: "</string>
+    <string name="tr_1ef5187f3" formatted="false">"آنے والے قمری مہینے"</string>
+    <string name="tr_1f044de6c" formatted="false">"غیر سرکاری ذریعہ تصدیق کی اطلاع دیتا ہے (سرکاری سروس نہیں)"</string>
+    <string name="tr_23639ea3a" formatted="false">"☾  ہلال جمعرات"</string>
+    <string name="tr_24731f717" formatted="false">"اطلاعات اور اپ ڈیٹس"</string>
+    <string name="tr_24b907f39" formatted="false">"پاکستان کے لیے بنایا گیا، سب کے لیے دستیاب"</string>
+    <string name="tr_24c60376d" formatted="false">"فعال ہے، مگر درست الارم کی اجازت نہ ہونے پر اینڈرائیڈ تاخیر کر سکتا ہے۔"</string>
+    <string name="tr_2693fa2db" formatted="false">"یاددہانی: صبح 11:00 بجے پاکستان وقت"</string>
+    <string name="tr_26ab89cd8" formatted="false">"🌟 پانچ ستارے"</string>
+    <string name="tr_2740d8755" formatted="false">" صبح 11:00 بجے پاکستان وقت۔ "</string>
+    <string name="tr_2ab2b2db2" formatted="false">"یاددہانیاں بند ہیں۔"</string>
+    <string name="tr_2b2c8ff92" formatted="false">": دو منٹ بعد بجنے والا الارم بند ہو گیا۔ یاددہانی دیکھنے کے لیے ایپ کھولیں۔"</string>
+    <string name="tr_2b791f512" formatted="false">"خوب!"</string>
+    <string name="tr_2bf4fb109" formatted="false">"ایپ کھولتے وقت گٹ ہب چیک کیا جاتا ہے، عموماً دن میں دو بار سے زیادہ نہیں۔"</string>
+    <string name="tr_301587d50" formatted="false">"عام اطلاع"</string>
+    <string name="tr_30abb2248" formatted="false">" · صبح 11:00 بجے پاکستان وقت"</string>
+    <string name="tr_30e977abc" formatted="false">"آزمائشی الارم"</string>
+    <string name="tr_31177076d" formatted="false">"آواز کے ساتھ الارم بجائیں"</string>
+    <string name="tr_317ebbade" formatted="false">"ہلال جمعرات کی آزمائشی اطلاع"</string>
+    <string name="tr_34f30058d" formatted="false">"مستقل دستخط والا ریلیز فعال ہے۔ غیر موافق آزمائشی ورژن اپ ڈیٹ میں شامل نہیں ہوں گے۔"</string>
+    <string name="tr_3605d841a" formatted="false">"گٹ ہب کی جانچ جاری ہے..."</string>
+    <string name="tr_367b81c35" formatted="false">"منصوبے کا لائسنس کھولیں (MIT)"</string>
+    <string name="tr_38fd47dcf" formatted="false">"یاددہانی کیسے ملے گی"</string>
+    <string name="tr_39d9ad26e" formatted="false">"محکمہ موسمیات کی پیش گوئی · غیر مصدقہ"</string>
+    <string name="tr_3ad3c4eb8" formatted="false">"اطلاعات کی اجازت دیں"</string>
+    <string name="tr_3f0043a99" formatted="false">"ہلال جمعرات کی پہلی یاددہانی"</string>
+    <string name="tr_3f02015c4" formatted="false">"باقی: %1$d دن، %2$d گھنٹے"</string>
+    <string name="tr_3f1373ff2" formatted="false">"صرف تیسرے فریق کی واضح طور پر تصدیق شدہ تاریخیں محفوظ ہوتی ہیں۔ ورنہ محکمہ موسمیات کی پیش گوئی یا کیلنڈر کا اندازہ استعمال ہوتا ہے، جو پاکستان میں سرکاری رؤیتِ ہلال سے مختلف ہو سکتا ہے۔"</string>
+    <string name="tr_3f40f4683" formatted="false">"ڈویلپر کا ایک چھوٹا راز: بعض تاریخوں کے لیے صبر چاہیے، مگر ایک نرم یاددہانی دن روشن کر سکتی ہے۔"</string>
+    <string name="tr_3f5595d00" formatted="false">"دس منٹ بعد"</string>
+    <string name="tr_412e31909" formatted="false">"اردو"</string>
+    <string name="tr_44e6395f1" formatted="false">"قمری جمعرات کا الارم"</string>
+    <string name="tr_482f6e668" formatted="false">"اردو"</string>
+    <string name="tr_4905881fe" formatted="false">"سات بار چھونے سے سات آسمان! اگلی جمعرات کی تاریخ ستاروں سے نہیں بلکہ کیلنڈر سے آتی ہے۔"</string>
+    <string name="tr_4ce8b7133" formatted="false">"اپ ڈیٹ کی جانچ پہلے سے جاری ہے"</string>
+    <string name="tr_4d80c320a" formatted="false">"درست وقت پر الارم: دستیاب ہے"</string>
+    <string name="tr_4d999ebe9" formatted="false">"✦ ستاروں کا راز کھل گیا ✦"</string>
+    <string name="tr_52b98b6ac" formatted="false">"بجنے والا الارم منتخب ہے۔ آواز، وائبریشن اور اسنوز کی ترتیبات موجود ہیں۔"</string>
+    <string name="tr_553dce768" formatted="false">"غیر سرکاری ذریعہ تصدیق کی اطلاع دیتا ہے"</string>
+    <string name="tr_5803fbc4e" formatted="false">"تعارف / ڈویلپر"</string>
+    <string name="tr_59feb6cf1" formatted="false">"صبح 11:00 بجے پاکستان وقت"</string>
+    <string name="tr_5c620cc0f" formatted="false">" (ابھی جانچ نہیں ہوئی)"</string>
+    <string name="tr_5ca78f773" formatted="false">"اطلاعات فعال ہیں۔ ماہانہ یاددہانی صبح 11:00 بجے پاکستان وقت پر ہو گی۔"</string>
+    <string name="tr_5d63b73c0" formatted="false">"ہر نئے ہجری مہینے کے پہلے دن یا اس کے بعد آنے والی پہلی جمعرات کو پاکستان وقت کے مطابق صبح 11:00 بجے یاددہانی طے کی جاتی ہے۔"</string>
+    <string name="tr_5f91c2744" formatted="false">" · تفصیل کے لیے چھوئیں"</string>
+    <string name="tr_61a4aaf1c" formatted="false">"اطلاعات: اجازت موجود ہے"</string>
+    <string name="tr_625a5311e" formatted="false">"قمری مہینے کے بجنے والے الارم"</string>
+    <string name="tr_62748ca83" formatted="false">"پہلا دن (پاکستان): "</string>
+    <string name="tr_649df08a4" formatted="false">"English"</string>
+    <string name="tr_64e319269" formatted="false">"اسی چاند کے نیچے خلوص سے تیار کردہ۔"</string>
+    <string name="tr_6ad863e01" formatted="false">"پاکستان میں سرکاری رؤیتِ ہلال کا فیصلہ مرکزی رؤیتِ ہلال کمیٹی کرتی ہے۔ ایپ دستیاب ہونے پر غیر سرکاری رپورٹ شدہ تاریخیں، ورنہ محکمہ موسمیات کی پیش گوئی یا کیلنڈر کا اندازہ استعمال کرتی ہے۔ یہ سرکاری تاریخ کی سروس ہونے کا دعویٰ نہیں کرتی۔"</string>
+    <string name="tr_6c52dbbbd" formatted="false">" (آزمائشی)"</string>
+    <string name="tr_6eb499e3e" formatted="false">"اس قمری مہینے"</string>
+    <string name="tr_6f0a71443" formatted="false">"ایپ کی ترتیبات کھولیں"</string>
+    <string name="tr_6f0c4c4f3" formatted="false">"گٹ ہب چیک نہیں ہو سکا۔ انٹرنیٹ کنکشن دیکھیں یا بعد میں کوشش کریں۔"</string>
+    <string name="tr_70afe9eff" formatted="false">"بند کریں"</string>
+    <string name="tr_752280813" formatted="false">"ریلیز کھولنے کے لیے براؤزر درکار ہے"</string>
+    <string name="tr_75c42cd1d" formatted="false">"آزمائشی اطلاع بھیجیں"</string>
+    <string name="tr_78f7af007" formatted="false">"خودکار شیڈول اور تاریخ کی جانچ کے لیے نہ لاگ اِن چاہیے نہ ماہانہ تبدیلی۔"</string>
+    <string name="tr_7cd229d28" formatted="false">"خودکار جانچ"</string>
+    <string name="tr_7d2f163e8" formatted="false">"چمکتے رہیں"</string>
+    <string name="tr_7d5b577f6" formatted="false">"الارم بند کریں"</string>
+    <string name="tr_7df0179ba" formatted="false">"تاریخ فراہم کرنے والے ذریعہ نے تصدیق کی خبر دی ہے۔"</string>
+    <string name="tr_82e4c1c51" formatted="false">" · پیش منظر"</string>
+    <string name="tr_895bbef9c" formatted="false">"فل اسکرین الارم کی اجازت دیں"</string>
+    <string name="tr_89b23b0f8" formatted="false">"ماہانہ یاددہانیاں"</string>
+    <string name="tr_89b86ab0e" formatted="false">"زبان"</string>
+    <string name="tr_8c0bda2f7" formatted="false">"صبح 11:00 بجے · پاکستان معیاری وقت"</string>
+    <string name="tr_8c7b688f9" formatted="false">"تاریخیں خود درج کرنے کی ضرورت نہیں۔ پاکستان کی ہجری تاریخ کا ذریعہ تقریباً ہر چھ گھنٹے بعد چیک کیا جاتا ہے، تاہم اینڈرائیڈ کی پابندیوں سے تاخیر ہو سکتی ہے۔"</string>
+    <string name="tr_8cda36e31" formatted="false">"نصب شدہ ورژن: "</string>
+    <string name="tr_8d46cd4f3" formatted="false">"نئی اپ ڈیٹ دستیاب ہے"</string>
+    <string name="tr_8e053a60d" formatted="false">"اگلی یاددہانی"</string>
+    <string name="tr_8e665e894" formatted="false">"چاندنی کا راز کھل گیا"</string>
+    <string name="tr_8f2742ccf" formatted="false">"قمری مہینے کی پہلی جمعرات"</string>
+    <string name="tr_9193319ab" formatted="false">"ہلال جمعرات"</string>
+    <string name="tr_92cd2c60f" formatted="false">"آخری جانچ: "</string>
+    <string name="tr_97677a3d8" formatted="false">"تاریخ کی نئی جانچ کی درخواست"</string>
+    <string name="tr_9b5824f8b" formatted="false">"تاریخوں کی خودکار تازہ کاری"</string>
+    <string name="tr_9bb43362e" formatted="false">"ماہانہ یاددہانی • صبح 11:00 بجے پاکستان وقت"</string>
+    <string name="tr_9c1391509" formatted="false">"وائبریشن"</string>
+    <string name="tr_9ee8e160d" formatted="false">"الارم کی آواز چلائیں"</string>
+    <string name="tr_a049d931d" formatted="false">"صبح 11:00 بجے پاکستان وقت"</string>
+    <string name="tr_a3111f6e0" formatted="false">"اختیاری بجنے والا الارم۔ آواز اور وائبریشن ایپ سے کنٹرول ہوں گے۔"</string>
+    <string name="tr_a3be44b12" formatted="false">"پہلی جمعرات: "</string>
+    <string name="tr_a4d7b4050" formatted="false">"محکمہ موسمیات پاکستان (پیش گوئیوں کے حوالے)، ہجری تاریخ کا عوامی غیر سرکاری ذریعہ، اینڈرائیڈ Material 3 / Material You اور کمیونٹی کے معاونین۔"</string>
+    <string name="tr_a62ad68a8" formatted="false">"درست وقت پر الارم: دستیاب نہیں؛ تاخیر ہو سکتی ہے"</string>
+    <string name="tr_a7ac68052" formatted="false">"جمعرات کی آزمائشی اطلاع"</string>
+    <string name="tr_a8cfdf4e5" formatted="false">"اپ ڈیٹ کی جانچ پہلے سے جاری ہے"</string>
+    <string name="tr_aea4a1df5" formatted="false">"ہلال جمعرات"</string>
+    <string name="tr_af9c36846" formatted="false">"اطلاعات چیک کریں"</string>
+    <string name="tr_b1b598c15" formatted="false">"باقی: %1$d گھنٹے، %2$d منٹ"</string>
+    <string name="tr_b493ac133" formatted="false">"نیا ورژن دستیاب: "</string>
+    <string name="tr_b4ab1852a" formatted="false">"ڈویلپر / منتظم: admknight"</string>
+    <string name="tr_b54c2a250" formatted="false">"فل اسکرین الارم کی اجازت اینڈرائیڈ ترتیبات میں بدلی جا سکتی ہے"</string>
+    <string name="tr_b76bd04ef" formatted="false">"اینڈرائیڈ کی اجازتیں"</string>
+    <string name="tr_b8468f15a" formatted="false">" • تفصیل کے لیے چھوئیں"</string>
+    <string name="tr_b968826a0" formatted="false">"نئی اپ ڈیٹ دستیاب: "</string>
+    <string name="tr_b979c6881" formatted="false">"اینڈرائیڈ ترتیبات &gt; الارم اور یاددہانیاں کھولیں"</string>
+    <string name="tr_ba6fed22b" formatted="false">"یہ اوپن سورس منصوبہ ہے۔ گٹ ہب پر تجاویز اور مسائل کی رپورٹ خوش آمدید ہیں۔"</string>
+    <string name="tr_ba95d7d71" formatted="false">"اس آلے پر الارم کی سہولت دستیاب نہیں"</string>
+    <string name="tr_ba9728b14" formatted="false">"گٹ ہب سے ڈاؤن لوڈ کریں"</string>
+    <string name="tr_bbb6663d7" formatted="false">"فون کی عام الارم آواز زیادہ سے زیادہ دو منٹ تک بجے گی۔"</string>
+    <string name="tr_bbfa773e5" formatted="false">"بند کریں"</string>
+    <string name="tr_c0346dc3c" formatted="false">"قمری مہینے کی پہلی جمعرات کی یاددہانی"</string>
+    <string name="tr_c1ebcee85" formatted="false">"یاددہانی صبح 11:00 بجے پاکستانی وقت پر رہے گی۔ قمری تاریخیں خودکار طور پر بدلتی ہیں؛ ہاتھ سے درستگی ضروری نہیں۔"</string>
+    <string name="tr_c264249ca" formatted="false">"ایپ کی اسکرینوں اور یاددہانیوں کی زبان منتخب کریں۔"</string>
+    <string name="tr_c45a5fc04" formatted="false">"مہینے کی ابتدا اور ماخذ دیکھنے کے لیے چھوئیں"</string>
+    <string name="tr_c45d4724f" formatted="false">"حسابی اندازہ — پاکستان میں رؤیت کی تصدیق نہیں"</string>
+    <string name="tr_c49feebf8" formatted="false">"جمعرات کا الارم رہ گیا"</string>
+    <string name="tr_c4f1ae264" formatted="false">"اینڈرائیڈ APK اپ ڈیٹ نصب کرنے سے پہلے اجازت مانگتا ہے۔ پرانے آزمائشی ورژن سے مستقل دستخط والے ورژن پر جانے کے لیے آزمائشی ایپ پہلے ہٹانا ہو گی؛ اس کے بعد ایک ہی دستخط والی اپ ڈیٹس براہِ راست نصب ہو سکیں گی۔"</string>
+    <string name="tr_c7f73bb54" formatted="false">"ترتیبات"</string>
+    <string name="tr_c94f17a39" formatted="false">"زمین پر واپسی"</string>
+    <string name="tr_c97c92d50" formatted="false">"پاکستان محکمہ موسمیات کا کیلنڈر دیکھیں"</string>
+    <string name="tr_cafd11c28" formatted="false">"بجنے والا الارم"</string>
+    <string name="tr_cca542e49" formatted="false">"ابھی اپ ڈیٹس چیک کریں"</string>
+    <string name="tr_ce34430d9" formatted="false">"یاددہانی کا وقت آ گیا ہے"</string>
+    <string name="tr_cf01481f6" formatted="false">"رازداری"</string>
+    <string name="tr_d0125779a" formatted="false">"اینڈرائیڈ میں اطلاعات کی ترتیبات کھولیں"</string>
+    <string name="tr_d1191e3eb" formatted="false">"ابھی آن لائن جانچ نہیں ہوئی"</string>
+    <string name="tr_d235418b3" formatted="false">"شکریہ اور شفافیت"</string>
+    <string name="tr_d2dadf8d6" formatted="false">"اینڈرائیڈ کی ترتیبات میں اطلاعات بند ہیں۔"</string>
+    <string name="tr_d48d6f64c" formatted="false">"الارم، اجازتوں اور ایپ اپ ڈیٹس کی ترتیبات"</string>
+    <string name="tr_d4d62ebda" formatted="false">"🌙 چاندنی کا راز کھل گیا"</string>
+    <string name="tr_d5beb0e19" formatted="false">"ہلال جمعرات کا الارم رہ گیا"</string>
+    <string name="tr_d5d9126e0" formatted="false">"درست وقت کے الارم کی اجازت دیں"</string>
+    <string name="tr_d871233bf" formatted="false">"رات کے آسمان میں اپ ڈیٹ کا بٹن نہیں، لیکن آپ کی یاددہانی ایپ میں ہے۔"</string>
+    <string name="tr_d9a529667" formatted="false">"آزمائشی APK کے دستخط مختلف ہو سکتے ہیں؛ دوبارہ انسٹال کرنا پڑ سکتا ہے۔"</string>
+    <string name="tr_dbca0d249" formatted="false">"درست وقت پر الارم کی اجازت دیں"</string>
+    <string name="tr_de6925be8" formatted="false">"تاریخ کی جانچ کے لیے یاددہانیاں فعال کریں"</string>
+    <string name="tr_e05882ae7" formatted="false">"زبان تبدیل ہو گئی"</string>
+    <string name="tr_e0ef1d33f" formatted="false">"ترتیبات · الارم اور اپ ڈیٹس"</string>
+    <string name="tr_e324b814d" formatted="false">"پورے اسکرین پر الارم کی اجازت نہیں۔ اینڈرائیڈ اس کی جگہ مختصر اطلاع دکھا سکتا ہے، مگر اجازت ہونے پر آواز بج سکتی ہے۔"</string>
+    <string name="tr_e49e6ce0b" formatted="false">"دو منٹ بعد بجنے والا الارم بند ہو گیا۔ یاددہانی دیکھنے کے لیے ایپ کھولیں۔"</string>
+    <string name="tr_e6dca6297" formatted="false">"درخواست بھیج دی گئی؛ نیٹ ورک دستیاب ہونے پر اینڈرائیڈ جانچ کرے گا"</string>
+    <string name="tr_e6e3d3f37" formatted="false">"قمری مہینے کی تفصیل"</string>
+    <string name="tr_e738e9bad" formatted="false">"ابھی جانچ نہیں ہوئی"</string>
+    <string name="tr_e9fae6216" formatted="false">"ہلال جمعرات کے بارے میں"</string>
+    <string name="tr_ea60c65e6" formatted="false">"گٹ ہب سے اپ ڈیٹ ڈاؤن لوڈ کریں"</string>
+    <string name="tr_ebd783954" formatted="false">"نہ اکاؤنٹ، نہ اشتہارات، نہ مقام کی اجازت اور نہ ایپ اینالیٹکس۔ فون عوامی ہجری تاریخ کے ذریعے اور گٹ ہب ریلیز چیک کرتا ہے؛ ان سروسز کو آپ کا IP پتا نظر آ سکتا ہے۔"</string>
+    <string name="tr_ee6dcaadb" formatted="false">"ہلال جمعرات کا الارم"</string>
+    <string name="tr_f2a40225e" formatted="false">"براؤزر درکار ہے"</string>
+    <string name="tr_f36436329" formatted="false">"دس منٹ بعد پھر بجائیں"</string>
+    <string name="tr_f49025ed2" formatted="false">"محکمہ موسمیات کی پیش گوئی — رؤیت کی تصدیق نہیں"</string>
+    <string name="tr_f58fbf254" formatted="false">"آن لائن تاریخ پرانی ہو سکتی ہے۔ نئی کامیاب جانچ تک پیش گوئی دکھائی جائے گی۔"</string>
+    <string name="tr_f59a85c50" formatted="false">"ماخذ: "</string>
+    <string name="tr_f68ab1a99" formatted="false">"یاددہانی کیسے کام کرتی ہے"</string>
+    <string name="tr_f6909a1b7" formatted="false">"عام اطلاع کے بجائے بند کرنے اور اسنوز کے اختیار والا الارم استعمال کریں۔"</string>
+    <string name="tr_f90b49d82" formatted="false">"اطلاعات پاکستان وقت کے مطابق خودکار طور پر طے ہیں۔"</string>
+    <string name="tr_f93b9817b" formatted="false">"آزمائشی بجنے والا الارم"</string>
+    <string name="tr_f9c72b159" formatted="false">"→  واپس"</string>
+    <string name="tr_fc6624bd9" formatted="false">"کوئی نیا ورژن نہیں ملا"</string>
+    <string name="tr_fe390c37a" formatted="false">"فون کی زبان استعمال کریں"</string>
+    <string name="tr_28efa34c4" formatted="false">"       ✦           ·\n  ·       ☾         ✧\n       ✧       ✦\n\nرات کے آسمان میں اپ ڈیٹ کا بٹن نہیں، مگر آپ کی یاددہانی ایپ میں ہے۔"</string>
+    <string name="tr_8cc4c465e" formatted="false">"ڈویلپر کا ایک چھوٹا راز: بعض تاریخوں کے لیے صبر چاہیے، مگر ایک نرم یاددہانی دن روشن کر سکتی ہے۔\n\n🌙  ✦  ✧  ✦  🌙"</string>
+    <string-array name="hijri_months">
+        <item>محرم</item>
+        <item>صفر</item>
+        <item>ربیع الاول</item>
+        <item>ربیع الثانی</item>
+        <item>جمادی الاول</item>
+        <item>جمادی الثانی</item>
+        <item>رجب</item>
+        <item>شعبان</item>
+        <item>رمضان</item>
+        <item>شوال</item>
+        <item>ذوالقعدہ</item>
+        <item>ذوالحجہ</item>
+    </string-array>
+</resources>

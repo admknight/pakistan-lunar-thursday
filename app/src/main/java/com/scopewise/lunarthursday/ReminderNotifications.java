@@ -28,29 +28,29 @@ final class ReminderNotifications {
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (manager == null) return;
         NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
-                "First Lunar Thursday", NotificationManager.IMPORTANCE_DEFAULT);
-        channel.setDescription("One reminder on the first Thursday of each lunar month in Pakistan time");
+                UiText.tr(context, "First Lunar Thursday"), NotificationManager.IMPORTANCE_DEFAULT);
+        channel.setDescription(UiText.tr(context, "One reminder on the first Thursday of each lunar month in Pakistan time"));
         manager.createNotificationChannel(channel);
     }
 
     static void show(Context context, String monthLabel, String basis) {
-        String label = monthLabel == null ? "this lunar month" : monthLabel;
+        String label = UiText.monthLabel(context, monthLabel);
         String note = "LIVE_REPORTED_CONFIRMED".equals(basis)
-                ? "Live date provider reports confirmation."
-                : "Calendar estimate; official sighting may differ.";
-        send(context, MONTHLY_ID, "First Lunar Thursday reminder",
-                label + " - 11:00 AM Pakistan time. " + note);
+                ? UiText.tr(context, "Live date provider reports confirmation.")
+                : UiText.tr(context, "Calendar estimate; official sighting may differ.");
+        send(context, MONTHLY_ID, UiText.tr(context, "First Hilal Thursday reminder"),
+                label + UiText.tr(context, " at 11:00 AM Pakistan time. ") + note);
     }
 
     static void missed(Context context, String monthLabel, String basis) {
-        send(context, MONTHLY_ID, "Lunar Thursday alarm was missed",
-                (monthLabel == null ? "Lunar Thursday" : monthLabel)
-                        + ": the ringing alarm stopped after two minutes. Open the app to review your reminder.");
+        send(context, MONTHLY_ID, UiText.tr(context, "Hilal Thursday alarm was missed"),
+                UiText.monthLabel(context, monthLabel == null ? "Hilal Thursday" : monthLabel)
+                        + UiText.tr(context, ": the ringing alarm stopped after two minutes. Open the app to review your reminder."));
     }
 
     static void test(Context context) {
-        send(context, TEST_ID, "Lunar Thursday test notification",
-                "Notifications are enabled. Monthly reminders target 11:00 AM PKT.");
+        send(context, TEST_ID, UiText.tr(context, "Hilal Thursday test notification"),
+                UiText.tr(context, "Notifications are enabled. Monthly reminders target 11:00 AM PKT."));
     }
 
     private static void send(Context context, int id, String title, String body) {

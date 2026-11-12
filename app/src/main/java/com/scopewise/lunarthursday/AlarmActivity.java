@@ -14,7 +14,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.color.DynamicColors;
 
 /** Optional large-format alarm controls; also accessible from notification actions. */
-public final class AlarmActivity extends Activity {
+public final class AlarmActivity extends LocalizedActivity {
     @Override protected void onCreate(Bundle state) {
         super.onCreate(state);
         DynamicColors.applyToActivityIfAvailable(this);
@@ -26,26 +26,27 @@ public final class AlarmActivity extends Activity {
         }
         String label = getIntent().getStringExtra(AlarmRingingService.EXTRA_LABEL);
         boolean test = getIntent().getBooleanExtra(AlarmRingingService.EXTRA_TEST, false);
-        if (label == null) label = "Lunar Thursday";
+        if (label == null) label = "Hilal Thursday";
+        label = UiText.monthLabel(this, label);
         LinearLayout body = new LinearLayout(this);
         body.setOrientation(LinearLayout.VERTICAL);
         body.setGravity(Gravity.CENTER);
         body.setPadding(dp(32), dp(48), dp(32), dp(40));
         TextView title = new TextView(this);
-        title.setText(test ? "Test alarm" : "Lunar Thursday alarm");
+        title.setText(UiText.tr(this, test ? "Test alarm" : "Hilal Thursday alarm"));
         title.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         title.setTextSize(28);
         title.setGravity(Gravity.CENTER);
         body.addView(title);
         TextView caption = new TextView(this);
-        caption.setText(label + "\n11:00 AM Pakistan time");
+        caption.setText(label + "\n" + UiText.tr(this, "11:00 AM Pakistan time"));
         caption.setTextSize(18);
         caption.setGravity(Gravity.CENTER);
         LinearLayout.LayoutParams cap = new LinearLayout.LayoutParams(-1, -2);
         cap.topMargin = dp(18);
         body.addView(caption, cap);
         MaterialButton dismiss = new MaterialButton(this);
-        dismiss.setText("Dismiss alarm");
+        dismiss.setText(UiText.tr(this, "Dismiss alarm"));
         dismiss.setAllCaps(false);
         dismiss.setOnClickListener(v -> command(AlarmRingingService.ACTION_DISMISS));
         LinearLayout.LayoutParams buttons = new LinearLayout.LayoutParams(-1, dp(56));
@@ -53,7 +54,7 @@ public final class AlarmActivity extends Activity {
         body.addView(dismiss, buttons);
         if (!test) {
             MaterialButton snooze = new MaterialButton(this);
-            snooze.setText("Snooze 10 minutes");
+            snooze.setText(UiText.tr(this, "Snooze 10 minutes"));
             snooze.setAllCaps(false);
             snooze.setOnClickListener(v -> command(AlarmRingingService.ACTION_SNOOZE));
             LinearLayout.LayoutParams row = new LinearLayout.LayoutParams(-1, dp(56));

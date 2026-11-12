@@ -29,7 +29,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 /** User preferences, permission guidance, and the release update manager. No date editing. */
-public final class SettingsActivity extends Activity {
+public final class SettingsActivity extends LocalizedActivity {
     private static final int NOTIFICATION_REQUEST = 85;
     private SharedPreferences p;
     private int primary;
@@ -70,6 +70,8 @@ public final class SettingsActivity extends Activity {
 
         add(body, button("←  Back", false, this::finish), 0);
         add(body, text("Settings", 28, true, onSurface), 18);
+        add(body, button("App language", false, this::chooseLanguage), 10);
+        add(body, text("Choose the language used for the app screens and reminders.", 12, false, onSurfaceVariant), 5);
         add(body, text("Alert delivery, permissions and app updates", 14, false, onSurfaceVariant), 4);
 
         LinearLayout alert = panel();
@@ -114,7 +116,7 @@ public final class SettingsActivity extends Activity {
 
         LinearLayout updates = panel();
         add(updates, text("App updates", 19, true, onSurface), 0);
-        add(updates, text("Installed version: " + UpdateManager.installed(this), 14, false, onSurfaceVariant), 10);
+        add(updates, text(UiText.tr(this, "Installed version: ") + UpdateManager.installed(this), 14, false, onSurfaceVariant), 10);
         toggle(updates, "Check automatically", "Checks GitHub when you open the app, normally at most twice per day.",
                 p.getBoolean(UpdateManager.AUTO_CHECK, true), value ->
                         p.edit().putBoolean(UpdateManager.AUTO_CHECK, value).apply());
@@ -132,15 +134,15 @@ public final class SettingsActivity extends Activity {
         long last = UpdateManager.lastChecked(this);
         String label = last <= 0 ? "Never checked"
                 : Instant.ofEpochMilli(last).atZone(LunarEngine.PAKISTAN)
-                        .format(DateTimeFormatter.ofPattern("d MMM yyyy, h:mm a", Locale.ENGLISH)) + " PKT";
-        add(updates, text("Last checked: " + label, 12, false, onSurfaceVariant), 10);
+                        .format(DateTimeFormatter.ofPattern("d MMM yyyy, h:mm a", AppLanguage.locale(this))) + " PKT";
+        add(updates, text(UiText.tr(this, "Last checked: ") + label, 12, false, onSurfaceVariant), 10);
         UpdateManager.Result available = UpdateManager.available(this);
         if (available == null) {
-            add(updates, text("No newer release detected" + (last <= 0 ? " (not yet checked)" : ""),
+            add(updates, text(UiText.tr(this, "No newer release detected") + (last <= 0 ? UiText.tr(this, " (not yet checked)") : ""),
                     14, true, onSurface), 8);
         } else {
-            add(updates, text("Update available: " + VersionPolicy.display(available.tag)
-                            + (available.preview ? " (preview)" : ""), 16, true, primary), 12);
+            add(updates, text(UiText.tr(this, "Update available: ") + VersionPolicy.display(available.tag)
+                            + (available.preview ? UiText.tr(this, " (preview)") : ""), 16, true, primary), 12);
             add(updates, button("Download update on GitHub", true, () -> open(available.url)), 8);
         }
         add(updates, button(UpdateManager.isChecking() ? "Checking GitHub..." : "Check for updates now", false, () -> {
@@ -156,13 +158,36 @@ public final class SettingsActivity extends Activity {
     private interface Changed { void set(boolean enabled); }
     private void toggle(LinearLayout parent, String title, String help, boolean checked, Changed changed) {
         MaterialSwitch control = new MaterialSwitch(this);
-        control.setText(title);
+        control.setText(UiText.tr(this, title));
         control.setTextColor(onSurface);
         control.setTextSize(16);
         control.setChecked(checked);
         add(parent, control, 14);
         add(parent, text(help, 12, false, onSurfaceVariant), 0);
         control.setOnCheckedChangeListener((button, value) -> changed.set(value));
+    }
+
+    private void chooseLanguage() {
+        String[] names = new String[]{
+                UiText.tr(this, "Follow device language"), "English", "اردو"
+        };
+        String current = AppLanguage.choice(this);
+        int selected = "ur".equals(current) ? 2 : "en".equals(current) ? 1 : 0;
+        new android.app.AlertDialog.Builder(this)
+                .setTitle(UiText.tr(this, "App language"))
+                .setSingleChoiceItems(names, selected, (dialog, index) -> {
+                    String code = index == 2 ? "ur" : index == 1 ? "en" : "";
+                    dialog.dismiss();
+                    if (!code.equals(AppLanguage.choice(this))) {
+                        AppLanguage.select(this, code);
+                        Intent restart = new Intent(this, MainActivity.class)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(restart);
+                        finish();
+                    }
+                })
+                .setNegativeButton(UiText.tr(this, "Close"), null)
+                .show();
     }
 
     private void askNotifications() {
@@ -220,7 +245,7 @@ public final class SettingsActivity extends Activity {
     }
     private TextView text(String value, int size, boolean bold, int color) {
         TextView v = new TextView(this);
-        v.setText(value);
+        v.setText(UiText.tr(this, value));
         v.setTextSize(size);
         v.setTextColor(color);
         if (bold) v.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
@@ -228,7 +253,7 @@ public final class SettingsActivity extends Activity {
     }
     private MaterialButton button(String value, boolean primaryButton, Runnable run) {
         MaterialButton button = new MaterialButton(this);
-        button.setText(value);
+        button.setText(UiText.tr(this, value));
         button.setAllCaps(false);
         button.setMinHeight(dp(48));
         button.setCornerRadius(dp(18));
@@ -244,5 +269,5 @@ public final class SettingsActivity extends Activity {
         parent.addView(view, params);
     }
     private int dp(int v) { return (int) (v * getResources().getDisplayMetrics().density + .5f); }
-    private void toast(String text) { Toast.makeText(this, text, Toast.LENGTH_LONG).show(); }
+    private void toast(String text) { Toast.makeText(this, UiText.tr(this, text), Toast.LENGTH_LONG).show(); }
 }

@@ -21,7 +21,7 @@ public final class SnoozeReceiver extends BroadcastReceiver {
         if (scheduled <= 0 || scheduled != received) return;
         if (System.currentTimeMillis() + 1000L < scheduled) { rearm(context); return; }
         String key = p.getString(ReminderStore.SNOOZE_KEY, "");
-        String label = p.getString(ReminderStore.SNOOZE_LABEL, "Lunar Thursday");
+        String label = p.getString(ReminderStore.SNOOZE_LABEL, "Hilal Thursday");
         String basis = p.getString(ReminderStore.SNOOZE_BASIS, "");
         clear(context);
         if (p.getBoolean(ReminderStore.ENABLED, false) && p.getBoolean(ReminderStore.ALARM_MODE, false)) {

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Hilal Thursday</string>
+    <string name="tr_0005bdb96" formatted="false">"Checking GitHub releases"</string>
+    <string name="tr_0047ae94e" formatted="false">"A quieter way to remember the rhythm of Pakistan\'s lunar months."</string>
+    <string name="tr_004a77be9" formatted="false">"Allow notifications to receive reminders or ringing alarms."</string>
+    <string name="tr_00a83a63b" formatted="false">"Your next lunar Thursday, at a glance"</string>
+    <string name="tr_00fedff2f" formatted="false">"Notifications: permission needed"</string>
+    <string name="tr_01e1787a9" formatted="false">"App language"</string>
+    <string name="tr_01f44bc97" formatted="false">"Today in Pakistan: "</string>
+    <string name="tr_03283ea97" formatted="false">"Version "</string>
+    <string name="tr_03366c77b" formatted="false">"Source code and issues"</string>
+    <string name="tr_062079591" formatted="false">"Calendar estimate · not confirmed"</string>
+    <string name="tr_06352ba4d" formatted="false">"About  ·  developer &amp; surprises"</string>
+    <string name="tr_09e0cb995" formatted="false">"Month: "</string>
+    <string name="tr_0b6504c95" formatted="false">"Include preview versions"</string>
+    <string name="tr_0bb2128a2" formatted="false">"Calendar estimate; official sighting may differ."</string>
+    <string name="tr_10eae0ce7" formatted="false">"Enable Alarms &amp; reminders in Android settings"</string>
+    <string name="tr_12b461e73" formatted="false">"Vibration follows the device\'s vibration policy."</string>
+    <string name="tr_133278b92" formatted="false">"No newer compatible release found"</string>
+    <string name="tr_14d624084" formatted="false">" at 11:00 AM Pakistan time. "</string>
+    <string name="tr_16213f85d" formatted="false">"App updates"</string>
+    <string name="tr_164ab02db" formatted="false">"Alert mode: "</string>
+    <string name="tr_17fd4b2db" formatted="false">"%1$d minutes remaining"</string>
+    <string name="tr_18e0e1489" formatted="false">"One reminder on the first Thursday of each lunar month in Pakistan time"</string>
+    <string name="tr_196d2da5d" formatted="false">"Forecasts and third-party reports may differ from the official Ruet-e-Hilal decision."</string>
+    <string name="tr_1aaa27f9a" formatted="false">"Download releases"</string>
+    <string name="tr_1b36cb9e2" formatted="false">"Last successful feed check: "</string>
+    <string name="tr_1ef5187f3" formatted="false">"Upcoming lunar months"</string>
+    <string name="tr_1f044de6c" formatted="false">"Live provider reports confirmation (not a government API)"</string>
+    <string name="tr_23639ea3a" formatted="false">"☾  HILAL THURSDAY"</string>
+    <string name="tr_24731f717" formatted="false">"Notifications and updates"</string>
+    <string name="tr_24b907f39" formatted="false">"Made for Pakistan, open to everyone"</string>
+    <string name="tr_24c60376d" formatted="false">"Enabled, but Android may delay delivery without precise alarm access."</string>
+    <string name="tr_2693fa2db" formatted="false">"Reminder: 11:00 AM PKT"</string>
+    <string name="tr_26ab89cd8" formatted="false">"🌟 Five stars"</string>
+    <string name="tr_2740d8755" formatted="false">" 11:00 AM Pakistan time. "</string>
+    <string name="tr_2ab2b2db2" formatted="false">"Reminders are paused."</string>
+    <string name="tr_2b2c8ff92" formatted="false">": the ringing alarm stopped after two minutes. Open the app to review your reminder."</string>
+    <string name="tr_2b791f512" formatted="false">"Lovely"</string>
+    <string name="tr_2bf4fb109" formatted="false">"Checks GitHub when you open the app, normally at most twice per day."</string>
+    <string name="tr_301587d50" formatted="false">"Standard notification"</string>
+    <string name="tr_30abb2248" formatted="false">" · 11:00 AM Pakistan time"</string>
+    <string name="tr_30e977abc" formatted="false">"Test alarm"</string>
+    <string name="tr_31177076d" formatted="false">"Ring audible alarm"</string>
+    <string name="tr_317ebbade" formatted="false">"Hilal Thursday test notification"</string>
+    <string name="tr_34f30058d" formatted="false">"Stable release signing active. Incompatible debug-signed previews are excluded from update checks."</string>
+    <string name="tr_3605d841a" formatted="false">"Checking GitHub..."</string>
+    <string name="tr_367b81c35" formatted="false">"Open project license (MIT)"</string>
+    <string name="tr_38fd47dcf" formatted="false">"How reminders reach you"</string>
+    <string name="tr_39d9ad26e" formatted="false">"PMD forecast · not confirmed"</string>
+    <string name="tr_3ad3c4eb8" formatted="false">"Allow notifications"</string>
+    <string name="tr_3f0043a99" formatted="false">"First Hilal Thursday reminder"</string>
+    <string name="tr_3f02015c4" formatted="false">"%1$d days, %2$d hours remaining"</string>
+    <string name="tr_3f1373ff2" formatted="false">"Only explicitly confirmed dates from the third-party provider are cached as reported. Otherwise PMD forecasts or calendar estimates are used, which may differ from Pakistan\'s official sighting."</string>
+    <string name="tr_3f40f4683" formatted="false">"A tiny secret from the developer: some dates need patience, but a gentle reminder can still brighten the day."</string>
+    <string name="tr_3f5595d00" formatted="false">"Snooze 10 min"</string>
+    <string name="tr_412e31909" formatted="false">"Urdu"</string>
+    <string name="tr_44e6395f1" formatted="false">"Lunar Thursday alarm"</string>
+    <string name="tr_482f6e668" formatted="false">"اردو"</string>
+    <string name="tr_4905881fe" formatted="false">"Seven taps, seven skies. Your next Thursday is written in the stars — but the date still comes from the calendar, not the stars."</string>
+    <string name="tr_4ce8b7133" formatted="false">"Update check already in progress"</string>
+    <string name="tr_4d80c320a" formatted="false">"Precise alarm scheduling: available"</string>
+    <string name="tr_4d999ebe9" formatted="false">"✦ Constellation unlocked ✦"</string>
+    <string name="tr_52b98b6ac" formatted="false">"Ringing alarm is selected. Sound, vibration and Snooze are managed in Settings."</string>
+    <string name="tr_553dce768" formatted="false">"Third-party feed reports confirmation"</string>
+    <string name="tr_5803fbc4e" formatted="false">"About / Developer"</string>
+    <string name="tr_59feb6cf1" formatted="false">"11:00 AM Pakistan time"</string>
+    <string name="tr_5c620cc0f" formatted="false">" (not yet checked)"</string>
+    <string name="tr_5ca78f773" formatted="false">"Notifications are enabled. Monthly reminders target 11:00 AM PKT."</string>
+    <string name="tr_5d63b73c0" formatted="false">"The reminder is scheduled for 11:00 AM Pakistan Standard Time on the first Thursday on or after each new Hijri month\'s first civil day."</string>
+    <string name="tr_5f91c2744" formatted="false">"  ·  tap for details"</string>
+    <string name="tr_61a4aaf1c" formatted="false">"Notifications: allowed"</string>
+    <string name="tr_625a5311e" formatted="false">"Ringing lunar alarms"</string>
+    <string name="tr_62748ca83" formatted="false">"First civil day (Pakistan): "</string>
+    <string name="tr_649df08a4" formatted="false">"English"</string>
+    <string name="tr_64e319269" formatted="false">"Made with care under the same moon."</string>
+    <string name="tr_6ad863e01" formatted="false">"Official Pakistani moon sighting is determined by the Central Ruet-e-Hilal Committee. The app uses third-party reported dates when available and PMD forecasts or calculated estimates otherwise. It does not claim a government-approved date feed."</string>
+    <string name="tr_6c52dbbbd" formatted="false">" (preview)"</string>
+    <string name="tr_6eb499e3e" formatted="false">"this lunar month"</string>
+    <string name="tr_6f0a71443" formatted="false">"Open app settings"</string>
+    <string name="tr_6f0c4c4f3" formatted="false">"Could not check GitHub. Check your connection or try later."</string>
+    <string name="tr_70afe9eff" formatted="false">"Dismiss"</string>
+    <string name="tr_752280813" formatted="false">"A browser is needed to open the release"</string>
+    <string name="tr_75c42cd1d" formatted="false">"Send a test notification"</string>
+    <string name="tr_78f7af007" formatted="false">"Automatic scheduling and date checks require no login or monthly adjustments."</string>
+    <string name="tr_7cd229d28" formatted="false">"Check automatically"</string>
+    <string name="tr_7d2f163e8" formatted="false">"Shine on"</string>
+    <string name="tr_7d5b577f6" formatted="false">"Dismiss alarm"</string>
+    <string name="tr_7df0179ba" formatted="false">"Live date provider reports confirmation."</string>
+    <string name="tr_82e4c1c51" formatted="false">" · Preview"</string>
+    <string name="tr_895bbef9c" formatted="false">"Allow full-screen alarm display"</string>
+    <string name="tr_89b23b0f8" formatted="false">"Monthly reminders"</string>
+    <string name="tr_89b86ab0e" formatted="false">"Language"</string>
+    <string name="tr_8c0bda2f7" formatted="false">"11:00 AM  ·  Pakistan Standard Time"</string>
+    <string name="tr_8c7b688f9" formatted="false">"No manual date changes. Pakistan Hijri-date feed checks are scheduled about every six hours, subject to Android background limits."</string>
+    <string name="tr_8cda36e31" formatted="false">"Installed version: "</string>
+    <string name="tr_8d46cd4f3" formatted="false">"UPDATE AVAILABLE"</string>
+    <string name="tr_8e053a60d" formatted="false">"NEXT REMINDER"</string>
+    <string name="tr_8e665e894" formatted="false">"Moonlight unlocked"</string>
+    <string name="tr_8f2742ccf" formatted="false">"First Lunar Thursday"</string>
+    <string name="tr_9193319ab" formatted="false">"Hilal Thursday"</string>
+    <string name="tr_92cd2c60f" formatted="false">"Last checked: "</string>
+    <string name="tr_97677a3d8" formatted="false">"Request a date refresh"</string>
+    <string name="tr_9b5824f8b" formatted="false">"Automatic date updates"</string>
+    <string name="tr_9bb43362e" formatted="false">"Monthly reminder • 11:00 AM PKT"</string>
+    <string name="tr_9c1391509" formatted="false">"Vibrate"</string>
+    <string name="tr_9ee8e160d" formatted="false">"Play alarm sound"</string>
+    <string name="tr_a049d931d" formatted="false">"11:00 AM PKT"</string>
+    <string name="tr_a3111f6e0" formatted="false">"Optional ringing alarm. Sound and vibration are controlled inside the app."</string>
+    <string name="tr_a3be44b12" formatted="false">"First Thursday: "</string>
+    <string name="tr_a4d7b4050" formatted="false">"Pakistan Meteorological Department (forecast references), public third-party Hijri-date service, Android Material 3 / Material You, and community contributors."</string>
+    <string name="tr_a62ad68a8" formatted="false">"Precise alarm scheduling: not available; reminder may be delayed"</string>
+    <string name="tr_a7ac68052" formatted="false">"Lunar Thursday test notification"</string>
+    <string name="tr_a8cfdf4e5" formatted="false">"Update check already running"</string>
+    <string name="tr_aea4a1df5" formatted="false">"Lunar Thursday"</string>
+    <string name="tr_af9c36846" formatted="false">"Check notifications"</string>
+    <string name="tr_b1b598c15" formatted="false">"%1$d hours, %2$d minutes remaining"</string>
+    <string name="tr_b493ac133" formatted="false">"New version available: "</string>
+    <string name="tr_b4ab1852a" formatted="false">"Developer / maintainer: admknight"</string>
+    <string name="tr_b54c2a250" formatted="false">"Full-screen alarm access can be managed in Android settings"</string>
+    <string name="tr_b76bd04ef" formatted="false">"Android permissions"</string>
+    <string name="tr_b8468f15a" formatted="false">"  •  Tap for details"</string>
+    <string name="tr_b968826a0" formatted="false">"Update available: "</string>
+    <string name="tr_b979c6881" formatted="false">"Open Android Settings &gt; Alarms &amp; reminders"</string>
+    <string name="tr_ba6fed22b" formatted="false">"An open-source project. Contributions and issue reports are welcome on GitHub."</string>
+    <string name="tr_ba95d7d71" formatted="false">"Alarm service unavailable on this device"</string>
+    <string name="tr_ba9728b14" formatted="false">"Download on GitHub"</string>
+    <string name="tr_bbb6663d7" formatted="false">"Use your phone\'s default alarm tone, for up to two minutes."</string>
+    <string name="tr_bbfa773e5" formatted="false">"Close"</string>
+    <string name="tr_c0346dc3c" formatted="false">"First Lunar Thursday reminder"</string>
+    <string name="tr_c1ebcee85" formatted="false">"Reminder time remains 11:00 AM Pakistan time. Lunar dates are updated automatically; there is no manual calendar correction."</string>
+    <string name="tr_c264249ca" formatted="false">"Choose the language used for the app screens and reminders."</string>
+    <string name="tr_c45a5fc04" formatted="false">"Tap for the month-start date and source"</string>
+    <string name="tr_c45d4724f" formatted="false">"Calculated estimate - NOT a Pakistan sighting confirmation"</string>
+    <string name="tr_c49feebf8" formatted="false">"Lunar Thursday alarm was missed"</string>
+    <string name="tr_c4f1ae264" formatted="false">"Android always asks before installing APK updates. Moving from older debug-signed preview builds to a signed release requires uninstalling the preview first; future releases with the same signing key can update in place."</string>
+    <string name="tr_c7f73bb54" formatted="false">"Settings"</string>
+    <string name="tr_c94f17a39" formatted="false">"Back to Earth"</string>
+    <string name="tr_c97c92d50" formatted="false">"View Pakistan PMD calendar"</string>
+    <string name="tr_cafd11c28" formatted="false">"Ringing alarm"</string>
+    <string name="tr_cca542e49" formatted="false">"Check for updates now"</string>
+    <string name="tr_ce34430d9" formatted="false">"Scheduled time has arrived"</string>
+    <string name="tr_cf01481f6" formatted="false">"Privacy"</string>
+    <string name="tr_d0125779a" formatted="false">"Open notification settings in Android"</string>
+    <string name="tr_d1191e3eb" formatted="false">"Not checked online yet"</string>
+    <string name="tr_d235418b3" formatted="false">"Credits and transparency"</string>
+    <string name="tr_d2dadf8d6" formatted="false">"Notifications are blocked in Android settings."</string>
+    <string name="tr_d48d6f64c" formatted="false">"Alert delivery, permissions and app updates"</string>
+    <string name="tr_d4d62ebda" formatted="false">"🌙 Moonlight unlocked"</string>
+    <string name="tr_d5beb0e19" formatted="false">"Hilal Thursday alarm was missed"</string>
+    <string name="tr_d5d9126e0" formatted="false">"Allow exact alarms"</string>
+    <string name="tr_d871233bf" formatted="false">"The night sky has no update button, but your reminder app does."</string>
+    <string name="tr_d9a529667" formatted="false">"Preview APKs use debug signing and may require reinstalling."</string>
+    <string name="tr_dbca0d249" formatted="false">"Allow precise alarm scheduling"</string>
+    <string name="tr_de6925be8" formatted="false">"Enable reminders to allow date checks"</string>
+    <string name="tr_e05882ae7" formatted="false">"Language changed"</string>
+    <string name="tr_e0ef1d33f" formatted="false">"Settings  ·  alarm &amp; updates"</string>
+    <string name="tr_e324b814d" formatted="false">"Full-screen alarm display is not allowed. Android may show a heads-up alert instead. Alarm sound can still play when permitted."</string>
+    <string name="tr_e49e6ce0b" formatted="false">"The ringing alarm stopped after two minutes. Open the app to review your reminder."</string>
+    <string name="tr_e6dca6297" formatted="false">"Refresh requested; Android will run it when network is available"</string>
+    <string name="tr_e6e3d3f37" formatted="false">"Lunar month details"</string>
+    <string name="tr_e738e9bad" formatted="false">"Never checked"</string>
+    <string name="tr_e9fae6216" formatted="false">"About Hilal Thursday"</string>
+    <string name="tr_ea60c65e6" formatted="false">"Download update on GitHub"</string>
+    <string name="tr_ebd783954" formatted="false">"No account, ads, location request, or app analytics. The phone checks a public Hijri-date feed and GitHub\'s Releases API; those services can see the connecting IP address."</string>
+    <string name="tr_ee6dcaadb" formatted="false">"Hilal Thursday alarm"</string>
+    <string name="tr_f2a40225e" formatted="false">"A browser is required"</string>
+    <string name="tr_f36436329" formatted="false">"Snooze 10 minutes"</string>
+    <string name="tr_f49025ed2" formatted="false">"PMD published forecast - not a confirmed sighting"</string>
+    <string name="tr_f58fbf254" formatted="false">"Online date data may be stale. Forecasts are shown until a new check succeeds."</string>
+    <string name="tr_f59a85c50" formatted="false">"Source: "</string>
+    <string name="tr_f68ab1a99" formatted="false">"How reminders work"</string>
+    <string name="tr_f6909a1b7" formatted="false">"Use a ringing alarm with Dismiss and Snooze, instead of a simple notification."</string>
+    <string name="tr_f90b49d82" formatted="false">"Notifications are scheduled automatically in Pakistan time."</string>
+    <string name="tr_f93b9817b" formatted="false">"Test ringing alarm"</string>
+    <string name="tr_f9c72b159" formatted="false">"←  Back"</string>
+    <string name="tr_fc6624bd9" formatted="false">"No newer release detected"</string>
+    <string name="tr_fe390c37a" formatted="false">"Follow device language"</string>
+    <string name="tr_28efa34c4" formatted="false">"       ✦           ·\n  ·       ☾         ✧\n       ✧       ✦\n\nThe night sky has no update button, but your reminder app does."</string>
+    <string name="tr_8cc4c465e" formatted="false">"A tiny secret from the developer: some dates need patience, but a gentle reminder can still brighten the day.\n\n🌙  ✦  ✧  ✦  🌙"</string>
+    <string-array name="hijri_months">
+        <item>Muharram</item>
+        <item>Safar</item>
+        <item>Rabi al-Awwal</item>
+        <item>Rabi al-Thani</item>
+        <item>Jumada al-Awwal</item>
+        <item>Jumada al-Thani</item>
+        <item>Rajab</item>
+        <item>Sha\'ban</item>
+        <item>Ramadan</item>
+        <item>Shawwal</item>
+        <item>Dhu al-Qa\'dah</item>
+        <item>Dhu al-Hijjah</item>
+    </string-array>
+</resources>

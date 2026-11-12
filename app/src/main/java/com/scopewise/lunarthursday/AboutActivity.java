@@ -22,7 +22,7 @@ import com.google.android.material.color.MaterialColors;
 
 
 /** About, credits, data transparency, and unobtrusive optional easter eggs. */
-public final class AboutActivity extends Activity {
+public final class AboutActivity extends LocalizedActivity {
     private int primary;
     private int onPrimary;
     private int surface;
@@ -64,13 +64,13 @@ public final class AboutActivity extends Activity {
         TextView moon = text("☾", 62, true, primary);
         moon.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         moon.setOnLongClickListener(v -> {
-            new AlertDialog.Builder(this).setTitle("✦ Constellation unlocked ✦")
-                    .setMessage("       ✦           ·\n  ·       ☾         ✧\n       ✧       ✦\n\nThe night sky has no update button, but your reminder app does.")
-                    .setPositiveButton("Back to Earth", null).show();
+            new AlertDialog.Builder(this).setTitle(UiText.tr(this, "✦ Constellation unlocked ✦"))
+                    .setMessage(UiText.tr(this, "       ✦           ·\n  ·       ☾         ✧\n       ✧       ✦\n\nThe night sky has no update button, but your reminder app does."))
+                    .setPositiveButton(UiText.tr(this, "Back to Earth"), null).show();
             return true;
         });
         add(body, moon, 20);
-        add(body, text("Lunar Thursday", 30, true, onSurface), 4);
+        add(body, text(getString(R.string.app_name), 30, true, onSurface), 4);
         add(body, text("A quieter way to remember the rhythm of Pakistan's lunar months.", 15, false, secondary), 8);
 
         LinearLayout info = panel();
@@ -96,14 +96,14 @@ public final class AboutActivity extends Activity {
         add(credits, text("Pakistan Meteorological Department (forecast references), public third-party Hijri-date service, Android Material 3 / Material You, and community contributors.", 13, false, secondary), 9);
         add(credits, button("Open project license (MIT)", false,
                 () -> open("https://github.com/admknight/pakistan-lunar-thursday/blob/main/LICENSE")), 10);
-        TextView version = text("Version " + UpdateManager.installed(this) + "  ·  tap for details", 12, false, secondary);
+        TextView version = text(UiText.tr(this, "Version ") + UpdateManager.installed(this) + UiText.tr(this, "  ·  tap for details"), 12, false, secondary);
         version.setOnClickListener(v -> {
             versionTaps++;
             if (versionTaps == 5) {
                 versionTaps = 0;
-                new AlertDialog.Builder(this).setTitle("🌟 Five stars")
-                        .setMessage("A tiny secret from the developer: some dates need patience, but a gentle reminder can still brighten the day.\n\n🌙  ✦  ✧  ✦  🌙")
-                        .setPositiveButton("Shine on", null).show();
+                new AlertDialog.Builder(this).setTitle(UiText.tr(this, "🌟 Five stars"))
+                        .setMessage(UiText.tr(this, "A tiny secret from the developer: some dates need patience, but a gentle reminder can still brighten the day.\n\n🌙  ✦  ✧  ✦  🌙"))
+                        .setPositiveButton(UiText.tr(this, "Shine on"), null).show();
             }
         });
         add(credits, version, 14);
@@ -113,7 +113,7 @@ public final class AboutActivity extends Activity {
 
     private void open(String url) {
         try { startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url))); }
-        catch (RuntimeException ignored) { Toast.makeText(this, "A browser is required", Toast.LENGTH_SHORT).show(); }
+        catch (RuntimeException ignored) { Toast.makeText(this, UiText.tr(this, "A browser is required"), Toast.LENGTH_SHORT).show(); }
     }
 
     private LinearLayout column() {
@@ -139,7 +139,7 @@ public final class AboutActivity extends Activity {
 
     private TextView text(String value, int size, boolean strong, int color) {
         TextView t = new TextView(this);
-        t.setText(value);
+        t.setText(UiText.tr(this, value));
         t.setTextColor(color);
         t.setTextSize(size);
         if (strong) t.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
@@ -148,7 +148,7 @@ public final class AboutActivity extends Activity {
 
     private MaterialButton button(String value, boolean prominent, Runnable run) {
         MaterialButton b = new MaterialButton(this);
-        b.setText(value);
+        b.setText(UiText.tr(this, value));
         b.setAllCaps(false);
         b.setCornerRadius(dp(18));
         b.setMinHeight(dp(48));

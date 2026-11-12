@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Locale;
 
 /** Automatic lunar reminder dashboard, Material You, with Settings and update indicator. */
-public final class MainActivity extends Activity {
+public final class MainActivity extends LocalizedActivity {
     private static final int REQUEST_NOTIFICATIONS = 44;
     private static final DateTimeFormatter DATE_LONG = DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy", Locale.ENGLISH);
     private static final DateTimeFormatter DATE_SHORT = DateTimeFormatter.ofPattern("d MMM yyyy", Locale.ENGLISH);
@@ -123,19 +123,18 @@ public final class MainActivity extends Activity {
         }
         setContentView(scroll);
 
-        TextView moonHeader = label("☾  LUNAR THURSDAY", 14, true, primary);
+        TextView moonHeader = label("☾  HILAL THURSDAY", 14, true, primary);
         add(body, moonHeader, 0);
         moonHeader.setOnClickListener(v -> {
             if (++moonTaps >= 7) {
                 moonTaps = 0;
-                new AlertDialog.Builder(this).setTitle("🌙 Moonlight unlocked")
-                        .setMessage("Seven taps, seven skies. Your next Thursday is written in the stars — but the date still comes from the calendar, not the stars.")
-                        .setPositiveButton("Lovely", null).show();
+                new AlertDialog.Builder(this).setTitle(UiText.tr(this, "🌙 Moonlight unlocked"))
+                        .setMessage(UiText.tr(this, "Seven taps, seven skies. Your next Thursday is written in the stars — but the date still comes from the calendar, not the stars."))
+                        .setPositiveButton(UiText.tr(this, "Lovely"), null).show();
             }
         });
         add(body, label("Your next lunar Thursday, at a glance", 26, true, onSurface), 8);
-        add(body, label("Today in Pakistan: " + LocalDate.now(LunarEngine.PAKISTAN)
-                .format(DATE_LONG), 13, false, onSurfaceVariant), 8);
+        add(body, label(UiText.tr(this, "Today in Pakistan: ") + UiText.date(this, LocalDate.now(LunarEngine.PAKISTAN), true), 13, false, onSurfaceVariant), 8);
         add(body, label("Monthly reminder • 11:00 AM PKT", 14, false, onSurfaceVariant), 8);
         add(body, button("Settings  ·  alarm & updates", false,
                 () -> startActivity(new Intent(this, SettingsActivity.class))), 12);
@@ -151,9 +150,9 @@ public final class MainActivity extends Activity {
             add(hero, countdownView, 10);
             ticker.removeCallbacks(tickerTask);
             ticker.postDelayed(tickerTask, 60_000L);
-            add(hero, label(next.thursday().format(DATE_LONG), 24, true, onPrimaryContainer), 10);
+            add(hero, label(UiText.date(this, next.thursday(), true), 24, true, onPrimaryContainer), 10);
             add(hero, label("11:00 AM  ·  Pakistan Standard Time", 16, true, onPrimaryContainer), 8);
-            add(hero, label(next.label() + "  ·  " + sourceLabel(next.basis), 14, false, onPrimaryContainer), 12);
+            add(hero, label(UiText.month(this, next) + "  ·  " + sourceLabel(next.basis), 14, false, onPrimaryContainer), 12);
             add(hero, label("Tap for the month-start date and source", 12, false, onPrimaryContainer), 8);
             MaterialCardView heroCard = card(hero, primaryContainer);
             heroCard.setOnClickListener(v -> showMonthDetails(next));
@@ -164,8 +163,8 @@ public final class MainActivity extends Activity {
         if (release != null) {
             LinearLayout available = panel();
             add(available, label("UPDATE AVAILABLE", 12, true, onPrimaryContainer), 0);
-            add(available, label("Version " + VersionPolicy.display(release.tag)
-                    + (release.preview ? " · Preview" : ""), 17, true, onPrimaryContainer), 8);
+            add(available, label(UiText.tr(this, "Version ") + VersionPolicy.display(release.tag)
+                    + (release.preview ? UiText.tr(this, " · Preview") : ""), 17, true, onPrimaryContainer), 8);
             add(available, button("Download on GitHub", true, () -> open(release.url)), 10);
             add(body, card(available, primaryContainer), 14);
         }
@@ -179,7 +178,7 @@ public final class MainActivity extends Activity {
         toggle.setChecked(enabled);
         add(state, toggle, 0);
         add(state, label(statusMessage(enabled), 13, false, onSurfaceVariant), 8);
-        add(state, label("Alert mode: " + (preferences.getBoolean(ReminderStore.ALARM_MODE, false)
+        add(state, label(UiText.tr(this, "Alert mode: ") + UiText.tr(this, preferences.getBoolean(ReminderStore.ALARM_MODE, false)
                 ? "Ringing alarm" : "Standard notification"), 13, true, onSurface), 8);
         if (enabled && !ReminderNotifications.permitted(this)) {
             add(state, button("Allow notifications", true, this::requestNotificationPermission), 10);
@@ -203,9 +202,9 @@ public final class MainActivity extends Activity {
             LunarEngine.Month item = upcoming.get(i);
             LinearLayout itemView = panel();
             itemView.setPadding(dp(2), dp(7), dp(2), dp(7));
-            add(itemView, label(item.thursday().format(DATE_SHORT) + "  ·  " + item.label(),
+            add(itemView, label(UiText.date(this, item.thursday(), false) + "  ·  " + UiText.month(this, item),
                     15, true, onSurface), 0);
-            add(itemView, label(sourceLabel(item.basis) + "  •  Tap for details",
+            add(itemView, label(sourceLabel(item.basis) + UiText.tr(this, "  •  Tap for details"),
                     12, false, onSurfaceVariant), 5);
             itemView.setOnClickListener(v -> showMonthDetails(item));
             add(list, itemView, i == 0 ? 0 : 6);
@@ -221,8 +220,8 @@ public final class MainActivity extends Activity {
         long checked = preferences.getLong(ReminderStore.LAST_REFRESH_SUCCESS, 0L);
         String when = checked <= 0 ? "Not checked online yet"
                 : Instant.ofEpochMilli(checked).atZone(LunarEngine.PAKISTAN)
-                        .format(DateTimeFormatter.ofPattern("d MMM yyyy, h:mm a", Locale.ENGLISH)) + " PKT";
-        add(info, label("Last successful feed check: " + when, 12, true, onSurfaceVariant), 12);
+                         .format(DateTimeFormatter.ofPattern("d MMM yyyy, h:mm a", AppLanguage.locale(this))) + " PKT";
+        add(info, label(UiText.tr(this, "Last successful feed check: ") + when, 12, true, onSurfaceVariant), 12);
         long age = checked > 0 && System.currentTimeMillis() >= checked
                 ? System.currentTimeMillis() - checked : 0L;
         if (checked == 0 || age > 36L * 60 * 60 * 1000) {
@@ -253,29 +252,27 @@ public final class MainActivity extends Activity {
         long minutes = (millis + 59_999L) / 60_000L;
         long days = minutes / (24L * 60L);
         long hours = (minutes % (24L * 60L)) / 60L;
-        if (minutes == 0L) return "Scheduled time has arrived";
-        if (days > 0) return "In " + days + (days == 1 ? " day" : " days")
-                + ", " + hours + (hours == 1 ? " hour" : " hours");
-        if (hours > 0) return "In " + hours + (hours == 1 ? " hour" : " hours")
-                + ", " + (minutes % 60L) + " minutes";
-        return "In " + minutes + (minutes == 1 ? " minute" : " minutes");
+        if (minutes == 0L) return UiText.tr(this, "Scheduled time has arrived");
+        if (days > 0) return UiText.fmt(this, "%1$d days, %2$d hours remaining", days, hours);
+        if (hours > 0) return UiText.fmt(this, "%1$d hours, %2$d minutes remaining", hours, minutes % 60L);
+        return UiText.fmt(this, "%1$d minutes remaining", minutes);
     }
 
     private void showMonthDetails(LunarEngine.Month item) {
-        String description = "Month: " + item.label()
-                + "\nFirst civil day (Pakistan): " + item.start.format(DATE_LONG)
-                + "\nFirst Thursday: " + item.thursday().format(DATE_LONG)
-                + "\nReminder: 11:00 AM PKT"
-                + "\n\nSource: " + LunarEngine.basisDescription(item.basis)
-                + "\n\nForecasts and third-party reports may differ from the official Ruet-e-Hilal decision.";
-        new AlertDialog.Builder(this).setTitle("Lunar month details")
-                .setMessage(description).setPositiveButton("Close", null).show();
+        String description = UiText.tr(this, "Month: ") + UiText.month(this, item)
+                + "\n" + UiText.tr(this, "First civil day (Pakistan): ") + UiText.date(this, item.start, true)
+                + "\n" + UiText.tr(this, "First Thursday: ") + UiText.date(this, item.thursday(), true)
+                + "\n" + UiText.tr(this, "Reminder: 11:00 AM PKT")
+                + "\n\n" + UiText.tr(this, "Source: ") + UiText.tr(this, LunarEngine.basisDescription(item.basis))
+                + "\n\n" + UiText.tr(this, "Forecasts and third-party reports may differ from the official Ruet-e-Hilal decision.");
+        new AlertDialog.Builder(this).setTitle(UiText.tr(this, "Lunar month details"))
+                .setMessage(description).setPositiveButton(UiText.tr(this, "Close"), null).show();
     }
 
     private String sourceLabel(LunarEngine.Basis b) {
-        if (b == LunarEngine.Basis.PMD_FORECAST) return "PMD forecast · not confirmed";
-        if (b == LunarEngine.Basis.LIVE_REPORTED_CONFIRMED) return "Third-party feed reports confirmation";
-        return "Calendar estimate · not confirmed";
+        if (b == LunarEngine.Basis.PMD_FORECAST) return UiText.tr(this, "PMD forecast · not confirmed");
+        if (b == LunarEngine.Basis.LIVE_REPORTED_CONFIRMED) return UiText.tr(this, "Third-party feed reports confirmation");
+        return UiText.tr(this, "Calendar estimate · not confirmed");
     }
 
     private String statusMessage(boolean enabled) {
@@ -316,7 +313,7 @@ public final class MainActivity extends Activity {
     private int color(int attribute, int fallback) { return MaterialColors.getColor(this, attribute, fallback); }
     private TextView label(String title, int sizeSp, boolean bold, int color) {
         TextView t = new TextView(this);
-        t.setText(title);
+        t.setText(UiText.tr(this, title));
         t.setTextSize(sizeSp);
         t.setTextColor(color);
         if (bold) t.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
@@ -338,7 +335,7 @@ public final class MainActivity extends Activity {
     }
     private MaterialButton button(String title, boolean prominent, Runnable action) {
         MaterialButton b = new MaterialButton(this);
-        b.setText(title);
+        b.setText(UiText.tr(this, title));
         b.setAllCaps(false);
         b.setCornerRadius(dp(18));
         b.setMinHeight(dp(48));
@@ -354,5 +351,5 @@ public final class MainActivity extends Activity {
         parent.addView(child, p);
     }
     private int dp(int v) { return (int) (v * getResources().getDisplayMetrics().density + .5f); }
-    private void toast(String message) { Toast.makeText(this, message, Toast.LENGTH_LONG).show(); }
+    private void toast(String message) { Toast.makeText(this, UiText.tr(this, message), Toast.LENGTH_LONG).show(); }
 }

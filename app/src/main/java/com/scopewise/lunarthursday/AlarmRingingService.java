@@ -37,7 +37,7 @@ public final class AlarmRingingService extends Service {
     private final Handler handler = new Handler(Looper.getMainLooper());
     private MediaPlayer player;
     private Vibrator vibrator;
-    private String label = "Lunar Thursday";
+    private String label = "Hilal Thursday";
     private String monthKey = "";
     private String basis = "";
     private boolean test;
@@ -54,7 +54,7 @@ public final class AlarmRingingService extends Service {
 
     static boolean start(Context context, String month, String key, String source, boolean test) {
         Intent i = new Intent(context, AlarmRingingService.class).setAction(ACTION_START)
-                .putExtra(EXTRA_LABEL, month == null ? "Lunar Thursday" : month)
+                .putExtra(EXTRA_LABEL, month == null ? "Hilal Thursday" : month)
                 .putExtra(EXTRA_KEY, key == null ? "" : key)
                 .putExtra(EXTRA_BASIS, source == null ? "" : source)
                 .putExtra(EXTRA_TEST, test);
@@ -100,7 +100,7 @@ public final class AlarmRingingService extends Service {
             return START_NOT_STICKY;
         }
         label = intent.getStringExtra(EXTRA_LABEL);
-        if (label == null || label.isEmpty()) label = "Lunar Thursday";
+        if (label == null || label.isEmpty()) label = "Hilal Thursday";
         monthKey = intent.getStringExtra(EXTRA_KEY);
         if (monthKey == null) monthKey = "";
         basis = intent.getStringExtra(EXTRA_BASIS);
@@ -128,9 +128,9 @@ public final class AlarmRingingService extends Service {
     private void ensureChannel() {
         NotificationManager manager = getSystemService(NotificationManager.class);
         if (manager == null) return;
-        NotificationChannel channel = new NotificationChannel(CHANNEL, "Ringing lunar alarms",
+        NotificationChannel channel = new NotificationChannel(CHANNEL, UiText.tr(this, "Ringing lunar alarms"),
                 NotificationManager.IMPORTANCE_HIGH);
-        channel.setDescription("Optional ringing alarm. Sound and vibration are controlled inside the app.");
+        channel.setDescription(UiText.tr(this, "Optional ringing alarm. Sound and vibration are controlled inside the app."));
         channel.setSound(null, null); // Avoid duplicate ringtone from service and notification.
         channel.enableVibration(false);
         manager.createNotificationChannel(channel);
@@ -150,15 +150,15 @@ public final class AlarmRingingService extends Service {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         Notification.Builder builder = new Notification.Builder(this, CHANNEL)
                 .setSmallIcon(R.drawable.ic_crescent)
-                .setContentTitle(test ? "Test ringing alarm" : "Lunar Thursday alarm")
-                .setContentText(label + " · 11:00 AM Pakistan time")
+                .setContentTitle(UiText.tr(this, test ? "Test ringing alarm" : "Hilal Thursday alarm"))
+                .setContentText(UiText.monthLabel(this, label) + UiText.tr(this, " · 11:00 AM Pakistan time"))
                 .setCategory(Notification.CATEGORY_ALARM)
                 .setOngoing(true)
                 .setAutoCancel(false)
                 .setContentIntent(display)
-                .addAction(new Notification.Action.Builder(null, "Dismiss",
+                .addAction(new Notification.Action.Builder(null, UiText.tr(this, "Dismiss"),
                         serviceAction(ACTION_DISMISS, 1902)).build());
-        if (!test) builder.addAction(new Notification.Action.Builder(null, "Snooze 10 min",
+        if (!test) builder.addAction(new Notification.Action.Builder(null, UiText.tr(this, "Snooze 10 min"),
                 serviceAction(ACTION_SNOOZE, 1903)).build());
         if (canUseFullScreen(this)) builder.setFullScreenIntent(display, true);
         return builder.build();
