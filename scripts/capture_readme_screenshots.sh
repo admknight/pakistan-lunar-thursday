@@ -4,7 +4,7 @@ set -euo pipefail
 # Real Android emulator captures of the installed, signed GitHub release APK.
 # No mocked app screens, synthetic dates, or Photoshop composites.
 PACKAGE=com.scopewise.lunarthursday
-APK_PATH="${APK_PATH:-release-apk/HilalThursday-v1.8.0.apk}"
+APK_PATH="${APK_PATH:-release-apk/HilalThursday-v1.8.1.apk}"
 OUTPUT=docs/screenshots
 mkdir -p "$OUTPUT"
 
@@ -23,6 +23,18 @@ adb shell pm grant "$PACKAGE" android.permission.POST_NOTIFICATIONS || true
 adb shell input keyevent 3 || true
 adb shell am start -W -n "$PACKAGE/.MainActivity"
 sleep 5
+# On a fresh emulator the launcher can regain focus during first-boot setup.
+# Bring the real installed app to the foreground again if needed.
+for attempt in 1 2 3 4; do
+  adb shell am start -W -n "$PACKAGE/.MainActivity" >/dev/null
+  sleep 3
+  if adb shell uiautomator dump /sdcard/hilal_initial.xml >/dev/null 2>&1 && \
+     adb exec-out cat /sdcard/hilal_initial.xml > /tmp/hilal_initial.xml && \
+     grep -q 'Your next lunar Thursday' /tmp/hilal_initial.xml; then
+    echo "Confirmed app is in foreground after attempt $attempt"
+    break
+  fi
+done
 
 # Query accessibility's actual UI hierarchy, then tap the requested real control.
 # Prefer a clickable exact-label node over child labels, and fail rather than guess.
