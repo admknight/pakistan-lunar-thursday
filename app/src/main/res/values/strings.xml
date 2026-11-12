@@ -193,4 +193,41 @@
         <item>Dhu al-Qa\'dah</item>
         <item>Dhu al-Hijjah</item>
     </string-array>
+    <string name="tr_bc79cdffb" formatted="false">"More options"</string>
+    <string name="tr_3a7869538" formatted="false">"Home"</string>
+    <string name="tr_d5d0a30b5" formatted="false">"Calendar"</string>
+    <string name="tr_22e2bada8" formatted="false">"Updates"</string>
+    <string name="tr_4efca0d10" formatted="false">"About"</string>
+    <string name="tr_e08c0aa8f" formatted="false">"Days"</string>
+    <string name="tr_21e849293" formatted="false">"Hours"</string>
+    <string name="tr_4f846a84e" formatted="false">"Minutes"</string>
+    <string name="tr_7e7ca678f" formatted="false">"Reminders enabled"</string>
+    <string name="tr_14cd8cc8f" formatted="false">"Reminders paused"</string>
+    <string name="tr_0146bbb12" formatted="false">"Review alert permissions"</string>
+    <string name="tr_5d0c1e332" formatted="false">"An Android permission may delay reminders"</string>
+    <string name="tr_ff8b555d8" formatted="false">"Update available"</string>
+    <string name="tr_c19c8e067" formatted="false">"See all  ›"</string>
+    <string name="tr_e7976b5a5" formatted="false">"Dates are calculated automatically and may be estimated."</string>
+    <string name="tr_5c6a715d0" formatted="false">"First Thursday · 11:00 AM PKT"</string>
+    <string name="tr_6fe626b4e" formatted="false">"Calendar source information"</string>
+    <string name="tr_12e1ccc8e" formatted="false">"Forecasts and calculations are not official confirmations"</string>
+    <string name="tr_c14de2388" formatted="false">"Updates &amp; calendar"</string>
+    <string name="tr_9a840afff" formatted="false">"App releases and automatic Pakistan lunar-date checks"</string>
+    <string name="tr_896159511" formatted="false">"APP VERSION"</string>
+    <string name="tr_d8c998b38" formatted="false">"AUTOMATIC HIJRI DATE CHECKS"</string>
+    <string name="tr_9e90cc8da" formatted="false">"Dates are updated automatically. Third-party reports, forecasts and calculated estimates can differ from Pakistan's official sighting decision."</string>
+    <string name="tr_76900f1bf" formatted="false">"Back"</string>
+    <string name="tr_826773931" formatted="false">"🌙 A gentle reminder, every lunar month."</string>
+    <string name="tr_5948efcd3" formatted="false">"11:00 AM Pakistan time · English &amp; Urdu"</string>
+    <string name="tr_6675c7c21" formatted="false">"👨‍💻  Developer"</string>
+    <string name="tr_e9f5537f0" formatted="false">"No account, ads or location tracking"</string>
+    <string name="tr_2625b494a" formatted="false">"Calendar sources &amp; accuracy"</string>
+    <string name="tr_b2c4cd11d" formatted="false">"How Islamic month dates are determined"</string>
+    <string name="tr_135e912e8" formatted="false">"What's new"</string>
+    <string name="tr_e72a29ae1" formatted="false">"View the latest public release notes"</string>
+    <string name="tr_0865ed3f4" formatted="false">"Open source &amp; feedback"</string>
+    <string name="tr_808f656e2" formatted="false">"Code, issues and contributions"</string>
+    <string name="tr_abb2896dc" formatted="false">"MIT License"</string>
+    <string name="tr_e135e38ac" formatted="false">"Read the project license"</string>
+    <string name="tr_68a5ff1d6" formatted="false">"✨ Made with care under the same moon."</string>
 </resources>

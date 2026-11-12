@@ -193,4 +193,41 @@
         <item>ذوالقعدہ</item>
         <item>ذوالحجہ</item>
     </string-array>
+    <string name="tr_bc79cdffb" formatted="false">"مزید اختیارات"</string>
+    <string name="tr_3a7869538" formatted="false">"ہوم"</string>
+    <string name="tr_d5d0a30b5" formatted="false">"کیلنڈر"</string>
+    <string name="tr_22e2bada8" formatted="false">"اپ ڈیٹس"</string>
+    <string name="tr_4efca0d10" formatted="false">"تعارف"</string>
+    <string name="tr_e08c0aa8f" formatted="false">"دن"</string>
+    <string name="tr_21e849293" formatted="false">"گھنٹے"</string>
+    <string name="tr_4f846a84e" formatted="false">"منٹ"</string>
+    <string name="tr_7e7ca678f" formatted="false">"یاد دہانیاں فعال ہیں"</string>
+    <string name="tr_14cd8cc8f" formatted="false">"یاد دہانیاں بند ہیں"</string>
+    <string name="tr_0146bbb12" formatted="false">"اطلاع کی اجازتیں دیکھیں"</string>
+    <string name="tr_5d0c1e332" formatted="false">"اینڈرائیڈ کی اجازت نہ ہونے سے یاد دہانی میں تاخیر ہو سکتی ہے"</string>
+    <string name="tr_ff8b555d8" formatted="false">"نئی اپ ڈیٹ دستیاب ہے"</string>
+    <string name="tr_c19c8e067" formatted="false">"سب دیکھیں  ›"</string>
+    <string name="tr_e7976b5a5" formatted="false">"تاریخیں خودکار حساب سے نکالی جاتی ہیں اور تخمینی ہو سکتی ہیں۔"</string>
+    <string name="tr_5c6a715d0" formatted="false">"پہلی جمعرات · صبح 11:00 بجے (پاکستان)"</string>
+    <string name="tr_6fe626b4e" formatted="false">"قمری تاریخ کے ذرائع"</string>
+    <string name="tr_12e1ccc8e" formatted="false">"پیش گوئیاں اور حسابی تاریخیں سرکاری تصدیق نہیں ہیں"</string>
+    <string name="tr_c14de2388" formatted="false">"اپ ڈیٹس اور کیلنڈر"</string>
+    <string name="tr_9a840afff" formatted="false">"ایپ کے نئے ورژن اور پاکستان کی قمری تاریخ کی خودکار جانچ"</string>
+    <string name="tr_896159511" formatted="false">"ایپ کا ورژن"</string>
+    <string name="tr_d8c998b38" formatted="false">"قمری تاریخ کی خودکار جانچ"</string>
+    <string name="tr_9e90cc8da" formatted="false">"تاریخیں خودکار طور پر تازہ ہوتی ہیں۔ دوسرے ذرائع کی رپورٹس، پیش گوئیاں اور حسابی تخمینے پاکستان کے سرکاری رویتِ ہلال کے فیصلے سے مختلف ہو سکتے ہیں۔"</string>
+    <string name="tr_76900f1bf" formatted="false">"واپس"</string>
+    <string name="tr_826773931" formatted="false">"🌙 ہر قمری مہینے کی ایک نرم یاد دہانی۔"</string>
+    <string name="tr_5948efcd3" formatted="false">"صبح 11:00 بجے پاکستانی وقت · انگریزی اور اردو"</string>
+    <string name="tr_6675c7c21" formatted="false">"👨‍💻  ڈویلپر"</string>
+    <string name="tr_e9f5537f0" formatted="false">"اکاؤنٹ، اشتہارات یا مقام کی نگرانی نہیں"</string>
+    <string name="tr_2625b494a" formatted="false">"قمری تاریخ کے ذرائع اور درستگی"</string>
+    <string name="tr_b2c4cd11d" formatted="false">"اسلامی مہینوں کی تاریخیں کیسے طے ہوتی ہیں"</string>
+    <string name="tr_135e912e8" formatted="false">"نیا کیا ہے"</string>
+    <string name="tr_e72a29ae1" formatted="false">"نئے جاری شدہ ورژن کی تفصیلات دیکھیں"</string>
+    <string name="tr_0865ed3f4" formatted="false">"اوپن سورس اور تجاویز"</string>
+    <string name="tr_808f656e2" formatted="false">"کوڈ، مسائل اور تعاون"</string>
+    <string name="tr_abb2896dc" formatted="false">"ایم آئی ٹی لائسنس"</string>
+    <string name="tr_e135e38ac" formatted="false">"پروجیکٹ کا لائسنس پڑھیں"</string>
+    <string name="tr_68a5ff1d6" formatted="false">"✨ ایک ہی چاند تلے محبت سے تیار کردہ۔"</string>
 </resources>

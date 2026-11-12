@@ -45,6 +45,10 @@ public final class SettingsActivity extends LocalizedActivity {
         DynamicColors.applyToActivityIfAvailable(this);
         p = ReminderStore.prefs(this);
         render();
+        if (getIntent().getBooleanExtra("open_language_dialog", false)) {
+            getIntent().removeExtra("open_language_dialog");
+            new android.os.Handler(android.os.Looper.getMainLooper()).post(this::chooseLanguage);
+        }
     }
 
     @Override protected void onResume() {
@@ -68,9 +72,9 @@ public final class SettingsActivity extends LocalizedActivity {
         scroll.addView(body);
         setContentView(scroll);
 
-        add(body, button("←  Back", false, this::finish), 0);
-        add(body, text("Settings", 28, true, onSurface), 18);
-        add(body, button("App language", false, this::chooseLanguage), 10);
+        add(body, slimAction("←", "Back", this::finish), 0);
+        add(body, text("Settings", 28, true, onSurface), 9);
+        add(body, slimAction("🌐", "App language", this::chooseLanguage), 10);
         add(body, text("Choose the language used for the app screens and reminders.", 12, false, onSurfaceVariant), 5);
         add(body, text("Alert delivery, permissions and app updates", 14, false, onSurfaceVariant), 4);
 
@@ -89,7 +93,7 @@ public final class SettingsActivity extends LocalizedActivity {
             toggle(alert, "Vibrate", "Vibration follows the device's vibration policy.",
                     p.getBoolean(ReminderStore.ALARM_VIBRATE, true), value ->
                             p.edit().putBoolean(ReminderStore.ALARM_VIBRATE, value).apply());
-            add(alert, button("Test ringing alarm", true, () -> {
+            add(alert, slimAction("🔔", "Test ringing alarm", () -> {
                 if (!ReminderNotifications.permitted(this)) { askNotifications(); return; }
                 if (!AlarmRingingService.startTest(this)) toast("Alarm service unavailable on this device");
             }), 16);
@@ -145,7 +149,7 @@ public final class SettingsActivity extends LocalizedActivity {
                             + (available.preview ? UiText.tr(this, " (preview)") : ""), 16, true, primary), 12);
             add(updates, button("Download update on GitHub", true, () -> open(available.url)), 8);
         }
-        add(updates, button(UpdateManager.isChecking() ? "Checking GitHub..." : "Check for updates now", false, () -> {
+        add(updates, slimAction("↻", UpdateManager.isChecking() ? "Checking GitHub..." : "Check for updates now", () -> {
             if (UpdateManager.isChecking()) { toast("Update check already running"); return; }
             UpdateManager.check(this, true, (ok, message) -> { toast(message); render(); });
             toast("Checking GitHub releases");
@@ -153,6 +157,24 @@ public final class SettingsActivity extends LocalizedActivity {
         add(updates, text("Android always asks before installing APK updates. Moving from older debug-signed preview builds to a signed release requires uninstalling the preview first; future releases with the same signing key can update in place.",
                 12, false, onSurfaceVariant), 12);
         add(body, card(updates), 16);
+    }
+
+    /** Tappable icon row; keeps the screen scannable without large button blocks. */
+    private LinearLayout slimAction(String emblem, String title, Runnable operation) {
+        LinearLayout row = new LinearLayout(this);
+        row.setOrientation(LinearLayout.HORIZONTAL);
+        row.setGravity(android.view.Gravity.CENTER_VERTICAL);
+        row.setPadding(dp(7), dp(8), dp(7), dp(8));
+        TextView symbol = text(emblem, 22, false, primary);
+        symbol.setGravity(android.view.Gravity.CENTER);
+        row.addView(symbol, new LinearLayout.LayoutParams(dp(44), dp(40)));
+        TextView name = text(title, 15, true, onSurface);
+        row.addView(name, new LinearLayout.LayoutParams(0, -2, 1));
+        row.addView(text("›", 22, false, onSurfaceVariant));
+        row.setClickable(true);
+        row.setFocusable(true);
+        row.setOnClickListener(v -> operation.run());
+        return row;
     }
 
     private interface Changed { void set(boolean enabled); }
