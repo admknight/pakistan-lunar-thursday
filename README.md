@@ -5,7 +5,7 @@
 <h1>Hilal Thursday · ہلال جمعرات</h1>
 
 <p><strong>Pakistan's lunar-month Thursday reminder, made simple.</strong><br>
-A bilingual, open-source Android app that reminds you at <strong>11:00 AM Pakistan time</strong> on the first Thursday of each Islamic month.</p>
+A bilingual, open-source Android app that reminds you on the first Thursday of each Islamic month at <strong>your selected Pakistan time</strong> (11:00 AM PKT by default).</p>
 
 <p>
   <a href="https://github.com/admknight/pakistan-lunar-thursday/releases/latest"><img alt="Latest permanently signed release" src="https://img.shields.io/github/v/release/admknight/pakistan-lunar-thursday?label=stable%20release&amp;color=168568"></a>
@@ -19,30 +19,30 @@ A bilingual, open-source Android app that reminds you at <strong>11:00 AM Pakist
 
 </div>
 
-> **Date accuracy:** Gregorian reminder dates are shown alongside **expected Hijri dates** derived from Pakistan-specific month-start information. Dates may be forecasts or third-party reports, not official Ruet-e-Hilal confirmation. The Hijri label uses a Pakistan civil-day basis, not a precise sunset rollover.
+> **Date accuracy:** Today's Gregorian date is shown as a Pakistan civil date. **Today's Hijri Date** is displayed with a separate source-quality label and changes at **approximate local sunset** when a Pakistan city is selected or the existing optional weather location is available. Without a location, it explicitly falls back to a **civil-date estimate**. Future Gregorian/Hijri reminder dates remain provisional; forecasts and third-party reports are **not official Ruet-e-Hilal confirmation**.
 
 ## Real app screenshots
 
-These are **genuine, unedited screenshots** of the permanently signed **v1.9.0** APK running on a **Pixel 5 / Android 15 emulator (API 35)**, captured with Android Debug Bridge. They are **not promotional mockups**. The English and Urdu dashboards and upcoming-month calendar show the new **expected Hijri date alongside the Gregorian date**. Forecast labels reflect the source data available during capture; weather/location was disabled in these example screens.
+These are **genuine, unedited screenshots** of the permanently signed **v1.9.1** APK running on a **Pixel 5 / Android 15 emulator (API 35)**, captured with Android Debug Bridge. They are **not promotional mockups**. This version fixes the duplicate crescent and shows **Today's Hijri Date** with its source/accuracy status, while future month dates remain labeled **Expected Hijri**. Settings include a user-selectable reminder time and city-based approximate Maghrib boundary. Weather/location was disabled during capture; the Hijri home display therefore shows its documented civil-date fallback.
 
 | Dashboard · English | Dashboard · اردو | Upcoming Islamic months |
 |:---:|:---:|:---:|
-| <img src="docs/screenshots/home-en.png" width="245" alt="Actual v1.9.0 English dashboard: Gregorian next reminder, expected Hijri date, live countdown and moon-and-mosque illustration"> | <img src="docs/screenshots/home-ur.png" width="245" alt="Actual v1.9.0 Urdu RTL dashboard showing Gregorian date and expected Islamic date"> | <img src="docs/screenshots/calendar-en.png" width="245" alt="Actual v1.9.0 calendar displaying Gregorian and expected Hijri reminder dates, with forecast status"> |
+| <img src="docs/screenshots/home-en.png" width="245" alt="Actual signed v1.9.1 English dashboard: one corrected crescent, today's Hijri Date with forecast label, future expected Hijri reminder, and live countdown"> | <img src="docs/screenshots/home-ur.png" width="245" alt="Actual signed v1.9.1 Urdu RTL dashboard showing today's Hijri Date and the upcoming expected date"> | <img src="docs/screenshots/calendar-en.png" width="245" alt="Actual signed v1.9.1 calendar showing Gregorian dates and expected Hijri reminder dates with source status"> |
 
 | Signature alarm sound picker | Ringing alarm settings | Weather and location |
 |:---:|:---:|:---:|
-| <img src="docs/screenshots/alarm-sounds-en.png" width="245" alt="Actual selection screen for Hilal Noor, Sukoon, Hilal Nida and Android phone alarm sounds"> | <img src="docs/screenshots/settings-alarm-en.png" width="245" alt="Actual settings with ringing alarm enabled and the selectable signature alarm sound"> | <img src="docs/screenshots/weather-settings-en.png" width="245" alt="Actual optional local-weather effects and location settings"> |
+| <img src="docs/screenshots/alarm-sounds-en.png" width="245" alt="Actual selection screen for Hilal Noor, Sukoon, Hilal Nida and Android phone alarm sounds"> | <img src="docs/screenshots/settings-alarm-en.png" width="245" alt="Actual settings with ringing alarm enabled and the selectable signature alarm sound"> | <img src="docs/screenshots/weather-settings-en.png" width="245" alt="Actual signed v1.9.1 Maghrib city selection and optional local-weather settings"> |
 
 <details>
 <summary>More screenshots — updates, About and general Settings</summary>
 
 | Updates and date checks | About &amp; Developer | General settings |
 |:---:|:---:|:---:|
-| <img src="docs/screenshots/updates-en.png" width="245" alt="Real updates page, including release and calendar-source check status"> | <img src="docs/screenshots/about-en.png" width="245" alt="Real About page with developer, privacy and source links"> | <img src="docs/screenshots/settings-en.png" width="245" alt="Real settings screen with language, alarm, and permission controls"> |
+| <img src="docs/screenshots/updates-en.png" width="245" alt="Real updates page, including release and calendar-source check status"> | <img src="docs/screenshots/about-en.png" width="245" alt="Real About page with developer, privacy and source links"> | <img src="docs/screenshots/settings-en.png" width="245" alt="Real signed v1.9.1 settings screen with user-selectable reminder time, language, alarm, and permission controls"> |
 
 </details>
 
-The captures show the app's real Android UI, including its emulator permission state and the selected date source; dates are illustrative, **not official moon-sighting announcements**. UI colors, fonts and positioning can vary by device. See [the reproducible capture script](scripts/capture_readme_screenshots.sh) and [verified v1.9.0 emulator capture run](https://github.com/admknight/pakistan-lunar-thursday/actions/runs/43310479750).
+The captures show the app's real Android UI, including its emulator permission state and the selected date source; dates are illustrative, **not official moon-sighting announcements**. UI colors, fonts and positioning can vary by device. See [the reproducible capture script](scripts/capture_readme_screenshots.sh) and [verified v1.9.1 emulator capture run](https://github.com/admknight/pakistan-lunar-thursday/actions/runs/43324644906).
 
 ## Download / install
 
@@ -72,9 +72,9 @@ Once installed, the **in-app updater** can check GitHub Releases, download newer
 
 ## Gregorian and expected Hijri dates
 
-The Home and Calendar screens display the **Gregorian reminder date plus its expected Hijri day, month and year**. For example, the PMD forecast of Rajab 1448 starting on **11 December 2026** gives the first Thursday as **17 December 2026 · expected 7 Rajab 1448 AH**. The current-day label also shows an estimated Hijri civil date when a defensible month start is available.
+The Home and Calendar screens display **Gregorian dates alongside Hijri dates**. For future reminders, the app says **Expected Hijri**, since the actual month start may change. For example, the PMD forecast of Rajab 1448 starting on **11 December 2026** gives **Thursday, 17 December 2026 · expected 7 Rajab 1448 AH**. The home screen instead uses the neutral heading **Hijri Date** for today, and separately reports the provider's evidence status and whether the day is sunset-aware or a civil-date fallback.
 
-The date comes from the **same month-start observation/forecast/estimate used by the reminder engine**, so a newer provider-reported first day automatically changes the predicted Hijri day. A Hijri day in this interface is aligned with the **Pakistan civil date** (not automatically adjusted at sunset); it is not an official moon-sighting statement. The app labels source quality separately.
+The day and month come from the **same month-start observation/forecast/estimate used by the reminder engine**, so a newer source first day updates the displayed dates. For today's Hijri display, **Settings → Hijri date and Maghrib → Sunset location** lets users select a Pakistan city; the display changes at that city's **approximate astronomical sunset**. Automatic mode may reuse the already-permitted, optional weather location. Without a city or available location, the app clearly labels the result a **Pakistan civil-date estimate**. These calculated sunset times are not certified prayer times and do not establish an official moon sighting.
 
 ## Signature alarm sounds
 
@@ -101,7 +101,7 @@ The main screen now has a compact app header with a three-dot **More options** m
 
 The **About / Developer** screen uses concise icon-and-text rows for privacy, calendar accuracy, recent releases, project feedback and the MIT license rather than full-width GitHub buttons. Three optional hidden interactions remain: tap the home logo/title seven times, long-press the About icon, and tap the About version area five times. None of the easter eggs changes alarms, dates, or update settings.
 
-Android accessibility labels, English/Urdu string resources, and right-to-left layout behavior are retained. The reminders still fire at **11:00 AM Pakistan time**; month-start accuracy remains subject to the independent data-source limitations below. The UI has been captured on an Android emulator; real-device alarm behavior remains unverified.
+Android accessibility labels, English/Urdu strings, and right-to-left layouts are retained. The **first-Thursday rule remains automatic**, while users can choose any reminder time in Pakistan Standard Time under **Settings → Reminder time**; existing installations default to **11:00 AM PKT**. The UI has been captured on an Android emulator; exact delivery, notifications and ringing behavior on physical devices remain unverified.
 
 ## Living sky and optional local weather
 
@@ -111,7 +111,7 @@ Weather data attribution: [Open-Meteo](https://open-meteo.com/) · [CC BY 4.0](h
 
 ## Bilingual app language and icon
 
-Go to **Settings → App language** to choose **Follow device language**, **English**, or **اردو**. The language selection is retained locally on Android 8–12; on Android 13+ it uses Android's native per-app language system. Islamic month labels and on-screen dates follow the selected interface language. The app's reminder timing stays fixed at **11:00 AM Pakistan Standard Time**, regardless of the phone's locale or time zone.
+Go to **Settings → App language** to choose **Follow device language**, **English**, or **اردو**. The language selection is retained locally on Android 8–12; on Android 13+ it uses Android's native per-app language system. Islamic month labels and on-screen dates follow the selected interface language. The selected reminder time is stored in **Pakistan Standard Time**, independent of the phone's locale/time zone. The default remains **11:00 AM PKT** until the user changes it.
 
 The updated app icon uses native Android vector foreground/background layers and a separate monochrome layer for Material You themed icons. The published package name `com.scopewise.lunarthursday` and GitHub repository URL are intentionally unchanged to preserve upgrade compatibility, app data, and existing links. Branding is not a claim of government association or official sighting confirmation.
 
