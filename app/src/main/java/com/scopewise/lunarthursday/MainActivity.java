@@ -73,7 +73,7 @@ public final class MainActivity extends Activity {
     }
 
     private void applyPalette() {
-        primary = color(com.google.android.material.R.attr.colorPrimary, 0xFF136F53);
+        primary = color(androidx.appcompat.R.attr.colorPrimary, 0xFF136F53);
         onPrimary = color(com.google.android.material.R.attr.colorOnPrimary, 0xFFFFFFFF);
         surface = color(com.google.android.material.R.attr.colorSurface, 0xFFFFFFFF);
         onSurface = color(com.google.android.material.R.attr.colorOnSurface, 0xFF1B211E);
