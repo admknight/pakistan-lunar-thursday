@@ -23,11 +23,11 @@ A bilingual, open-source Android app that reminds you at <strong>11:00 AM Pakist
 
 ## Real app screenshots
 
-These are **genuine, unedited screenshots** of the permanently signed **v1.8.1** APK on a **Pixel 5 / Android 15 emulator (API 35)**, captured with Android Debug Bridge. They are **not promotional mockups**. The v1.9.0 release adds expected Hijri day labels; its refreshed screenshots are being captured. Weather/location remains off in the example screens.
+These are **genuine, unedited screenshots** of the permanently signed **v1.9.0** APK running on a **Pixel 5 / Android 15 emulator (API 35)**, captured with Android Debug Bridge. They are **not promotional mockups**. The English and Urdu dashboards and upcoming-month calendar show the new **expected Hijri date alongside the Gregorian date**. Forecast labels reflect the source data available during capture; weather/location was disabled in these example screens.
 
 | Dashboard · English | Dashboard · اردو | Upcoming Islamic months |
 |:---:|:---:|:---:|
-| <img src="docs/screenshots/home-en.png" width="245" alt="Real Hilal Thursday English home dashboard with a moon and mosque illustration, next reminder date, and countdown"> | <img src="docs/screenshots/home-ur.png" width="245" alt="Real Hilal Thursday Urdu RTL dashboard"> | <img src="docs/screenshots/calendar-en.png" width="245" alt="Real upcoming Hijri-month calendar with source-quality labels"> |
+| <img src="docs/screenshots/home-en.png" width="245" alt="Actual v1.9.0 English dashboard: Gregorian next reminder, expected Hijri date, live countdown and moon-and-mosque illustration"> | <img src="docs/screenshots/home-ur.png" width="245" alt="Actual v1.9.0 Urdu RTL dashboard showing Gregorian date and expected Islamic date"> | <img src="docs/screenshots/calendar-en.png" width="245" alt="Actual v1.9.0 calendar displaying Gregorian and expected Hijri reminder dates, with forecast status"> |
 
 | Signature alarm sound picker | Ringing alarm settings | Weather and location |
 |:---:|:---:|:---:|
@@ -42,7 +42,7 @@ These are **genuine, unedited screenshots** of the permanently signed **v1.8.1**
 
 </details>
 
-The captures show the app's real Android UI, including its emulator permission state and the selected date source; dates are illustrative, **not official moon-sighting announcements**. UI colors, fonts and positioning can vary by device. See [the reproducible capture script](scripts/capture_readme_screenshots.sh) and [verified v1.8.1 emulator capture run](https://github.com/admknight/pakistan-lunar-thursday/actions/runs/43304367533).
+The captures show the app's real Android UI, including its emulator permission state and the selected date source; dates are illustrative, **not official moon-sighting announcements**. UI colors, fonts and positioning can vary by device. See [the reproducible capture script](scripts/capture_readme_screenshots.sh) and [verified v1.9.0 emulator capture run](https://github.com/admknight/pakistan-lunar-thursday/actions/runs/43310479750).
 
 ## Download / install
 
