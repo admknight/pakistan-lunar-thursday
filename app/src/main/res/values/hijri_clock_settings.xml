@@ -9,7 +9,7 @@
   <string name="hijri_first_thursday_note">The first-Thursday date remains automatic. Calendar sources may update after moon sightings; the selected reminder time is saved.</string>
   <string name="hijri_clock_section">Hijri date and Maghrib</string>
   <string name="hijri_select_city">Sunset location</string>
-  <string name="hijri_clock_explanation">Choose a Pakistani city for an approximate Maghrib date change. Automatic mode uses existing opt-in weather location when available; otherwise today's Hijri date is a civil-date estimate. This does not certify a moon sighting.</string>
+  <string name="hijri_clock_explanation">Choose a Pakistani city for an approximate Maghrib date change. Automatic mode uses existing opt-in weather location when available; otherwise the displayed Hijri date is a civil-date estimate. This does not certify a moon sighting.</string>
   <string-array name="hijri_sunset_cities">
     <item>Automatic (weather if permitted)</item><item>Karachi</item><item>Lahore</item>
     <item>Islamabad</item><item>Peshawar</item><item>Quetta</item>
