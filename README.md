@@ -6,7 +6,7 @@ A small, **fully automatic, best-effort** Android reminder for the **first Thurs
 
 ## Download / install
 
-Open **[Releases](https://github.com/admknight/pakistan-lunar-thursday/releases)** and select the latest **Preview** release. Under **Assets**, download `app-debug.apk` directly and install it on Android 8.0 or later. You can also download `app-debug.apk.sha256` to verify its checksum. For build-by-build debugging, [Actions → Build Android APK](https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/build-apk.yml) retains the temporary `LunarThursday-debug-apk` artifact.
+Open **[Releases](https://github.com/admknight/pakistan-lunar-thursday/releases)** to download publicly available APKs. Preview releases contain `app-debug.apk` (temporary debug signing). Once the maintainer completes the [permanent signing setup](docs/SIGNING.md), the separate [Publish permanently signed APK workflow](https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/publish-stable.yml) publishes a **normal GitHub Release** with `LunarThursday-vX.Y.Z.apk` and its SHA-256 checksum. For diagnostics, [Actions → Build Android APK](https://github.com/admknight/pakistan-lunar-thursday/actions/workflows/build-apk.yml) retains temporary artifacts.
 
 The GitHub Actions build produces a **debug-signed test APK**, not a production-signed stable APK. Each cloud runner may use a different debug signing key. Therefore, installing a newer build can require uninstalling the old one first. Do not treat this as a stable release-signing solution. Android 13+ requires the one-time **Notifications** permission; Android 12+ may also require **Alarms & reminders** permission for closer-to-exact delivery. No monthly date entry is necessary.
 
@@ -20,7 +20,9 @@ The GitHub Actions build produces a **debug-signed test APK**, not a production-
 - Material 3 interface, light/dark theme, **Material You dynamic wallpaper color** on Android 12+.
 - **Optional ringing alarm** in Settings: repeats the system alarm sound/vibration for up to two minutes; **Dismiss** and **Snooze 10 minutes** controls; a missed-alert notification remains after timeout. The original notification-only mode stays the default.
 - **Settings page** with alarm preferences, exact-alarm/full-screen permission guidance, and automatic updates that require no manual lunar-date adjustments.
-- **In-app update indicator** on the home screen, with a GitHub release checker on app open (about twice daily) and a manual **Check now** option. You can include or exclude preview releases. APK installation always requires user approval.
+- **In-app update indicator** on the home screen, with a GitHub release checker on app open (about twice daily) and a manual **Check now** option. Debug builds can opt into preview update checks; permanently signed release builds exclude incompatible debug-signed preview APKs. APK installation always requires user approval.
+- **Interactive home dashboard** with live countdown in Pakistan time, tap-to-explore upcoming month cards, a reminder status / alert-mode overview, and one-tap date refresh requests (queued through Android JobScheduler).
+- **About / Developer page** for `admknight`, open-source attribution, privacy, calendar-source transparency, and small hidden easter eggs.
 - Next reminder, upcoming months, source quality, last successful feed check, and a test-notification button.
 - **No accounts, no ads, no location permission, no tracking and no manually entered dates.**
 
@@ -30,9 +32,9 @@ Open **Settings** to enable **Ring audible alarm** if a normal notification is e
 
 The **update manager** checks the public GitHub Releases API automatically when the app is opened, at most every twelve hours after a successful check. It reports a newer matching release and opens its APK download URL in your browser. It cannot silently install updates. With **Include preview versions** disabled, it will hide preview releases. It requests no new accounts, location, or tracking permissions.
 
-### Why releases are currently previews
+### Preview builds versus permanently signed public releases
 
-The existing workflow generates a **new debug signing key per runner/build**. An APK signed by a different key usually cannot update an installed copy without uninstalling it first. To ship a real stable release and seamless updates, the project needs a **persistent release signing keystore managed securely outside this public repository** and Android device testing. No private keystore is stored in the repository or embedded in GitHub Actions; until that is configured, builds are explicitly tagged **preview**. GitHub preview releases are public and retain downloadable APK assets; the Actions artifacts are temporary.
+The automatic CI workflow generates a **debug signing key per runner/build**, so its builds are correctly tagged **preview**. **GitHub pre-releases are still public** and provide direct APK downloads. A long-lived release key and a separate certificate-verified release workflow have now been prepared. The maintainer must add two encrypted GitHub Actions secrets once before that workflow can publish a normally labeled public release. See [Private signing setup](docs/SIGNING.md); **the private signing material is never part of this public repository**. First-time migration from any debug-signed APK to the permanently signed APK requires uninstalling the debug APK. After that, updates using the same signer and a higher version code can install in place. App signing is not a substitute for actual device testing. The stable build excludes incompatible debug-signed preview updates.
 
 ## Important accuracy limitations
 
