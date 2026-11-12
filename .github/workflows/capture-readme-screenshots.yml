@@ -88,5 +88,15 @@ jobs:
             echo 'Screenshots are unchanged.'
           else
             git commit -m 'Capture real signed v1.8.0 Android emulator screenshots [skip ci]'
-            git push origin HEAD:main
+            # The daily download counter may advance main during emulator capture.
+            # Merge non-overlapping updates rather than reject a verified capture.
+            for attempt in 1 2 3; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+              sleep 3
+            done
+            echo 'Could not publish screenshots after retries' >&2
+            exit 1
           fi
