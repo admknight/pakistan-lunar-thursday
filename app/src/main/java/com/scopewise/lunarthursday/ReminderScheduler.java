@@ -32,11 +32,12 @@ final class ReminderScheduler {
         cancel(context);
         SharedPreferences p = ReminderStore.prefs(context);
         if (!p.getBoolean(ReminderStore.ENABLED, false)) return;
+        java.time.LocalTime chosenTime = ReminderStore.reminderTime(context);
         List<LunarEngine.Month> next = LunarEngine.upcoming(
-                Instant.now(), ReminderStore.confirmedStarts(context), 1);
+                Instant.now(), ReminderStore.confirmedStarts(context), 1, chosenTime);
         if (next.isEmpty()) return;
         LunarEngine.Month month = next.get(0);
-        long when = month.remindAt().toEpochMilli();
+        long when = month.remindAt(chosenTime).toEpochMilli();
         AlarmManager alarms = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (alarms == null) return;
         Intent intent = new Intent(context, ReminderReceiver.class).setAction(ACTION_FIRE);

@@ -45,16 +45,25 @@ jobs:
             app/src/main/java/com/scopewise/lunarthursday/VersionPolicy.java \
             app/src/main/java/com/scopewise/lunarthursday/WeatherCode.java \
             app/src/main/java/com/scopewise/lunarthursday/AlarmTonePolicy.java \
+            app/src/main/java/com/scopewise/lunarthursday/SunsetMath.java \
+            app/src/main/java/com/scopewise/lunarthursday/ReminderTimePolicy.java \
+            app/src/main/java/com/scopewise/lunarthursday/MonthEndChecks.java \
             test/java/com/scopewise/lunarthursday/EngineTest.java \
             test/java/com/scopewise/lunarthursday/FeedDatePolicyTest.java \
             test/java/com/scopewise/lunarthursday/VersionPolicyTest.java \
             test/java/com/scopewise/lunarthursday/WeatherCodeTest.java \
-            test/java/com/scopewise/lunarthursday/AlarmTonePolicyTest.java
+            test/java/com/scopewise/lunarthursday/AlarmTonePolicyTest.java \
+            test/java/com/scopewise/lunarthursday/SunsetMathTest.java \
+            test/java/com/scopewise/lunarthursday/ReminderTimePolicyTest.java \
+            test/java/com/scopewise/lunarthursday/MonthEndChecksTest.java
           java -cp build/portable-tests com.scopewise.lunarthursday.EngineTest
           java -cp build/portable-tests com.scopewise.lunarthursday.FeedDatePolicyTest
           java -cp build/portable-tests com.scopewise.lunarthursday.VersionPolicyTest
           java -cp build/portable-tests com.scopewise.lunarthursday.WeatherCodeTest
           java -cp build/portable-tests com.scopewise.lunarthursday.AlarmTonePolicyTest
+          java -cp build/portable-tests com.scopewise.lunarthursday.SunsetMathTest
+          java -cp build/portable-tests com.scopewise.lunarthursday.ReminderTimePolicyTest
+          java -cp build/portable-tests com.scopewise.lunarthursday.MonthEndChecksTest
 
       - name: Verify the three reviewed Gemini music excerpts
         shell: bash
@@ -129,7 +138,7 @@ jobs:
           fi
           cat > "$RUNNER_TEMP/release-notes.md" <<'NOTES'
           ## Pakistan Lunar Thursday — Android preview
-          This debug-signed APK reminds you at **11:00 AM Pakistan time** on the first Thursday on or after the start of each Islamic month. Date checks are automatic, with no manual correction required. Version 1.9.0 adds the expected Hijri day alongside Gregorian dates on the home dashboard and upcoming-month calendar, with English/Urdu labels and Pakistan moon-sighting caveats. It retains three user-supplied, originally composed Gemini musical alarm cues (Hilal Noor, Sukoon and Hilal Nida), offline previews, persistence of the selected tone, and Android's system alarm-tone picker. It preserves weather scenery, in-app updates and the eleven AM PKT reminder.
+          This debug-signed APK reminds you on the first Thursday of each Islamic month at a **user-selected Pakistan time** (default 11:00 AM PKT). Version 1.9.1 corrects the double-crescent drawing, labels today's Hijri date separately from its source, supports approximate sunset transitions for a selected Pakistan city or an already-permitted weather location, and schedules late month-end date-feed checks after sunset, at 00:15 PKT and at 07:00 PKT (Android may defer background work). It retains three user-supplied, originally composed Gemini musical alarm cues (Hilal Noor, Sukoon and Hilal Nida), offline previews, persistence of the selected tone, and Android's system alarm-tone picker. It preserves weather scenery, in-app updates, the first-Thursday rule, and the 11:00 AM PKT default.
 
           **Install:** Download the APK asset below, allow installation from your browser/file manager, open the app, and grant notification and (when available) exact-alarm permissions. Android 8.0 or newer is required.
 

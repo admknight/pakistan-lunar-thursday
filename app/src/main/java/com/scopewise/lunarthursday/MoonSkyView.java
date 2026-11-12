@@ -53,10 +53,12 @@ final class MoonSkyView extends View {
             p.setColor(0xFFFEE6AD);
             float[][] stars={{31,29,1.3f},{69,53,1.2f},{126,21,1.1f},{239,20,1.6f},{300,41,1.5f},{326,92,1.0f},{263,76,1f},{99,104,1f}};
             for(float[] s:stars)canvas.drawCircle(s[0],s[1],s[2],p);
-            Path crescent=new Path();crescent.setFillType(Path.FillType.EVEN_ODD);
+            // Subtract the cutout: EVEN_ODD also rendered a second stray crescent.
+            Path crescent=new Path();
             crescent.addCircle(180,49,29,Path.Direction.CW);
-            crescent.addCircle(193,40,25,Path.Direction.CW);
-            canvas.drawPath(crescent,p);
+            Path cutout=new Path();
+            cutout.addCircle(193,40,25,Path.Direction.CW);
+            if(crescent.op(cutout,Path.Op.DIFFERENCE)) canvas.drawPath(crescent,p);
         } else {
             p.setColor(0xFFFFE7A9);
             canvas.drawCircle(184,48,early?21:27,p);

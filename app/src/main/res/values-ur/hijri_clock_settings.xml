@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="hijri_current_date">ہجری تاریخ: %1$s %2$s</string>
+  <string name="hijri_civil_fallback">شہری تاریخ کا اندازہ · مغرب کے لیے شہر منتخب کریں</string>
+  <string name="hijri_sunset_status">تقریباً غروبِ آفتاب %1$s · %2$s</string>
+  <string name="hijri_weather_location">موسم کا مقام</string>
+  <string name="hijri_reminder_time">یاد دہانی کا وقت</string>
+  <string name="hijri_time_note">پاکستانی وقت کے مطابق کوئی بھی وقت منتخب کریں۔ پہلے سے مقررہ وقت صبح 11 بجے ہے۔</string>
+  <string name="hijri_first_thursday_note">اسلامی مہینے کی پہلی جمعرات خودکار رہے گی۔ رؤیتِ ہلال کے بعد تاریخ میں تبدیلی ہو سکتی ہے۔ منتخب وقت محفوظ رہے گا۔</string>
+  <string name="hijri_clock_section">ہجری تاریخ اور مغرب</string>
+  <string name="hijri_select_city">غروبِ آفتاب کے لیے شہر</string>
+  <string name="hijri_clock_explanation">مغرب کے بعد تاریخ بدلنے کے لیے پاکستانی شہر منتخب کریں۔ خودکار انتخاب دستیاب ہونے پر پہلے سے اجازت یافتہ موسم کا مقام استعمال کرتا ہے۔ مقام نہ ہونے پر ہجری تاریخ شہری تاریخ کا اندازہ ہے، تصدیقِ رؤیتِ ہلال نہیں۔</string>
+  <string-array name="hijri_sunset_cities">
+    <item>خودکار (اجازت ہو تو موسم کا مقام)</item><item>کراچی</item><item>لاہور</item>
+    <item>اسلام آباد</item><item>پشاور</item><item>کوئٹہ</item>
+    <item>ملتان</item><item>فیصل آباد</item><item>حیدر آباد</item><item>گلگت</item>
+  </string-array>
+</resources>

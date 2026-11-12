@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
 /** Only automatic feed observations are stored. No user date editing. */
 final class ReminderStore {
     static final String ENABLED = "enabled";
+    static final String REMINDER_HOUR = "monthly_reminder_hour_pkt";
+    static final String REMINDER_MINUTE = "monthly_reminder_minute_pkt";
     static final String ALARM_MODE = "ringing_alarm_mode";
     static final String ALARM_SOUND = "ringing_alarm_sound";
     static final String ALARM_VIBRATE = "ringing_alarm_vibration";
@@ -30,6 +33,19 @@ final class ReminderStore {
 
     static SharedPreferences prefs(Context context) {
         return context.getApplicationContext().getSharedPreferences(FILE, Context.MODE_PRIVATE);
+    }
+
+    static LocalTime reminderTime(Context context) {
+        SharedPreferences p = prefs(context);
+        return ReminderTimePolicy.fromSaved(
+                p.getInt(REMINDER_HOUR, 11), p.getInt(REMINDER_MINUTE, 0));
+    }
+
+    /** Commit both fields together before rescheduling to avoid mixed values. */
+    static boolean setReminderTime(Context context, int hour, int minute) {
+        LocalTime valid = ReminderTimePolicy.validate(hour, minute);
+        return prefs(context).edit().putInt(REMINDER_HOUR, valid.getHour())
+                .putInt(REMINDER_MINUTE, valid.getMinute()).commit();
     }
 
     static Map<String, LocalDate> confirmedStarts(Context context) {

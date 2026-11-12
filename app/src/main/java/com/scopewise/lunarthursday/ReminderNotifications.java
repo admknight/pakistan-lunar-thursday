@@ -39,7 +39,8 @@ final class ReminderNotifications {
                 ? UiText.tr(context, "Live date provider reports confirmation.")
                 : UiText.tr(context, "Calendar estimate; official sighting may differ.");
         send(context, MONTHLY_ID, UiText.tr(context, "First Hilal Thursday reminder"),
-                label + UiText.tr(context, " at 11:00 AM Pakistan time. ") + note);
+                label + UiText.tr(context, " at ") + UiText.reminderTimeText(context)
+                        + UiText.tr(context, " Pakistan time. ") + note);
     }
 
     static void missed(Context context, String monthLabel, String basis) {
@@ -50,7 +51,8 @@ final class ReminderNotifications {
 
     static void test(Context context) {
         send(context, TEST_ID, UiText.tr(context, "Hilal Thursday test notification"),
-                UiText.tr(context, "Notifications are enabled. Monthly reminders target 11:00 AM PKT."));
+                UiText.tr(context, "Notifications are enabled. Monthly reminders target ")
+                        + UiText.reminderTimeText(context) + " PKT.");
     }
 
     private static void send(Context context, int id, String title, String body) {

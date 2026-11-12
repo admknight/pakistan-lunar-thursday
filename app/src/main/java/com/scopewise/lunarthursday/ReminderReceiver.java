@@ -15,7 +15,7 @@ public final class ReminderReceiver extends BroadcastReceiver {
         long scheduled = p.getLong(ReminderStore.NEXT_TRIGGER, -2);
         if (received <= 0 || received != scheduled) return;
 
-        // If device time has moved backward, do not notify before 11:00 PKT.
+        // If device time has moved backward, do not notify before the saved PKT time.
         if (System.currentTimeMillis() + 1000L < received) {
             ReminderScheduler.sync(context);
             return;

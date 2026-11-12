@@ -68,6 +68,7 @@ final class WeatherManager {
     }
 
     static void disable(Context context) {
+        HijriClock.clearWeatherSunsets(context);
         ReminderStore.prefs(context).edit().putBoolean(ENABLED, false)
                 .remove(CODE).remove(DAY).remove(TEMP)
                 .remove(LAST_SUCCESS).remove(LAST_ATTEMPT).apply();
@@ -165,6 +166,7 @@ final class WeatherManager {
                 if (enabled(context) && permissionGranted(context)) {
                     ReminderStore.prefs(context).edit().putInt(CODE,code).putBoolean(DAY,isDay==1)
                       .putInt(TEMP,(int)Math.round(temp)).putLong(LAST_SUCCESS,System.currentTimeMillis()).apply();
+                    HijriClock.saveWeatherSunsets(context, latitude, longitude);
                 }
             } catch (Exception ignored) { /* Retain time-aware fallback when offline. */ }
             finally { if(conn!=null)conn.disconnect();finish(onComplete); }

@@ -53,8 +53,12 @@ public final class LunarEngine {
             return (int) day;
         }
 
-        public Instant remindAt() {
-            return ZonedDateTime.of(thursday(), REMINDER_TIME, PAKISTAN).toInstant();
+        public Instant remindAt() { return remindAt(REMINDER_TIME); }
+
+        /** PKT wall time chosen by the user; calendar day remains first Thursday. */
+        public Instant remindAt(LocalTime chosenTime) {
+            if (chosenTime == null) throw new IllegalArgumentException("Reminder time required");
+            return ZonedDateTime.of(thursday(), chosenTime, PAKISTAN).toInstant();
         }
     }
 
@@ -161,6 +165,13 @@ public final class LunarEngine {
 
     /** Upcoming one-time reminder occurrences, sorted by Pakistan local date. */
     public static List<Month> upcoming(Instant now, Map<String, LocalDate> confirmedStarts, int limit) {
+        return upcoming(now, confirmedStarts, limit, REMINDER_TIME);
+    }
+
+    /** Scheduling at a user-selected Pakistan wall time, never a different date. */
+    public static List<Month> upcoming(Instant now, Map<String, LocalDate> confirmedStarts,
+                                       int limit, LocalTime chosenTime) {
+        if (chosenTime == null) throw new IllegalArgumentException("Reminder time required");
         if (limit < 1) return Collections.emptyList();
         int gregorianYear = now.atZone(PAKISTAN).getYear();
         // Bounding the search to nearby Hijri years prevents pathological work.
@@ -169,10 +180,10 @@ public final class LunarEngine {
         for (int year = Math.max(1, estimatedHijriYear - 5); year <= estimatedHijriYear + 7; year++) {
             for (int mon = 1; mon <= 12; mon++) {
                 Month candidate = month(year, mon, confirmedStarts);
-                if (candidate.remindAt().isAfter(now)) months.add(candidate);
+                if (candidate.remindAt(chosenTime).isAfter(now)) months.add(candidate);
             }
         }
-        months.sort(Comparator.comparing(Month::remindAt));
+        months.sort(Comparator.comparing(x -> x.remindAt(chosenTime)));
         if (months.size() <= limit) return months;
         return new ArrayList<>(months.subList(0, limit));
     }

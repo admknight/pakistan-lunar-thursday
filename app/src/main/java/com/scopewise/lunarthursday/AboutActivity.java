@@ -87,7 +87,8 @@ public final class AboutActivity extends LocalizedActivity {
         TextView tagline = text("🌙 A gentle reminder, every lunar month.", 15, false, secondary);
         tagline.setGravity(Gravity.CENTER);
         add(body, tagline, 6);
-        TextView detail = text("11:00 AM Pakistan time · English & Urdu", 12, false, secondary);
+        TextView detail = text(UiText.reminderTimeText(this)
+                + " Pakistan time · English & Urdu", 12, false, secondary);
         detail.setGravity(Gravity.CENTER);
         add(body, detail, 7);
 
@@ -107,7 +108,7 @@ public final class AboutActivity extends LocalizedActivity {
                 () -> showInfo("Calendar sources & accuracy", "Official Pakistani moon sighting is determined by the Central Ruet-e-Hilal Committee. The app uses third-party reported dates when available and PMD forecasts or calculated estimates otherwise. It does not claim a government-approved date feed.")));
         divider(list);
         list.addView(linkRow("✨", "What's new", "Weather visuals and in-app updates",
-                () -> showInfo("What's new", "Hilal Thursday v1.7 adds optional location-based weather scenery, a time-aware moon-and-mosque illustration, background update alerts and secure APK downloads inside the app. Android always confirms installation. Weather data: Open-Meteo (CC BY 4.0).")));
+                () -> showInfo("What's new", "Hilal Thursday v1.9.1 fixes the extra crescent, shows today's Hijri date with an optional city-based Maghrib transition, and lets you choose the monthly reminder time in Pakistan time. All three signature alarm sounds remain available.")));
         divider(list);
         list.addView(linkRow("⌘", "Open source & feedback", "Code, issues and contributions",
                 () -> open(PROJECT)));

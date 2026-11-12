@@ -46,11 +46,19 @@ public final class MainActivity extends LocalizedActivity {
     private int primaryContainer, onPrimaryContainer;
     private int monthTaps;
     private Instant countdownTarget;
+    private LocalDate displayedPakistanDate, displayedHijriReferenceDate;
     private TextView daysValue, hoursValue, minutesValue;
     private final Handler ticker = new Handler(Looper.getMainLooper());
     private final Runnable tick = new Runnable() {
         @Override public void run() {
             if (isFinishing() || isDestroyed() || activeTab != TAB_HOME) return;
+            HijriClock.Result actual = HijriClock.current(MainActivity.this, Instant.now());
+            if (displayedPakistanDate != null
+                    && (!displayedPakistanDate.equals(actual.todayGregorian)
+                    || !displayedHijriReferenceDate.equals(actual.hijriReferenceDate))) {
+                render(); // Midnight or Maghrib boundary: refresh the visible dates.
+                return;
+            }
             updateCounters();
             ticker.postDelayed(this, 60_000L);
         }
@@ -248,13 +256,18 @@ public final class MainActivity extends LocalizedActivity {
         List<LunarEngine.Month> upcoming = months(6);
         TextView welcome = text("Your next lunar Thursday, at a glance", 25, true, onSurface);
         add(body, welcome, 0);
-        LocalDate today = LocalDate.now(LunarEngine.PAKISTAN);
+        HijriClock.Result civilClock = HijriClock.current(this, Instant.now());
+        displayedPakistanDate = civilClock.todayGregorian;
+        displayedHijriReferenceDate = civilClock.hijriReferenceDate;
         add(body, text(UiText.tr(this, "Today in Pakistan: ")
-                + UiText.date(this, today, true), 13, false, secondary), 6);
-        LunarEngine.HijriDate expectedToday = LunarEngine.expectedOnDate(
-                today, ReminderStore.confirmedStarts(this));
-        if (expectedToday != null) {
-            add(body, text(UiText.expectedHijriDate(this, expectedToday.month, today),
+                + UiText.date(this, civilClock.todayGregorian, true), 13, false, secondary), 6);
+        LunarEngine.HijriDate currentHijri = LunarEngine.expectedOnDate(
+                civilClock.hijriReferenceDate, ReminderStore.confirmedStarts(this));
+        if (currentHijri != null) {
+            add(body, text(UiText.currentHijriDate(this, currentHijri),
+                    14, true, onSurface), 3);
+            add(body, text(sourceLabel(currentHijri.month.basis)
+                    + " · " + UiText.hijriClockStatus(this, civilClock),
                     12, false, secondary), 3);
         }
 
@@ -273,7 +286,8 @@ public final class MainActivity extends LocalizedActivity {
             add(details, text(UiText.date(this, next.thursday(), true), 16, true, onPrimaryContainer), 7);
             add(details, text(UiText.expectedHijriDate(this, next, next.thursday()),
                     14, true, onPrimaryContainer), 4);
-            add(details, text("11:00 AM  ·  Pakistan Standard Time", 13, false, onPrimaryContainer), 3);
+            add(details, text(UiText.reminderTimeText(this)
+                    + " · Pakistan Standard Time", 13, false, onPrimaryContainer), 3);
             LinearLayout countdown = row();
             countdown.setGravity(Gravity.CENTER);
             daysValue = addCounter(countdown, "Days");
@@ -293,7 +307,7 @@ public final class MainActivity extends LocalizedActivity {
             hero.addView(details);
             card.setOnClickListener(v -> showMonthDetails(next));
             add(body, card, 17);
-            countdownTarget = next.remindAt();
+            countdownTarget = next.remindAt(ReminderStore.reminderTime(this));
             updateCounters();
             ticker.postDelayed(tick, 60_000L);
         }
@@ -360,7 +374,8 @@ public final class MainActivity extends LocalizedActivity {
 
     private void renderMonths(LinearLayout body) {
         add(body, text("Upcoming lunar months", 26, true, onSurface), 2);
-        add(body, text("First Thursday · 11:00 AM PKT", 13, false, secondary), 7);
+        add(body, text(UiText.tr(this, "First Thursday · ")
+                + UiText.reminderTimeText(this) + " PKT", 13, false, secondary), 7);
         List<LunarEngine.Month> next = months(7);
         for (int i = 0; i < next.size(); i++) {
             add(body, card(monthRow(next.get(i)), i == 0 ? primaryContainer : surfaceVariant, 19), i == 0 ? 17 : 11);
@@ -474,7 +489,8 @@ public final class MainActivity extends LocalizedActivity {
                 + "\n" + UiText.expectedHijriDate(this, item, item.start)
                 + "\n\n" + UiText.tr(this, "First Thursday: ") + UiText.date(this, item.thursday(), true)
                 + "\n" + UiText.expectedHijriDate(this, item, item.thursday())
-                + "\n" + UiText.tr(this, "Reminder: 11:00 AM PKT")
+                + "\n" + UiText.tr(this, "Reminder: ")
+                + UiText.reminderTimeText(this) + " PKT"
                 + "\n\n" + UiText.tr(this, "Source: ") + LunarEngine.basisDescription(item.basis)
                 + "\n\n" + UiText.tr(this, "Forecasts and third-party reports may differ from the official Ruet-e-Hilal decision.");
         new AlertDialog.Builder(this).setTitle(UiText.tr(this, "Lunar month details"))
@@ -494,7 +510,8 @@ public final class MainActivity extends LocalizedActivity {
     }
 
     private List<LunarEngine.Month> months(int n) {
-        return LunarEngine.upcoming(Instant.now(), ReminderStore.confirmedStarts(this), n);
+        return LunarEngine.upcoming(Instant.now(), ReminderStore.confirmedStarts(this),
+                n, ReminderStore.reminderTime(this));
     }
 
     private void requestNotificationPermission() {

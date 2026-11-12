@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="hijri_current_date">Hijri Date: %1$s %2$s</string>
+  <string name="hijri_civil_fallback">Civil-date estimate · choose a city for Maghrib</string>
+  <string name="hijri_sunset_status">Approximate sunset %1$s · %2$s</string>
+  <string name="hijri_weather_location">Weather location</string>
+  <string name="hijri_reminder_time">Reminder time</string>
+  <string name="hijri_time_note">Choose any time in Pakistan Standard Time. Default: 11:00 AM PKT.</string>
+  <string name="hijri_first_thursday_note">The first-Thursday date remains automatic. Calendar sources may update after moon sightings; the selected reminder time is saved.</string>
+  <string name="hijri_clock_section">Hijri date and Maghrib</string>
+  <string name="hijri_select_city">Sunset location</string>
+  <string name="hijri_clock_explanation">Choose a Pakistani city for an approximate Maghrib date change. Automatic mode uses existing opt-in weather location when available; otherwise today's Hijri date is a civil-date estimate. This does not certify a moon sighting.</string>
+  <string-array name="hijri_sunset_cities">
+    <item>Automatic (weather if permitted)</item><item>Karachi</item><item>Lahore</item>
+    <item>Islamabad</item><item>Peshawar</item><item>Quetta</item>
+    <item>Multan</item><item>Faisalabad</item><item>Hyderabad</item><item>Gilgit</item>
+  </string-array>
+</resources>

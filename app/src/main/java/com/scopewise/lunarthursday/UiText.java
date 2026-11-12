@@ -2,6 +2,7 @@ package com.scopewise.lunarthursday;
 
 import android.content.Context;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashMap;
@@ -290,6 +291,29 @@ final class UiText {
         String day = String.format(AppLanguage.locale(context), "%d", month.hijriDay(civilDate));
         return AppLanguage.wrap(context).getString(
                 R.string.expected_hijri_date, day, month(context, month));
+    }
+
+    /** Today's Hijri-date label is neutral; the source is qualified separately. */
+    static String currentHijriDate(Context context, LunarEngine.HijriDate value) {
+        String day = String.format(AppLanguage.locale(context), "%d", value.day);
+        return AppLanguage.wrap(context).getString(
+                R.string.hijri_current_date, day, month(context, value.month));
+    }
+
+    static String reminderTimeText(Context context) {
+        LocalTime selected = ReminderStore.reminderTime(context);
+        return DateTimeFormatter.ofPattern("h:mm a", AppLanguage.locale(context))
+                .format(selected);
+    }
+
+    static String hijriClockStatus(Context context, HijriClock.Result clock) {
+        if (clock.approximateSunset == null) {
+            return AppLanguage.wrap(context).getString(R.string.hijri_civil_fallback);
+        }
+        String sunset = DateTimeFormatter.ofPattern("h:mm a", AppLanguage.locale(context))
+                .format(clock.approximateSunset);
+        return AppLanguage.wrap(context).getString(
+                R.string.hijri_sunset_status, sunset, clock.locationName);
     }
 
     static String date(Context context, LocalDate value, boolean longFormat) {

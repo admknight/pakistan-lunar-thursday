@@ -32,8 +32,14 @@ public final class DateSyncJob extends JobService {
                 // Keep cached observed dates; scheduling continues from fallback.
             }
             if (!stopped) {
-                boolean retry = !connected && params.getJobId() == DateSyncScheduler.ONCE_ID;
+                int id = params.getJobId();
+                boolean isFollowup = id >= DateSyncScheduler.MONTH_FIRST_ID
+                        && id < DateSyncScheduler.MONTH_FIRST_ID + DateSyncScheduler.MONTH_JOB_COUNT;
+                boolean retry = !connected && (id == DateSyncScheduler.ONCE_ID || isFollowup);
                 jobFinished(params, retry);
+                // Recalculate future windows after a newly reported month start,
+                // or when the final possible day of a month has passed.
+                DateSyncScheduler.ensure(this);
             }
         }, "lunar-feed-sync");
         worker.start();
@@ -43,7 +49,10 @@ public final class DateSyncJob extends JobService {
     @Override public boolean onStopJob(JobParameters params) {
         stopped = true;
         if (worker != null) worker.interrupt();
-        return params.getJobId() == DateSyncScheduler.ONCE_ID;
+        int id = params.getJobId();
+        return id == DateSyncScheduler.ONCE_ID
+                || (id >= DateSyncScheduler.MONTH_FIRST_ID
+                    && id < DateSyncScheduler.MONTH_FIRST_ID + DateSyncScheduler.MONTH_JOB_COUNT);
     }
 
     private boolean updateFromFeed() throws Exception {
@@ -90,6 +99,7 @@ public final class DateSyncJob extends JobService {
                 if (ReminderStore.saveReportedConfirmed(this,
                         confirmed.monthKey, confirmed.firstDay)) {
                     ReminderScheduler.sync(this);
+                    DateSyncScheduler.ensure(this); // Source changes can shift the next check window.
                 }
             }
             return true;

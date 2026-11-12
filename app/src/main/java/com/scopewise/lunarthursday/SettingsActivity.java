@@ -25,6 +25,7 @@ import com.google.android.material.color.MaterialColors;
 import com.google.android.material.materialswitch.MaterialSwitch;
 
 import java.time.Instant;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -82,6 +83,10 @@ public final class SettingsActivity extends LocalizedActivity {
 
         LinearLayout alert = panel();
         add(alert, text("How reminders reach you", 19, true, onSurface), 0);
+        add(alert, slimAction("⏰", getString(R.string.hijri_reminder_time)
+                + " · " + UiText.reminderTimeText(this) + " PKT",
+                this::chooseReminderTime), 9);
+        add(alert, text(getString(R.string.hijri_time_note), 12, false, onSurfaceVariant), 5);
         boolean ringing = p.getBoolean(ReminderStore.ALARM_MODE, false);
         toggle(alert, "Ring audible alarm", "Use a ringing alarm with Dismiss and Snooze, instead of a simple notification.",
                 ringing, value -> {
@@ -111,7 +116,7 @@ public final class SettingsActivity extends LocalizedActivity {
                 add(alert, button("Allow full-screen alarm display", false, this::askFullScreen), 8);
             }
         }
-        add(alert, text("Reminder time remains 11:00 AM Pakistan time. Lunar dates are updated automatically; there is no manual calendar correction.",
+        add(alert, text(getString(R.string.hijri_first_thursday_note),
                 13, false, onSurfaceVariant), 16);
         add(body, card(alert), 22);
 
@@ -125,6 +130,18 @@ public final class SettingsActivity extends LocalizedActivity {
                 14, false, onSurfaceVariant), 10);
         if (!ReminderScheduler.exactAlarmsAllowed(this)) add(permissions, button("Allow exact alarms", false, this::askExactAlarms), 10);
         add(body, card(permissions), 16);
+
+        LinearLayout hijriTiming = panel();
+        add(hijriTiming, text(getString(R.string.hijri_clock_section),
+                19, true, onSurface), 0);
+        int cityIndex = HijriClock.selectedCity(this);
+        String[] cityLabels = HijriClock.cityLabels(this);
+        String cityName = cityIndex < cityLabels.length ? cityLabels[cityIndex] : cityLabels[0];
+        add(hijriTiming, slimAction("🌇", getString(R.string.hijri_select_city)
+                + " · " + cityName, this::chooseHijriCity), 10);
+        add(hijriTiming, text(getString(R.string.hijri_clock_explanation),
+                12, false, onSurfaceVariant), 6);
+        add(body, card(hijriTiming), 16);
 
         LinearLayout scenes = panel();
         add(scenes, text("🌤 Sky and local weather", 19, true, onSurface), 0);
@@ -229,6 +246,34 @@ public final class SettingsActivity extends LocalizedActivity {
         add(parent, control, 14);
         add(parent, text(help, 12, false, onSurfaceVariant), 0);
         control.setOnCheckedChangeListener((button, value) -> changed.set(value));
+    }
+
+    private void chooseReminderTime() {
+        LocalTime current = ReminderStore.reminderTime(this);
+        new android.app.TimePickerDialog(this, (picker, hour, minute) -> {
+            if (ReminderStore.setReminderTime(this, hour, minute)) {
+                ReminderScheduler.sync(this); // Cancel old time, reschedule first Thursday.
+                DateSyncScheduler.ensure(this); // Update the pre-reminder date refresh window.
+                render();
+            } else {
+                toast("Unable to save reminder time");
+            }
+        }, current.getHour(), current.getMinute(),
+                android.text.format.DateFormat.is24HourFormat(this)).show();
+    }
+
+    private void chooseHijriCity() {
+        String[] names = HijriClock.cityLabels(this);
+        new android.app.AlertDialog.Builder(this)
+                .setTitle(getString(R.string.hijri_select_city))
+                .setSingleChoiceItems(names, HijriClock.selectedCity(this), (dialog, index) -> {
+                    HijriClock.selectCity(this, index);
+                    DateSyncScheduler.ensure(this); // Recalculate month-end Maghrib check times.
+                    dialog.dismiss();
+                    render();
+                })
+                .setNegativeButton(UiText.tr(this, "Close"), null)
+                .show();
     }
 
     private void chooseLanguage() {
