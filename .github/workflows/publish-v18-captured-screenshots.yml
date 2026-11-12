@@ -25,9 +25,13 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/hilal-capture"
           gh run download 43301311373 --repo "$GITHUB_REPOSITORY" \
             --name real-hilal-thursday-v1.8-emulator-screenshots \
-            --dir docs/screenshots
+            --dir "$RUNNER_TEMP/hilal-capture"
+          # gh refuses to extract over existing checkout PNGs. Preserve exact
+          # artifact bytes and intentionally replace only documented captures.
+          cp "$RUNNER_TEMP/hilal-capture"/*.png docs/screenshots/
 
       - name: Verify screenshots are genuine PNG captures of expected dimensions
         shell: bash
