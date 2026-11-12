@@ -4,7 +4,7 @@ set -euo pipefail
 # Real Android emulator captures of the installed, signed GitHub release APK.
 # No mocked app screens, synthetic dates, or Photoshop composites.
 PACKAGE=com.scopewise.lunarthursday
-APK_PATH="${APK_PATH:-release-apk/HilalThursday-v1.8.1.apk}"
+APK_PATH="${APK_PATH:-release-apk/HilalThursday-v1.9.0.apk}"
 OUTPUT=docs/screenshots
 mkdir -p "$OUTPUT"
 
@@ -109,8 +109,10 @@ PY
 }
 
 capture home-en 'Your next lunar Thursday'
+assert_ui 'Expected Hijri'
 tap_ui Calendar
 capture calendar-en 'Upcoming lunar months'
+assert_ui 'Expected Hijri'
 tap_ui Updates
 capture updates-en 'Updates & calendar'
 tap_ui About
@@ -152,6 +154,7 @@ if not any(any('\u0600'<=ch<='\u06ff' for ch in t) for t in texts):
 print('Urdu UI confirmed on live emulator')
 PY
 capture home-ur 'ہلال'
+assert_ui 'متوقع ہجری تاریخ'
 
 echo "[capture] All screenshots are live emulator captures from signed APK."
 ls -lh "$OUTPUT"/*.png
