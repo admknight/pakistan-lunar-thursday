@@ -13,6 +13,8 @@ final class ReminderStore {
     static final String ALARM_MODE = "ringing_alarm_mode";
     static final String ALARM_SOUND = "ringing_alarm_sound";
     static final String ALARM_VIBRATE = "ringing_alarm_vibration";
+    static final String ALARM_TONE_ID = "ringing_alarm_tone_id";
+    static final String ALARM_TONE_URI = "ringing_alarm_tone_uri";
     static final String SNOOZE_TRIGGER = "snooze_trigger";
     static final String SNOOZE_KEY = "snooze_month_key";
     static final String SNOOZE_LABEL = "snooze_month_label";

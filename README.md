@@ -49,6 +49,14 @@ The GitHub Actions build produces a **debug-signed test APK**, not a production-
 - Next reminder, upcoming months, source quality, last successful feed check, and a test-notification button.
 - **No accounts, no ads, no tracking, and no manually entered lunar dates.** Optional location permission is used **only after the user enables weather visuals**; the app never requests background or precise location.
 
+## Signature alarm sounds (v1.8.0)
+
+Hilal Thursday includes three **music-derived, 23-second custom alarm cues** made from recordings supplied by the maintainer: **🌙 Hilal Noor** (the default), **✨ Sukoon**, and **🕌 Hilal Nida**. These are converted excerpts of the Gemini-generated musical recordings the maintainer reviewed; **they are not the rejected synthetic notification tones**.
+
+Enable **Settings → Ring audible alarm** and choose **Alarm sound** to preview, select, and save one of the built-in sounds, or choose **📱 From phone** to open Android's existing alarm-tone picker. The app does **not** change the system-wide ringtone; selection persists between upgrades. Sounds play locally without requiring network access and obey the existing two-minute ringing limit, Dismiss and Snooze controls. Phone sounds that disappear or become inaccessible fall back to an available alarm.
+
+**Audio rights and provenance:** [docs/AUDIO.md](docs/AUDIO.md). The MIT license for software should not be interpreted as a verified license grant for AI-generated sound recordings; check rights before independent redistribution or commercialization.
+
 ## Ringing alarm and updates
 
 Open **Settings** to enable **Ring audible alarm** if a normal notification is easy to miss. You can toggle sound and vibration independently and test the alarm from Settings. Alarm sound/vibration stop automatically after two minutes even if you don't dismiss; Snooze schedules another attempt ten minutes later. Android notification, exact-alarm, foreground service, and (on some devices) full-screen intent permissions affect availability and timing. Do Not Disturb, battery restrictions, device power-off, and OEM behavior can suppress or delay ringing. This path has been built in CI, **not tested on a physical phone**.
@@ -95,7 +103,7 @@ A third-party data feed at `https://islamicdatetoday.pk/data/today.json` is used
 - **compileSdk:** 36; **targetSdk:** 35; **minSdk:** 26
 - **Application ID:** `com.scopewise.lunarthursday`
 
-The GitHub workflow installs the matching Android SDK platform/build tools, runs 180 pure-Java scheduling/feed-policy/version/weather-code assertions, builds the APK and attaches its SHA-256 hash. It runs on pushes to `main`, pull requests and manual dispatch. Successful pushes to `main` also publish a **versioned GitHub pre-release** if that version has not already been published. Increment `versionName` when publishing a new preview; rebuilding the same version does not silently replace public assets. This project deliberately uses the stable Java Material Components SDK rather than introducing Kotlin/Compose into an already tested Java-only notification engine.
+The GitHub workflow installs the matching Android SDK platform/build tools, runs 206 portable Java assertions covering scheduling, feed policy, versioning, weather codes and alarm-tone selection, builds the APK and attaches its SHA-256 hash. It runs on pushes to `main`, pull requests and manual dispatch. Successful pushes to `main` also publish a **versioned GitHub pre-release** if that version has not already been published. Increment `versionName` when publishing a new preview; rebuilding the same version does not silently replace public assets. This project deliberately uses the stable Java Material Components SDK rather than introducing Kotlin/Compose into an already tested Java-only notification engine.
 
 ## Local build
 

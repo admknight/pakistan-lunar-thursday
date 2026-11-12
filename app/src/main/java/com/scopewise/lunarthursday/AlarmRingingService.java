@@ -165,28 +165,13 @@ public final class AlarmRingingService extends Service {
     }
 
     private void beginSound() {
-        Uri alarm = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-        if (!tryPlay(alarm)) tryPlay(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-    }
-
-    private boolean tryPlay(Uri uri) {
-        if (uri == null) return false;
-        MediaPlayer candidate = new MediaPlayer();
+        player = AlarmTonePlayer.prepare(this, AlarmTonePlayer.selection(this), true);
+        if (player == null) return; // The service and optional vibration remain functional.
         try {
-            candidate.setAudioAttributes(new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_ALARM)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .build());
-            candidate.setWakeMode(this, PowerManager.PARTIAL_WAKE_LOCK);
-            candidate.setDataSource(this, uri);
-            candidate.setLooping(true);
-            candidate.prepare();
-            candidate.start();
-            player = candidate;
-            return true;
-        } catch (Exception failure) {
-            candidate.release();
-            return false;
+            player.start();
+        } catch (RuntimeException failure) {
+            player.release();
+            player = null;
         }
     }
 

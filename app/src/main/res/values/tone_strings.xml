@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tone_heading">Alarm sound</string>
+    <string name="tone_back">Back</string>
+    <string name="tone_intro">Select one sound for the ringing alarm. Tap ▶ to preview without changing your selection.</string>
+    <string name="tone_signature_section">Hilal signature sounds</string>
+    <string name="tone_noor">Hilal Noor</string>
+    <string name="tone_noor_desc">Warm melodic signature · balanced and attentive · 23 s</string>
+    <string name="tone_sukoon">Sukoon</string>
+    <string name="tone_sukoon_desc">Peaceful melodic flute and strings · 23 s</string>
+    <string name="tone_nida">Hilal Nida</string>
+    <string name="tone_nida_desc">Lively acoustic rhythm and melody · 23 s</string>
+    <string name="tone_phone_section">Sounds already on your phone</string>
+    <string name="tone_phone">Choose from phone</string>
+    <string name="tone_phone_desc">Select a system alarm tone using Android</string>
+    <string name="tone_phone_picker">Choose an alarm sound</string>
+    <string name="tone_stop">■ Stop preview</string>
+    <string name="tone_selected">Selected</string>
+    <string name="tone_select">Choose this sound</string>
+    <string name="tone_preview">Play sample</string>
+    <string name="tone_cannot_play">Unable to play this sound</string>
+    <string name="tone_picker_unavailable">Phone alarm picker is unavailable on this device</string>
+    <string name="tone_footer">Built-in sounds work offline. Your choice is kept during app updates. Alarms still stop after two minutes; Android controls the alarm volume.</string>
+    <string name="tone_current_summary">Selected alarm: %1$s</string>
+    <string name="tone_sound_help">Play your chosen Hilal or phone alarm sound (up to two minutes).</string>
+</resources>

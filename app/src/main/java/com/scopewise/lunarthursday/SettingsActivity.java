@@ -89,9 +89,15 @@ public final class SettingsActivity extends LocalizedActivity {
                     render();
                 });
         if (ringing) {
-            toggle(alert, "Play alarm sound", "Use your phone's default alarm tone, for up to two minutes.",
+            toggle(alert, "Play alarm sound", getString(R.string.tone_sound_help),
                     p.getBoolean(ReminderStore.ALARM_SOUND, true), value ->
                             p.edit().putBoolean(ReminderStore.ALARM_SOUND, value).apply());
+            String selectedTone = AlarmTonePlayer.selection(this);
+            int toneName = AlarmTonePolicy.SUKOON.equals(selectedTone) ? R.string.tone_sukoon
+                    : AlarmTonePolicy.NIDA.equals(selectedTone) ? R.string.tone_nida
+                    : AlarmTonePolicy.PHONE.equals(selectedTone) ? R.string.tone_phone : R.string.tone_noor;
+            add(alert, slimAction("♪", getString(R.string.tone_heading) + " · " + getString(toneName),
+                    () -> startActivity(new Intent(this, AlarmToneActivity.class))), 9);
             toggle(alert, "Vibrate", "Vibration follows the device's vibration policy.",
                     p.getBoolean(ReminderStore.ALARM_VIBRATE, true), value ->
                             p.edit().putBoolean(ReminderStore.ALARM_VIBRATE, value).apply());

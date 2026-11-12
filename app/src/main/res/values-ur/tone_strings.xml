@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tone_heading">الارم کی آواز</string>
+    <string name="tone_back">واپس</string>
+    <string name="tone_intro">الارم کے لیے آواز منتخب کریں۔ ▶ دبا کر سنے بغیر انتخاب تبدیل کیے۔</string>
+    <string name="tone_signature_section">ہلال کی مخصوص آوازیں</string>
+    <string name="tone_noor">ہلال نور</string>
+    <string name="tone_noor_desc">دلکش اور متوازن دُھن · ۲۳ سیکنڈ</string>
+    <string name="tone_sukoon">سکون</string>
+    <string name="tone_sukoon_desc">نرم بانسری اور سازوں کی دُھن · ۲۳ سیکنڈ</string>
+    <string name="tone_nida">ہلال ندا</string>
+    <string name="tone_nida_desc">متحرک سازوں اور تال کی دُھن · ۲۳ سیکنڈ</string>
+    <string name="tone_phone_section">فون میں موجود آوازیں</string>
+    <string name="tone_phone">فون سے آواز منتخب کریں</string>
+    <string name="tone_phone_desc">اینڈرائیڈ کی الارم آواز منتخب کریں</string>
+    <string name="tone_phone_picker">الارم کی آواز منتخب کریں</string>
+    <string name="tone_stop">■ سننا بند کریں</string>
+    <string name="tone_selected">منتخب شدہ</string>
+    <string name="tone_select">یہ آواز منتخب کریں</string>
+    <string name="tone_preview">آواز سنیں</string>
+    <string name="tone_cannot_play">یہ آواز نہیں چل سکی</string>
+    <string name="tone_picker_unavailable">اس فون پر الارم کی آوازوں کا انتخاب دستیاب نہیں</string>
+    <string name="tone_footer">ایپ کی اپنی آوازیں آف لائن چلتی ہیں۔ اپ ڈیٹ کے بعد بھی انتخاب محفوظ رہتا ہے۔ الارم دو منٹ بعد بند ہو جاتا ہے؛ آواز کی سطح فون کنٹرول کرتا ہے۔</string>
+    <string name="tone_current_summary">منتخب آواز: %1$s</string>
+    <string name="tone_sound_help">منتخب شدہ ہلال یا فون کی آواز چلائیں (زیادہ سے زیادہ دو منٹ)۔</string>
+</resources>

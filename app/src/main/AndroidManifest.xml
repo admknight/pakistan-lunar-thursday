@@ -19,6 +19,7 @@
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme"
         android:supportsRtl="true">
+        <activity android:name=".AlarmToneActivity" android:exported="false" />
         <activity android:name=".SettingsActivity" android:exported="false" />
         <activity android:name=".AboutActivity" android:exported="false" />
         <activity android:name=".AlarmActivity" android:exported="false"
