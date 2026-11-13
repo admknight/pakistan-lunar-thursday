@@ -132,6 +132,8 @@ public final class SettingsActivity extends LocalizedActivity {
         toggle(observances, getString(R.string.events_set_b), getString(R.string.events_set_b_help),
                 EventsStore.isShown(this, IslamicEvents.SET_B),
                 value -> EventsStore.setShown(this, IslamicEvents.SET_B, value));
+        toggle(observances, getString(R.string.events_remind), getString(R.string.events_remind_help),
+                EventsStore.remindersOn(this), value -> EventsStore.setRemindersOn(this, value));
         add(body, card(observances), 16);
 
         LinearLayout permissions = panel();

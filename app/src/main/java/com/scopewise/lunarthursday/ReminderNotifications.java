@@ -13,6 +13,7 @@ import android.os.Build;
 final class ReminderNotifications {
     private static final String CHANNEL_ID = "lunar_thursday_monthly_v1";
     private static final int MONTHLY_ID = 1701;
+    private static final int OBSERVANCE_ID = 1702;
     private static final int TEST_ID = 1702;
 
     private ReminderNotifications() { }
@@ -55,6 +56,11 @@ final class ReminderNotifications {
         send(context, MONTHLY_ID, localized.getString(R.string.possible_thursday_title),
                 localized.getString(R.string.possible_thursday_body,
                         UiText.monthLabel(context, monthLabel), forecast));
+    }
+
+    /** A day's observances: an ordinary notification, separate from the monthly reminder. */
+    static void observance(Context context, String title, String body) {
+        send(context, OBSERVANCE_ID, title, body);
     }
 
     static void missed(Context context, String monthLabel, String basis) {

@@ -32,7 +32,9 @@ object IslamicEvents {
         /** The observance is the night before the listed day. */
         @JvmField val eve: Boolean,
         /** Length in days, starting on [day]. */
-        @JvmField val days: Int
+        @JvmField val days: Int,
+        /** Whether its reminder is on until the user changes it. */
+        @JvmField val remindDefault: Boolean
     )
 
     class Occurrence internal constructor(
@@ -69,7 +71,7 @@ object IslamicEvents {
             events.add(Event(id, month, day, set, nameEn,
                 row.optString("name_ur", "").trim().ifEmpty { null },
                 row.optString("note_en", "").trim().ifEmpty { null },
-                row.optBoolean("eve", false), days))
+                row.optBoolean("eve", false), days, row.optBoolean("remind", true)))
         }
         return events
     }

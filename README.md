@@ -54,7 +54,7 @@ Once installed, the **in-app updater** can check GitHub Releases, download newer
 
 ## Features
 
-- An **Upcoming observances** list in the Calendar tab, from sets you switch on in Settings (common observances are on by default). The dates are a project-maintained list, not an authoritative calendar.
+- An **Upcoming observances** list in the Calendar tab, from sets you switch on in Settings (common observances are on by default). Each observance day gets one quiet notification at your reminder time, which you can switch off as a whole or per observance. The dates are a project-maintained list, not an authoritative calendar.
 - A home-screen widget showing today's Hijri date in Pakistan and the coming first Thursday, with a day count.
 - A one-time automatically scheduled reminder on the first Thursday of each new Islamic month, at **your selected Pakistan time** (11:00 AM PKT by default).
 - Automated date checks using HTTPS and Android `JobScheduler`, nominally every six hours and subject to Android background execution limits.

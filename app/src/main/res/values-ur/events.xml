@@ -18,4 +18,12 @@
   <string name="events_set_a_help">ولادت اور شہادت کی تاریخیں، اربعین، غدیر اور دیگر۔</string>
   <string name="events_set_b">ایامِ صحابہ و اولیاء</string>
   <string name="events_set_b_help">ایامِ خلفاء، ۱۲ ربیع الاول، گیارہویں شریف اور دیگر۔</string>
+  <string name="events_remind">مذہبی ایام پر یاد دہانی</string>
+  <string name="events_remind_help">آپ کے مقررہ وقت پر ایک خاموش اطلاع۔ گھنٹی والا الارم صرف پہلی جمعرات کے لیے ہے۔</string>
+  <string name="events_reminder_turn_off">اس کی یاد دہانی بند کریں</string>
+  <string name="events_reminder_turn_on">اس کی یاد دہانی چالو کریں</string>
+  <string name="events_notify_today">آج: %1$s</string>
+  <string name="events_notify_tonight">آج رات: %1$s</string>
+  <string name="events_notify_several">آج کے مذہبی ایام</string>
+  <string name="events_notify_tonight_tag">آج رات</string>
 </resources>
