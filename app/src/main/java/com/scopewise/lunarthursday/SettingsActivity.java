@@ -120,6 +120,20 @@ public final class SettingsActivity extends LocalizedActivity {
                 13, false, onSurfaceVariant), 16);
         add(body, card(alert), 22);
 
+        LinearLayout observances = panel();
+        add(observances, text(getString(R.string.events_settings_title), 19, true, onSurface), 0);
+        add(observances, text(getString(R.string.events_settings_help), 13, false, onSurfaceVariant), 6);
+        toggle(observances, getString(R.string.events_set_shared), getString(R.string.events_set_shared_help),
+                EventsStore.isShown(this, IslamicEvents.SET_SHARED),
+                value -> EventsStore.setShown(this, IslamicEvents.SET_SHARED, value));
+        toggle(observances, getString(R.string.events_set_a), getString(R.string.events_set_a_help),
+                EventsStore.isShown(this, IslamicEvents.SET_A),
+                value -> EventsStore.setShown(this, IslamicEvents.SET_A, value));
+        toggle(observances, getString(R.string.events_set_b), getString(R.string.events_set_b_help),
+                EventsStore.isShown(this, IslamicEvents.SET_B),
+                value -> EventsStore.setShown(this, IslamicEvents.SET_B, value));
+        add(body, card(observances), 16);
+
         LinearLayout permissions = panel();
         add(permissions, text("Android permissions", 19, true, onSurface), 0);
         add(permissions, text(ReminderNotifications.permitted(this) ? "Notifications: allowed" : "Notifications: permission needed",

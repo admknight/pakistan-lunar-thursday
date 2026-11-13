@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="events_heading">آنے والے مذہبی ایام</string>
+  <string name="events_none">کوئی مذہبی ایام فعال نہیں۔ ترتیبات میں منتخب کریں۔</string>
+  <string name="events_may_shift">تاریخ ایک دن آگے پیچھے ہو سکتی ہے</string>
+  <string name="events_night_before">ایک رات پہلے منایا جاتا ہے</string>
+  <string name="events_days">%1$s دن</string>
+  <string name="events_details_title">مذہبی دن</string>
+  <string name="events_details_date">پاکستان میں تاریخ: %1$s</string>
+  <string name="events_details_eve">%1$s کی شام کو منایا جاتا ہے۔</string>
+  <string name="events_details_unconfirmed">مہینے کے آغاز کی ابھی تصدیق نہیں ہوئی، اس لیے یہ تاریخ ایک دن آگے پیچھے ہو سکتی ہے۔</string>
+  <string name="events_source_note">یہ تاریخیں اس منصوبے کی مرتب کردہ فہرست ہیں اور ایپ میں دکھائے گئے مہینے کے آغاز کے مطابق ہیں۔ براہِ کرم اپنے عالم یا کیلنڈر سے تصدیق کریں۔</string>
+  <string name="events_settings_title">مذہبی ایام</string>
+  <string name="events_settings_help">منتخب کریں کہ کیلنڈر میں کون سے مذہبی ایام دکھائے جائیں۔</string>
+  <string name="events_set_shared">عام مذہبی ایام</string>
+  <string name="events_set_shared_help">رمضان، دونوں عیدیں، عاشورہ، شبِ برات اور دیگر۔</string>
+  <string name="events_set_a">ایامِ اہلِ بیت</string>
+  <string name="events_set_a_help">ولادت اور شہادت کی تاریخیں، اربعین، غدیر اور دیگر۔</string>
+  <string name="events_set_b">ایامِ صحابہ و اولیاء</string>
+  <string name="events_set_b_help">ایامِ خلفاء، ۱۲ ربیع الاول، گیارہویں شریف اور دیگر۔</string>
+</resources>
