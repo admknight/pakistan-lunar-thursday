@@ -613,12 +613,24 @@ public final class MainActivity extends LocalizedActivity {
         return UiText.tr(this, "Calendar estimate · not confirmed");
     }
 
+    /** A calculated hint for a sighting-dependent month; never a claim about the decision. */
+    private String sightingOutlook(LunarEngine.Month item) {
+        java.time.LocalDate evening = ReminderPlanner.decisionEvening(
+                item.hijriYear, item.hijriMonth, ReminderStore.confirmedStarts(this));
+        CrescentVisibility.Outlook outlook = CrescentVisibility.estimate(evening).outlook;
+        int label = outlook == CrescentVisibility.Outlook.LIKELY ? R.string.sighting_likely
+                : outlook == CrescentVisibility.Outlook.UNLIKELY ? R.string.sighting_unlikely
+                : R.string.sighting_borderline;
+        return str(R.string.sighting_outlook, UiText.date(this, evening, false), str(label));
+    }
+
     private String dependsOnSightingNote(LunarEngine.Month item) {
         java.time.LocalDate other = ReminderPlanner.otherThursday(
                 item.hijriYear, item.hijriMonth, ReminderStore.confirmedStarts(this));
         if (other == null) return "";
         return "\n\n" + AppLanguage.wrap(this).getString(
-                R.string.depends_on_sighting, UiText.date(this, other, true));
+                R.string.depends_on_sighting, UiText.date(this, other, true))
+                + "\n" + sightingOutlook(item);
     }
 
     /** Source label, plus a second line when the first Thursday still depends on the sighting. */
@@ -628,7 +640,8 @@ public final class MainActivity extends LocalizedActivity {
                 item.hijriYear, item.hijriMonth, ReminderStore.confirmedStarts(this));
         if (other == null) return label;
         return label + "\n" + AppLanguage.wrap(this).getString(
-                R.string.depends_on_sighting, UiText.date(this, other, false));
+                R.string.depends_on_sighting, UiText.date(this, other, false))
+                + "\n" + sightingOutlook(item);
     }
 
     private List<LunarEngine.Month> months(int n) {

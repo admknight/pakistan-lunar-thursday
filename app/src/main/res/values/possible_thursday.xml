@@ -3,4 +3,8 @@
   <string name="possible_thursday_title">Possible first Thursday</string>
   <string name="possible_thursday_body">Today may be the first Thursday of %1$s. The moon decision is not confirmed yet; the forecast date is %2$s.</string>
   <string name="depends_on_sighting">Depends on the moon sighting · may be %1$s instead</string>
+  <string name="sighting_outlook">Calculated estimate: a sighting on %1$s is %2$s</string>
+  <string name="sighting_likely">likely</string>
+  <string name="sighting_borderline">borderline</string>
+  <string name="sighting_unlikely">unlikely</string>
 </resources>
