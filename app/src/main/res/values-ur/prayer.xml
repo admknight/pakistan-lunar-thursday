@@ -33,4 +33,9 @@
   <string name="extra_friday_toggle">جمعہ کی یاد دہانی</string>
   <string name="extra_friday_help">ہر جمعہ کو آپ کے مقررہ وقت پر۔</string>
   <string name="extra_friday_title">جمعہ</string>
+  <string name="compass_title">قبلہ نما</string>
+  <string name="compass_open">قبلہ نما کھولیں</string>
+  <string name="compass_note">فون کو ہموار رکھیں، دھات اور مقناطیس سے دور۔ سبز تیر منتخب شہر کے لیے قبلہ کی سمت بتاتا ہے۔ فون کا قطب نما چند درجے غلط ہو سکتا ہے۔</string>
+  <string name="compass_no_sensor">اس فون میں گردش کا سینسر نہیں، اس لیے قبلہ نما یہاں کام نہیں کر سکتا۔</string>
+  <string name="compass_calibrate">قطب نما کی درستی کم ہے: فون کو آٹھ کے ہندسے کی شکل میں گھمائیں۔</string>
 </resources>

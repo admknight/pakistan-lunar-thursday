@@ -425,8 +425,11 @@ public final class MainActivity extends LocalizedActivity {
                 ? R.string.prayer_method_jafari : R.string.prayer_method_karachi);
         double[] place = HijriClock.cityCoordinates(this);
         if (place != null) {
-            add(panel, text(str(R.string.qibla_line, String.format(AppLanguage.locale(this), "%d",
-                    Math.round(Qibla.bearing(place[0], place[1])))), 13, true, onSurface), 8);
+            TextView qibla = text(str(R.string.qibla_line, String.format(AppLanguage.locale(this), "%d",
+                    Math.round(Qibla.bearing(place[0], place[1])))) + " · " + str(R.string.compass_open),
+                    13, true, primary);
+            qibla.setOnClickListener(v -> startActivity(new Intent(this, QiblaCompassActivity.class)));
+            add(panel, qibla, 8);
         }
         add(panel, text((city < cities.length ? cities[city] : "") + " · " + method
                 + "\n" + str(R.string.prayer_note), 11, false, secondary), 8);
