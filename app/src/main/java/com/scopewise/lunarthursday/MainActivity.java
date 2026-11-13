@@ -307,6 +307,7 @@ public final class MainActivity extends LocalizedActivity {
             hero.addView(details);
             card.setOnClickListener(v -> showMonthDetails(next));
             add(body, card, 17);
+            renderPrayerTimes(body, currentHijri);
             countdownTarget = next.remindAt(ReminderStore.reminderTime(this));
             updateCounters();
             ticker.postDelayed(tick, 60_000L);
@@ -384,6 +385,43 @@ public final class MainActivity extends LocalizedActivity {
         add(body, card(compactSurfaceRow("ⓘ", "Calendar source information",
                 "Forecasts and calculations are not official confirmations",
                 this::calendarDisclaimer), surfaceVariant, 19), 18);
+    }
+
+    /** Today's calculated prayer times for the city chosen in Settings. */
+    private void renderPrayerTimes(LinearLayout body, LunarEngine.HijriDate currentHijri) {
+        LinearLayout panel = column();
+        panel.setPadding(dp(16), dp(14), dp(16), dp(14));
+        panel.addView(text(str(R.string.prayer_title), 17, true, onSurface));
+        PrayerTimes.Day day = PrayerStore.today(this);
+        if (day == null) {
+            add(panel, text(str(R.string.prayer_choose_city), 13, false, secondary), 6);
+            panel.setOnClickListener(v -> openSettings(false));
+            add(body, card(panel, surfaceVariant, 19), 14);
+            return;
+        }
+        java.time.format.DateTimeFormatter clock = java.time.format.DateTimeFormatter
+                .ofPattern("h:mm a", AppLanguage.locale(this));
+        if (currentHijri != null && currentHijri.month.hijriMonth == 9 && day.fajr != null && day.maghrib != null) {
+            add(panel, text(str(R.string.prayer_roza, String.format(AppLanguage.locale(this), "%d", currentHijri.day))
+                    + " · " + str(R.string.prayer_sehri, clock.format(day.fajr))
+                    + " · " + str(R.string.prayer_iftar, clock.format(day.maghrib)), 14, true, primary), 6);
+        }
+        int[] labels = {R.string.prayer_fajr, R.string.prayer_sunrise, R.string.prayer_dhuhr,
+                R.string.prayer_asr, R.string.prayer_maghrib, R.string.prayer_isha};
+        java.time.LocalTime[] times = {day.fajr, day.sunrise, day.dhuhr, day.asr, day.maghrib, day.isha};
+        for (int i = 0; i < labels.length; i++) {
+            LinearLayout line = row();
+            line.addView(weightedText(str(labels[i]), 14, false, onSurface));
+            line.addView(text(times[i] == null ? "—" : clock.format(times[i]), 14, true, onSurface));
+            add(panel, line, i == 0 ? 8 : 4);
+        }
+        int city = HijriClock.selectedCity(this);
+        String[] cities = HijriClock.cityLabels(this);
+        String method = str(PrayerStore.method(this) == PrayerTimes.Method.JAFARI
+                ? R.string.prayer_method_jafari : R.string.prayer_method_karachi);
+        add(panel, text((city < cities.length ? cities[city] : "") + " · " + method
+                + "\n" + str(R.string.prayer_note), 11, false, secondary), 8);
+        add(body, card(panel, surfaceVariant, 19), 14);
     }
 
     private String str(int id, Object... values) {

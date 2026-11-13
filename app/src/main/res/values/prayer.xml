@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="prayer_title">Today\'s prayer times</string>
+  <string name="prayer_choose_city">Choose a city in Settings to see prayer times.</string>
+  <string name="prayer_fajr">Fajr</string>
+  <string name="prayer_sunrise">Sunrise</string>
+  <string name="prayer_dhuhr">Dhuhr</string>
+  <string name="prayer_asr">Asr</string>
+  <string name="prayer_maghrib">Maghrib</string>
+  <string name="prayer_isha">Isha</string>
+  <string name="prayer_note">Calculated times. Your mosque\'s timetable may differ by a few minutes.</string>
+  <string name="prayer_method_title">Prayer time method</string>
+  <string name="prayer_method_karachi">Karachi (Hanafi Asr)</string>
+  <string name="prayer_method_jafari">Jafari</string>
+  <string name="prayer_method_help">Sets the Fajr, Asr, Maghrib and Isha rules. Prayer times use the city chosen above.</string>
+  <string name="prayer_roza">Roza %1$s</string>
+  <string name="prayer_sehri">Sehri ends %1$s</string>
+  <string name="prayer_iftar">Iftar %1$s</string>
+</resources>
