@@ -136,6 +136,12 @@ public final class SettingsActivity extends LocalizedActivity {
                 EventsStore.remindersOn(this), value -> EventsStore.setRemindersOn(this, value));
         add(body, card(observances), 16);
 
+        LinearLayout announcement = panel();
+        add(announcement, text(getString(R.string.announcement_title), 19, true, onSurface), 0);
+        toggle(announcement, getString(R.string.announcement_toggle), getString(R.string.announcement_help),
+                AnnouncementSync.isOn(this), value -> AnnouncementSync.setOn(this, value));
+        add(body, card(announcement), 16);
+
         LinearLayout permissions = panel();
         add(permissions, text("Android permissions", 19, true, onSurface), 0);
         add(permissions, text(ReminderNotifications.permitted(this) ? "Notifications: allowed" : "Notifications: permission needed",

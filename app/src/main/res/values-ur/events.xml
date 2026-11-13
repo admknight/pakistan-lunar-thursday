@@ -26,4 +26,7 @@
   <string name="events_notify_tonight">آج رات: %1$s</string>
   <string name="events_notify_several">آج کے مذہبی ایام</string>
   <string name="events_notify_tonight_tag">آج رات</string>
+  <string name="announcement_title">چاند کا اعلان</string>
+  <string name="announcement_toggle">چاند کے فیصلے کے لیے خبریں دیکھیں</string>
+  <string name="announcement_help">ہر مہینے کی ۲۹ تاریخ کے آس پاس ایپ مہینے کے آغاز کی تصدیق کے لیے گوگل نیوز کی سرخیاں پڑھتی ہے۔ یہ سرکاری ذریعہ نہیں۔ صرف پیش گوئی پر انحصار کے لیے بند کریں۔</string>
 </resources>

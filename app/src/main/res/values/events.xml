@@ -26,4 +26,7 @@
   <string name="events_notify_tonight">Tonight: %1$s</string>
   <string name="events_notify_several">Today\'s observances</string>
   <string name="events_notify_tonight_tag">tonight</string>
+  <string name="announcement_title">Moon announcement</string>
+  <string name="announcement_toggle">Check the news for the moon decision</string>
+  <string name="announcement_help">Around the 29th of each month the app reads Google News headlines to confirm the month start. It is not an official source. Turn off to rely on forecasts only.</string>
 </resources>
