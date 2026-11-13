@@ -16,4 +16,11 @@
   <string name="prayer_roza">روزہ %1$s</string>
   <string name="prayer_sehri">سحری ختم %1$s</string>
   <string name="prayer_iftar">افطار %1$s</string>
+  <string name="qibla_line">قبلہ: حقیقی شمال سے گھڑی کی سمت %1$s°</string>
+  <string name="tasbih_title">تسبیح شمار</string>
+  <string name="tasbih_open_hint">گننے کے لیے چھوئیں، ہدف اختیاری ہے</string>
+  <string name="tasbih_hint">گننے کے لیے کہیں بھی چھوئیں</string>
+  <string name="tasbih_target">ہدف: %1$s</string>
+  <string name="tasbih_no_target">کوئی ہدف نہیں</string>
+  <string name="tasbih_reset">صفر کریں</string>
 </resources>
