@@ -33,4 +33,9 @@
   <string name="extra_friday_toggle">Friday reminder</string>
   <string name="extra_friday_help">Every Friday at your reminder time.</string>
   <string name="extra_friday_title">Friday (Jumu\'ah)</string>
+  <string name="compass_title">Qibla compass</string>
+  <string name="compass_open">open compass</string>
+  <string name="compass_note">Hold the phone flat, away from metal and magnets. The green arrow points to the Qibla for the chosen city. A phone compass can be several degrees off.</string>
+  <string name="compass_no_sensor">This phone has no rotation sensor, so the compass cannot work here.</string>
+  <string name="compass_calibrate">Low compass accuracy: move the phone in a figure of eight.</string>
 </resources>

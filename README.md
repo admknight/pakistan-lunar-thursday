@@ -58,7 +58,7 @@ Once installed, the **in-app updater** can check GitHub Releases, download newer
 - **Today's prayer times** on the Home screen for the chosen city, with a method setting (Karachi with Hanafi Asr, or Jafari). In Ramadan the card also shows the roza number, sehri end and iftar. These are calculated times, not a mosque timetable.
 - **Today's verse**: a daily card with a Quran verse (256 chosen verses, so none repeats for about eight months), an Urdu translation of your choice and the date, which can be shared as an image.
 - Optional quiet reminders, all off until switched on: **prayer time alerts**, a **Thursday evening** reminder and a **Friday** reminder.
-- The **Qibla bearing** for the chosen city (a number, not a compass) and a simple **tasbih counter**.
+- The **Qibla bearing** for the chosen city, a live **Qibla compass** using the phone's rotation sensor, and a simple **tasbih counter**.
 - A home-screen widget showing today's Hijri date in Pakistan and the coming first Thursday, with a day count.
 - A one-time automatically scheduled reminder on the first Thursday of each new Islamic month, at **your selected Pakistan time** (11:00 AM PKT by default).
 - Automated date checks using HTTPS and Android `JobScheduler`, nominally every six hours and subject to Android background execution limits.
