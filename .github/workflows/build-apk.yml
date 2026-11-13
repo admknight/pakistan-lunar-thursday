@@ -38,6 +38,9 @@ jobs:
       - name: Run unit tests (date engine, feed, version and reminder rules)
         run: gradle --no-daemon :app:testDebugUnitTest
 
+      - name: Check the announcement-reading rules
+        run: python3 -m unittest discover -s scripts/tests
+
       - name: Verify the three reviewed Gemini music excerpts
         shell: bash
         run: |

@@ -1,0 +1,112 @@
+name: Update confirmed month starts
+
+# Reads news reports of the Central Ruet-e-Hilal Committee's announcement and
+# records the confirmed first day of the next Hijri month in
+# data/month-starts.json. Writes only when at least two publishers agree and
+# none disagrees; otherwise it changes nothing and opens an issue.
+
+on:
+  schedule:
+    # Evening and night in Pakistan (16:07 to 01:37 PKT), when the decision is announced.
+    - cron: '7,37 11-20 * * *'
+    # Next morning (05:07 to 11:07 PKT), before the default reminder time.
+    - cron: '7 0-6 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Report the result without changing the file
+        type: boolean
+        default: true
+      anchor:
+        description: 'Backtest from this confirmed month, e.g. 1448-5=2026-10-13 (never writes)'
+        type: string
+        required: false
+      now:
+        description: 'Act as this time, e.g. 2026-11-13T09:00:00+05:00 (testing)'
+        type: string
+        required: false
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: month-start-corrections
+  cancel-in-progress: false
+
+jobs:
+  update:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Check the reading rules
+        run: python3 -m unittest discover -s scripts/tests
+
+      - name: Look for the announcement
+        id: look
+        shell: bash
+        env:
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+          ANCHOR: ${{ inputs.anchor }}
+          NOW: ${{ inputs.now }}
+        run: |
+          set -euo pipefail
+          args=()
+          if [[ "$DRY_RUN" == "true" ]]; then args+=(--dry-run); fi
+          if [[ -n "${ANCHOR:-}" ]]; then args+=(--anchor "$ANCHOR"); fi
+          if [[ -n "${NOW:-}" ]]; then args+=(--now "$NOW"); fi
+          python3 scripts/update_month_starts.py "${args[@]}"
+
+      - name: Record the confirmed start
+        if: steps.look.outputs.changed == 'true'
+        shell: bash
+        env:
+          SUMMARY: ${{ steps.look.outputs.summary }}
+        run: |
+          set -euo pipefail
+          python3 -c "import json; json.load(open('data/month-starts.json', encoding='utf-8'))"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/month-starts.json
+          git commit -m "Record confirmed month start: $SUMMARY [skip ci]"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then exit 0; fi
+            git pull --rebase origin main
+          done
+          echo 'Could not push the confirmed start.' >&2
+          exit 1
+
+      - name: Ask for a manual check when nothing could be confirmed
+        if: steps.look.outputs.attention == 'true' && !(github.event_name == 'workflow_dispatch' && inputs.dry_run)
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SUMMARY: ${{ steps.look.outputs.summary }}
+        run: |
+          set -euo pipefail
+          title='Month start not confirmed automatically'
+          open="$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number // empty')"
+          if [[ -n "$open" ]]; then
+            echo "Issue #$open is already open."
+            exit 0
+          fi
+          printf '%s\n\n%s\n' "$SUMMARY" \
+            'The app keeps using its forecast until this is settled. To settle it by hand, add the month to `data/month-starts.json` with at least two news sources. This issue closes itself once a start is recorded.' \
+            > "$RUNNER_TEMP/issue.md"
+          gh issue create --title "$title" --body-file "$RUNNER_TEMP/issue.md"
+
+      - name: Close the manual-check issue once a start is recorded
+        if: steps.look.outputs.changed == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SUMMARY: ${{ steps.look.outputs.summary }}
+        run: |
+          set -euo pipefail
+          title='Month start not confirmed automatically'
+          for number in $(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[].number'); do
+            gh issue close "$number" --comment "Recorded: $SUMMARY"
+          done
