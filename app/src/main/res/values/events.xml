@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="events_heading">Upcoming observances</string>
+  <string name="events_none">No observances are switched on. Choose them in Settings.</string>
+  <string name="events_may_shift">date may move by a day</string>
+  <string name="events_night_before">observed the night before</string>
+  <string name="events_days">%1$s days</string>
+  <string name="events_details_title">Observance</string>
+  <string name="events_details_date">Date in Pakistan: %1$s</string>
+  <string name="events_details_eve">Observed on the evening of %1$s.</string>
+  <string name="events_details_unconfirmed">The month start is not confirmed yet, so this date may move by a day.</string>
+  <string name="events_source_note">These dates are a list maintained by this project and follow the month start shown in the app. Please check with your own scholar or calendar.</string>
+  <string name="events_settings_title">Observances</string>
+  <string name="events_settings_help">Choose which observances appear in the calendar.</string>
+  <string name="events_set_shared">Common observances</string>
+  <string name="events_set_shared_help">Ramadan, the two Eids, Ashura, Shab-e-Barat and others.</string>
+  <string name="events_set_a">Ahl al-Bayt days</string>
+  <string name="events_set_a_help">Wiladat and shahadat dates, Arbaeen, Ghadeer and others.</string>
+  <string name="events_set_b">Sahaba and Awliya days</string>
+  <string name="events_set_b_help">Khulafa days, 12 Rabi al-Awwal, Giyarhween and others.</string>
+</resources>

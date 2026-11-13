@@ -380,9 +380,61 @@ public final class MainActivity extends LocalizedActivity {
         for (int i = 0; i < next.size(); i++) {
             add(body, card(monthRow(next.get(i)), i == 0 ? primaryContainer : surfaceVariant, 19), i == 0 ? 17 : 11);
         }
+        renderObservances(body);
         add(body, card(compactSurfaceRow("ⓘ", "Calendar source information",
                 "Forecasts and calculations are not official confirmations",
                 this::calendarDisclaimer), surfaceVariant, 19), 18);
+    }
+
+    private String str(int id, Object... values) {
+        return AppLanguage.wrap(this).getString(id, values);
+    }
+
+    /** Upcoming observances from the sets chosen in Settings. */
+    private void renderObservances(LinearLayout body) {
+        add(body, text(str(R.string.events_heading), 20, true, onSurface), 24);
+        if (EventsStore.enabledSets(this).isEmpty()) {
+            add(body, text(str(R.string.events_none), 13, false, secondary), 8);
+            return;
+        }
+        for (IslamicEvents.Occurrence item : EventsStore.upcoming(this, 8)) {
+            add(body, card(compactSurfaceRow("✦", EventsStore.name(this, item.event),
+                    observanceLine(item), () -> showObservance(item)), surfaceVariant, 19), 9);
+        }
+    }
+
+    private String observanceHijri(IslamicEvents.Occurrence item) {
+        return String.format(AppLanguage.locale(this), "%d", item.month.hijriDay(item.date))
+                + " " + UiText.month(this, item.month);
+    }
+
+    private String observanceLine(IslamicEvents.Occurrence item) {
+        StringBuilder line = new StringBuilder(UiText.date(this, item.date, false))
+                .append(" · ").append(observanceHijri(item));
+        if (item.event.days > 1) {
+            line.append(" · ").append(str(R.string.events_days,
+                    String.format(AppLanguage.locale(this), "%d", item.event.days)));
+        }
+        if (item.event.eve) line.append(" · ").append(str(R.string.events_night_before));
+        if (!item.confirmed) line.append("\n").append(str(R.string.events_may_shift));
+        return line.toString();
+    }
+
+    private void showObservance(IslamicEvents.Occurrence item) {
+        StringBuilder message = new StringBuilder(EventsStore.name(this, item.event))
+                .append("\n\n").append(str(R.string.events_details_date, UiText.date(this, item.date, true)))
+                .append("\n").append(observanceHijri(item));
+        if (item.event.eve) {
+            message.append("\n").append(str(R.string.events_details_eve,
+                    UiText.date(this, item.date.minusDays(1), true)));
+        }
+        if (item.event.noteEn != null && !AppLanguage.isUrdu(this)) {
+            message.append("\n\n").append(item.event.noteEn);
+        }
+        if (!item.confirmed) message.append("\n\n").append(str(R.string.events_details_unconfirmed));
+        message.append("\n\n").append(str(R.string.events_source_note));
+        new AlertDialog.Builder(this).setTitle(str(R.string.events_details_title))
+                .setMessage(message.toString()).setPositiveButton(UiText.tr(this, "Close"), null).show();
     }
 
     private LinearLayout monthRow(LunarEngine.Month item) {
