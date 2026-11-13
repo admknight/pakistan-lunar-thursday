@@ -144,7 +144,7 @@ For such a month the screens also show a **calculated estimate** of whether a si
 - **Android Gradle Plugin:** 9.4.1 (stable)
 - **Gradle:** 9.6.0
 - **Material Components for Android:** 1.14.0 (Material 3)
-- **Languages:** Java and Kotlin (AGP built-in Kotlin), JVM target 17
+- **Languages:** Kotlin (AGP built-in Kotlin), JVM target 17; some unit tests are still written in Java
 - **compileSdk:** 36; **targetSdk:** 35; **minSdk:** 26
 - **Application ID:** `com.scopewise.lunarthursday`
 
