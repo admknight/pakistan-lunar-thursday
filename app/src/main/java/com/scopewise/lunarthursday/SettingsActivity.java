@@ -136,6 +136,19 @@ public final class SettingsActivity extends LocalizedActivity {
                 EventsStore.remindersOn(this), value -> EventsStore.setRemindersOn(this, value));
         add(body, card(observances), 16);
 
+        LinearLayout extras = panel();
+        add(extras, text(getString(R.string.extra_title), 19, true, onSurface), 0);
+        toggle(extras, getString(R.string.extra_prayer_toggle), getString(R.string.extra_prayer_help),
+                ExtraReminderScheduler.isOn(this, ExtraReminderScheduler.PRAYER_ALERTS),
+                value -> ExtraReminderScheduler.setOn(this, ExtraReminderScheduler.PRAYER_ALERTS, value));
+        toggle(extras, getString(R.string.extra_thursday_toggle), getString(R.string.extra_thursday_help),
+                ExtraReminderScheduler.isOn(this, ExtraReminderScheduler.THURSDAY_EVENING),
+                value -> ExtraReminderScheduler.setOn(this, ExtraReminderScheduler.THURSDAY_EVENING, value));
+        toggle(extras, getString(R.string.extra_friday_toggle), getString(R.string.extra_friday_help),
+                ExtraReminderScheduler.isOn(this, ExtraReminderScheduler.FRIDAY),
+                value -> ExtraReminderScheduler.setOn(this, ExtraReminderScheduler.FRIDAY, value));
+        add(body, card(extras), 16);
+
         LinearLayout announcement = panel();
         add(announcement, text(getString(R.string.announcement_title), 19, true, onSurface), 0);
         toggle(announcement, getString(R.string.announcement_toggle), getString(R.string.announcement_help),
@@ -297,6 +310,7 @@ public final class SettingsActivity extends LocalizedActivity {
                 .setTitle(getString(R.string.prayer_method_title))
                 .setSingleChoiceItems(names, current, (dialog, index) -> {
                     PrayerStore.setMethod(this, methods[index]);
+                    ExtraReminderScheduler.sync(this); // Prayer alerts follow the method.
                     dialog.dismiss();
                     render();
                 })
@@ -310,6 +324,7 @@ public final class SettingsActivity extends LocalizedActivity {
                 .setTitle(getString(R.string.hijri_select_city))
                 .setSingleChoiceItems(names, HijriClock.selectedCity(this), (dialog, index) -> {
                     HijriClock.selectCity(this, index);
+                    ExtraReminderScheduler.sync(this); // Prayer alerts follow the city.
                     DateSyncScheduler.ensure(this); // Recalculate month-end Maghrib check times.
                     dialog.dismiss();
                     render();

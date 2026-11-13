@@ -52,6 +52,7 @@
         <receiver android:name=".ReminderReceiver" android:exported="false" />
         <receiver android:name=".SnoozeReceiver" android:exported="false" />
         <receiver android:name=".EventReminderReceiver" android:exported="false" />
+        <receiver android:name=".ExtraReminderReceiver" android:exported="false" />
         <receiver
             android:name=".HijriWidgetProvider"
             android:exported="true"

@@ -23,4 +23,14 @@
   <string name="tasbih_target">ہدف: %1$s</string>
   <string name="tasbih_no_target">کوئی ہدف نہیں</string>
   <string name="tasbih_reset">صفر کریں</string>
+  <string name="extra_title">مزید یاد دہانیاں</string>
+  <string name="extra_prayer_toggle">اوقاتِ نماز کی اطلاع</string>
+  <string name="extra_prayer_help">منتخب شہر اور طریقے کے مطابق پانچوں نمازوں کے وقت ایک خاموش اطلاع۔ شہر ضروری ہے۔</string>
+  <string name="extra_prayer_body">%1$s · حساب شدہ وقت</string>
+  <string name="extra_thursday_toggle">جمعرات کی شام کی یاد دہانی</string>
+  <string name="extra_thursday_help">ہر جمعرات کو منتخب شہر کے مغرب کے وقت، یا شہر کے بغیر شام ۶:۳۰ بجے۔</string>
+  <string name="extra_thursday_title">جمعرات کی شام (شبِ جمعہ)</string>
+  <string name="extra_friday_toggle">جمعہ کی یاد دہانی</string>
+  <string name="extra_friday_help">ہر جمعہ کو آپ کے مقررہ وقت پر۔</string>
+  <string name="extra_friday_title">جمعہ</string>
 </resources>
