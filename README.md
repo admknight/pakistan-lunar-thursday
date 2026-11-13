@@ -54,6 +54,7 @@ Once installed, the **in-app updater** can check GitHub Releases, download newer
 
 ## Features
 
+- A home-screen widget showing today's Hijri date in Pakistan and the coming first Thursday, with a day count.
 - A one-time automatically scheduled reminder on the first Thursday of each new Islamic month, at **your selected Pakistan time** (11:00 AM PKT by default).
 - Automated date checks using HTTPS and Android `JobScheduler`, nominally every six hours and subject to Android background execution limits.
 - Cache of dates the third-party provider explicitly labels as confirmed, never treating its estimates as confirmations.

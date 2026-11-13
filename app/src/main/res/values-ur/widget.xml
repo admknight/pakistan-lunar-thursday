@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="widget_name">ہجری تاریخ اور پہلی جمعرات</string>
+  <string name="widget_description">پاکستان میں آج کی ہجری تاریخ اور آنے والی پہلی جمعرات۔</string>
+  <string name="widget_next_label">پہلی جمعرات</string>
+  <string name="widget_today">آج</string>
+  <string name="widget_tomorrow">کل</string>
+  <string name="widget_in_days">%1$s دن بعد</string>
+  <string name="widget_may_be_instead">اس کے بجائے %1$s بھی ہو سکتی ہے</string>
+</resources>
