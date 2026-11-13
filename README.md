@@ -54,7 +54,7 @@ Once installed, the **in-app updater** can check GitHub Releases, download newer
 
 ## Features
 
-- A one-time automatically scheduled reminder at **11 AM Pakistan time** on the first Thursday of each new Islamic month.
+- A one-time automatically scheduled reminder on the first Thursday of each new Islamic month, at **your selected Pakistan time** (11:00 AM PKT by default).
 - Automated date checks using HTTPS and Android `JobScheduler`, nominally every six hours and subject to Android background execution limits.
 - Cache of dates the third-party provider explicitly labels as confirmed, never treating its estimates as confirmations.
 - PMD published **2026–2027 forecast dates** used as fallback, then a clearly labeled *calculated approximation* for other years.
@@ -126,11 +126,11 @@ A third-party data feed at `https://islamicdatetoday.pk/data/today.json` is used
 - **Android Gradle Plugin:** 9.4.1 (stable)
 - **Gradle:** 9.6.0
 - **Material Components for Android:** 1.14.0 (Material 3)
-- **Java:** 17
+- **Languages:** Java and Kotlin (AGP built-in Kotlin), JVM target 17
 - **compileSdk:** 36; **targetSdk:** 35; **minSdk:** 26
 - **Application ID:** `com.scopewise.lunarthursday`
 
-The GitHub workflow installs the matching Android SDK platform/build tools, runs 206 portable Java assertions covering scheduling, feed policy, versioning, weather codes and alarm-tone selection, builds the APK and attaches its SHA-256 hash. It runs on pushes to `main`, pull requests and manual dispatch. Successful pushes to `main` also publish a **versioned GitHub pre-release** if that version has not already been published. Increment `versionName` when publishing a new preview; rebuilding the same version does not silently replace public assets. This project deliberately uses the stable Java Material Components SDK rather than introducing Kotlin/Compose into an already tested Java-only notification engine.
+The GitHub workflow installs the matching Android SDK platform/build tools, runs the unit tests (`gradle :app:testDebugUnitTest`) covering scheduling, possible month starts, feed policy, versioning, weather codes, sunset math, reminder rules and alarm-tone selection, builds the APK and attaches its SHA-256 hash. It runs on pushes to `main`, pull requests and manual dispatch. Successful pushes to `main` also publish a **versioned GitHub pre-release** if that version has not already been published. Increment `versionName` when publishing a new preview; rebuilding the same version does not silently replace public assets. New code is written in Kotlin and the existing Java is being converted in stages; the interface still uses the stable Material Components views, not Compose.
 
 ## Local build
 
@@ -142,27 +142,13 @@ gradle --no-daemon :app:assembleDebug
 
 The debug build appears at `app/build/outputs/apk/debug/app-debug.apk`.
 
-Portable scheduling tests (no Android SDK required):
+Unit tests (need the Android SDK, like the build):
 
 ```bash
-mkdir -p build/portable-tests
-javac -d build/portable-tests \
-  app/src/main/java/com/scopewise/lunarthursday/LunarEngine.java \
-  app/src/main/java/com/scopewise/lunarthursday/FeedDatePolicy.java \
-  app/src/main/java/com/scopewise/lunarthursday/VersionPolicy.java \
-  app/src/main/java/com/scopewise/lunarthursday/WeatherCode.java \
-  app/src/main/java/com/scopewise/lunarthursday/AlarmTonePolicy.java \
-  test/java/com/scopewise/lunarthursday/EngineTest.java \
-  test/java/com/scopewise/lunarthursday/FeedDatePolicyTest.java \
-  test/java/com/scopewise/lunarthursday/VersionPolicyTest.java \
-  test/java/com/scopewise/lunarthursday/WeatherCodeTest.java \
-  test/java/com/scopewise/lunarthursday/AlarmTonePolicyTest.java
-java -cp build/portable-tests com.scopewise.lunarthursday.EngineTest
-java -cp build/portable-tests com.scopewise.lunarthursday.FeedDatePolicyTest
-java -cp build/portable-tests com.scopewise.lunarthursday.VersionPolicyTest
-java -cp build/portable-tests com.scopewise.lunarthursday.WeatherCodeTest
-java -cp build/portable-tests com.scopewise.lunarthursday.AlarmTonePolicyTest
+gradle --no-daemon :app:testDebugUnitTest
 ```
+
+Tests live in `app/src/test`. The older self-checking test programs run through `PortableSuiteTest`.
 
 ## Privacy
 
@@ -180,6 +166,14 @@ The app contacts the independent Hijri-date feed and GitHub's public Releases AP
 
 ## License
 
-The application source code is MIT-licensed; see [LICENSE](LICENSE). The externally generated musical recordings have separate [provenance and reuse notes](docs/AUDIO.md) and are **not assumed to be covered by MIT**.
+The application source code is MIT-licensed; see [LICENSE](LICENSE).
 
-**Build evidence:** Pure-Java tests and static XML checks can be run without Android SDK. Successful GitHub CI builds establish APK compilation, not real-device notification timing or official announcement accuracy.
+### How to credit this project
+
+The MIT license requires that the copyright notice and license text stay with any copy or substantial part of this code. If you reuse it, please also credit it where your users can see it, for example on an About or open-source licenses screen:
+
+> Includes code from Hilal Thursday by admknight (https://github.com/admknight/pakistan-lunar-thursday), MIT License.
+
+ The externally generated musical recordings have separate [provenance and reuse notes](docs/AUDIO.md) and are **not assumed to be covered by MIT**.
+
+**Build evidence:** Unit tests run in CI before every build. Successful GitHub CI builds establish APK compilation, not real-device notification timing or official announcement accuracy.
