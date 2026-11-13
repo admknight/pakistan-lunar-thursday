@@ -22,6 +22,7 @@
         <activity android:name=".AlarmToneActivity" android:exported="false" />
         <activity android:name=".SettingsActivity" android:exported="false" />
         <activity android:name=".AboutActivity" android:exported="false" />
+        <activity android:name=".MorningCardActivity" android:exported="false" />
         <activity android:name=".AlarmActivity" android:exported="false"
             android:showWhenLocked="true" android:turnScreenOn="true" />
         <activity android:name=".MainActivity" android:exported="true">

@@ -308,6 +308,8 @@ public final class MainActivity extends LocalizedActivity {
             card.setOnClickListener(v -> showMonthDetails(next));
             add(body, card, 17);
             renderPrayerTimes(body, currentHijri);
+            add(body, card(compactSurfaceRow("❖", str(R.string.verse_title), str(R.string.verse_open_hint),
+                    () -> startActivity(new Intent(this, MorningCardActivity.class))), surfaceVariant, 19), 12);
             countdownTarget = next.remindAt(ReminderStore.reminderTime(this));
             updateCounters();
             ticker.postDelayed(tick, 60_000L);
