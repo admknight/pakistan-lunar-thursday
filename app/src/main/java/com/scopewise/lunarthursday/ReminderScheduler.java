@@ -33,6 +33,7 @@ final class ReminderScheduler {
         HijriWidgetProvider.refreshAll(context);
         // Observance reminders use their own alarm and re-arm from the same data.
         EventReminderScheduler.sync(context);
+        ExtraReminderScheduler.sync(context);
         // Cancel old PendingIntent on schedule changes, boot, and when switched off.
         cancel(context);
         SharedPreferences p = ReminderStore.prefs(context);

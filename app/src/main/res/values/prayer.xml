@@ -23,4 +23,14 @@
   <string name="tasbih_target">Target: %1$s</string>
   <string name="tasbih_no_target">No target</string>
   <string name="tasbih_reset">Reset</string>
+  <string name="extra_title">More reminders</string>
+  <string name="extra_prayer_toggle">Prayer time alerts</string>
+  <string name="extra_prayer_help">A quiet notification at each of the five prayer times for the chosen city and method. Needs a city.</string>
+  <string name="extra_prayer_body">%1$s · calculated time</string>
+  <string name="extra_thursday_toggle">Thursday evening reminder</string>
+  <string name="extra_thursday_help">Every Thursday at Maghrib for the chosen city, or at 6:30 PM without one.</string>
+  <string name="extra_thursday_title">Thursday evening (Shab-e-Jumma)</string>
+  <string name="extra_friday_toggle">Friday reminder</string>
+  <string name="extra_friday_help">Every Friday at your reminder time.</string>
+  <string name="extra_friday_title">Friday (Jumu\'ah)</string>
 </resources>

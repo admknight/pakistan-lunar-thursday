@@ -14,6 +14,7 @@ final class ReminderNotifications {
     private static final String CHANNEL_ID = "lunar_thursday_monthly_v1";
     private static final int MONTHLY_ID = 1701;
     private static final int OBSERVANCE_ID = 1702;
+    private static final int EXTRA_ID = 1703;
     private static final int TEST_ID = 1702;
 
     private ReminderNotifications() { }
@@ -61,6 +62,11 @@ final class ReminderNotifications {
     /** A day's observances: an ordinary notification, separate from the monthly reminder. */
     static void observance(Context context, String title, String body) {
         send(context, OBSERVANCE_ID, title, body);
+    }
+
+    /** Prayer-time, Thursday-evening and Friday reminders: ordinary notifications. */
+    static void extra(Context context, String title, String body) {
+        send(context, EXTRA_ID, title, body);
     }
 
     static void missed(Context context, String monthLabel, String basis) {
