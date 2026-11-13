@@ -163,6 +163,11 @@ public final class SettingsActivity extends LocalizedActivity {
                 + " · " + cityName, this::chooseHijriCity), 10);
         add(hijriTiming, text(getString(R.string.hijri_clock_explanation),
                 12, false, onSurfaceVariant), 6);
+        add(hijriTiming, slimAction("🕌", getString(R.string.prayer_method_title) + " · "
+                + getString(PrayerStore.method(this) == PrayerTimes.Method.JAFARI
+                        ? R.string.prayer_method_jafari : R.string.prayer_method_karachi),
+                this::choosePrayerMethod), 12);
+        add(hijriTiming, text(getString(R.string.prayer_method_help), 12, false, onSurfaceVariant), 6);
         add(body, card(hijriTiming), 16);
 
         LinearLayout scenes = panel();
@@ -282,6 +287,21 @@ public final class SettingsActivity extends LocalizedActivity {
             }
         }, current.getHour(), current.getMinute(),
                 android.text.format.DateFormat.is24HourFormat(this)).show();
+    }
+
+    private void choosePrayerMethod() {
+        PrayerTimes.Method[] methods = {PrayerTimes.Method.KARACHI_HANAFI, PrayerTimes.Method.JAFARI};
+        String[] names = {getString(R.string.prayer_method_karachi), getString(R.string.prayer_method_jafari)};
+        int current = PrayerStore.method(this) == PrayerTimes.Method.JAFARI ? 1 : 0;
+        new android.app.AlertDialog.Builder(this)
+                .setTitle(getString(R.string.prayer_method_title))
+                .setSingleChoiceItems(names, current, (dialog, index) -> {
+                    PrayerStore.setMethod(this, methods[index]);
+                    dialog.dismiss();
+                    render();
+                })
+                .setNegativeButton(UiText.tr(this, "Close"), null)
+                .show();
     }
 
     private void chooseHijriCity() {

@@ -48,6 +48,12 @@ final class HijriClock {
         ReminderStore.prefs(context).edit().putInt(CITY, index).apply();
     }
 
+    /** Latitude and longitude of the chosen city, or null for the automatic option. */
+    static double[] cityCoordinates(Context context) {
+        int city = selectedCity(context);
+        return city > 0 ? new double[] {CITY_COORDS[city][0], CITY_COORDS[city][1]} : null;
+    }
+
     static String[] cityLabels(Context context) {
         return AppLanguage.wrap(context).getResources().getStringArray(R.array.hijri_sunset_cities);
     }
