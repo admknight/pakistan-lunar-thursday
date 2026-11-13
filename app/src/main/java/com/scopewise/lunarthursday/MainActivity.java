@@ -310,6 +310,8 @@ public final class MainActivity extends LocalizedActivity {
             renderPrayerTimes(body, currentHijri);
             add(body, card(compactSurfaceRow("❖", str(R.string.verse_title), str(R.string.verse_open_hint),
                     () -> startActivity(new Intent(this, MorningCardActivity.class))), surfaceVariant, 19), 12);
+            add(body, card(compactSurfaceRow("◎", str(R.string.tasbih_title), str(R.string.tasbih_open_hint),
+                    () -> startActivity(new Intent(this, TasbihActivity.class))), surfaceVariant, 19), 9);
             countdownTarget = next.remindAt(ReminderStore.reminderTime(this));
             updateCounters();
             ticker.postDelayed(tick, 60_000L);
@@ -421,6 +423,11 @@ public final class MainActivity extends LocalizedActivity {
         String[] cities = HijriClock.cityLabels(this);
         String method = str(PrayerStore.method(this) == PrayerTimes.Method.JAFARI
                 ? R.string.prayer_method_jafari : R.string.prayer_method_karachi);
+        double[] place = HijriClock.cityCoordinates(this);
+        if (place != null) {
+            add(panel, text(str(R.string.qibla_line, String.format(AppLanguage.locale(this), "%d",
+                    Math.round(Qibla.bearing(place[0], place[1])))), 13, true, onSurface), 8);
+        }
         add(panel, text((city < cities.length ? cities[city] : "") + " · " + method
                 + "\n" + str(R.string.prayer_note), 11, false, secondary), 8);
         add(body, card(panel, surfaceVariant, 19), 14);

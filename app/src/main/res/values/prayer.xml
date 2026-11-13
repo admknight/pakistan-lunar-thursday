@@ -16,4 +16,11 @@
   <string name="prayer_roza">Roza %1$s</string>
   <string name="prayer_sehri">Sehri ends %1$s</string>
   <string name="prayer_iftar">Iftar %1$s</string>
+  <string name="qibla_line">Qibla: %1$s° clockwise from true north</string>
+  <string name="tasbih_title">Tasbih counter</string>
+  <string name="tasbih_open_hint">Tap to count, with an optional target</string>
+  <string name="tasbih_hint">Tap anywhere to count</string>
+  <string name="tasbih_target">Target: %1$s</string>
+  <string name="tasbih_no_target">No target</string>
+  <string name="tasbih_reset">Reset</string>
 </resources>
