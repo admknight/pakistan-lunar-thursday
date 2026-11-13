@@ -43,6 +43,20 @@ final class ReminderNotifications {
                         + UiText.tr(context, " Pakistan time. ") + note);
     }
 
+    /** Unconfirmed month, other candidate Thursday: says plainly that it is not certain. */
+    static void possible(Context context, String monthLabel, String expectedDateIso) {
+        Context localized = AppLanguage.wrap(context);
+        String forecast;
+        try {
+            forecast = UiText.date(context, java.time.LocalDate.parse(expectedDateIso), true);
+        } catch (RuntimeException missingOrInvalid) {
+            forecast = "?";
+        }
+        send(context, MONTHLY_ID, localized.getString(R.string.possible_thursday_title),
+                localized.getString(R.string.possible_thursday_body,
+                        UiText.monthLabel(context, monthLabel), forecast));
+    }
+
     static void missed(Context context, String monthLabel, String basis) {
         send(context, MONTHLY_ID, UiText.tr(context, "Hilal Thursday alarm was missed"),
                 UiText.monthLabel(context, monthLabel == null ? "Hilal Thursday" : monthLabel)

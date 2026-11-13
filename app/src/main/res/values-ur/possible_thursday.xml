@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="possible_thursday_title">ممکنہ پہلی جمعرات</string>
+  <string name="possible_thursday_body">آج %1$s کی پہلی جمعرات ہو سکتی ہے۔ چاند کے فیصلے کی ابھی تصدیق نہیں ہوئی؛ پیش گوئی کے مطابق تاریخ %2$s ہے۔</string>
+</resources>
