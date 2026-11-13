@@ -2,4 +2,5 @@
 <resources>
   <string name="possible_thursday_title">ممکنہ پہلی جمعرات</string>
   <string name="possible_thursday_body">آج %1$s کی پہلی جمعرات ہو سکتی ہے۔ چاند کے فیصلے کی ابھی تصدیق نہیں ہوئی؛ پیش گوئی کے مطابق تاریخ %2$s ہے۔</string>
+  <string name="depends_on_sighting">چاند کی رویت پر منحصر · اس کے بجائے %1$s بھی ہو سکتی ہے</string>
 </resources>

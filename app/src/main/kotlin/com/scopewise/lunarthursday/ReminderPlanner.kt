@@ -36,10 +36,46 @@ object ReminderPlanner {
             ZonedDateTime.of(thursday, chosenTime, LunarEngine.PAKISTAN).toInstant()
     }
 
+    /**
+     * The month as screens and reminders should show it. Normally this is the
+     * engine's month. If its forecast start is impossible after a confirmed
+     * earlier month (not 29 or 30 days on), the nearest possible start is used
+     * instead, so the date shown always matches the reminder that is planned.
+     */
+    @JvmStatic
+    fun effectiveMonth(hijriYear: Int, hijriMonth: Int, confirmedStarts: Map<String, LocalDate>): LunarEngine.Month {
+        val base = LunarEngine.month(hijriYear, hijriMonth, confirmedStarts)
+        val possible = MonthStartCandidates.forMonth(hijriYear, hijriMonth, confirmedStarts).possibleStarts
+        if (base.start in possible) return base
+        val nearest = possible.minByOrNull { abs(ChronoUnit.DAYS.between(it, base.start)) }!!
+        return LunarEngine.Month(hijriYear, hijriMonth, nearest, base.basis)
+    }
+
+    /** The other Thursday an unconfirmed month could still begin with, or null when there is none. */
+    @JvmStatic
+    fun otherThursday(hijriYear: Int, hijriMonth: Int, confirmedStarts: Map<String, LocalDate>): LocalDate? =
+        occurrences(hijriYear, hijriMonth, confirmedStarts).firstOrNull { it.kind == Kind.POSSIBLE }?.thursday
+
+    /** Upcoming months for the screens, ordered by their main reminder, using [effectiveMonth]. */
+    @JvmStatic
+    fun upcomingMonths(now: Instant, confirmedStarts: Map<String, LocalDate>, limit: Int,
+                       chosenTime: LocalTime): List<LunarEngine.Month> {
+        val approximateHijriYear = now.atZone(LunarEngine.PAKISTAN).year - 579
+        val found = ArrayList<LunarEngine.Month>()
+        for (year in maxOf(1, approximateHijriYear - 2)..approximateHijriYear + 3) {
+            for (month in 1..12) {
+                val candidate = effectiveMonth(year, month, confirmedStarts)
+                if (candidate.remindAt(chosenTime).isAfter(now)) found.add(candidate)
+            }
+        }
+        found.sortBy { it.remindAt(chosenTime) }
+        return if (found.size > limit) found.subList(0, limit) else found
+    }
+
     /** Every Thursday on which the given month may be reminded, earliest first. */
     @JvmStatic
     fun occurrences(hijriYear: Int, hijriMonth: Int, confirmedStarts: Map<String, LocalDate>): List<Occurrence> {
-        val month = LunarEngine.month(hijriYear, hijriMonth, confirmedStarts)
+        val month = effectiveMonth(hijriYear, hijriMonth, confirmedStarts)
         val candidates = MonthStartCandidates.forMonth(hijriYear, hijriMonth, confirmedStarts)
         if (candidates.basis == MonthStartCandidates.Basis.CONFIRMED) {
             val thursday = candidates.earliestThursday
