@@ -45,4 +45,6 @@ android {
 dependencies {
     implementation 'com.google.android.material:material:1.14.0'
     testImplementation 'junit:junit:4.13.2'
+    // Real org.json for unit tests; on a device Android supplies it.
+    testImplementation 'org.json:json:20240303'
 }

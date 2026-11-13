@@ -119,6 +119,10 @@ The updated app icon uses native Android vector foreground/background layers and
 
 A third-party data feed at `https://islamicdatetoday.pk/data/today.json` is used for estimated and explicitly reported-confirmed dates; it is **not** an official government announcement API. The authoritative moon-sighting decision in Pakistan is made by the Central Ruet-e-Hilal Committee. The feed previously returned a value of `pakistan_ruet_e_hilal_estimated`, which the app correctly does **not** treat as confirmation. There is no verified official machine-readable announcement API integrated into this project.
 
+### Confirmed month starts (corrections file)
+
+Because that feed has not been seen to report confirmations, the app also reads this repository's own [`data/month-starts.json`](data/month-starts.json). It lists Hijri month starts taken from reports of the Central Ruet-e-Hilal Committee's announcement, each backed by at least two independent news sources. The app accepts an entry only if it fits the calendar: 29 or 30 days after a confirmed previous month, or within three days of the forecast when no neighbour is confirmed. One edit to that file corrects every installed copy without an app release. It is a project-maintained record, **not an official government source**, and it can be late or wrong.
+
 **Automatic operation does not mean guaranteed official accuracy.** If the feed is late, wrong, offline, or never reports a confirmation, the reminder will use a forecast/estimate; this may move the alert to the wrong Thursday. Android power management can defer a background refresh or notification, especially with permission restrictions, a switched-off device or force-stop. The UI always labels the calendar basis.
 
 ## Toolchain
@@ -152,7 +156,7 @@ Tests live in `app/src/test`. The older self-checking test programs run through 
 
 ## Privacy
 
-The app contacts the independent Hijri-date feed and GitHub's public Releases API, whose providers may observe the connecting IP address. **Weather visuals are strictly opt-in:** after enabling them, Android requests only approximate foreground location; coordinates are rounded to two decimal places (approximately 1 km) and sent by HTTPS to [Open-Meteo](https://open-meteo.com/). Raw location coordinates are not saved, and turning the feature off clears cached weather. No background or precise location permission is requested. Weather conditions are cached locally for up to three hours. Open-Meteo forecast data is supplied under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) and its free-hosted API is intended for non-commercial use. The app sends no account credentials or tracking identifiers. Existing reminder settings and month-start observations remain local.
+The app contacts the independent Hijri-date feed, this repository's corrections file on GitHub and GitHub's public Releases API, whose providers may observe the connecting IP address. **Weather visuals are strictly opt-in:** after enabling them, Android requests only approximate foreground location; coordinates are rounded to two decimal places (approximately 1 km) and sent by HTTPS to [Open-Meteo](https://open-meteo.com/). Raw location coordinates are not saved, and turning the feature off clears cached weather. No background or precise location permission is requested. Weather conditions are cached locally for up to three hours. Open-Meteo forecast data is supplied under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) and its free-hosted API is intended for non-commercial use. The app sends no account credentials or tracking identifiers. Existing reminder settings and month-start observations remain local.
 
 ## Attribution / references
 
