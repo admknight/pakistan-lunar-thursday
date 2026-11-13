@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "authority": "Central Ruet-e-Hilal Committee, Pakistan (as reported by the listed news sources)",
+  "note": "Confirmed first days of Hijri months in Pakistan. Each entry needs at least two independent reports of the committee's announcement. Read by the app; do not add forecasts.",
+  "months": [
+    {
+      "hijri_year": 1448,
+      "hijri_month": 6,
+      "first_day": "2026-11-12",
+      "sighted_on_29th": false,
+      "sources": [
+        "https://pakobserver.net/?p=786836",
+        "https://bloompakistan.com/?p=187344"
+      ]
+    }
+  ]
+}

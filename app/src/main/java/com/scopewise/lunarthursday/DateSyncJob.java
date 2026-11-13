@@ -31,6 +31,15 @@ public final class DateSyncJob extends JobService {
             } catch (Exception ignored) {
                 // Keep cached observed dates; scheduling continues from fallback.
             }
+            // The project's own corrections file is read after the feed, so a
+            // confirmed month start from it is the value that stays stored.
+            boolean corrections = false;
+            try {
+                corrections = CorrectionsSync.fetchAndApply(this);
+            } catch (Exception ignored) {
+                // Same fallback: keep what is cached and retry later.
+            }
+            connected = connected && corrections;
             if (!stopped) {
                 int id = params.getJobId();
                 boolean isFollowup = id >= DateSyncScheduler.MONTH_FIRST_ID
