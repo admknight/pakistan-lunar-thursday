@@ -7,10 +7,10 @@ name: Update confirmed month starts
 
 on:
   schedule:
-    # Evening and night in Pakistan (16:07 to 01:37 PKT), when the decision is announced.
-    - cron: '7,37 11-20 * * *'
-    # Next morning (05:07 to 11:07 PKT), before the default reminder time.
-    - cron: '7 0-6 * * *'
+    # Every 15 minutes, all day. GitHub delays or drops many scheduled runs, so
+    # frequent attempts are the safeguard. Outside a decision window the script
+    # exits at once without any network request.
+    - cron: '4,19,34,49 * * * *'
   workflow_dispatch:
     inputs:
       dry_run:

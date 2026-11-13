@@ -294,7 +294,7 @@ public final class MainActivity extends LocalizedActivity {
             hoursValue = addCounter(countdown, "Hours");
             minutesValue = addCounter(countdown, "Minutes");
             add(details, countdown, 15);
-            add(details, text(sourceLabel(next.basis), 12, false, onPrimaryContainer), 12);
+            add(details, text(sourceLine(next), 12, false, onPrimaryContainer), 12);
             WeatherManager.Scene live = WeatherManager.current(this);
             if (live != null) {
                 add(details, text("🌤 " + live.description(this) + "  ·  Weather: Open-Meteo", 12, false, onPrimaryContainer), 7);
@@ -399,7 +399,7 @@ public final class MainActivity extends LocalizedActivity {
         details.addView(text(UiText.date(this, item.thursday(), false), 13, false, secondary));
         details.addView(text(UiText.expectedHijriDate(this, item, item.thursday()),
                 12, true, onSurface));
-        details.addView(text(sourceLabel(item.basis), 11, false, secondary));
+        details.addView(text(sourceLine(item), 11, false, secondary));
         row.addView(details, new LinearLayout.LayoutParams(0, -2, 1));
         row.addView(text(chevron(), 27, false, secondary));
         row.setOnClickListener(v -> showMonthDetails(item));
@@ -492,6 +492,7 @@ public final class MainActivity extends LocalizedActivity {
                 + "\n" + UiText.tr(this, "Reminder: ")
                 + UiText.reminderTimeText(this) + " PKT"
                 + "\n\n" + UiText.tr(this, "Source: ") + LunarEngine.basisDescription(item.basis)
+                + dependsOnSightingNote(item)
                 + "\n\n" + UiText.tr(this, "Forecasts and third-party reports may differ from the official Ruet-e-Hilal decision.");
         new AlertDialog.Builder(this).setTitle(UiText.tr(this, "Lunar month details"))
                 .setMessage(message).setPositiveButton(UiText.tr(this, "Close"), null).show();
@@ -509,8 +510,27 @@ public final class MainActivity extends LocalizedActivity {
         return UiText.tr(this, "Calendar estimate · not confirmed");
     }
 
+    private String dependsOnSightingNote(LunarEngine.Month item) {
+        java.time.LocalDate other = ReminderPlanner.otherThursday(
+                item.hijriYear, item.hijriMonth, ReminderStore.confirmedStarts(this));
+        if (other == null) return "";
+        return "\n\n" + AppLanguage.wrap(this).getString(
+                R.string.depends_on_sighting, UiText.date(this, other, true));
+    }
+
+    /** Source label, plus a second line when the first Thursday still depends on the sighting. */
+    private String sourceLine(LunarEngine.Month item) {
+        String label = sourceLabel(item.basis);
+        java.time.LocalDate other = ReminderPlanner.otherThursday(
+                item.hijriYear, item.hijriMonth, ReminderStore.confirmedStarts(this));
+        if (other == null) return label;
+        return label + "\n" + AppLanguage.wrap(this).getString(
+                R.string.depends_on_sighting, UiText.date(this, other, false));
+    }
+
     private List<LunarEngine.Month> months(int n) {
-        return LunarEngine.upcoming(Instant.now(), ReminderStore.confirmedStarts(this),
+        // Same months and dates the reminder planner uses, so screens and alerts agree.
+        return ReminderPlanner.upcomingMonths(Instant.now(), ReminderStore.confirmedStarts(this),
                 n, ReminderStore.reminderTime(this));
     }
 

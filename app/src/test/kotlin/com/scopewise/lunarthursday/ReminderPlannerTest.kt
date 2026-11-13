@@ -80,6 +80,49 @@ class ReminderPlannerTest {
         assertEquals("2027-04-15 CONFIRMED", "${third.thursday} ${third.kind}")
     }
 
+    /** A confirmed month can make the next month's forecast start impossible. */
+    @Test fun impossibleForecastStartIsReplacedByTheNearestPossibleOne() {
+        // Forecast: Sha'ban 1449 starts Thu 30 Dec 2027. If Rajab is confirmed on Thu 2 Dec,
+        // Sha'ban can only start Fri 31 Dec or Sat 1 Jan, so its first Thursday is 6 Jan.
+        val confirmed = mapOf("1449-7" to d("2027-12-02"))
+        assertEquals(d("2027-12-30"), LunarEngine.month(1449, 8, confirmed).start)
+        val effective = ReminderPlanner.effectiveMonth(1449, 8, confirmed)
+        assertEquals(d("2027-12-31"), effective.start)
+        assertEquals(d("2028-01-06"), effective.thursday())
+        assertEquals(1, effective.hijriDay(d("2027-12-31")))
+        assertEquals(listOf("2028-01-06 EXPECTED"), shape(1449, 8, confirmed))
+        assertEquals(null, ReminderPlanner.otherThursday(1449, 8, confirmed))
+    }
+
+    @Test fun effectiveMonthIsTheEngineMonthWhenTheForecastIsPossible() {
+        for ((key, start) in LunarEngine.publishedStarts()) {
+            val (y, m) = key.split("-").map { it.toInt() }
+            assertEquals(key, start, ReminderPlanner.effectiveMonth(y, m, emptyMap()).start)
+        }
+        assertEquals(d("2026-11-12"), ReminderPlanner.effectiveMonth(1448, 6, jt1448).start)
+    }
+
+    @Test fun otherThursdayIsOnlySetForSightingDependentMonths() {
+        assertEquals(null, ReminderPlanner.otherThursday(1448, 6, jt1448))
+        assertEquals(null, ReminderPlanner.otherThursday(1448, 7, jt1448))
+        assertEquals(d("2027-04-08"), ReminderPlanner.otherThursday(1448, 11, mapOf("1448-10" to d("2027-03-10"))))
+    }
+
+    @Test fun upcomingMonthsMatchTheEngineListAndThePlannedReminder() {
+        val now = Instant.parse("2026-11-13T04:00:00Z")
+        val old = LunarEngine.upcoming(now, emptyMap(), 7, eleven).map { "${it.key()} ${it.thursday()}" }
+        val new = ReminderPlanner.upcomingMonths(now, emptyMap(), 7, eleven).map { "${it.key()} ${it.thursday()}" }
+        assertEquals(old, new)
+        // The first listed month is the one whose main reminder is planned next.
+        val confirmed = mapOf("1449-7" to d("2027-12-02"))
+        val at = Instant.parse("2027-12-31T00:00:00Z")
+        val listed = ReminderPlanner.upcomingMonths(at, confirmed, 1, eleven)[0]
+        val planned = ReminderPlanner.next(at, confirmed, eleven)!!
+        assertEquals("1449-8", listed.key())
+        assertEquals(planned.month.key(), listed.key())
+        assertEquals(planned.thursday, listed.thursday())
+    }
+
     /** With no confirmations, the planner's expected reminders are exactly the old engine's. */
     @Test fun matchesTheExistingEngineWhenIgnoringPossibleNotices() {
         var now = Instant.parse("2026-01-01T00:00:00Z")
