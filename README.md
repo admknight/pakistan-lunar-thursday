@@ -135,6 +135,8 @@ GitHub starts only some scheduled runs, so the app does not depend on that workf
 
 A Hijri month is 29 or 30 days long, so once a month's start is confirmed the next month can begin on only two days. Both usually lead to the same first Thursday. They differ only when the 29th falls on a Wednesday: a sighting makes Thursday the 1st, otherwise the first Thursday is a week later. In such a month, if no confirmation has arrived by the reminder time, the app keeps the normal reminder on the forecast Thursday and adds a quiet **Possible first Thursday** notification on the other one. It says plainly that the moon decision is not confirmed and never uses the ringing alarm. Once the start is confirmed, only the correct Thursday is reminded.
 
+For such a month the screens also show a **calculated estimate** of whether a sighting that evening is likely, borderline or unlikely. It uses low-precision sun and moon positions and Odeh's visibility criterion for five places across Pakistan. Against this app's PMD forecast table it agrees in 19 or more of 22 months. It is a hint only and never changes a reminder; the committee's decision is what counts.
+
 **Automatic operation does not mean guaranteed official accuracy.** If the feed is late, wrong, offline, or never reports a confirmation, the reminder will use a forecast/estimate; this may move the alert to the wrong Thursday. Android power management can defer a background refresh or notification, especially with permission restrictions, a switched-off device or force-stop. The UI always labels the calendar basis.
 
 ## Toolchain

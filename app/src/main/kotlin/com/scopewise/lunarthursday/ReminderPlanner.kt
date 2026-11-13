@@ -51,6 +51,14 @@ object ReminderPlanner {
         return LunarEngine.Month(hijriYear, hijriMonth, nearest, base.basis)
     }
 
+    /** The evening of the 29th of the month before: when the sighting for this month is decided. */
+    @JvmStatic
+    fun decisionEvening(hijriYear: Int, hijriMonth: Int, confirmedStarts: Map<String, LocalDate>): LocalDate {
+        val previousYear = if (hijriMonth == 1) hijriYear - 1 else hijriYear
+        val previousMonth = if (hijriMonth == 1) 12 else hijriMonth - 1
+        return effectiveMonth(previousYear, previousMonth, confirmedStarts).start.plusDays(28)
+    }
+
     /** The other Thursday an unconfirmed month could still begin with, or null when there is none. */
     @JvmStatic
     fun otherThursday(hijriYear: Int, hijriMonth: Int, confirmedStarts: Map<String, LocalDate>): LocalDate? =
