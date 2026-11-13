@@ -56,6 +56,7 @@ Once installed, the **in-app updater** can check GitHub Releases, download newer
 
 - An **Upcoming observances** list in the Calendar tab, from sets you switch on in Settings (common observances are on by default). Each observance day gets one quiet notification at your reminder time, which you can switch off as a whole or per observance. The dates are a project-maintained list, not an authoritative calendar.
 - **Today's prayer times** on the Home screen for the chosen city, with a method setting (Karachi with Hanafi Asr, or Jafari). In Ramadan the card also shows the roza number, sehri end and iftar. These are calculated times, not a mosque timetable.
+- **Today's verse**: a daily card with a short Quran verse, an Urdu translation of your choice and the date, which can be shared as an image.
 - A home-screen widget showing today's Hijri date in Pakistan and the coming first Thursday, with a day count.
 - A one-time automatically scheduled reminder on the first Thursday of each new Islamic month, at **your selected Pakistan time** (11:00 AM PKT by default).
 - Automated date checks using HTTPS and Android `JobScheduler`, nominally every six hours and subject to Android background execution limits.
@@ -180,6 +181,8 @@ The app contacts the independent Hijri-date feed, this repository's corrections 
 ## License
 
 The application source code is MIT-licensed; see [LICENSE](LICENSE).
+
+**Not covered by the MIT license:** `app/src/main/assets/verses.json`. Its Quran text is the Tanzil Quran Text (Uthmani, Version 1.1), Copyright (C) 2007-2026 Tanzil Project, Creative Commons Attribution 3.0, copied verbatim; changing it is not allowed, and its source is [tanzil.net](https://tanzil.net/). Its Urdu translations (Fateh Muhammad Jalandhry, Muhammad Hussain Najafi, Syed Zeeshan Haider Jawadi) come from [tanzil.net/trans](https://tanzil.net/trans/), where they are provided for non-commercial purposes only; any other use needs the translator's or publisher's permission. Anyone reusing this project commercially must remove or separately license those translations. The file is rebuilt only with `scripts/build_verses.py`, never edited by hand.
 
 ### How to credit this project
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="verse_title">Today\'s verse</string>
+  <string name="verse_open_hint">View the daily card and share it as an image</string>
+  <string name="verse_share">Share as image</string>
+  <string name="verse_translation">Urdu translation</string>
+  <string name="verse_reference">Quran %1$s:%2$s</string>
+  <string name="verse_credit">Quran text: Tanzil.net · Translation: %1$s</string>
+  <string name="verse_notice">Quran text from the Tanzil Project (tanzil.net), shown unchanged. Urdu translations from tanzil.net/trans, for non-commercial use only. No translation is a substitute for the Quran text.</string>
+  <string name="verse_unavailable">The verse could not be loaded.</string>
+  <string name="verse_share_failed">The image could not be shared.</string>
+</resources>

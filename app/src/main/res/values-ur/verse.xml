@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="verse_title">آج کی آیت</string>
+  <string name="verse_open_hint">روزانہ کا کارڈ دیکھیں اور تصویر کے طور پر شیئر کریں</string>
+  <string name="verse_share">تصویر کے طور پر شیئر کریں</string>
+  <string name="verse_translation">اردو ترجمہ</string>
+  <string name="verse_reference">القرآن %1$s:%2$s</string>
+  <string name="verse_credit">متنِ قرآن: Tanzil.net · ترجمہ: %1$s</string>
+  <string name="verse_notice">متنِ قرآن تنزیل پراجیکٹ (tanzil.net) سے بغیر کسی تبدیلی کے۔ اردو تراجم tanzil.net/trans سے، صرف غیر تجارتی استعمال کے لیے۔ کوئی ترجمہ متنِ قرآن کا بدل نہیں۔</string>
+  <string name="verse_unavailable">آیت لوڈ نہیں ہو سکی۔</string>
+  <string name="verse_share_failed">تصویر شیئر نہیں ہو سکی۔</string>
+</resources>
