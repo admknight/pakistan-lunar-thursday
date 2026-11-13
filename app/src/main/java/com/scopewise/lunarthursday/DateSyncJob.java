@@ -40,6 +40,9 @@ public final class DateSyncJob extends JobService {
                 // Same fallback: keep what is cached and retry later.
             }
             connected = connected && corrections;
+            // Around the 29th the phone also reads the news for the moon decision
+            // itself, so confirmation does not depend on a server job running on time.
+            AnnouncementSync.checkIfDue(this);
             if (!stopped) {
                 int id = params.getJobId();
                 boolean isFollowup = id >= DateSyncScheduler.MONTH_FIRST_ID

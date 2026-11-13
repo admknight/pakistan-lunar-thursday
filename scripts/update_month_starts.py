@@ -301,12 +301,8 @@ def main(argv=None):
         write_output(changed="false", attention="true",
                      summary="%s: no confirmation found for over %d days; edit the file by hand" % (label, GIVE_UP_DAYS))
         return 0
-    in_window = now <= opens + dt.timedelta(days=WINDOW_DAYS)
-    if not (in_window or args.force or args.dry_run or now.astimezone(dt.timezone.utc).hour == 3):
-        write_output(changed="false", attention=str(overdue).lower(),
-                     summary="%s: still unconfirmed; next search at 03:00 UTC" % label)
-        return 0
-
+    # GitHub starts only a fraction of scheduled runs, so every run that does
+    # start searches until the month is confirmed or the give-up limit passes.
     outcome, evidence = decide(fetch_headlines(month, evening), month, evening)
     for item in evidence:
         print("  evidence: %s | %s | %s" % (item["published"].astimezone(PKT).isoformat(),
