@@ -76,7 +76,7 @@ public final class DateSyncJob extends JobService {
                 new URL(FEED_URL).openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Accept", "application/json");
-        connection.setRequestProperty("User-Agent", "LunarThursdayAndroid/1.2.0");
+        connection.setRequestProperty("User-Agent", "HilalThursday-Android");
         connection.setConnectTimeout(8000);
         connection.setReadTimeout(8000);
         connection.setUseCaches(false);
