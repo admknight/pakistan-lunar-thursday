@@ -75,6 +75,16 @@ class HijriWidgetProvider : AppWidgetProvider() {
                         R.string.widget_may_be_instead, UiText.date(context, other, false)))
             }
 
+            // Next observance from the sets chosen in Settings; hidden when there is none.
+            val observance = EventsStore.upcoming(context, 1).firstOrNull()
+            if (observance == null) {
+                views.setViewVisibility(R.id.widget_observance, View.GONE)
+            } else {
+                views.setViewVisibility(R.id.widget_observance, View.VISIBLE)
+                views.setTextViewText(R.id.widget_observance,
+                    EventsStore.name(context, observance.event) + " · " + UiText.date(context, observance.date, false))
+            }
+
             val open = PendingIntent.getActivity(context, 0, Intent(context, MainActivity::class.java),
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
             views.setOnClickPendingIntent(R.id.widget_root, open)

@@ -63,4 +63,14 @@
             android:textColor="@color/widget_accent"
             android:textSize="12sp" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/widget_observance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/widget_text_muted"
+        android:textSize="11sp" />
 </LinearLayout>
