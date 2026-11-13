@@ -15,7 +15,7 @@ class DailyVerseTest {
     private val library by lazy { DailyVerse.parse(text) }
 
     @Test fun bundledFileIsCompleteAndCarriesItsNotice() {
-        assertEquals(31, library.verses.size)
+        assertEquals(256, library.verses.size)
         for (v in library.verses) {
             assertTrue(v.reference(), v.arabic.isNotBlank())
             for (id in DailyVerse.TRANSLATIONS) assertTrue(v.reference() + id, v.urdu(id).isNotBlank())
@@ -40,9 +40,11 @@ class DailyVerseTest {
         val first = DailyVerse.forDate(library, start)
         assertEquals(first.reference(), DailyVerse.forDate(library, start).reference())
         assertNotEquals(first.reference(), DailyVerse.forDate(library, start.plusDays(1)).reference())
-        assertEquals(first.reference(), DailyVerse.forDate(library, start.plusDays(31)).reference())
-        val seen = (0 until 31).map { DailyVerse.forDate(library, start.plusDays(it.toLong())).reference() }.toSet()
-        assertEquals(31, seen.size)
+        val size = library.verses.size
+        assertEquals(first.reference(), DailyVerse.forDate(library, start.plusDays(size.toLong())).reference())
+        // No verse repeats until the whole list has been shown.
+        val seen = (0 until size).map { DailyVerse.forDate(library, start.plusDays(it.toLong())).reference() }.toSet()
+        assertEquals(size, seen.size)
         // Dates before 1970 still map into the list.
         assertTrue(DailyVerse.forDate(library, LocalDate.parse("1960-01-01")).arabic.isNotBlank())
     }
