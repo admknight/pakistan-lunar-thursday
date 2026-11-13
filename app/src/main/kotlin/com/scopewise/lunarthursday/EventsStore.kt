@@ -47,6 +47,7 @@ object EventsStore {
         val key = key(set) ?: return
         ReminderStore.prefs(context).edit().putBoolean(key, shown).apply()
         EventReminderScheduler.sync(context)
+        HijriWidgetProvider.refreshAll(context)
     }
 
     /** Master switch for observance notifications; on by default. */
