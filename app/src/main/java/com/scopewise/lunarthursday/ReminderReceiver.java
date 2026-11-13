@@ -28,7 +28,11 @@ public final class ReminderReceiver extends BroadcastReceiver {
                 p.getString(ReminderStore.LAST_SENT_KEY, ""), monthKey, received)) {
             String label = intent.getStringExtra(ReminderScheduler.EXTRA_MONTH);
             String basis = intent.getStringExtra(ReminderScheduler.EXTRA_BASIS);
-            if (!p.getBoolean(ReminderStore.ALARM_MODE, false)
+            if ("POSSIBLE".equals(intent.getStringExtra(ReminderScheduler.EXTRA_KIND))) {
+                // The less likely Thursday of an unconfirmed month: a quiet notice, never the ringing alarm.
+                ReminderNotifications.possible(context, label,
+                        intent.getStringExtra(ReminderScheduler.EXTRA_EXPECTED_DATE));
+            } else if (!p.getBoolean(ReminderStore.ALARM_MODE, false)
                     || !AlarmRingingService.start(context, label, monthKey, basis, false)) {
                 ReminderNotifications.show(context, label, basis);
             }

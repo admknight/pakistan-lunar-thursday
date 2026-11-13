@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 
 import java.time.Instant;
-import java.util.List;
 
 /** Schedules only the next occurrence, then rolls forward after notification. */
 final class ReminderScheduler {
@@ -17,6 +16,8 @@ final class ReminderScheduler {
     static final String EXTRA_MONTH = "month_label";
     static final String EXTRA_MONTH_KEY = "month_key";
     static final String EXTRA_BASIS = "basis";
+    static final String EXTRA_KIND = "reminder_kind";
+    static final String EXTRA_EXPECTED_DATE = "expected_thursday";
     private static final int REQUEST_CODE = 1017;
 
     private ReminderScheduler() { }
@@ -33,11 +34,13 @@ final class ReminderScheduler {
         SharedPreferences p = ReminderStore.prefs(context);
         if (!p.getBoolean(ReminderStore.ENABLED, false)) return;
         java.time.LocalTime chosenTime = ReminderStore.reminderTime(context);
-        List<LunarEngine.Month> next = LunarEngine.upcoming(
-                Instant.now(), ReminderStore.confirmedStarts(context), 1, chosenTime);
-        if (next.isEmpty()) return;
-        LunarEngine.Month month = next.get(0);
-        long when = month.remindAt(chosenTime).toEpochMilli();
+        // Plans from every day the month can still start on, so a month whose
+        // first Thursday depends on the sighting is never passed in silence.
+        ReminderPlanner.Occurrence next = ReminderPlanner.next(
+                Instant.now(), ReminderStore.confirmedStarts(context), chosenTime);
+        if (next == null) return;
+        LunarEngine.Month month = next.month;
+        long when = next.triggerAt(chosenTime).toEpochMilli();
         AlarmManager alarms = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (alarms == null) return;
         Intent intent = new Intent(context, ReminderReceiver.class).setAction(ACTION_FIRE);
@@ -45,6 +48,8 @@ final class ReminderScheduler {
         intent.putExtra(EXTRA_MONTH, month.label());
         intent.putExtra(EXTRA_MONTH_KEY, month.key());
         intent.putExtra(EXTRA_BASIS, month.basis.name());
+        intent.putExtra(EXTRA_KIND, next.kind.name());
+        intent.putExtra(EXTRA_EXPECTED_DATE, next.expectedThursday.toString());
         PendingIntent pi = PendingIntent.getBroadcast(context, REQUEST_CODE, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         try {
