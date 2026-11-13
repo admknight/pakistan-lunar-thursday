@@ -18,4 +18,12 @@
   <string name="events_set_a_help">Wiladat and shahadat dates, Arbaeen, Ghadeer and others.</string>
   <string name="events_set_b">Sahaba and Awliya days</string>
   <string name="events_set_b_help">Khulafa days, 12 Rabi al-Awwal, Giyarhween and others.</string>
+  <string name="events_remind">Remind me on observance days</string>
+  <string name="events_remind_help">A quiet notification at your reminder time. The ringing alarm is only for the first Thursday.</string>
+  <string name="events_reminder_turn_off">Turn off its reminder</string>
+  <string name="events_reminder_turn_on">Turn on its reminder</string>
+  <string name="events_notify_today">Today: %1$s</string>
+  <string name="events_notify_tonight">Tonight: %1$s</string>
+  <string name="events_notify_several">Today\'s observances</string>
+  <string name="events_notify_tonight_tag">tonight</string>
 </resources>

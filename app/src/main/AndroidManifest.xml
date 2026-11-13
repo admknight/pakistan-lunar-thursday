@@ -49,6 +49,7 @@
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <receiver android:name=".ReminderReceiver" android:exported="false" />
         <receiver android:name=".SnoozeReceiver" android:exported="false" />
+        <receiver android:name=".EventReminderReceiver" android:exported="false" />
         <receiver
             android:name=".HijriWidgetProvider"
             android:exported="true"

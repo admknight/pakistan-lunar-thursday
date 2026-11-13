@@ -1,27 +1,30 @@
 {
   "schema": 1,
-  "note": "Islamic observances by Hijri date. month 1-12, or 0 for every month. day 1-30, or 0 for the last day of the month. set: shared, a or b. eve: the observance is the night before the listed day. Dates are a project-maintained list, not an authoritative calendar.",
+  "note": "Islamic observances by Hijri date. month 1-12, or 0 for every month. day 1-30, or 0 for the last day of the month. set: shared, a or b. eve: the observance is the night before the listed day. Dates are a project-maintained list, not an authoritative calendar. remind: false means its reminder is off unless the user turns it on.",
   "events": [
     {
       "id": "new-year",
       "month": 1,
       "day": 1,
       "set": "shared",
-      "name_en": "Islamic New Year"
+      "name_en": "Islamic New Year",
+      "name_ur": "اسلامی نیا سال"
     },
     {
       "id": "umar-shahadat",
       "month": 1,
       "day": 1,
       "set": "b",
-      "name_en": "Shahadat of Hazrat Umar Farooq"
+      "name_en": "Shahadat of Hazrat Umar Farooq",
+      "name_ur": "یومِ شہادت حضرت عمر فاروقؓ"
     },
     {
       "id": "tasua",
       "month": 1,
       "day": 9,
       "set": "a",
-      "name_en": "Tasu'a"
+      "name_en": "Tasu'a",
+      "name_ur": "تاسوعا (۹ محرم)"
     },
     {
       "id": "ashura",
@@ -29,6 +32,7 @@
       "day": 10,
       "set": "shared",
       "name_en": "Ashura",
+      "name_ur": "عاشورہ",
       "note_en": "Observed differently: fasting on the 9th and 10th, or a day of mourning"
     },
     {
@@ -37,6 +41,7 @@
       "day": 25,
       "set": "a",
       "name_en": "Shahadat of Imam Zain-ul-Abideen",
+      "name_ur": "شہادت امام زین العابدینؑ",
       "note_en": "Also reported: 12 Muharram"
     },
     {
@@ -44,7 +49,8 @@
       "month": 2,
       "day": 20,
       "set": "a",
-      "name_en": "Arbaeen (Chehlum)"
+      "name_en": "Arbaeen (Chehlum)",
+      "name_ur": "اربعین (چہلم)"
     },
     {
       "id": "prophet-wafat-hasan-shahadat",
@@ -52,6 +58,7 @@
       "day": 28,
       "set": "a",
       "name_en": "Wafat of the Prophet (PBUH) and Shahadat of Imam Hasan",
+      "name_ur": "وفاتِ رسول اللہ ﷺ اور شہادت امام حسنؑ",
       "note_en": "Imam Hasan also reported: 7 Safar"
     },
     {
@@ -60,6 +67,7 @@
       "day": 0,
       "set": "a",
       "name_en": "Shahadat of Imam Ali Raza",
+      "name_ur": "شہادت امام علی رضاؑ",
       "note_en": "Last day of Safar. Also reported: 17 Safar and 23 Dhu al-Qa'dah"
     },
     {
@@ -67,21 +75,24 @@
       "month": 3,
       "day": 8,
       "set": "a",
-      "name_en": "Shahadat of Imam Hasan Askari"
+      "name_en": "Shahadat of Imam Hasan Askari",
+      "name_ur": "شہادت امام حسن عسکریؑ"
     },
     {
       "id": "milad-12",
       "month": 3,
       "day": 12,
       "set": "b",
-      "name_en": "Eid Milad-un-Nabi (12th)"
+      "name_en": "Eid Milad-un-Nabi (12th)",
+      "name_ur": "عید میلاد النبی ﷺ (۱۲ ربیع الاول)"
     },
     {
       "id": "milad-17",
       "month": 3,
       "day": 17,
       "set": "a",
-      "name_en": "Wiladat of the Prophet (PBUH) and Imam Jafar Sadiq (17th)"
+      "name_en": "Wiladat of the Prophet (PBUH) and Imam Jafar Sadiq (17th)",
+      "name_ur": "ولادتِ رسول اللہ ﷺ اور امام جعفر صادقؑ (۱۷ ربیع الاول)"
     },
     {
       "id": "hasan-askari-wiladat",
@@ -89,6 +100,7 @@
       "day": 8,
       "set": "a",
       "name_en": "Wiladat of Imam Hasan Askari",
+      "name_ur": "ولادت امام حسن عسکریؑ",
       "note_en": "Also reported: 10 Rabi al-Thani"
     },
     {
@@ -96,14 +108,16 @@
       "month": 4,
       "day": 11,
       "set": "b",
-      "name_en": "Giyarhween Sharif (Sheikh Abdul Qadir Jilani)"
+      "name_en": "Giyarhween Sharif (Sheikh Abdul Qadir Jilani)",
+      "name_ur": "گیارہویں شریف (شیخ عبدالقادر جیلانیؒ)"
     },
     {
       "id": "zainab-wiladat",
       "month": 5,
       "day": 5,
       "set": "a",
-      "name_en": "Wiladat of Bibi Zainab"
+      "name_en": "Wiladat of Bibi Zainab",
+      "name_ur": "ولادت بی بی زینبؑ"
     },
     {
       "id": "fatima-shahadat-1",
@@ -111,6 +125,7 @@
       "day": 13,
       "set": "a",
       "name_en": "Shahadat of Bibi Fatima Zahra (first report)",
+      "name_ur": "شہادت بی بی فاطمہ زہراؑ (پہلی روایت)",
       "note_en": "Ayyam-e-Fatimiyya, 13th to 15th"
     },
     {
@@ -118,63 +133,72 @@
       "month": 6,
       "day": 3,
       "set": "a",
-      "name_en": "Shahadat of Bibi Fatima Zahra (second report)"
+      "name_en": "Shahadat of Bibi Fatima Zahra (second report)",
+      "name_ur": "شہادت بی بی فاطمہ زہراؑ (دوسری روایت)"
     },
     {
       "id": "fatima-wiladat",
       "month": 6,
       "day": 20,
       "set": "a",
-      "name_en": "Wiladat of Bibi Fatima Zahra"
+      "name_en": "Wiladat of Bibi Fatima Zahra",
+      "name_ur": "ولادت بی بی فاطمہ زہراؑ"
     },
     {
       "id": "abu-bakr-wafat",
       "month": 6,
       "day": 22,
       "set": "b",
-      "name_en": "Wafat of Hazrat Abu Bakr Siddiq"
+      "name_en": "Wafat of Hazrat Abu Bakr Siddiq",
+      "name_ur": "یومِ وفات حضرت ابوبکر صدیقؓ"
     },
     {
       "id": "baqir-wiladat",
       "month": 7,
       "day": 1,
       "set": "a",
-      "name_en": "Wiladat of Imam Muhammad Baqir"
+      "name_en": "Wiladat of Imam Muhammad Baqir",
+      "name_ur": "ولادت امام محمد باقرؑ"
     },
     {
       "id": "ali-naqi-shahadat",
       "month": 7,
       "day": 3,
       "set": "a",
-      "name_en": "Shahadat of Imam Ali Naqi"
+      "name_en": "Shahadat of Imam Ali Naqi",
+      "name_ur": "شہادت امام علی نقیؑ"
     },
     {
       "id": "taqi-wiladat",
       "month": 7,
       "day": 10,
       "set": "a",
-      "name_en": "Wiladat of Imam Muhammad Taqi"
+      "name_en": "Wiladat of Imam Muhammad Taqi",
+      "name_ur": "ولادت امام محمد تقیؑ"
     },
     {
       "id": "ali-wiladat",
       "month": 7,
       "day": 13,
       "set": "a",
-      "name_en": "Wiladat of Imam Ali"
+      "name_en": "Wiladat of Imam Ali",
+      "name_ur": "ولادت امام علیؑ"
     },
     {
       "id": "zainab-wafat",
       "month": 7,
       "day": 15,
       "set": "a",
-      "name_en": "Wafat of Bibi Zainab"
+      "name_en": "Wafat of Bibi Zainab",
+      "name_ur": "وفات بی بی زینبؑ"
     },
     {
       "id": "musa-kazim-shahadat",
       "month": 7,
       "day": 25,
       "set": "a",
-      "name_en": "Shahadat of Imam Musa Kazim"
+      "name_en": "Shahadat of Imam Musa Kazim",
+      "name_ur": "شہادت امام موسیٰ کاظمؑ"
     },
     {
       "id": "meraj-mabath",
@@ -182,6 +206,7 @@
       "day": 27,
       "set": "shared",
       "name_en": "Shab-e-Meraj / Mab'ath",
+      "name_ur": "شبِ معراج / بعثت",
       "note_en": "Same date, two names",
       "eve": true
     },
@@ -190,21 +215,24 @@
       "month": 8,
       "day": 3,
       "set": "a",
-      "name_en": "Wiladat of Imam Husain"
+      "name_en": "Wiladat of Imam Husain",
+      "name_ur": "ولادت امام حسینؑ"
     },
     {
       "id": "abbas-wiladat",
       "month": 8,
       "day": 4,
       "set": "a",
-      "name_en": "Wiladat of Hazrat Abbas"
+      "name_en": "Wiladat of Hazrat Abbas",
+      "name_ur": "ولادت حضرت عباسؑ"
     },
     {
       "id": "zain-ul-abideen-wiladat",
       "month": 8,
       "day": 5,
       "set": "a",
-      "name_en": "Wiladat of Imam Zain-ul-Abideen"
+      "name_en": "Wiladat of Imam Zain-ul-Abideen",
+      "name_ur": "ولادت امام زین العابدینؑ"
     },
     {
       "id": "shab-e-barat",
@@ -212,6 +240,7 @@
       "day": 15,
       "set": "shared",
       "name_en": "Shab-e-Barat (15 Sha'ban)",
+      "name_ur": "شبِ برات (۱۵ شعبان)",
       "eve": true
     },
     {
@@ -219,21 +248,24 @@
       "month": 8,
       "day": 15,
       "set": "a",
-      "name_en": "Wiladat of Imam Mahdi"
+      "name_en": "Wiladat of Imam Mahdi",
+      "name_ur": "ولادت امام مہدیؑ"
     },
     {
       "id": "ramadan-start",
       "month": 9,
       "day": 1,
       "set": "shared",
-      "name_en": "Start of Ramadan"
+      "name_en": "Start of Ramadan",
+      "name_ur": "آغازِ رمضان"
     },
     {
       "id": "hasan-wiladat",
       "month": 9,
       "day": 15,
       "set": "a",
-      "name_en": "Wiladat of Imam Hasan"
+      "name_en": "Wiladat of Imam Hasan",
+      "name_ur": "ولادت امام حسنؑ"
     },
     {
       "id": "zarbat-qadr-19",
@@ -241,6 +273,7 @@
       "day": 19,
       "set": "a",
       "name_en": "Zarbat of Imam Ali; Shab-e-Qadr (19th night)",
+      "name_ur": "ضربتِ امام علیؑ؛ شبِ قدر (۱۹ویں شب)",
       "eve": true
     },
     {
@@ -248,7 +281,8 @@
       "month": 9,
       "day": 21,
       "set": "shared",
-      "name_en": "Shahadat of Hazrat Ali (Youm-e-Ali)"
+      "name_en": "Shahadat of Hazrat Ali (Youm-e-Ali)",
+      "name_ur": "شہادت حضرت علی (یومِ علی)"
     },
     {
       "id": "qadr-21",
@@ -256,6 +290,7 @@
       "day": 21,
       "set": "a",
       "name_en": "Shab-e-Qadr (21st night)",
+      "name_ur": "شبِ قدر (۲۱ویں شب)",
       "eve": true
     },
     {
@@ -264,6 +299,7 @@
       "day": 23,
       "set": "a",
       "name_en": "Shab-e-Qadr (23rd night)",
+      "name_ur": "شبِ قدر (۲۳ویں شب)",
       "eve": true
     },
     {
@@ -272,6 +308,7 @@
       "day": 27,
       "set": "b",
       "name_en": "Shab-e-Qadr (27th night)",
+      "name_ur": "شبِ قدر (۲۷ویں شب)",
       "eve": true
     },
     {
@@ -279,7 +316,8 @@
       "month": 10,
       "day": 1,
       "set": "shared",
-      "name_en": "Eid al-Fitr"
+      "name_en": "Eid al-Fitr",
+      "name_ur": "عید الفطر"
     },
     {
       "id": "jafar-sadiq-shahadat",
@@ -287,6 +325,7 @@
       "day": 25,
       "set": "a",
       "name_en": "Shahadat of Imam Jafar Sadiq",
+      "name_ur": "شہادت امام جعفر صادقؑ",
       "note_en": "Also reported: 15 Shawwal"
     },
     {
@@ -294,70 +333,80 @@
       "month": 11,
       "day": 11,
       "set": "a",
-      "name_en": "Wiladat of Imam Ali Raza"
+      "name_en": "Wiladat of Imam Ali Raza",
+      "name_ur": "ولادت امام علی رضاؑ"
     },
     {
       "id": "taqi-shahadat",
       "month": 11,
       "day": 29,
       "set": "a",
-      "name_en": "Shahadat of Imam Muhammad Taqi"
+      "name_en": "Shahadat of Imam Muhammad Taqi",
+      "name_ur": "شہادت امام محمد تقیؑ"
     },
     {
       "id": "ali-fatima-marriage",
       "month": 12,
       "day": 1,
       "set": "a",
-      "name_en": "Marriage of Imam Ali and Bibi Fatima Zahra"
+      "name_en": "Marriage of Imam Ali and Bibi Fatima Zahra",
+      "name_ur": "عقدِ امام علیؑ و بی بی فاطمہ زہراؑ"
     },
     {
       "id": "baqir-shahadat",
       "month": 12,
       "day": 7,
       "set": "a",
-      "name_en": "Shahadat of Imam Muhammad Baqir"
+      "name_en": "Shahadat of Imam Muhammad Baqir",
+      "name_ur": "شہادت امام محمد باقرؑ"
     },
     {
       "id": "arafah",
       "month": 12,
       "day": 9,
       "set": "shared",
-      "name_en": "Day of Arafah"
+      "name_en": "Day of Arafah",
+      "name_ur": "یومِ عرفہ"
     },
     {
       "id": "eid-al-adha",
       "month": 12,
       "day": 10,
       "set": "shared",
-      "name_en": "Eid al-Adha"
+      "name_en": "Eid al-Adha",
+      "name_ur": "عید الاضحیٰ"
     },
     {
       "id": "ali-naqi-wiladat",
       "month": 12,
       "day": 15,
       "set": "a",
-      "name_en": "Wiladat of Imam Ali Naqi"
+      "name_en": "Wiladat of Imam Ali Naqi",
+      "name_ur": "ولادت امام علی نقیؑ"
     },
     {
       "id": "ghadeer",
       "month": 12,
       "day": 18,
       "set": "a",
-      "name_en": "Eid-e-Ghadeer"
+      "name_en": "Eid-e-Ghadeer",
+      "name_ur": "عیدِ غدیر"
     },
     {
       "id": "usman-shahadat",
       "month": 12,
       "day": 18,
       "set": "b",
-      "name_en": "Shahadat of Hazrat Usman Ghani"
+      "name_en": "Shahadat of Hazrat Usman Ghani",
+      "name_ur": "یومِ شہادت حضرت عثمان غنیؓ"
     },
     {
       "id": "mubahila",
       "month": 12,
       "day": 24,
       "set": "a",
-      "name_en": "Eid-e-Mubahila"
+      "name_en": "Eid-e-Mubahila",
+      "name_ur": "عیدِ مباہلہ"
     },
     {
       "id": "ayyam-al-beedh",
@@ -365,8 +414,10 @@
       "day": 13,
       "set": "shared",
       "name_en": "Ayyam al-Beedh (optional fasts)",
+      "name_ur": "ایامِ بیض (نفلی روزے)",
       "note_en": "Every month, 13th to 15th",
-      "days": 3
+      "days": 3,
+      "remind": false
     }
   ]
 }

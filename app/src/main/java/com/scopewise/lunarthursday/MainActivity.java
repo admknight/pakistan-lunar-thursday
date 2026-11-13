@@ -433,8 +433,12 @@ public final class MainActivity extends LocalizedActivity {
         }
         if (!item.confirmed) message.append("\n\n").append(str(R.string.events_details_unconfirmed));
         message.append("\n\n").append(str(R.string.events_source_note));
+        boolean reminds = EventsStore.reminds(this, item.event);
         new AlertDialog.Builder(this).setTitle(str(R.string.events_details_title))
-                .setMessage(message.toString()).setPositiveButton(UiText.tr(this, "Close"), null).show();
+                .setMessage(message.toString()).setPositiveButton(UiText.tr(this, "Close"), null)
+                .setNeutralButton(str(reminds ? R.string.events_reminder_turn_off : R.string.events_reminder_turn_on),
+                        (dialog, which) -> EventsStore.setReminds(this, item.event, !reminds))
+                .show();
     }
 
     private LinearLayout monthRow(LunarEngine.Month item) {

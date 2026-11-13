@@ -8,6 +8,8 @@ object EventsStore {
     const val SHOW_SHARED = "events_show_shared"
     const val SHOW_A = "events_show_a"
     const val SHOW_B = "events_show_b"
+    const val REMIND = "events_remind"
+    private const val REMIND_EVENT_PREFIX = "event_remind_"
 
     @Volatile private var cached: List<IslamicEvents.Event>? = null
 
@@ -44,7 +46,33 @@ object EventsStore {
     fun setShown(context: Context, set: String, shown: Boolean) {
         val key = key(set) ?: return
         ReminderStore.prefs(context).edit().putBoolean(key, shown).apply()
+        EventReminderScheduler.sync(context)
     }
+
+    /** Master switch for observance notifications; on by default. */
+    @JvmStatic
+    fun remindersOn(context: Context): Boolean = ReminderStore.prefs(context).getBoolean(REMIND, true)
+
+    @JvmStatic
+    fun setRemindersOn(context: Context, on: Boolean) {
+        ReminderStore.prefs(context).edit().putBoolean(REMIND, on).apply()
+        EventReminderScheduler.sync(context)
+    }
+
+    /** One event's reminder: the file's default until the user changes it. */
+    @JvmStatic
+    fun reminds(context: Context, event: IslamicEvents.Event): Boolean =
+        ReminderStore.prefs(context).getBoolean(REMIND_EVENT_PREFIX + event.id, event.remindDefault)
+
+    @JvmStatic
+    fun setReminds(context: Context, event: IslamicEvents.Event, on: Boolean) {
+        ReminderStore.prefs(context).edit().putBoolean(REMIND_EVENT_PREFIX + event.id, on).apply()
+        EventReminderScheduler.sync(context)
+    }
+
+    @JvmStatic
+    fun remindIds(context: Context): Set<String> =
+        events(context).filter { reminds(context, it) }.map { it.id }.toSet()
 
     @JvmStatic
     fun enabledSets(context: Context): Set<String> =
