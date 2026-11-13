@@ -29,6 +29,8 @@ final class ReminderScheduler {
     }
 
     static void sync(Context context) {
+        // Stored dates or settings may have changed; keep any home-screen widget current.
+        HijriWidgetProvider.refreshAll(context);
         // Cancel old PendingIntent on schedule changes, boot, and when switched off.
         cancel(context);
         SharedPreferences p = ReminderStore.prefs(context);
