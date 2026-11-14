@@ -28,6 +28,7 @@ class TasbihActivity : LocalizedActivity() {
         page.gravity = Gravity.CENTER
         val pad = (20 * resources.displayMetrics.density).toInt()
         page.setPadding(pad, pad, pad, pad)
+        padForSystemBars(page)
 
         val title = TextView(this)
         title.text = getString(R.string.tasbih_title)

@@ -36,6 +36,7 @@ class QiblaCompassActivity : LocalizedActivity(), SensorEventListener {
         page.gravity = Gravity.CENTER_HORIZONTAL
         val pad = (20 * resources.displayMetrics.density).toInt()
         page.setPadding(pad, pad * 2, pad, pad)
+        padForSystemBars(page)
 
         val title = TextView(this)
         title.text = getString(R.string.compass_title)

@@ -7,6 +7,8 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.RadialGradient
 import android.graphics.Shader
 import android.graphics.Typeface
 import android.os.Bundle
@@ -68,10 +70,23 @@ object MorningCardRenderer {
                today: LocalDate, hijriLine: String?): Bitmap {
         val bitmap = Bitmap.createBitmap(WIDTH, HEIGHT, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
+        // The look changes with the date: seven colour themes and three ornaments, 21 combinations.
+        val day = today.toEpochDay()
+        val theme = THEMES[Math.floorMod(day, THEMES.size.toLong()).toInt()]
         val background = Paint()
-        background.shader = LinearGradient(0f, 0f, 0f, HEIGHT.toFloat(),
-            Color.rgb(16, 44, 52), Color.rgb(28, 78, 70), Shader.TileMode.CLAMP)
+        background.shader = LinearGradient(0f, 0f, WIDTH * 0.35f, HEIGHT.toFloat(),
+            theme[0], theme[1], Shader.TileMode.CLAMP)
         canvas.drawRect(0f, 0f, WIDTH.toFloat(), HEIGHT.toFloat(), background)
+        val glow = Paint()
+        glow.shader = RadialGradient(WIDTH / 2f, HEIGHT * 0.42f, WIDTH * 0.75f,
+            Color.argb(46, 255, 255, 255), Color.TRANSPARENT, Shader.TileMode.CLAMP)
+        canvas.drawRect(0f, 0f, WIDTH.toFloat(), HEIGHT.toFloat(), glow)
+        val accent = theme[2]
+        when (Math.floorMod(day / THEMES.size, 3L).toInt()) {
+            0 -> starLattice(canvas, accent)
+            1 -> archFrame(canvas, accent)
+            else -> crescentSky(canvas, accent)
+        }
 
         val textWidth = WIDTH - 2 * MARGIN
         val arabic = verse.arabic
@@ -105,17 +120,118 @@ object MorningCardRenderer {
         y += urduBlock.height + 60f
 
         val reference = TextPaint(small)
-        reference.color = Color.rgb(240, 214, 150)
+        reference.color = accent
         reference.textSize = 38f
         canvas.drawText(context.getString(R.string.verse_reference, verse.surah.toString(), verse.ayah.toString()),
-            centre, minOf(y, 1160f), reference)
+            centre, minOf(y, 1140f), reference)
 
+        brand(context, canvas, accent)
         val credit = TextPaint(small)
-        credit.textSize = 26f
-        canvas.drawText(context.getString(R.string.verse_credit, translator), centre, HEIGHT - 110f, credit)
-        canvas.drawText(context.getString(R.string.app_name), centre, HEIGHT - 64f, credit)
+        credit.textSize = 24f
+        canvas.drawText(context.getString(R.string.verse_credit, translator), centre, HEIGHT - 34f, credit)
         return bitmap
     }
+
+    /** App icon and name, centred above the source credit. */
+    private fun brand(context: Context, canvas: Canvas, accent: Int) {
+        val line = Paint(Paint.ANTI_ALIAS_FLAG)
+        line.color = accent
+        line.alpha = 110
+        line.strokeWidth = 2f
+        canvas.drawLine(WIDTH / 2f - 150f, 1178f, WIDTH / 2f + 150f, 1178f, line)
+        val name = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        name.color = Color.WHITE
+        name.textSize = 40f
+        name.typeface = Typeface.DEFAULT_BOLD
+        val label = context.getString(R.string.app_name)
+        val icon = 68
+        val gap = 20f
+        val total = icon + gap + name.measureText(label)
+        val left = (WIDTH - total) / 2f
+        val top = 1200
+        val drawable = try {
+            context.getDrawable(R.mipmap.ic_launcher)
+        } catch (missing: RuntimeException) {
+            null
+        }
+        if (drawable != null) {
+            drawable.setBounds(left.toInt(), top, left.toInt() + icon, top + icon)
+            drawable.draw(canvas)
+        }
+        canvas.drawText(label, left + icon + gap, top + icon / 2f + 14f, name)
+    }
+
+    private fun ornament(accent: Int, alpha: Int, width: Float): Paint {
+        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+        paint.style = Paint.Style.STROKE
+        paint.strokeWidth = width
+        paint.color = accent
+        paint.alpha = alpha
+        return paint
+    }
+
+    /** A faint grid of eight-point stars. */
+    private fun starLattice(canvas: Canvas, accent: Int) {
+        val paint = ornament(accent, 26, 2f)
+        val step = 216f
+        val r = 62f
+        var cy = 0f
+        while (cy <= HEIGHT + step) {
+            var cx = 0f
+            while (cx <= WIDTH + step) {
+                canvas.drawRect(cx - r, cy - r, cx + r, cy + r, paint)
+                canvas.save()
+                canvas.rotate(45f, cx, cy)
+                canvas.drawRect(cx - r, cy - r, cx + r, cy + r, paint)
+                canvas.restore()
+                cx += step
+            }
+            cy += step
+        }
+    }
+
+    /** A pointed arch framing the text. */
+    private fun archFrame(canvas: Canvas, accent: Int) {
+        for ((inset, alpha) in listOf(36f to 90, 54f to 40)) {
+            val l = inset
+            val r = WIDTH - inset
+            val arch = Path()
+            arch.moveTo(l, 1150f)
+            arch.lineTo(l, 420f)
+            arch.cubicTo(l, 250f, WIDTH * 0.30f, 150f, WIDTH / 2f, 40f + inset)
+            arch.cubicTo(WIDTH * 0.70f, 150f, r, 250f, r, 420f)
+            arch.lineTo(r, 1150f)
+            canvas.drawPath(arch, ornament(accent, alpha, 3f))
+        }
+    }
+
+    /** A thin crescent with a few stars in the upper corner. */
+    private fun crescentSky(canvas: Canvas, accent: Int) {
+        val fill = Paint(Paint.ANTI_ALIAS_FLAG)
+        fill.color = accent
+        fill.alpha = 70
+        val moon = Path()
+        moon.addCircle(900f, 150f, 92f, Path.Direction.CW)
+        val cut = Path()
+        cut.addCircle(938f, 124f, 80f, Path.Direction.CW)
+        if (moon.op(cut, Path.Op.DIFFERENCE)) canvas.drawPath(moon, fill)
+        fill.alpha = 110
+        val stars = arrayOf(floatArrayOf(120f, 90f, 4f), floatArrayOf(250f, 210f, 3f), floatArrayOf(700f, 70f, 3f),
+            floatArrayOf(90f, 330f, 2.5f), floatArrayOf(980f, 330f, 3f), floatArrayOf(160f, 1090f, 3f),
+            floatArrayOf(930f, 1060f, 4f), floatArrayOf(540f, 215f, 2.5f))
+        for (s in stars) canvas.drawCircle(s[0], s[1], s[2], fill)
+    }
+
+    /** Top colour, bottom colour and accent for each theme; all dark enough for white text. */
+    private val THEMES = arrayOf(
+        intArrayOf(Color.rgb(16, 44, 52), Color.rgb(28, 78, 70), Color.rgb(240, 214, 150)),
+        intArrayOf(Color.rgb(18, 28, 62), Color.rgb(44, 62, 112), Color.rgb(236, 208, 148)),
+        intArrayOf(Color.rgb(52, 22, 44), Color.rgb(98, 44, 72), Color.rgb(244, 208, 170)),
+        intArrayOf(Color.rgb(12, 50, 60), Color.rgb(20, 96, 104), Color.rgb(250, 224, 170)),
+        intArrayOf(Color.rgb(58, 30, 20), Color.rgb(110, 62, 36), Color.rgb(250, 222, 168)),
+        intArrayOf(Color.rgb(26, 30, 40), Color.rgb(58, 66, 84), Color.rgb(224, 206, 160)),
+        intArrayOf(Color.rgb(34, 24, 66), Color.rgb(72, 52, 118), Color.rgb(240, 212, 160))
+    )
 
     private fun block(text: String, size: Float, color: Int, width: Int, bold: Boolean, spacing: Float): StaticLayout {
         val paint = TextPaint(Paint.ANTI_ALIAS_FLAG)
@@ -149,6 +265,7 @@ class MorningCardActivity : LocalizedActivity() {
         page.gravity = Gravity.CENTER_HORIZONTAL
         val pad = (16 * resources.displayMetrics.density).toInt()
         page.setPadding(pad, pad * 2, pad, pad)
+        padForSystemBars(page)
 
         val title = TextView(this)
         title.text = getString(R.string.verse_title)
