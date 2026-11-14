@@ -19,11 +19,30 @@ crashed() {
   adb logcat -d 2>/dev/null | grep -A3 "FATAL EXCEPTION" | grep -q "$PACKAGE"
 }
 
+# A slow emulator sometimes shows "<system app> isn't responding" over the app; choose Wait.
+dismiss_system_dialog() {
+  local attempt
+  for attempt in 1 2 3; do
+    adb shell uiautomator dump /sdcard/smoke.xml > /dev/null 2>&1
+    adb exec-out cat /sdcard/smoke.xml > "$OUT/screen.xml" 2>/dev/null
+    grep -q "responding" "$OUT/screen.xml" || return 0
+    adb shell input tap 330 1338
+    sleep 3
+  done
+}
+
+swipe_up() {
+  dismiss_system_dialog
+  adb shell input swipe 500 1500 500 "$1" 300
+  sleep 2
+}
+
 # Opens one screen and requires it to be the resumed activity with no crash recorded.
 open_screen() {
   local name="$1" activity="$2"; shift 2
   adb shell am start -W -n "$PACKAGE/.$activity" "$@" > /dev/null 2>&1
   sleep 4
+  dismiss_system_dialog
   shot "$name"
   if crashed; then fail "$name: crash recorded"; return; fi
   if adb shell dumpsys activity activities | grep -E "ResumedActivity" | grep -q "$PACKAGE/.$activity"; then
@@ -33,9 +52,12 @@ open_screen() {
   fi
 }
 
-screen_text() {
+# Saves what is on screen to a file first: piping adb straight into "grep -q" fails under pipefail.
+on_screen() {
+  dismiss_system_dialog
   adb shell uiautomator dump /sdcard/smoke.xml > /dev/null 2>&1
-  adb exec-out cat /sdcard/smoke.xml 2>/dev/null
+  adb exec-out cat /sdcard/smoke.xml > "$OUT/screen.xml" 2>/dev/null
+  grep -q "$1" "$OUT/screen.xml"
 }
 
 test -s "$APK" || { echo "[smoke] APK missing: $APK"; exit 1; }
@@ -49,17 +71,18 @@ adb install -r "$APK" || { echo "[smoke] install failed"; exit 1; }
 adb shell pm grant "$PACKAGE" android.permission.POST_NOTIFICATIONS || true
 adb logcat -c || true
 adb logcat -b crash -c || true
+sleep 20  # let the freshly booted launcher settle
 
 echo "[smoke] English screens"
 open_screen 01-home-en MainActivity
-screen_text | grep -q "Your next lunar Thursday" || fail "home: expected heading not shown"
+on_screen "Your next lunar Thursday" || fail "home: expected heading not shown"
 adb shell am force-stop "$PACKAGE"
 open_screen 02-calendar-en MainActivity --ei open_tab 1
-adb shell input swipe 500 1500 500 500 300; sleep 2; shot 02b-calendar-observances-en
+swipe_up 500; shot 02b-calendar-observances-en
 adb shell am force-stop "$PACKAGE"
 open_screen 03-updates-en MainActivity --ei open_tab 2
 open_screen 04-settings-en SettingsActivity
-adb shell input swipe 500 1500 500 300 300; sleep 2; shot 04b-settings-lower-en
+swipe_up 300; shot 04b-settings-lower-en
 open_screen 05-about-en AboutActivity
 open_screen 06-verse-card MorningCardActivity
 open_screen 07-tasbih TasbihActivity
@@ -68,7 +91,7 @@ open_screen 09-alarm-tones AlarmToneActivity
 
 # Requires a piece of text to be on screen right now.
 expect_text() {
-  if screen_text | grep -q "$2"; then echo "[smoke] ok: $1 shows '$2'"; else fail "$1: '$2' is not on screen"; fi
+  if on_screen "$2"; then echo "[smoke] ok: $1 shows '$2'"; else fail "$1: '$2' is not on screen"; fi
 }
 
 echo "[smoke] Verse card carries both dates"
@@ -91,24 +114,24 @@ adb emu geo fix 74.36 31.52 > /dev/null 2>&1 || true
 adb shell pm grant "$PACKAGE" android.permission.ACCESS_COARSE_LOCATION || true
 write_prefs '<boolean name="weather_visuals_enabled" value="true" /><int name="auto_place_lat_tenths" value="315" /><int name="auto_place_lon_tenths" value="744" />'
 open_screen 09b-home-auto-location MainActivity
-adb shell input swipe 500 1500 500 500 300; sleep 2; shot 09c-home-auto-location-prayer-times
+swipe_up 500; shot 09c-home-auto-location-prayer-times
 expect_text "auto location" "Fajr"
 expect_text "auto location" "Your location"
 expect_text "auto location" "Qibla compass"
 open_screen 09d-qibla-compass-auto-location QiblaCompassActivity
-if screen_text | grep -q "Choose a city"; then fail "compass: still asks for a city with a kept position"; fi
+if on_screen "Choose a city"; then fail "compass: still asks for a city with a kept position"; fi
 
 echo "[smoke] Neither city nor location: the app says what to do"
 adb shell pm revoke "$PACKAGE" android.permission.ACCESS_COARSE_LOCATION || true
 write_prefs ''
 open_screen 09e-home-no-place MainActivity
-adb shell input swipe 500 1500 500 500 300; sleep 2
+swipe_up 500
 expect_text "no place" "Choose a city in Settings"
 
 echo "[smoke] City chosen, so prayer times are shown"
 write_prefs '<int name="hijri_sunset_city_index" value="2" />'
 open_screen 10-home-with-city MainActivity
-adb shell input swipe 500 1500 500 500 300; sleep 2; shot 10b-home-prayer-times
+swipe_up 500; shot 10b-home-prayer-times
 expect_text "city" "Fajr"
 expect_text "city" "Lahore"
 open_screen 10c-qibla-compass-city QiblaCompassActivity
@@ -139,7 +162,7 @@ echo "[smoke] Urdu screens"
 adb shell cmd locale set-app-locales "$PACKAGE" --locales ur > /dev/null 2>&1 || fail "could not switch the app to Urdu"
 adb shell am force-stop "$PACKAGE"
 open_screen 13-home-ur MainActivity
-adb shell input swipe 500 1500 500 500 300; sleep 2; shot 13b-home-lower-ur
+swipe_up 500; shot 13b-home-lower-ur
 adb shell am force-stop "$PACKAGE"
 open_screen 14-calendar-ur MainActivity --ei open_tab 1
 open_screen 15-settings-ur SettingsActivity
