@@ -126,6 +126,6 @@ jobs:
             release/app-debug.apk \
             release/app-debug.apk.sha256 \
             --target "$GITHUB_SHA" \
-            --title "Noor-e-Hilal v$APP_VERSION (Preview, debug-signed)" \
+            --title "Mah-e-Nau v$APP_VERSION (Preview, debug-signed)" \
             --prerelease \
             --notes-file "$RUNNER_TEMP/release-notes.md"

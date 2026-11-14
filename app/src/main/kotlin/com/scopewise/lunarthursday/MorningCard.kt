@@ -130,10 +130,8 @@ object MorningCardRenderer {
         canvas.drawText(context.getString(R.string.verse_reference, verse.surah.toString(), verse.ayah.toString()),
             centre, minOf(y, 1140f), reference)
 
+        // The source and translator are credited on the screen under the card, not on the image.
         brand(context, canvas, accent)
-        val credit = TextPaint(small)
-        credit.textSize = 24f
-        canvas.drawText(context.getString(R.string.verse_credit, translator), centre, HEIGHT - 34f, credit)
         return bitmap
     }
 
@@ -143,7 +141,7 @@ object MorningCardRenderer {
         line.color = accent
         line.alpha = 110
         line.strokeWidth = 2f
-        canvas.drawLine(WIDTH / 2f - 150f, 1178f, WIDTH / 2f + 150f, 1178f, line)
+        canvas.drawLine(WIDTH / 2f - 150f, 1190f, WIDTH / 2f + 150f, 1190f, line)
         val name = TextPaint(Paint.ANTI_ALIAS_FLAG)
         name.color = Color.WHITE
         name.textSize = 40f
@@ -153,7 +151,7 @@ object MorningCardRenderer {
         val gap = 20f
         val total = icon + gap + name.measureText(label)
         val left = (WIDTH - total) / 2f
-        val top = 1200
+        val top = 1218
         val drawable = try {
             context.getDrawable(R.mipmap.ic_launcher)
         } catch (missing: RuntimeException) {
