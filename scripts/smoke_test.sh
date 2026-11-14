@@ -127,8 +127,15 @@ open_screen 09b-home-auto-location MainActivity
 swipe_up 500; shot 09c-home-auto-location-prayer-times
 expect_text "auto location" "Fajr"
 expect_text "auto location" "Your location"
-swipe_up 900  # the Qibla row sits below the prayer card
-expect_text "auto location" "Find the Qibla direction"
+# The Qibla row sits below the prayer card; scroll in small steps until it shows.
+found_qibla_row=0
+for step in 1 2 3 4 5 6; do
+  if on_screen "Find the Qibla direction"; then found_qibla_row=1; break; fi
+  cp "$OUT/screen.xml" "$OUT/screen-qibla-step-$step.xml"
+  adb shell input swipe 500 1400 500 1000 400; sleep 2
+done
+if [ "$found_qibla_row" = 1 ]; then echo "[smoke] ok: auto location shows the Qibla compass row"; shot 09c2-home-qibla-row
+else fail "auto location: the Qibla compass row was not found by scrolling"; fi
 open_screen 09d-qibla-compass-auto-location QiblaCompassActivity
 if on_screen "Choose a city"; then fail "compass: still asks for a city with a kept position"; fi
 
