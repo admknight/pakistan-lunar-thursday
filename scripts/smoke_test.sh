@@ -66,18 +66,52 @@ open_screen 07-tasbih TasbihActivity
 open_screen 08-qibla-compass QiblaCompassActivity
 open_screen 09-alarm-tones AlarmToneActivity
 
+# Requires a piece of text to be on screen right now.
+expect_text() {
+  if screen_text | grep -q "$2"; then echo "[smoke] ok: $1 shows '$2'"; else fail "$1: '$2' is not on screen"; fi
+}
+
+echo "[smoke] Verse card carries both dates"
+open_screen 06b-verse-card-dates MorningCardActivity
+expect_text "verse card" " AH"
+
+write_prefs() {
+  # $1 = extra <map> entries. Rewrites the app settings file while the app is stopped.
+  adb shell am force-stop "$PACKAGE"
+  adb shell "run-as $PACKAGE sh -c 'cat shared_prefs/lunar_thursday_settings.xml'" > "$OUT/prefs-read.xml" 2>/dev/null || true
+  if ! grep -q "</map>" "$OUT/prefs-read.xml" 2>/dev/null; then fail "could not read the settings file"; return 1; fi
+  grep -v "hijri_sunset_city_index\|auto_place_\|weather_visuals_enabled" "$OUT/prefs-read.xml" \
+    | sed "s#</map>#$1</map>#" > "$OUT/prefs-write.xml"
+  adb push "$OUT/prefs-write.xml" /data/local/tmp/prefs-write.xml > /dev/null
+  adb shell "run-as $PACKAGE sh -c 'cat /data/local/tmp/prefs-write.xml > shared_prefs/lunar_thursday_settings.xml'" || true
+}
+
+echo "[smoke] No city, weather location on: prayer times and Qibla come from the kept position"
+adb emu geo fix 74.36 31.52 > /dev/null 2>&1 || true
+adb shell pm grant "$PACKAGE" android.permission.ACCESS_COARSE_LOCATION || true
+write_prefs '<boolean name="weather_visuals_enabled" value="true" /><int name="auto_place_lat_tenths" value="315" /><int name="auto_place_lon_tenths" value="744" />'
+open_screen 09b-home-auto-location MainActivity
+adb shell input swipe 500 1500 500 500 300; sleep 2; shot 09c-home-auto-location-prayer-times
+expect_text "auto location" "Fajr"
+expect_text "auto location" "Your location"
+expect_text "auto location" "Qibla compass"
+open_screen 09d-qibla-compass-auto-location QiblaCompassActivity
+if screen_text | grep -q "Choose a city"; then fail "compass: still asks for a city with a kept position"; fi
+
+echo "[smoke] Neither city nor location: the app says what to do"
+adb shell pm revoke "$PACKAGE" android.permission.ACCESS_COARSE_LOCATION || true
+write_prefs ''
+open_screen 09e-home-no-place MainActivity
+adb shell input swipe 500 1500 500 500 300; sleep 2
+expect_text "no place" "Choose a city in Settings"
+
 echo "[smoke] City chosen, so prayer times are shown"
-adb shell am force-stop "$PACKAGE"
-adb shell "run-as $PACKAGE sh -c 'cat shared_prefs/lunar_thursday_settings.xml'" > "$OUT/prefs-before.xml" 2>/dev/null || true
-if grep -q "<map" "$OUT/prefs-before.xml" 2>/dev/null; then
-  sed 's#</map>#    <int name="hijri_sunset_city_index" value="2" />\n</map>#' "$OUT/prefs-before.xml" > "$OUT/prefs-city.xml"
-  adb push "$OUT/prefs-city.xml" /data/local/tmp/prefs-city.xml > /dev/null
-  adb shell "run-as $PACKAGE sh -c 'cat /data/local/tmp/prefs-city.xml > shared_prefs/lunar_thursday_settings.xml'" || true
-  open_screen 10-home-with-city MainActivity
-  adb shell input swipe 500 1500 500 500 300; sleep 2; shot 10b-home-prayer-times
-else
-  fail "could not read the settings file to choose a city"
-fi
+write_prefs '<int name="hijri_sunset_city_index" value="2" />'
+open_screen 10-home-with-city MainActivity
+adb shell input swipe 500 1500 500 500 300; sleep 2; shot 10b-home-prayer-times
+expect_text "city" "Fajr"
+expect_text "city" "Lahore"
+open_screen 10c-qibla-compass-city QiblaCompassActivity
 
 echo "[smoke] Ringing test alarm"
 # Extras are single words: adb re-splits quoted arguments on the device.

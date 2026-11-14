@@ -314,16 +314,18 @@ class MorningCardActivity : LocalizedActivity() {
         val now = Instant.now()
         val today = now.atZone(LunarEngine.PAKISTAN).toLocalDate()
         val translation = VerseStore.translation(this)
-        // The Hijri date goes on a shared picture only when its month start is confirmed.
+        // Same Hijri date as the home screen, whether its month start is confirmed or still a forecast.
         val confirmed = ReminderStore.confirmedStarts(this)
         val hijri = LunarEngine.expectedOnDate(HijriClock.current(this, now).hijriReferenceDate, confirmed)
-        val hijriLine = if (hijri != null && hijri.month.basis == LunarEngine.Basis.LIVE_REPORTED_CONFIRMED) {
+        val hijriLine = if (hijri != null) {
             String.format(AppLanguage.locale(this), "%d", hijri.day) + " " + UiText.month(this, hijri.month)
         } else null
         val bitmap = MorningCardRenderer.render(this, DailyVerse.forDate(library, today), translation,
             library.translators[translation] ?: "", today, hijriLine)
         current = bitmap
         image?.setImageBitmap(bitmap)
+        // Lets screen readers, and the smoke test, read the dates drawn on the picture.
+        image?.contentDescription = listOfNotNull(UiText.date(this, today, true), hijriLine).joinToString(", ")
     }
 
     private fun chooseTranslation() {
