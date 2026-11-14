@@ -127,7 +127,7 @@ open_screen 09b-home-auto-location MainActivity
 swipe_up 500; shot 09c-home-auto-location-prayer-times
 expect_text "auto location" "Fajr"
 expect_text "auto location" "Your location"
-cp "$OUT/screen.xml" "$OUT/screen-auto-location.xml"
+swipe_up 900  # the Qibla row sits below the prayer card
 expect_text "auto location" "Find the Qibla direction"
 open_screen 09d-qibla-compass-auto-location QiblaCompassActivity
 if on_screen "Choose a city"; then fail "compass: still asks for a city with a kept position"; fi
