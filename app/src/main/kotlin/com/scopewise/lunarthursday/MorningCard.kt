@@ -149,6 +149,7 @@ class MorningCardActivity : LocalizedActivity() {
         page.gravity = Gravity.CENTER_HORIZONTAL
         val pad = (16 * resources.displayMetrics.density).toInt()
         page.setPadding(pad, pad * 2, pad, pad)
+        padForSystemBars(page)
 
         val title = TextView(this)
         title.text = getString(R.string.verse_title)

@@ -80,13 +80,14 @@ else
 fi
 
 echo "[smoke] Ringing test alarm"
+# Extras are single words: adb re-splits quoted arguments on the device.
 adb shell am start-foreground-service -n "$PACKAGE/.AlarmRingingService" \
-  -a com.scopewise.lunarthursday.ALARM_START --es lunar_alarm_label "Test ringing alarm" \
+  -a com.scopewise.lunarthursday.ALARM_START --es lunar_alarm_label SmokeTest \
   --es lunar_alarm_month_key test --es lunar_alarm_basis TEST --ez lunar_alarm_test true > /dev/null 2>&1
 sleep 4
 shot 11-alarm-ringing
 adb shell dumpsys activity services "$PACKAGE" | grep -q "AlarmRingingService" || fail "alarm: ringing service is not running"
-open_screen 12-alarm-screen AlarmActivity --es lunar_alarm_label "Test ringing alarm" --ez lunar_alarm_test true
+open_screen 12-alarm-screen AlarmActivity --es lunar_alarm_label SmokeTest --ez lunar_alarm_test true
 adb shell am startservice -n "$PACKAGE/.AlarmRingingService" -a com.scopewise.lunarthursday.ALARM_DISMISS > /dev/null 2>&1
 sleep 3
 crashed && fail "alarm: crash recorded"
