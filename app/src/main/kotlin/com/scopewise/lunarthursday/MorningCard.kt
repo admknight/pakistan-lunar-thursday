@@ -99,7 +99,7 @@ object MorningCardRenderer {
         while (true) {
             arabicBlock = block(arabic, arabicSize, Color.WHITE, textWidth, true, 1.35f)
             urduBlock = block(urdu, urduSize, Color.rgb(226, 236, 230), textWidth, false, 1.45f)
-            if (arabicBlock.height + urduBlock.height <= 820 || arabicSize <= 34f) break
+            if (arabicBlock.height + urduBlock.height <= 800 || arabicSize <= 34f) break
             arabicSize -= 4f
             urduSize -= 2.5f
         }
@@ -110,10 +110,15 @@ object MorningCardRenderer {
         small.textAlign = Paint.Align.CENTER
         val centre = WIDTH / 2f
 
-        canvas.drawText(UiText.date(context, today, true), centre, 120f, small)
-        if (hijriLine != null) canvas.drawText(hijriLine, centre, 170f, small)
+        val dates = TextPaint(small)
+        dates.typeface = Typeface.DEFAULT_BOLD
+        dates.textSize = 48f
+        dates.color = Color.WHITE
+        canvas.drawText(UiText.date(context, today, true), centre, 128f, dates)
+        dates.color = accent
+        if (hijriLine != null) canvas.drawText(hijriLine, centre, 194f, dates)
 
-        var y = 250f + (820 - arabicBlock.height - urduBlock.height) / 2f
+        var y = 270f + (800 - arabicBlock.height - urduBlock.height) / 2f
         draw(canvas, arabicBlock, y)
         y += arabicBlock.height + 56f
         draw(canvas, urduBlock, y)
@@ -211,9 +216,9 @@ object MorningCardRenderer {
         fill.color = accent
         fill.alpha = 70
         val moon = Path()
-        moon.addCircle(900f, 150f, 92f, Path.Direction.CW)
+        moon.addCircle(968f, 300f, 74f, Path.Direction.CW)
         val cut = Path()
-        cut.addCircle(938f, 124f, 80f, Path.Direction.CW)
+        cut.addCircle(998f, 279f, 64f, Path.Direction.CW)
         if (moon.op(cut, Path.Op.DIFFERENCE)) canvas.drawPath(moon, fill)
         fill.alpha = 110
         val stars = arrayOf(floatArrayOf(120f, 90f, 4f), floatArrayOf(250f, 210f, 3f), floatArrayOf(700f, 70f, 3f),

@@ -162,7 +162,7 @@ class MainActivity : LocalizedActivity() {
         val heading = column()
         heading.setPadding(dp(12), 0, 0, 0)
         heading.addView(text("Hilal Thursday", 18, true, onSurface))
-        heading.addView(text("ہلال جمعرات", 12, false, secondary))
+        heading.addView(text("نورِ ہلال", 12, false, secondary))
         bar.addView(heading, LinearLayout.LayoutParams(0, -2, 1f))
         val moonEgg = View.OnClickListener {
             if (++monthTaps >= 7) {
