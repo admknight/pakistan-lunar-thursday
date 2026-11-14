@@ -20,11 +20,22 @@ crashed() {
 }
 
 # A slow emulator sometimes shows "<system app> isn't responding" over the app; choose Wait.
+dump_screen() {
+  local try
+  for try in 1 2 3 4; do
+    adb shell rm -f /sdcard/smoke.xml > /dev/null 2>&1
+    adb shell uiautomator dump /sdcard/smoke.xml > /dev/null 2>&1
+    adb exec-out cat /sdcard/smoke.xml > "$OUT/screen.xml" 2>/dev/null
+    grep -q "<hierarchy" "$OUT/screen.xml" && return 0
+    sleep 2
+  done
+  : > "$OUT/screen.xml"
+}
+
 dismiss_system_dialog() {
   local attempt
   for attempt in 1 2 3; do
-    adb shell uiautomator dump /sdcard/smoke.xml > /dev/null 2>&1
-    adb exec-out cat /sdcard/smoke.xml > "$OUT/screen.xml" 2>/dev/null
+    dump_screen
     grep -q "responding" "$OUT/screen.xml" || return 0
     adb shell input tap 330 1338
     sleep 3
@@ -52,11 +63,10 @@ open_screen() {
   fi
 }
 
-# Saves what is on screen to a file first: piping adb straight into "grep -q" fails under pipefail.
+# True when the text is on screen. dismiss_system_dialog leaves a fresh copy of the screen in a file;
+# piping adb straight into "grep -q" fails under pipefail.
 on_screen() {
   dismiss_system_dialog
-  adb shell uiautomator dump /sdcard/smoke.xml > /dev/null 2>&1
-  adb exec-out cat /sdcard/smoke.xml > "$OUT/screen.xml" 2>/dev/null
   grep -q "$1" "$OUT/screen.xml"
 }
 
