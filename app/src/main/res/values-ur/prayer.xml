@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="prayer_title">آج کے اوقاتِ نماز</string>
-  <string name="prayer_choose_city">اوقاتِ نماز دیکھنے کے لیے ترتیبات میں شہر منتخب کریں۔</string>
+  <string name="prayer_choose_city">اوقاتِ نماز اور قبلہ کی سمت دیکھنے کے لیے ترتیبات میں شہر منتخب کریں یا وہاں موسم کا مقام آن کریں۔</string>
+  <string name="prayer_your_location">آپ کا مقام</string>
+  <string name="compass_open_hint">اپنی جگہ سے قبلہ کی سمت معلوم کریں</string>
   <string name="prayer_fajr">فجر</string>
   <string name="prayer_sunrise">طلوعِ آفتاب</string>
   <string name="prayer_dhuhr">ظہر</string>
@@ -25,7 +27,7 @@
   <string name="tasbih_reset">صفر کریں</string>
   <string name="extra_title">مزید یاد دہانیاں</string>
   <string name="extra_prayer_toggle">اوقاتِ نماز کی اطلاع</string>
-  <string name="extra_prayer_help">منتخب شہر اور طریقے کے مطابق پانچوں نمازوں کے وقت ایک خاموش اطلاع۔ شہر ضروری ہے۔</string>
+  <string name="extra_prayer_help">منتخب شہر اور طریقے کے مطابق پانچوں نمازوں کے وقت ایک خاموش اطلاع۔ شہر یا موسم کا مقام ضروری ہے۔</string>
   <string name="extra_prayer_body">%1$s · حساب شدہ وقت</string>
   <string name="extra_thursday_toggle">جمعرات کی شام کی یاد دہانی</string>
   <string name="extra_thursday_help">ہر جمعرات کو منتخب شہر کے مغرب کے وقت، یا شہر کے بغیر شام ۶:۳۰ بجے۔</string>

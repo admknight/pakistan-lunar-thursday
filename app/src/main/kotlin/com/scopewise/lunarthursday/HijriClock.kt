@@ -12,6 +12,9 @@ object HijriClock {
     private const val TIME_0 = "hijri_weather_sunset_min0"
     private const val DAY_1 = "hijri_weather_sunset_date1"
     private const val TIME_1 = "hijri_weather_sunset_min1"
+    // The automatic location, rounded to a tenth of a degree (about 10 km), kept on the device only.
+    private const val AUTO_LAT = "auto_place_lat_tenths"
+    private const val AUTO_LON = "auto_place_lon_tenths"
     // Index 0: existing optional weather-derived sunset, otherwise civil fallback.
     private val CITY_COORDS = arrayOf(
         doubleArrayOf(0.0, 0.0), doubleArrayOf(24.8607, 67.0011), doubleArrayOf(31.5204, 74.3587),
@@ -38,11 +41,27 @@ object HijriClock {
         ReminderStore.prefs(context).edit().putInt(CITY, index).apply()
     }
 
-    /** Latitude and longitude of the chosen city, or null for the automatic option. */
+    /**
+     * Latitude and longitude for prayer times and Qibla: the chosen city, or, on the
+     * automatic option, the coarse position kept from the weather location. Null when neither exists.
+     */
     @JvmStatic
     fun cityCoordinates(context: Context): DoubleArray? {
         val city = selectedCity(context)
-        return if (city > 0) doubleArrayOf(CITY_COORDS[city][0], CITY_COORDS[city][1]) else null
+        if (city > 0) return doubleArrayOf(CITY_COORDS[city][0], CITY_COORDS[city][1])
+        if (!WeatherManager.enabled(context) || !WeatherManager.permissionGranted(context)) return null
+        val p = ReminderStore.prefs(context)
+        if (!p.contains(AUTO_LAT) || !p.contains(AUTO_LON)) return null
+        return doubleArrayOf(p.getInt(AUTO_LAT, 0) / 10.0, p.getInt(AUTO_LON, 0) / 10.0)
+    }
+
+    /** Name shown beside prayer times: the chosen city, or a plain label for the automatic location. */
+    @JvmStatic
+    fun placeLabel(context: Context): String {
+        val city = selectedCity(context)
+        val labels = cityLabels(context)
+        return if (city > 0 && city < labels.size) labels[city]
+        else AppLanguage.wrap(context).getString(R.string.prayer_your_location)
     }
 
     @JvmStatic
@@ -92,13 +111,19 @@ object HijriClock {
         ReminderStore.prefs(context).edit().putString(DAY_0, today.toString())
             .putInt(TIME_0, first.hour * 60 + first.minute)
             .putString(DAY_1, today.plusDays(1).toString())
-            .putInt(TIME_1, second.hour * 60 + second.minute).apply()
+            .putInt(TIME_1, second.hour * 60 + second.minute)
+            .putInt(AUTO_LAT, Math.round(latitude * 10.0).toInt())
+            .putInt(AUTO_LON, Math.round(longitude * 10.0).toInt()).apply()
         DateSyncScheduler.ensure(context)
+        // Prayer alerts and the widget follow the position that was just learned.
+        ExtraReminderScheduler.sync(context)
+        HijriWidgetProvider.refreshAll(context)
     }
 
     @JvmStatic
     fun clearWeatherSunsets(context: Context) {
         ReminderStore.prefs(context).edit()
-            .remove(DAY_0).remove(TIME_0).remove(DAY_1).remove(TIME_1).apply()
+            .remove(DAY_0).remove(TIME_0).remove(DAY_1).remove(TIME_1)
+            .remove(AUTO_LAT).remove(AUTO_LON).apply()
     }
 }

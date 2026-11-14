@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="prayer_title">Today\'s prayer times</string>
-  <string name="prayer_choose_city">Choose a city in Settings to see prayer times.</string>
+  <string name="prayer_choose_city">Choose a city in Settings, or turn on weather location there, to see prayer times and the Qibla direction.</string>
+  <string name="prayer_your_location">Your location</string>
+  <string name="compass_open_hint">Find the Qibla direction from where you are</string>
   <string name="prayer_fajr">Fajr</string>
   <string name="prayer_sunrise">Sunrise</string>
   <string name="prayer_dhuhr">Dhuhr</string>
@@ -25,7 +27,7 @@
   <string name="tasbih_reset">Reset</string>
   <string name="extra_title">More reminders</string>
   <string name="extra_prayer_toggle">Prayer time alerts</string>
-  <string name="extra_prayer_help">A quiet notification at each of the five prayer times for the chosen city and method. Needs a city.</string>
+  <string name="extra_prayer_help">A quiet notification at each of the five prayer times for the chosen city or your weather location, and the chosen method. Needs one of the two.</string>
   <string name="extra_prayer_body">%1$s · calculated time</string>
   <string name="extra_thursday_toggle">Thursday evening reminder</string>
   <string name="extra_thursday_help">Every Thursday at Maghrib for the chosen city, or at 6:30 PM without one.</string>

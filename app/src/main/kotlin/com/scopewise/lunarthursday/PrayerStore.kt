@@ -17,8 +17,8 @@ object PrayerStore {
     }
 
     /**
-     * Today's times, or null when no city is chosen. The automatic weather
-     * location is not used: the app never stores its coordinates.
+     * Today's times, or null when there is neither a chosen city nor a
+     * position kept from the optional weather location.
      */
     @JvmStatic
     fun today(context: Context): PrayerTimes.Day? {

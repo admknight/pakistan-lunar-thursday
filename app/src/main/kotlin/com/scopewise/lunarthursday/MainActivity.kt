@@ -316,6 +316,9 @@ class MainActivity : LocalizedActivity() {
             add(body, card(compactSurfaceRow("◎", str(R.string.tasbih_title), str(R.string.tasbih_open_hint)) {
                 startActivity(Intent(this, TasbihActivity::class.java))
             }, surfaceVariant, 19), 9)
+            add(body, card(compactSurfaceRow("🧭", str(R.string.compass_title), str(R.string.compass_open_hint)) {
+                startActivity(Intent(this, QiblaCompassActivity::class.java))
+            }, surfaceVariant, 19), 9)
             countdownTarget = next.remindAt(ReminderStore.reminderTime(this))
             updateCounters()
             ticker.postDelayed(tick, 60_000L)
@@ -425,8 +428,6 @@ class MainActivity : LocalizedActivity() {
             line.addView(text(if (time == null) "—" else clock.format(time), 14, true, onSurface))
             add(panel, line, if (i == 0) 8 else 4)
         }
-        val city = HijriClock.selectedCity(this)
-        val cities = HijriClock.cityLabels(this)
         val method = str(if (PrayerStore.method(this) == PrayerTimes.Method.JAFARI) R.string.prayer_method_jafari
         else R.string.prayer_method_karachi)
         val place = HijriClock.cityCoordinates(this)
@@ -436,7 +437,7 @@ class MainActivity : LocalizedActivity() {
             qibla.setOnClickListener { startActivity(Intent(this, QiblaCompassActivity::class.java)) }
             add(panel, qibla, 8)
         }
-        add(panel, text((if (city < cities.size) cities[city] else "") + " · " + method +
+        add(panel, text(HijriClock.placeLabel(this) + " · " + method +
             "\n" + str(R.string.prayer_note), 11, false, secondary), 8)
         add(body, card(panel, surfaceVariant, 19), 14)
     }
