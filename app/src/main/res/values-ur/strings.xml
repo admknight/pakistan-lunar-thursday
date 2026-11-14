@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ہلال جمعرات</string>
+    <string name="app_name">نورِ ہلال</string>
     <string name="tr_0005bdb96" formatted="false">"گٹ ہب ریلیز کی جانچ جاری ہے"</string>
     <string name="tr_0047ae94e" formatted="false">"پاکستان کے قمری مہینوں کی خوبصورت ترتیب یاد رکھنے کا پرسکون طریقہ۔"</string>
     <string name="tr_004a77be9" formatted="false">"یاددہانی اور بجنے والے الارم کے لیے اطلاعات کی اجازت دیں۔"</string>
@@ -28,7 +28,7 @@
     <string name="tr_1b36cb9e2" formatted="false">"آخری کامیاب آن لائن جانچ: "</string>
     <string name="tr_1ef5187f3" formatted="false">"آنے والے قمری مہینے"</string>
     <string name="tr_1f044de6c" formatted="false">"غیر سرکاری ذریعہ تصدیق کی اطلاع دیتا ہے (سرکاری سروس نہیں)"</string>
-    <string name="tr_23639ea3a" formatted="false">"☾  ہلال جمعرات"</string>
+    <string name="tr_23639ea3a" formatted="false">"☾  نورِ ہلال"</string>
     <string name="tr_24731f717" formatted="false">"اطلاعات اور اپ ڈیٹس"</string>
     <string name="tr_24b907f39" formatted="false">"پاکستان کے لیے بنایا گیا، سب کے لیے دستیاب"</string>
     <string name="tr_24c60376d" formatted="false">"فعال ہے، مگر درست الارم کی اجازت نہ ہونے پر اینڈرائیڈ تاخیر کر سکتا ہے۔"</string>
@@ -43,14 +43,14 @@
     <string name="tr_30abb2248" formatted="false">" · صبح 11:00 بجے پاکستان وقت"</string>
     <string name="tr_30e977abc" formatted="false">"آزمائشی الارم"</string>
     <string name="tr_31177076d" formatted="false">"آواز کے ساتھ الارم بجائیں"</string>
-    <string name="tr_317ebbade" formatted="false">"ہلال جمعرات کی آزمائشی اطلاع"</string>
+    <string name="tr_317ebbade" formatted="false">"نورِ ہلال کی آزمائشی اطلاع"</string>
     <string name="tr_34f30058d" formatted="false">"مستقل دستخط والا ریلیز فعال ہے۔ غیر موافق آزمائشی ورژن اپ ڈیٹ میں شامل نہیں ہوں گے۔"</string>
     <string name="tr_3605d841a" formatted="false">"گٹ ہب کی جانچ جاری ہے..."</string>
     <string name="tr_367b81c35" formatted="false">"منصوبے کا لائسنس کھولیں (MIT)"</string>
     <string name="tr_38fd47dcf" formatted="false">"یاددہانی کیسے ملے گی"</string>
     <string name="tr_39d9ad26e" formatted="false">"محکمہ موسمیات کی پیش گوئی · غیر مصدقہ"</string>
     <string name="tr_3ad3c4eb8" formatted="false">"اطلاعات کی اجازت دیں"</string>
-    <string name="tr_3f0043a99" formatted="false">"ہلال جمعرات کی پہلی یاددہانی"</string>
+    <string name="tr_3f0043a99" formatted="false">"پہلی جمعرات کی یاددہانی"</string>
     <string name="tr_3f02015c4" formatted="false">"باقی: %1$d دن، %2$d گھنٹے"</string>
     <string name="tr_3f1373ff2" formatted="false">"صرف تیسرے فریق کی واضح طور پر تصدیق شدہ تاریخیں محفوظ ہوتی ہیں۔ ورنہ محکمہ موسمیات کی پیش گوئی یا کیلنڈر کا اندازہ استعمال ہوتا ہے، جو پاکستان میں سرکاری رؤیتِ ہلال سے مختلف ہو سکتا ہے۔"</string>
     <string name="tr_3f40f4683" formatted="false">"ڈویلپر کا ایک چھوٹا راز: بعض تاریخوں کے لیے صبر چاہیے، مگر ایک نرم یاددہانی دن روشن کر سکتی ہے۔"</string>
@@ -99,7 +99,7 @@
     <string name="tr_8e053a60d" formatted="false">"اگلی یاددہانی"</string>
     <string name="tr_8e665e894" formatted="false">"چاندنی کا راز کھل گیا"</string>
     <string name="tr_8f2742ccf" formatted="false">"قمری مہینے کی پہلی جمعرات"</string>
-    <string name="tr_9193319ab" formatted="false">"ہلال جمعرات"</string>
+    <string name="tr_9193319ab" formatted="false">"نورِ ہلال"</string>
     <string name="tr_92cd2c60f" formatted="false">"آخری جانچ: "</string>
     <string name="tr_97677a3d8" formatted="false">"تاریخ کی نئی جانچ کی درخواست"</string>
     <string name="tr_9b5824f8b" formatted="false">"تاریخوں کی خودکار تازہ کاری"</string>
@@ -113,7 +113,7 @@
     <string name="tr_a62ad68a8" formatted="false">"درست وقت پر الارم: دستیاب نہیں؛ تاخیر ہو سکتی ہے"</string>
     <string name="tr_a7ac68052" formatted="false">"جمعرات کی آزمائشی اطلاع"</string>
     <string name="tr_a8cfdf4e5" formatted="false">"اپ ڈیٹ کی جانچ پہلے سے جاری ہے"</string>
-    <string name="tr_aea4a1df5" formatted="false">"ہلال جمعرات"</string>
+    <string name="tr_aea4a1df5" formatted="false">"نورِ ہلال"</string>
     <string name="tr_af9c36846" formatted="false">"اطلاعات چیک کریں"</string>
     <string name="tr_b1b598c15" formatted="false">"باقی: %1$d گھنٹے، %2$d منٹ"</string>
     <string name="tr_b493ac133" formatted="false">"نیا ورژن دستیاب: "</string>
@@ -148,7 +148,7 @@
     <string name="tr_d2dadf8d6" formatted="false">"اینڈرائیڈ کی ترتیبات میں اطلاعات بند ہیں۔"</string>
     <string name="tr_d48d6f64c" formatted="false">"الارم، اجازتوں اور ایپ اپ ڈیٹس کی ترتیبات"</string>
     <string name="tr_d4d62ebda" formatted="false">"🌙 چاندنی کا راز کھل گیا"</string>
-    <string name="tr_d5beb0e19" formatted="false">"ہلال جمعرات کا الارم رہ گیا"</string>
+    <string name="tr_d5beb0e19" formatted="false">"نورِ ہلال کا الارم رہ گیا"</string>
     <string name="tr_d5d9126e0" formatted="false">"درست وقت کے الارم کی اجازت دیں"</string>
     <string name="tr_d871233bf" formatted="false">"رات کے آسمان میں اپ ڈیٹ کا بٹن نہیں، لیکن آپ کی یاددہانی ایپ میں ہے۔"</string>
     <string name="tr_d9a529667" formatted="false">"آزمائشی APK کے دستخط مختلف ہو سکتے ہیں؛ دوبارہ انسٹال کرنا پڑ سکتا ہے۔"</string>
@@ -161,10 +161,10 @@
     <string name="tr_e6dca6297" formatted="false">"درخواست بھیج دی گئی؛ نیٹ ورک دستیاب ہونے پر اینڈرائیڈ جانچ کرے گا"</string>
     <string name="tr_e6e3d3f37" formatted="false">"قمری مہینے کی تفصیل"</string>
     <string name="tr_e738e9bad" formatted="false">"ابھی جانچ نہیں ہوئی"</string>
-    <string name="tr_e9fae6216" formatted="false">"ہلال جمعرات کے بارے میں"</string>
+    <string name="tr_e9fae6216" formatted="false">"نورِ ہلال کے بارے میں"</string>
     <string name="tr_ea60c65e6" formatted="false">"گٹ ہب سے اپ ڈیٹ ڈاؤن لوڈ کریں"</string>
     <string name="tr_ebd783954" formatted="false">"نہ اکاؤنٹ، نہ اشتہارات، نہ مقام کی اجازت اور نہ ایپ اینالیٹکس۔ فون عوامی ہجری تاریخ کے ذریعے اور گٹ ہب ریلیز چیک کرتا ہے؛ ان سروسز کو آپ کا IP پتا نظر آ سکتا ہے۔"</string>
-    <string name="tr_ee6dcaadb" formatted="false">"ہلال جمعرات کا الارم"</string>
+    <string name="tr_ee6dcaadb" formatted="false">"نورِ ہلال کا الارم"</string>
     <string name="tr_f2a40225e" formatted="false">"براؤزر درکار ہے"</string>
     <string name="tr_f36436329" formatted="false">"دس منٹ بعد پھر بجائیں"</string>
     <string name="tr_f49025ed2" formatted="false">"محکمہ موسمیات کی پیش گوئی — رؤیت کی تصدیق نہیں"</string>
@@ -248,7 +248,7 @@
     <string name="tr17_63f21863d0" formatted="false">"پس منظر میں اپ ڈیٹ کی اطلاعات"</string>
     <string name="tr17_2cc18c2fb0" formatted="false">"Android تقریباً روزانہ GitHub پر چیک کرتا ہے، ایپ بند ہونے پر بھی۔ ڈاؤن لوڈ اور انسٹال آپ کی مرضی سے ہوگا۔"</string>
     <string name="tr17_6cf8845e00" formatted="false">"اپ ڈیٹ ڈاؤن لوڈ اور انسٹال کریں"</string>
-    <string name="tr17_3e0bf8d605" formatted="false">"ہلال جمعرات اپ ڈیٹ کریں"</string>
+    <string name="tr17_3e0bf8d605" formatted="false">"نورِ ہلال اپ ڈیٹ کریں"</string>
     <string name="tr17_e457149073" formatted="false">"ابھی نہیں"</string>
     <string name="tr17_7db0bddc82" formatted="false">"ڈاؤن لوڈ اور انسٹال کریں"</string>
     <string name="tr17_439f5b6308" formatted="false">"اپ ڈیٹ انسٹال ہو رہی ہے"</string>
@@ -259,17 +259,17 @@
     <string name="tr17_610e342dea" formatted="false">"Android سیٹنگز کھولیں"</string>
     <string name="tr17_56e2f5d363" formatted="false">"بعد میں"</string>
     <string name="tr17_f8b8cfcfff" formatted="false">"اندازاً مقام کی اجازت نہیں ملی؛ وقت کے مطابق منظر پھر بھی دستیاب ہے"</string>
-    <string name="tr17_1e434c4650" formatted="false">"ہلال جمعرات کی نئی اپ ڈیٹ دستیاب ہے"</string>
+    <string name="tr17_1e434c4650" formatted="false">"نورِ ہلال کی نئی اپ ڈیٹ دستیاب ہے"</string>
     <string name="tr17_d15c2b37c7" formatted="false">"براؤزر کی ضرورت نہیں۔"</string>
     <string name="tr17_3b425ad7cf" formatted="false">"موسم: Open-Meteo"</string>
     <string name="tr17_74c7f34de9" formatted="false">"نئی دستخط شدہ اپ ڈیٹ"</string>
     <string name="tr17_6f266286a2" formatted="false">"اختیاری موسم کا مقام · نہ اشتہارات، نہ اکاؤنٹ"</string>
     <string name="tr17_717c781cff" formatted="false">"موسمی منظر اور ایپ کے اندر اپ ڈیٹس"</string>
     <string name="tr17_3e3ca4d087" formatted="false">"نہ اکاؤنٹ درکار ہے، نہ اشتہارات یا تجزیاتی ٹریکنگ۔ مقام کی اجازت صرف موسمی مناظر فعال کرنے پر، ایپ کے استعمال کے دوران مانگی جاتی ہے۔ اندازاً مقام کو گول کر کے Open-Meteo کو بھیجا جاتا ہے، محفوظ نہیں کیا جاتا۔ ہجری تاریخ کا ذریعہ اور GitHub اپ ڈیٹ چیک بیرونی خدمات ہیں؛ وہ آپ کا انٹرنیٹ پتہ دیکھ سکتی ہیں۔"</string>
-    <string name="tr17_3f090a48a3" formatted="false">"ہلال جمعرات 1.7 میں اختیاری مقامی موسم کے مناظر، وقت کے مطابق چاند اور مسجد کی تصویر، پس منظر میں اپ ڈیٹ کی اطلاع اور ایپ کے اندر محفوظ APK ڈاؤن لوڈ شامل ہیں۔ انسٹالیشن کی تصدیق Android کرتا ہے۔ موسم: Open-Meteo (CC BY 4.0)۔"</string>
+    <string name="tr17_3f090a48a3" formatted="false">"نورِ ہلال 1.7 میں اختیاری مقامی موسم کے مناظر، وقت کے مطابق چاند اور مسجد کی تصویر، پس منظر میں اپ ڈیٹ کی اطلاع اور ایپ کے اندر محفوظ APK ڈاؤن لوڈ شامل ہیں۔ انسٹالیشن کی تصدیق Android کرتا ہے۔ موسم: Open-Meteo (CC BY 4.0)۔"</string>
     <string name="tr17_912d5a7d18" formatted="false">"ورژن "</string>
     <string name="tr17_72c55f8abb" formatted="false">" کو ایپ میں محفوظ طریقے سے ڈاؤن لوڈ کریں؟ Android کی تصدیق سے پہلے SHA-256 اور موجودہ دستخطی سرٹیفکیٹ چیک کیا جائے گا۔"</string>
-    <string name="tr17_a5e7a0d079" formatted="false">"Android سیٹنگز میں ہلال جمعرات کو ایپ اپ ڈیٹس انسٹال کرنے کی اجازت دیں۔ پھر اسی ایپ میں واپس آئیں۔ ویب براؤزر کی ضرورت نہیں۔"</string>
+    <string name="tr17_a5e7a0d079" formatted="false">"Android سیٹنگز میں نورِ ہلال کو ایپ اپ ڈیٹس انسٹال کرنے کی اجازت دیں۔ پھر اسی ایپ میں واپس آئیں۔ ویب براؤزر کی ضرورت نہیں۔"</string>
     <string name="tr17_6f2bb9125b" formatted="false">"پہلے ڈاؤن لوڈ شدہ APK اب مطابقت نہیں رکھتی"</string>
     <string name="tr17_adff75831c" formatted="false">"تصدیق شدہ APK ایپ کے اندر ڈاؤن لوڈ ہوتی ہے۔ Android انسٹالیشن کی تصدیق کرتا ہے اور اس ایپ سے انسٹال کرنے کی اجازت مانگ سکتا ہے۔ مستقل دستخط کے ساتھ آئندہ مستحکم ریلیز اسی ایپ پر اپ ڈیٹ ہو سکتی ہیں۔"</string>
     <string name="tr17_4236381988" formatted="false">" تیار ہے۔ ایپ میں ڈاؤن لوڈ کے لیے ٹیپ کریں۔"</string>
