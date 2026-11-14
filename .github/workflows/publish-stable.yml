@@ -92,8 +92,8 @@ jobs:
           [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo 'Invalid versionName'; exit 1; }
           tag="v$version"
           mkdir -p release
-          cp "$apk" "release/NoorEHilal-$tag.apk"
-          (cd release && sha256sum "NoorEHilal-$tag.apk" > "NoorEHilal-$tag.apk.sha256")
+          cp "$apk" "release/MahENau-$tag.apk"
+          (cd release && sha256sum "MahENau-$tag.apk" > "MahENau-$tag.apk.sha256")
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
@@ -115,15 +115,15 @@ jobs:
 
           **If you installed an earlier debug-signed preview, uninstall it before installing this release.** Android cannot update between different signer certificates. Reconfigure your settings after uninstalling.
 
-          **The app is now called Noor-e-Hilal (formerly Hilal Thursday).** It updates an installed Hilal Thursday in place. Version 2.0.0 keeps the first-Thursday reminder and adds: confirmed month starts read from news reports of the Central Ruet-e-Hilal Committee's announcement (by the app itself around the 29th, and from this project's corrections file); a quiet "Possible first Thursday" notice in the rare month where the first Thursday depends on the sighting; an observances calendar with three sets and quiet day-of reminders; today's prayer times for a chosen city with a Karachi (Hanafi Asr) or Jafari method, plus a Ramadan line; a daily verse card that can be shared as an image; a Qibla bearing with a live compass; optional prayer-time, Thursday-evening and Friday reminders; a calculated crescent-visibility hint for months that depend on the sighting; a tasbih counter; and a home-screen widget. The app's code was also moved from Java to Kotlin. It also fixes a case where a late date correction could suppress the correct reminder.
+          **The app is now called Mah-e-Nau (formerly Hilal Thursday; version 2.0.0 was briefly published as Noor-e-Hilal).** It updates an installed Hilal Thursday or Noor-e-Hilal in place. Version 2.0.1 changes the name and the verse card (larger dates, no credit line on the image); everything else is as in 2.0.0. Version 2.0.0 keeps the first-Thursday reminder and adds: confirmed month starts read from news reports of the Central Ruet-e-Hilal Committee's announcement (by the app itself around the 29th, and from this project's corrections file); a quiet "Possible first Thursday" notice in the rare month where the first Thursday depends on the sighting; an observances calendar with three sets and quiet day-of reminders; today's prayer times for a chosen city with a Karachi (Hanafi Asr) or Jafari method, plus a Ramadan line; a daily verse card that can be shared as an image; a Qibla bearing with a live compass; optional prayer-time, Thursday-evening and Friday reminders; a calculated crescent-visibility hint for months that depend on the sighting; a tasbih counter; and a home-screen widget. The app's code was also moved from Java to Kotlin. It also fixes a case where a late date correction could suppress the correct reminder.
 
           **Limits:** This version was smoke-tested on an Android 15 emulator (every screen opens in English and Urdu, the test alarm rings) but has not been verified on a physical phone: alarm and notification timing, sound, the widget, the compass and image sharing are untested on a real device. Month starts come from forecasts, news reports and a project-maintained file, not an official government source, and can be late or wrong. Observance dates are a project-maintained list. Prayer times and the Qibla bearing are calculated, not a mosque timetable. The Quran text is from the Tanzil Project (unchanged); the Urdu translations are for non-commercial use only. Installation updates require Android confirmation. Download the `.sha256` file to verify the APK before sharing it.
           NOTES
           gh release create "$TAG" \
-            "release/NoorEHilal-$TAG.apk" \
-            "release/NoorEHilal-$TAG.apk.sha256" \
+            "release/MahENau-$TAG.apk" \
+            "release/MahENau-$TAG.apk.sha256" \
             --target "$GITHUB_SHA" \
-            --title "Noor-e-Hilal $TAG" \
+            --title "Mah-e-Nau $TAG" \
             --notes-file "$RUNNER_TEMP/signed-release-notes.md"
 
       - name: Remove ephemeral release key material

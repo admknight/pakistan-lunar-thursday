@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Noor-e-Hilal</string>
+    <string name="app_name">Mah-e-Nau</string>
     <string name="tr_0005bdb96" formatted="false">"Checking GitHub releases"</string>
     <string name="tr_0047ae94e" formatted="false">"A quieter way to remember the rhythm of Pakistan\'s lunar months."</string>
     <string name="tr_004a77be9" formatted="false">"Allow notifications to receive reminders or ringing alarms."</string>
@@ -43,7 +43,7 @@
     <string name="tr_30abb2248" formatted="false">" · 11:00 AM Pakistan time"</string>
     <string name="tr_30e977abc" formatted="false">"Test alarm"</string>
     <string name="tr_31177076d" formatted="false">"Ring audible alarm"</string>
-    <string name="tr_317ebbade" formatted="false">"Noor-e-Hilal test notification"</string>
+    <string name="tr_317ebbade" formatted="false">"Mah-e-Nau test notification"</string>
     <string name="tr_34f30058d" formatted="false">"Stable release signing active. Incompatible debug-signed previews are excluded from update checks."</string>
     <string name="tr_3605d841a" formatted="false">"Checking GitHub..."</string>
     <string name="tr_367b81c35" formatted="false">"Open project license (MIT)"</string>
@@ -99,7 +99,7 @@
     <string name="tr_8e053a60d" formatted="false">"NEXT REMINDER"</string>
     <string name="tr_8e665e894" formatted="false">"Moonlight unlocked"</string>
     <string name="tr_8f2742ccf" formatted="false">"First Lunar Thursday"</string>
-    <string name="tr_9193319ab" formatted="false">"Noor-e-Hilal"</string>
+    <string name="tr_9193319ab" formatted="false">"Mah-e-Nau"</string>
     <string name="tr_92cd2c60f" formatted="false">"Last checked: "</string>
     <string name="tr_97677a3d8" formatted="false">"Request a date refresh"</string>
     <string name="tr_9b5824f8b" formatted="false">"Automatic date updates"</string>
@@ -148,7 +148,7 @@
     <string name="tr_d2dadf8d6" formatted="false">"Notifications are blocked in Android settings."</string>
     <string name="tr_d48d6f64c" formatted="false">"Alert delivery, permissions and app updates"</string>
     <string name="tr_d4d62ebda" formatted="false">"🌙 Moonlight unlocked"</string>
-    <string name="tr_d5beb0e19" formatted="false">"Noor-e-Hilal alarm was missed"</string>
+    <string name="tr_d5beb0e19" formatted="false">"Mah-e-Nau alarm was missed"</string>
     <string name="tr_d5d9126e0" formatted="false">"Allow exact alarms"</string>
     <string name="tr_d871233bf" formatted="false">"The night sky has no update button, but your reminder app does."</string>
     <string name="tr_d9a529667" formatted="false">"Preview APKs use debug signing and may require reinstalling."</string>
@@ -161,10 +161,10 @@
     <string name="tr_e6dca6297" formatted="false">"Refresh requested; Android will run it when network is available"</string>
     <string name="tr_e6e3d3f37" formatted="false">"Lunar month details"</string>
     <string name="tr_e738e9bad" formatted="false">"Never checked"</string>
-    <string name="tr_e9fae6216" formatted="false">"About Noor-e-Hilal"</string>
+    <string name="tr_e9fae6216" formatted="false">"About Mah-e-Nau"</string>
     <string name="tr_ea60c65e6" formatted="false">"Download update on GitHub"</string>
     <string name="tr_ebd783954" formatted="false">"No account, ads, location request, or app analytics. The phone checks a public Hijri-date feed and GitHub\'s Releases API; those services can see the connecting IP address."</string>
-    <string name="tr_ee6dcaadb" formatted="false">"Noor-e-Hilal alarm"</string>
+    <string name="tr_ee6dcaadb" formatted="false">"Mah-e-Nau alarm"</string>
     <string name="tr_f2a40225e" formatted="false">"A browser is required"</string>
     <string name="tr_f36436329" formatted="false">"Snooze 10 minutes"</string>
     <string name="tr_f49025ed2" formatted="false">"PMD published forecast - not a confirmed sighting"</string>
@@ -248,7 +248,7 @@
     <string name="tr17_63f21863d0" formatted="false">"Background update notifications"</string>
     <string name="tr17_2cc18c2fb0" formatted="false">"Android checks GitHub roughly daily, even when this app is closed; you decide when to download and install."</string>
     <string name="tr17_6cf8845e00" formatted="false">"Download and install update"</string>
-    <string name="tr17_3e0bf8d605" formatted="false">"Update Noor-e-Hilal"</string>
+    <string name="tr17_3e0bf8d605" formatted="false">"Update Mah-e-Nau"</string>
     <string name="tr17_e457149073" formatted="false">"Not now"</string>
     <string name="tr17_7db0bddc82" formatted="false">"Download &amp; install"</string>
     <string name="tr17_439f5b6308" formatted="false">"Installing update"</string>
@@ -259,17 +259,17 @@
     <string name="tr17_610e342dea" formatted="false">"Open Android settings"</string>
     <string name="tr17_56e2f5d363" formatted="false">"Later"</string>
     <string name="tr17_f8b8cfcfff" formatted="false">"Approximate location denied; time-aware sky remains available"</string>
-    <string name="tr17_1e434c4650" formatted="false">"Noor-e-Hilal update available"</string>
+    <string name="tr17_1e434c4650" formatted="false">"Mah-e-Nau update available"</string>
     <string name="tr17_d15c2b37c7" formatted="false">"No browser is needed."</string>
     <string name="tr17_3b425ad7cf" formatted="false">"Weather: Open-Meteo"</string>
     <string name="tr17_74c7f34de9" formatted="false">"Newer signed update"</string>
     <string name="tr17_6f266286a2" formatted="false">"Optional weather location · no ads or accounts"</string>
     <string name="tr17_717c781cff" formatted="false">"Weather visuals and in-app updates"</string>
     <string name="tr17_3e3ca4d087" formatted="false">"No account, ads, or analytics. Location is requested only when you enable weather visuals, and only while the app is in use. Approximate coordinates are rounded, sent to Open-Meteo, and never stored. The Hijri-date feed and GitHub release checks also contact external services. Each provider can see the connecting IP address."</string>
-    <string name="tr17_3f090a48a3" formatted="false">"Noor-e-Hilal v1.7 adds optional location-based weather scenery, a time-aware moon-and-mosque illustration, background update alerts and secure APK downloads inside the app. Android always confirms installation. Weather data: Open-Meteo (CC BY 4.0)."</string>
+    <string name="tr17_3f090a48a3" formatted="false">"Mah-e-Nau v1.7 adds optional location-based weather scenery, a time-aware moon-and-mosque illustration, background update alerts and secure APK downloads inside the app. Android always confirms installation. Weather data: Open-Meteo (CC BY 4.0)."</string>
     <string name="tr17_912d5a7d18" formatted="false">"Download version "</string>
     <string name="tr17_72c55f8abb" formatted="false">" securely inside this app? The APK is checked against its SHA-256 digest and the installed signing certificate before Android confirms installation."</string>
-    <string name="tr17_a5e7a0d079" formatted="false">"Allow Noor-e-Hilal to install app updates in Android settings. Return to this app to continue. No web browser is needed."</string>
+    <string name="tr17_a5e7a0d079" formatted="false">"Allow Mah-e-Nau to install app updates in Android settings. Return to this app to continue. No web browser is needed."</string>
     <string name="tr17_6f2bb9125b" formatted="false">"Previously downloaded APK is no longer compatible"</string>
     <string name="tr17_adff75831c" formatted="false">"Verified APKs download inside the app. Android confirms installation and may first require permission to install from this app. Permanent signing allows later stable releases to update in place."</string>
     <string name="tr17_4236381988" formatted="false">" is ready. Tap to download inside this app."</string>

@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="docs/branding/icon.svg" width="108" height="108" alt="Noor-e-Hilal official crescent-and-calendar app icon">
+<img src="docs/branding/icon.svg" width="108" height="108" alt="Mah-e-Nau official crescent-and-calendar app icon">
 
-<h1>Noor-e-Hilal · نورِ ہلال</h1>
+<h1>Mah-e-Nau · ماہِ نو</h1>
 
-<p><em>Formerly Hilal Thursday.</em></p>
+<p><em>Formerly Hilal Thursday (version 2.0.0 was briefly published as Noor-e-Hilal).</em></p>
 
 <p><strong>Pakistan's lunar-month Thursday reminder, made simple.</strong><br>
 A bilingual, open-source Android app that reminds you on the first Thursday of each Islamic month at <strong>your selected Pakistan time</strong> (11:00 AM PKT by default).</p>
@@ -71,10 +71,10 @@ Once installed, the **in-app updater** can check GitHub Releases, download newer
 - Rescheduling on device reboot, clock or timezone changes, app update, and exact-alarm permission changes.
 - Material 3 interface, light/dark theme, **Material You dynamic wallpaper color** on Android 12+.
 - **English / اردو bilingual interface**, with a Settings language selector (device language / English / Urdu), Urdu calendar month labels, translated reminder text, and right-to-left layout. Android 13+ users can also change the app language in system settings.
-- **Rebranded Noor-e-Hilal icon:** teal-and-gold crescent with a highlighted calendar day; adaptive icon for shaped launchers plus monochrome themed-icon variant on supported Android devices.
+- **Rebranded Mah-e-Nau icon:** teal-and-gold crescent with a highlighted calendar day; adaptive icon for shaped launchers plus monochrome themed-icon variant on supported Android devices.
 - **Optional ringing alarm** in Settings: choose from three original 23-second signature music cues (**Hilal Noor, Sukoon, Hilal Nida**) or an existing Android phone alarm sound. Includes preview/selection, optional vibration, **Dismiss**, **Snooze 10 minutes**, and a two-minute ringing limit. Notification-only mode remains available.
 - **Settings page** with alarm preferences, exact-alarm/full-screen permission guidance, and automatic updates that require no manual lunar-date adjustments.
-- **In-app update manager:** Checks the project's GitHub Releases API when the app opens, with optional daily background update notifications. Download progress and SHA-256 digest, Android package-ID, version, and signing-certificate verification all occur inside Noor-e-Hilal; **no browser or GitHub page is opened to update**. Android still controls and confirms APK installation, and may first request approval to install from this app. Installation is never silent. Stable builds exclude incompatible debug-signed previews.
+- **In-app update manager:** Checks the project's GitHub Releases API when the app opens, with optional daily background update notifications. Download progress and SHA-256 digest, Android package-ID, version, and signing-certificate verification all occur inside Mah-e-Nau; **no browser or GitHub page is opened to update**. Android still controls and confirms APK installation, and may first request approval to install from this app. Installation is never silent. Stable builds exclude incompatible debug-signed previews.
 - **Interactive home dashboard** with live countdown in Pakistan time, tap-to-explore upcoming month cards, a reminder status / alert-mode overview, and one-tap date refresh requests (queued through Android JobScheduler).
 - **About / Developer page** for `admknight`, open-source attribution, privacy, calendar-source transparency, and small hidden easter eggs.
 - Next reminder, upcoming months, source quality, last successful feed check, and a test-notification button.
@@ -88,7 +88,7 @@ The day and month come from the **same month-start observation/forecast/estimate
 
 ## Signature alarm sounds
 
-Noor-e-Hilal includes three **music-derived, 23-second custom alarm cues** made from recordings supplied by the maintainer: **🌙 Hilal Noor** (the default), **✨ Sukoon**, and **🕌 Hilal Nida**. These are converted excerpts of the Gemini-generated musical recordings the maintainer reviewed; **they are not the rejected synthetic notification tones**.
+Mah-e-Nau includes three **music-derived, 23-second custom alarm cues** made from recordings supplied by the maintainer: **🌙 Hilal Noor** (the default), **✨ Sukoon**, and **🕌 Hilal Nida**. These are converted excerpts of the Gemini-generated musical recordings the maintainer reviewed; **they are not the rejected synthetic notification tones**.
 
 Enable **Settings → Ring audible alarm** and choose **Alarm sound** to preview, select, and save one of the built-in sounds, or choose **📱 From phone** to open Android's existing alarm-tone picker. The app does **not** change the system-wide ringtone; selection persists between upgrades. Sounds play locally without requiring network access and obey the existing two-minute ringing limit, Dismiss and Snooze controls. Phone sounds that disappear or become inaccessible fall back to an available alarm.
 
@@ -115,7 +115,7 @@ Android accessibility labels, English/Urdu strings, and right-to-left layouts ar
 
 ## Living sky and optional local weather
 
-The home illustration reacts to the device's current time of day (morning, daylight, sunset, night), **even offline and without location access**. In **Settings → Sky and local weather**, opt in to weather effects. Android will ask for **approximate location** while the app is in use. Noor-e-Hilal retrieves a one-time coarse location, rounds it to two decimal places, and retrieves current temperature, WMO weather code, and daylight status from Open-Meteo. Clouds, rain, fog, snow, and storms change only the decorative scene; **weather data is not a hazard alert or official lunar-sighting source**. No continuous GPS polling or background location access is used. Cached conditions expire after three hours, and weather refreshes are throttled to about 45 minutes. When permission, location, connectivity, or weather data is unavailable, the app falls back to the time-of-day sky.
+The home illustration reacts to the device's current time of day (morning, daylight, sunset, night), **even offline and without location access**. In **Settings → Sky and local weather**, opt in to weather effects. Android will ask for **approximate location** while the app is in use. Mah-e-Nau retrieves a one-time coarse location, rounds it to two decimal places, and retrieves current temperature, WMO weather code, and daylight status from Open-Meteo. Clouds, rain, fog, snow, and storms change only the decorative scene; **weather data is not a hazard alert or official lunar-sighting source**. No continuous GPS polling or background location access is used. Cached conditions expire after three hours, and weather refreshes are throttled to about 45 minutes. When permission, location, connectivity, or weather data is unavailable, the app falls back to the time-of-day sky.
 
 Weather data attribution: [Open-Meteo](https://open-meteo.com/) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Open-Meteo's free hosted endpoint is for non-commercial use; maintainers must review licensing before any commercialization.
 
@@ -196,7 +196,7 @@ The application source code is MIT-licensed; see [LICENSE](LICENSE).
 
 The MIT license requires that the copyright notice and license text stay with any copy or substantial part of this code. If you reuse it, please also credit it where your users can see it, for example on an About or open-source licenses screen:
 
-> Includes code from Noor-e-Hilal by admknight (https://github.com/admknight/pakistan-lunar-thursday), MIT License.
+> Includes code from Mah-e-Nau by admknight (https://github.com/admknight/pakistan-lunar-thursday), MIT License.
 
  The externally generated musical recordings have separate [provenance and reuse notes](docs/AUDIO.md) and are **not assumed to be covered by MIT**.
 
