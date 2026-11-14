@@ -1,13 +1,13 @@
 {
-  "apk_downloads": 30,
-  "counted_apk_assets": 18,
-  "last_changed_utc": "2026-11-13T11:15:47+00:00",
+  "apk_downloads": 38,
+  "counted_apk_assets": 24,
+  "last_changed_utc": "2026-11-14T10:41:20+00:00",
   "metric": "Sum of download_count for .apk release assets on all currently published GitHub releases; includes stable and preview",
   "not_unique_users": true,
-  "preview_downloads": 11,
-  "published_releases": 18,
+  "preview_downloads": 14,
+  "published_releases": 24,
   "repository": "admknight/pakistan-lunar-thursday",
   "schema_version": 1,
   "source_api": "https://api.github.com/repos/admknight/pakistan-lunar-thursday/releases",
-  "stable_downloads": 19
+  "stable_downloads": 24
 }
