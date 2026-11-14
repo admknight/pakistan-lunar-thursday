@@ -99,9 +99,15 @@ open_screen 07-tasbih TasbihActivity
 open_screen 08-qibla-compass QiblaCompassActivity
 open_screen 09-alarm-tones AlarmToneActivity
 
-# Requires a piece of text to be on screen right now.
+# Requires a piece of text to be on the current screen, scrolling down in small steps to find it.
+# Swipes are sometimes dropped on a slow emulator, so one fixed swipe is not relied on.
 expect_text() {
-  if on_screen "$2"; then echo "[smoke] ok: $1 shows '$2'"; else fail "$1: '$2' is not on screen"; fi
+  local step
+  for step in 1 2 3 4 5 6 7 8; do
+    if on_screen "$2"; then echo "[smoke] ok: $1 shows '$2'"; return 0; fi
+    adb shell input swipe 500 1400 500 1000 400; sleep 2
+  done
+  fail "$1: '$2' was not found on the screen, even after scrolling"
 }
 
 echo "[smoke] Verse card carries both dates"
@@ -127,15 +133,8 @@ open_screen 09b-home-auto-location MainActivity
 swipe_up 500; shot 09c-home-auto-location-prayer-times
 expect_text "auto location" "Fajr"
 expect_text "auto location" "Your location"
-# The Qibla row sits below the prayer card; scroll in small steps until it shows.
-found_qibla_row=0
-for step in 1 2 3 4 5 6; do
-  if on_screen "Find the Qibla direction"; then found_qibla_row=1; break; fi
-  cp "$OUT/screen.xml" "$OUT/screen-qibla-step-$step.xml"
-  adb shell input swipe 500 1400 500 1000 400; sleep 2
-done
-if [ "$found_qibla_row" = 1 ]; then echo "[smoke] ok: auto location shows the Qibla compass row"; shot 09c2-home-qibla-row
-else fail "auto location: the Qibla compass row was not found by scrolling"; fi
+expect_text "auto location" "Find the Qibla direction"
+shot 09c2-home-qibla-row
 open_screen 09d-qibla-compass-auto-location QiblaCompassActivity
 if on_screen "Choose a city"; then fail "compass: still asks for a city with a kept position"; fi
 
