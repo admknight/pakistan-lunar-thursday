@@ -115,8 +115,8 @@ class AboutActivity : LocalizedActivity() {
             showInfo("Calendar sources & accuracy", "Official Pakistani moon sighting is determined by the Central Ruet-e-Hilal Committee. The app uses third-party reported dates when available and PMD forecasts or calculated estimates otherwise. It does not claim a government-approved date feed.")
         })
         divider(list)
-        list.addView(linkRow("✨", "What's new", "Weather visuals and in-app updates") {
-            showInfo("What's new", "Hilal Thursday v1.9.1 fixes the extra crescent, shows today's Hijri date with an optional city-based Maghrib transition, and lets you choose the monthly reminder time in Pakistan time. All three signature alarm sounds remain available.")
+        list.addView(linkRow("✨", "What's new", "Version 2.0.0") {
+            showInfo("What's new", "Version 2.0.0 keeps the first-Thursday reminder and adds: month starts confirmed automatically from news of the official announcement, an observances calendar, prayer times and Qibla for a chosen city, optional prayer, Thursday-evening and Friday reminders, a daily verse card you can share, a tasbih counter and a home-screen widget.")
         })
         divider(list)
         list.addView(linkRow("⌘", "Open source & feedback", "Code, issues and contributions") { open(PROJECT) })
