@@ -112,6 +112,14 @@ open_screen 15-settings-ur SettingsActivity
 open_screen 16-about-ur AboutActivity
 open_screen 17-verse-card-ur MorningCardActivity
 
+echo "[smoke] Verse card on later dates (its look changes with the date)"
+adb shell settings put global auto_time 0 > /dev/null 2>&1 || true
+for ahead in 1 9 17; do
+  adb shell "date $(date -u -d "+$ahead days" +%m%d%H%M%Y.%S)" > /dev/null 2>&1 || true
+  adb shell am force-stop "$PACKAGE"
+  open_screen "18-verse-card-plus-$ahead-days" MorningCardActivity
+done
+
 adb logcat -d > "$OUT/logcat.txt" 2>/dev/null || true
 adb logcat -d -b crash > "$OUT/crash.txt" 2>/dev/null || true
 if [ "$failures" -gt 0 ]; then
