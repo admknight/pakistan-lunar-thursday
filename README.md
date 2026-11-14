@@ -25,28 +25,30 @@ A bilingual, open-source Android app that reminds you on the first Thursday of e
 
 ## Real app screenshots
 
-> These screenshots were taken from v1.9.1, when the app was still called Hilal Thursday. The name and several screens have changed since.
-
-These are **genuine, unedited screenshots** of the permanently signed **v1.9.1** APK running on a **Pixel 5 / Android 15 emulator (API 35)**, captured with Android Debug Bridge. They are **not promotional mockups**. This version fixes the duplicate crescent and shows **Today's Hijri Date** with its source/accuracy status, while future month dates remain labeled **Expected Hijri**. Settings include a user-selectable reminder time and city-based approximate Maghrib boundary. Weather/location was disabled during capture; the Hijri home display therefore shows its documented civil-date fallback.
+These are **unedited screenshots of version 2.0.1** running on a **Pixel 5 / Android 15 emulator (API 35)**, captured with Android Debug Bridge by the project's [emulator smoke test](scripts/smoke_test.sh) ([the run they came from](https://github.com/admknight/pakistan-lunar-thursday/actions/runs/43553804364)). They are **not mockups**. They come from the debug build of the same code as the signed release, not from the signed APK itself.
 
 | Dashboard · English | Dashboard · اردو | Upcoming Islamic months |
 |:---:|:---:|:---:|
-| <img src="docs/screenshots/home-en.png" width="245" alt="Actual signed v1.9.1 English dashboard: one corrected crescent, today's Hijri Date with forecast label, future expected Hijri reminder, and live countdown"> | <img src="docs/screenshots/home-ur.png" width="245" alt="Actual signed v1.9.1 Urdu RTL dashboard showing today's Hijri Date and the upcoming expected date"> | <img src="docs/screenshots/calendar-en.png" width="245" alt="Actual signed v1.9.1 calendar showing Gregorian dates and expected Hijri reminder dates with source status"> |
+| <img src="docs/screenshots/home-en.png" width="245" alt="English dashboard with the Hijri date for today, the next first-Thursday reminder and a live countdown"> | <img src="docs/screenshots/home-ur.png" width="245" alt="Urdu right-to-left dashboard"> | <img src="docs/screenshots/calendar-en.png" width="245" alt="Upcoming Hijri months with each first Thursday and its source label"> |
 
-| Signature alarm sound picker | Ringing alarm settings | Weather and location |
+| Prayer times and Qibla | Daily verse card | Months and observances |
 |:---:|:---:|:---:|
-| <img src="docs/screenshots/alarm-sounds-en.png" width="245" alt="Actual selection screen for Hilal Noor, Sukoon, Hilal Nida and Android phone alarm sounds"> | <img src="docs/screenshots/settings-alarm-en.png" width="245" alt="Actual settings with ringing alarm enabled and the selectable signature alarm sound"> | <img src="docs/screenshots/weather-settings-en.png" width="245" alt="Actual signed v1.9.1 Maghrib city selection and optional local-weather settings"> |
+| <img src="docs/screenshots/prayer-times-en.png" width="245" alt="Calculated prayer times for Lahore with the Qibla bearing"> | <img src="docs/screenshots/verse-card-en.png" width="245" alt="Daily verse card with both dates, the verse, its Urdu translation and the app name"> | <img src="docs/screenshots/observances-en.png" width="245" alt="Lower part of the calendar: later months and the start of the observances list"> |
+
+| Tasbih counter | Alarm sound picker | Settings |
+|:---:|:---:|:---:|
+| <img src="docs/screenshots/tasbih-en.png" width="245" alt="Tasbih counter with target and reset"> | <img src="docs/screenshots/alarm-sounds-en.png" width="245" alt="Selection screen for the three built-in alarm sounds and phone alarm tones"> | <img src="docs/screenshots/settings-en.png" width="245" alt="Settings with language, reminder time, ringing alarm and observance choices"> |
 
 <details>
-<summary>More screenshots — updates, About and general Settings</summary>
+<summary>More screenshots: updates, About and the alarm screen</summary>
 
-| Updates and date checks | About &amp; Developer | General settings |
+| Updates and date checks | About &amp; Developer | Test alarm screen |
 |:---:|:---:|:---:|
-| <img src="docs/screenshots/updates-en.png" width="245" alt="Real updates page, including release and calendar-source check status"> | <img src="docs/screenshots/about-en.png" width="245" alt="Real About page with developer, privacy and source links"> | <img src="docs/screenshots/settings-en.png" width="245" alt="Real signed v1.9.1 settings screen with user-selectable reminder time, language, alarm, and permission controls"> |
+| <img src="docs/screenshots/updates-en.png" width="245" alt="Updates page with the installed version and date-check status"> | <img src="docs/screenshots/about-en.png" width="245" alt="About page with developer, privacy and source links"> | <img src="docs/screenshots/alarm-screen-en.png" width="245" alt="Full-screen alarm with a Dismiss button, shown for the test alarm"> |
 
 </details>
 
-The captures show the app's real Android UI, including its emulator permission state and the selected date source; dates are illustrative, **not official moon-sighting announcements**. UI colors, fonts and positioning can vary by device. See [the reproducible capture script](scripts/capture_readme_screenshots.sh) and [verified v1.9.1 emulator capture run](https://github.com/admknight/pakistan-lunar-thursday/actions/runs/43324644906).
+The captures show the app's real Android UI in the emulator's permission state. Dates are illustrative, **not official moon-sighting announcements**, and the verse card's colours change with the date. Colours, fonts and positioning can vary by device.
 
 ## Download / install
 
